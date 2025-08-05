@@ -4,6 +4,9 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed = 5f;
+    [SerializeField] private float _horizontalLimit = 4f;
+    [SerializeField] private float zMaxLimit = 2f;
+    [SerializeField] private float zMinLimit = -1f;
     Vector2 _movementInput;
     private Rigidbody _playerRigidbody;
     private void Awake()
@@ -25,6 +28,8 @@ public class PlayerController : MonoBehaviour
         Vector3 currentPosition = _playerRigidbody.position;
         Vector3 moveDirection = new Vector3(_movementInput.x, 0, _movementInput.y);
         Vector3 newPosition = currentPosition + (moveDirection * Time.fixedDeltaTime * _moveSpeed);
+        newPosition.x = Mathf.Clamp(newPosition.x, -_horizontalLimit, _horizontalLimit);
+        newPosition.z = Mathf.Clamp(newPosition.z, zMinLimit, zMaxLimit);
         _playerRigidbody.MovePosition(newPosition);
     }
 }
