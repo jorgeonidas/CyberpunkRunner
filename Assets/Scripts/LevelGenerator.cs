@@ -1,18 +1,33 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour
 {
+    public static Action<float> OnChangeSpeedAmount;
+    [SerializeField] CameraController _cameraController;
     [SerializeField] GameObject _chunkPrefab;
     [SerializeField] int _startingChunksAmmount = 12;
     [SerializeField] Transform _chunkParentTransform;
     [SerializeField] float _chunckLength = 10;
     [SerializeField] float _chunkMoveSpeed = 10f;
+    [SerializeField] float _minChunkMoveSpeed = 2f;
+    [SerializeField] float _maxChunkMoveSpeed = 15f;
     List<GameObject> _chunksList = new List<GameObject>();
 
     private void Start()
     {
         SpawnChunks();
+    }
+
+    private void OnEnable()
+    {
+        OnChangeSpeedAmount += ChangeChunkMoveSpeed;
+    }
+
+    private void OnDisable()
+    {
+        OnChangeSpeedAmount -= ChangeChunkMoveSpeed;
     }
 
     private void Update()
@@ -61,5 +76,13 @@ public class LevelGenerator : MonoBehaviour
                 PlaceNewChunk();
             }
         }
+    }
+
+    public void ChangeChunkMoveSpeed(float speedAmount)
+    {
+        _chunkMoveSpeed += speedAmount;
+        _chunkMoveSpeed = Mathf.Clamp(_chunkMoveSpeed, _minChunkMoveSpeed, _maxChunkMoveSpeed);
+        //Physics.gravity = new Vector3(Physics.gravity.x, Physics.gravity.y, Physics.gravity.z - speedAmount);
+        _cameraController.ChangeCaeramFOV(speedAmount);
     }
 }

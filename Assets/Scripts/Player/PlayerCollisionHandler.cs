@@ -5,6 +5,7 @@ public class PlayerCollisionHandler : MonoBehaviour
 {
     [SerializeField] Animator _animator;
     [SerializeField] float _hitCooldownTime = 1f;
+    [SerializeField] float _adjustChangeMoveSpeedAmount = 1f;
     bool _hitCooldownActive;
     float _hitCooldownTimer;
 
@@ -33,6 +34,7 @@ public class PlayerCollisionHandler : MonoBehaviour
         Debug.Log(other.gameObject.name);
         _animator.SetTrigger(StringConstants.AnimatioTriggers.HIT);
         ActivateHitCooldown();
+        LevelGenerator.OnChangeSpeedAmount?.Invoke(-_adjustChangeMoveSpeedAmount);
     }
 
     private void ActivateHitCooldown()
