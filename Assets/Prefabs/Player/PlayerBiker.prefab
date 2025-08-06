@@ -30,7 +30,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7548648361517365710}
-  - {fileID: 990474407017040229}
   m_Father: {fileID: 3601182532256503496}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8028125100094935181
@@ -45,8 +44,9 @@ GameObject:
   - component: {fileID: 4917855377038807386}
   - component: {fileID: 3125560919348818282}
   - component: {fileID: 1764349807929050841}
+  - component: {fileID: 806347939411337014}
   - component: {fileID: 4837316921628281203}
-  - component: {fileID: 1328628515302679809}
+  - component: {fileID: 2481092496884769814}
   m_Layer: 0
   m_Name: PlayerBiker
   m_TagString: Player
@@ -84,8 +84,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 5
   _horizontalLimit: 4
-  zMaxLimit: 2
-  zMinLimit: -1
+  zMaxLimit: 0
+  zMinLimit: 0
 --- !u!114 &3125560919348818282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,6 +146,21 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &806347939411337014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8028125100094935181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 318f30adcd37e5c4cb43efd8dd79ee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _vehicleTransform: {fileID: 7548648361517365710}
+  _leaningAmount: 35
+  _leaningLength: 0.3
 --- !u!54 &4837316921628281203
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -173,8 +188,8 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!136 &1328628515302679809
-CapsuleCollider:
+--- !u!65 &2481092496884769814
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -191,18 +206,16 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.3
-  m_Height: 1.8
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.9, z: 0}
+  serializedVersion: 3
+  m_Size: {x: 0.7, y: 1.2, z: 2.3}
+  m_Center: {x: 0, y: 0.7, z: 0.06}
 --- !u!1001 &3009105983800780847
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 5527743240850662282}
+    m_TransformParent: {fileID: 7548648361517365710}
     m_Modifications:
     - target: {fileID: 2402035107989884950, guid: ecfe2e7ecf15d0347a5544e53ff9120f, type: 3}
       propertyPath: m_Name
@@ -226,15 +239,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2629155273942458698, guid: ecfe2e7ecf15d0347a5544e53ff9120f, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2629155273942458698, guid: ecfe2e7ecf15d0347a5544e53ff9120f, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2629155273942458698, guid: ecfe2e7ecf15d0347a5544e53ff9120f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2629155273942458698, guid: ecfe2e7ecf15d0347a5544e53ff9120f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -321,7 +334,10 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 64271458179626322, guid: 542b24be0fbb7404398c770175ca589d, type: 3}
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4443711394195014, guid: 542b24be0fbb7404398c770175ca589d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 990474407017040229}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 542b24be0fbb7404398c770175ca589d, type: 3}
 --- !u!4 &7548648361517365710 stripped

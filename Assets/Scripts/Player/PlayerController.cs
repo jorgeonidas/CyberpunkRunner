@@ -9,9 +9,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float zMinLimit = -1f;
     Vector2 _movementInput;
     private Rigidbody _playerRigidbody;
+    VehicleLeaning _vehicleLaning;
     private void Awake()
     {
         _playerRigidbody = GetComponent<Rigidbody>();
+        _vehicleLaning = GetComponent<VehicleLeaning>();
     }
     public void Move(InputAction.CallbackContext conext)
     {
@@ -31,5 +33,9 @@ public class PlayerController : MonoBehaviour
         newPosition.x = Mathf.Clamp(newPosition.x, -_horizontalLimit, _horizontalLimit);
         newPosition.z = Mathf.Clamp(newPosition.z, zMinLimit, zMaxLimit);
         _playerRigidbody.MovePosition(newPosition);
+        if (_vehicleLaning)
+        {
+            _vehicleLaning.LeanHorizontal(_movementInput.x);
+        }
     }
 }
