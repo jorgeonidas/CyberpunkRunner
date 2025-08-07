@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Pool;
+using Random = UnityEngine.Random;
 
 public class LevelGenerator : MonoBehaviour
 {
@@ -8,13 +11,36 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] CameraController _cameraController;
     [SerializeField] int _startingChunksAmmount = 12;
     [SerializeField] Transform _chunkParentTransform;
-    List<GameObject> _chunksList = new List<GameObject>();
+    List<Chunk> _chunksList = new List<Chunk>();
     [SerializeField] LevelSettings _levelSettings;
+    private Dictionary<string, ObjectPool<Chunk>> _chunkPools;
     private float _currentChunkMoveSpeed;    
     private void Start()
     {
-        _currentChunkMoveSpeed = _levelSettings.InitialChunkSpeed;
+        InitializeChunksPool();
         SpawnChunks();
+    }
+
+    private void InitializeChunksPool()
+    {
+        _currentChunkMoveSpeed = _levelSettings.InitialChunkSpeed;
+        _chunkPools = new Dictionary<string, ObjectPool<Chunk>>();
+        foreach (var prefab in _levelSettings.ChunkPrefab)
+        {
+            string chunkPrefabName = prefab.name;
+            _chunkPools.Add(chunkPrefabName,
+            new ObjectPool<Chunk>(
+                createFunc: () =>
+                {
+                    Chunk newChunk = Instantiate(prefab, _chunkParentTransform);
+                    newChunk.gameObject.name = prefab.name;
+                    return newChunk;
+                },
+                actionOnGet: (chunk) => chunk.gameObject.SetActive(true),
+                actionOnRelease: (chunk) => chunk.gameObject.SetActive(false),
+                actionOnDestroy: (chunk) => Destroy(chunk.gameObject)
+            ));
+        }
     }
 
     private void OnEnable()
@@ -42,9 +68,18 @@ public class LevelGenerator : MonoBehaviour
 
     private void PlaceNewChunk()
     {
-        Chunk newChunk = Instantiate(_levelSettings.ChunkPrefab, CalculateSpawnPosition(), Quaternion.identity, _chunkParentTransform);
-        //initialize anything about chunk here
-        _chunksList.Add(newChunk.gameObject);
+        Chunk newChunk = GetRandomChunkFromPool();
+        newChunk.transform.position = CalculateSpawnPosition();
+        newChunk.transform.rotation = Quaternion.identity;
+        newChunk.transform.SetParent(_chunkParentTransform);
+        _chunksList.Add(newChunk);
+    }
+
+    private Chunk GetRandomChunkFromPool()
+    {
+        // int poolIndex = UnityEngine.Random.Range(0, _chunkPools.Count);
+        // return _chunkPools[poolIndex].Get();
+        return _chunkPools.Values.ToList()[Random.Range(0,_chunkPools.Count)].Get();
     }
 
     private Vector3 CalculateSpawnPosition()
@@ -64,16 +99,22 @@ public class LevelGenerator : MonoBehaviour
     {
         for (int i = 0; i < _chunksList.Count; i++)
         {
-            GameObject chunk = _chunksList[i];
+            Chunk chunk = _chunksList[i];
             chunk.transform.Translate(Vector3.back * _currentChunkMoveSpeed * Time.deltaTime);
 
             if (chunk.transform.position.z <= Camera.main.transform.position.z - _levelSettings.ChunkLength)
             {
                 _chunksList.Remove(chunk);
-                Destroy(chunk);
+                ReleaseChunk(chunk);
                 PlaceNewChunk();
             }
         }
+    }
+
+    private void ReleaseChunk(Chunk chunk)
+    {
+        string chunkName = chunk.name;
+        _chunkPools[chunkName].Release(chunk);
     }
 
     public void ChangeChunkMoveSpeed(float speedAmount)

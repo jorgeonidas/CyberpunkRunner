@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43a46f2e2cc735842bd47fa07e63cf80, type: 3}
   m_Name: Level_1_Settings
   m_EditorClassIdentifier: 
-  _chunkPrefab: {fileID: 3106525454637678067, guid: 9a74ff6d92d29b940822edcab15a6eb6, type: 3}
+  _chunkPrefab:
+  - {fileID: 3106525454637678067, guid: 9a74ff6d92d29b940822edcab15a6eb6, type: 3}
+  - {fileID: 3106525454637678067, guid: a9826c3d7df6bc64ca5347e0d63db76a, type: 3}
+  - {fileID: 767890853370171927, guid: db9093244a99b05419f9c27253e1af55, type: 3}
   _chunkLength: 10
   _lanes:
   - -3

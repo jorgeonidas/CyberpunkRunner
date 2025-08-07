@@ -4,7 +4,7 @@ using UnityEngine;
 public class Chunk : MonoBehaviour
 {
     //each 2.5f the lane
-    // [SerializeField] GameObject _fencePrefab;
+    [SerializeField] GameObject _fencePrefab;
     // [SerializeField] GameObject _applePrefab;
     // [SerializeField] GameObject _coinPrefab;
     [SerializeField] float[] _lanes = { -2.5f, 0f, 2.5f };
@@ -16,7 +16,7 @@ public class Chunk : MonoBehaviour
 
     private void Start()
     {
-        // SpawnFences();
+        //SpawnFences();
         // SpawnApple();
         // SpawnCoins();
     }
