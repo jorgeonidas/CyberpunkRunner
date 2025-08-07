@@ -11,36 +11,16 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] CameraController _cameraController;
     [SerializeField] int _startingChunksAmmount = 12;
     [SerializeField] Transform _chunkParentTransform;
-    List<Chunk> _chunksList = new List<Chunk>();
     [SerializeField] LevelSettings _levelSettings;
+    List<Chunk> _chunksList = new List<Chunk>();
     private Dictionary<string, ObjectPool<Chunk>> _chunkPools;
-    private float _currentChunkMoveSpeed;    
+    private float _currentChunkMoveSpeed;
+
+    #region UnityLifeCycle    
     private void Start()
     {
         InitializeChunksPool();
         SpawnChunks();
-    }
-
-    private void InitializeChunksPool()
-    {
-        _currentChunkMoveSpeed = _levelSettings.InitialChunkSpeed;
-        _chunkPools = new Dictionary<string, ObjectPool<Chunk>>();
-        foreach (var prefab in _levelSettings.ChunkPrefab)
-        {
-            string chunkPrefabName = prefab.name;
-            _chunkPools.Add(chunkPrefabName,
-            new ObjectPool<Chunk>(
-                createFunc: () =>
-                {
-                    Chunk newChunk = Instantiate(prefab, _chunkParentTransform);
-                    newChunk.gameObject.name = prefab.name;
-                    return newChunk;
-                },
-                actionOnGet: (chunk) => chunk.gameObject.SetActive(true),
-                actionOnRelease: (chunk) => chunk.gameObject.SetActive(false),
-                actionOnDestroy: (chunk) => Destroy(chunk.gameObject)
-            ));
-        }
     }
 
     private void OnEnable()
@@ -57,6 +37,7 @@ public class LevelGenerator : MonoBehaviour
     {
         MoveChunks();
     }
+    #endregion
 
     private void SpawnChunks()
     {
@@ -77,9 +58,7 @@ public class LevelGenerator : MonoBehaviour
 
     private Chunk GetRandomChunkFromPool()
     {
-        // int poolIndex = UnityEngine.Random.Range(0, _chunkPools.Count);
-        // return _chunkPools[poolIndex].Get();
-        return _chunkPools.Values.ToList()[Random.Range(0,_chunkPools.Count)].Get();
+        return _chunkPools.Values.ToList()[Random.Range(0, _chunkPools.Count)].Get();
     }
 
     private Vector3 CalculateSpawnPosition()
@@ -111,11 +90,41 @@ public class LevelGenerator : MonoBehaviour
         }
     }
 
+    #region Pooling
+    private void InitializeChunksPool()
+    {
+        _currentChunkMoveSpeed = _levelSettings.InitialChunkSpeed;
+        _chunkPools = new Dictionary<string, ObjectPool<Chunk>>();
+        foreach (var prefab in _levelSettings.ChunkPrefab)
+        {
+            string chunkPrefabName = prefab.name;
+            _chunkPools.Add(chunkPrefabName,
+            new ObjectPool<Chunk>(
+                createFunc: () =>
+                {
+                    return InstantiateNewChunk(prefab);
+                },
+                actionOnGet: (chunk) => chunk.gameObject.SetActive(true),
+                actionOnRelease: (chunk) => chunk.gameObject.SetActive(false),
+                actionOnDestroy: (chunk) => Destroy(chunk.gameObject)
+            ));
+        }
+    }
+
+    private Chunk InstantiateNewChunk(Chunk prefab)
+    {
+        Chunk newChunk = Instantiate(prefab, _chunkParentTransform);
+        newChunk.Initialize(this);
+        newChunk.gameObject.name = prefab.name;
+        return newChunk;
+    }
+
     private void ReleaseChunk(Chunk chunk)
     {
         string chunkName = chunk.name;
         _chunkPools[chunkName].Release(chunk);
     }
+    #endregion
 
     public void ChangeChunkMoveSpeed(float speedAmount)
     {
@@ -125,4 +134,6 @@ public class LevelGenerator : MonoBehaviour
         //Physics.gravity = new Vector3(Physics.gravity.x, Physics.gravity.y, Physics.gravity.z - speedAmount);
         _cameraController.ChangeCaeramFOV(speedAmount);
     }
+
+    public LevelSettings GetLevelSettings() => _levelSettings;
 }

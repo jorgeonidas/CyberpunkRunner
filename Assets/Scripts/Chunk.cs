@@ -7,12 +7,18 @@ public class Chunk : MonoBehaviour
     [SerializeField] GameObject _fencePrefab;
     // [SerializeField] GameObject _applePrefab;
     // [SerializeField] GameObject _coinPrefab;
-    [SerializeField] float[] _lanes = { -2.5f, 0f, 2.5f };
     [SerializeField] float _appleSpawnChance = 0.3f;
     [SerializeField] float _coinSpawnChance = 0.5f;
     List<int> availableLanes = new List<int>() { 0, 1, 2 };
     private const int _maxCoinsToSpawn = 5;
     private const float _chunckLength = 10f;
+    private LevelGenerator _levelGenerator;
+    float[] _lanes;
+    public void Initialize(LevelGenerator levelGenerator)
+    {
+        _levelGenerator = levelGenerator;
+        _lanes = _levelGenerator.GetLevelSettings().Lanes;
+    }
 
     private void Start()
     {
