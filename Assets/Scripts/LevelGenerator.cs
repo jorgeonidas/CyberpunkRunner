@@ -6,17 +6,14 @@ public class LevelGenerator : MonoBehaviour
 {
     public static Action<float> OnChangeSpeedAmount;
     [SerializeField] CameraController _cameraController;
-    [SerializeField] GameObject _chunkPrefab;
     [SerializeField] int _startingChunksAmmount = 12;
     [SerializeField] Transform _chunkParentTransform;
-    [SerializeField] float _chunckLength = 10;
-    [SerializeField] float _chunkInitialChunkMoveSpeed = 10f;
-    [SerializeField] float _minChunkMoveSpeed = 2f;
-    [SerializeField] float _maxChunkMoveSpeed = 15f;
     List<GameObject> _chunksList = new List<GameObject>();
-
+    [SerializeField] LevelSettings _levelSettings;
+    private float _currentChunkMoveSpeed;    
     private void Start()
     {
+        _currentChunkMoveSpeed = _levelSettings.InitialChunkSpeed;
         SpawnChunks();
     }
 
@@ -45,8 +42,9 @@ public class LevelGenerator : MonoBehaviour
 
     private void PlaceNewChunk()
     {
-        GameObject newChunk = Instantiate(_chunkPrefab, CalculateSpawnPosition(), Quaternion.identity, _chunkParentTransform);
-        _chunksList.Add(newChunk);
+        Chunk newChunk = Instantiate(_levelSettings.ChunkPrefab, CalculateSpawnPosition(), Quaternion.identity, _chunkParentTransform);
+        //initialize anything about chunk here
+        _chunksList.Add(newChunk.gameObject);
     }
 
     private Vector3 CalculateSpawnPosition()
@@ -58,7 +56,7 @@ public class LevelGenerator : MonoBehaviour
         }
         //take the last chunk, return the that position plus the chunk length in Z;
         Vector3 lasChunkPos = _chunksList[_chunksList.Count - 1].transform.position;
-        _chunkSpawnPosition = lasChunkPos + (Vector3.forward * _chunckLength);
+        _chunkSpawnPosition = lasChunkPos + (Vector3.forward * _levelSettings.ChunkLength);
         return _chunkSpawnPosition;
     }
 
@@ -67,9 +65,9 @@ public class LevelGenerator : MonoBehaviour
         for (int i = 0; i < _chunksList.Count; i++)
         {
             GameObject chunk = _chunksList[i];
-            chunk.transform.Translate(Vector3.back * _chunkInitialChunkMoveSpeed * Time.deltaTime);
+            chunk.transform.Translate(Vector3.back * _currentChunkMoveSpeed * Time.deltaTime);
 
-            if (chunk.transform.position.z <= Camera.main.transform.position.z - _chunckLength)
+            if (chunk.transform.position.z <= Camera.main.transform.position.z - _levelSettings.ChunkLength)
             {
                 _chunksList.Remove(chunk);
                 Destroy(chunk);
@@ -80,8 +78,8 @@ public class LevelGenerator : MonoBehaviour
 
     public void ChangeChunkMoveSpeed(float speedAmount)
     {
-        _chunkInitialChunkMoveSpeed += speedAmount;
-        _chunkInitialChunkMoveSpeed = Mathf.Clamp(_chunkInitialChunkMoveSpeed, _minChunkMoveSpeed, _maxChunkMoveSpeed);
+        _currentChunkMoveSpeed += speedAmount;
+        _currentChunkMoveSpeed = Mathf.Clamp(_currentChunkMoveSpeed, _levelSettings.MinChunkMoveSpeed, _levelSettings.MaxChunkMoveSpeed);
         //TODO: modify gravity? use physics obstacles at all?
         //Physics.gravity = new Vector3(Physics.gravity.x, Physics.gravity.y, Physics.gravity.z - speedAmount);
         _cameraController.ChangeCaeramFOV(speedAmount);

@@ -6006,13 +6006,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cameraController: {fileID: 577167648}
-  _chunkPrefab: {fileID: 1292174883349775258, guid: 9a74ff6d92d29b940822edcab15a6eb6, type: 3}
   _startingChunksAmmount: 12
   _chunkParentTransform: {fileID: 703072076}
-  _chunckLength: 10
-  _chunkInitialChunkMoveSpeed: 10
-  _minChunkMoveSpeed: 2
-  _maxChunkMoveSpeed: 12
+  _levelSettings: {fileID: 11400000, guid: e36a5c3c5d4babe44bf4ecd2ced9592c, type: 2}
 --- !u!4 &2018537116
 Transform:
   m_ObjectHideFlags: 0

@@ -175,8 +175,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _vehicleTransform: {fileID: 7548648361517365710}
-  _leaningAmount: 35
-  _leaningLength: 0.3
+  _leaningAmount: 45
+  _leaningLength: 0.2
 --- !u!54 &4837316921628281203
 Rigidbody:
   m_ObjectHideFlags: 0
