@@ -10,7 +10,7 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] int _startingChunksAmmount = 12;
     [SerializeField] Transform _chunkParentTransform;
     [SerializeField] float _chunckLength = 10;
-    [SerializeField] float _chunkMoveSpeed = 10f;
+    [SerializeField] float _chunkInitialChunkMoveSpeed = 10f;
     [SerializeField] float _minChunkMoveSpeed = 2f;
     [SerializeField] float _maxChunkMoveSpeed = 15f;
     List<GameObject> _chunksList = new List<GameObject>();
@@ -67,7 +67,7 @@ public class LevelGenerator : MonoBehaviour
         for (int i = 0; i < _chunksList.Count; i++)
         {
             GameObject chunk = _chunksList[i];
-            chunk.transform.Translate(Vector3.back * _chunkMoveSpeed * Time.deltaTime);
+            chunk.transform.Translate(Vector3.back * _chunkInitialChunkMoveSpeed * Time.deltaTime);
 
             if (chunk.transform.position.z <= Camera.main.transform.position.z - _chunckLength)
             {
@@ -80,8 +80,8 @@ public class LevelGenerator : MonoBehaviour
 
     public void ChangeChunkMoveSpeed(float speedAmount)
     {
-        _chunkMoveSpeed += speedAmount;
-        _chunkMoveSpeed = Mathf.Clamp(_chunkMoveSpeed, _minChunkMoveSpeed, _maxChunkMoveSpeed);
+        _chunkInitialChunkMoveSpeed += speedAmount;
+        _chunkInitialChunkMoveSpeed = Mathf.Clamp(_chunkInitialChunkMoveSpeed, _minChunkMoveSpeed, _maxChunkMoveSpeed);
         //TODO: modify gravity? use physics obstacles at all?
         //Physics.gravity = new Vector3(Physics.gravity.x, Physics.gravity.y, Physics.gravity.z - speedAmount);
         _cameraController.ChangeCaeramFOV(speedAmount);

@@ -6010,7 +6010,7 @@ MonoBehaviour:
   _startingChunksAmmount: 12
   _chunkParentTransform: {fileID: 703072076}
   _chunckLength: 10
-  _chunkMoveSpeed: 8
+  _chunkInitialChunkMoveSpeed: 10
   _minChunkMoveSpeed: 2
   _maxChunkMoveSpeed: 12
 --- !u!4 &2018537116

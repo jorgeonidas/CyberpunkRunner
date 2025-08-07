@@ -42,8 +42,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3601182532256503496}
   - component: {fileID: 4917855377038807386}
+  - component: {fileID: 2492954280592009525}
   - component: {fileID: 3125560919348818282}
-  - component: {fileID: 1764349807929050841}
   - component: {fileID: 806347939411337014}
   - component: {fileID: 4837316921628281203}
   - component: {fileID: 2481092496884769814}
@@ -82,25 +82,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f96cb8a9995aa574cb24319bc74eefbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 5
+  _moveSpeed: 8
   _horizontalLimit: 4
   zMaxLimit: 0
   zMinLimit: 0
---- !u!114 &3125560919348818282
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8028125100094935181}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52418a0a919bffb4a95fb4945010574e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _hitCooldownTime: 1
-  _adjustChangeMoveSpeedAmount: 2
---- !u!114 &1764349807929050841
+--- !u!114 &2492954280592009525
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -129,7 +115,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4917855377038807386}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: Move
+        m_MethodName: MoveLeft
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -139,13 +125,43 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 616ca490-7659-4e3e-9ddb-820e40f8c88d
-    m_ActionName: 'Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
+    m_ActionId: f6abfec7-77f2-4692-a4f3-87ba3f2e4981
+    m_ActionName: 'Player/MoveLeft[/Keyboard/a]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4917855377038807386}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: MoveRigth
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: d08c3107-6738-4376-9cd1-99620ba796a3
+    m_ActionName: 'Player/MoveRigth[/Keyboard/d]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &3125560919348818282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8028125100094935181}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52418a0a919bffb4a95fb4945010574e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hitCooldownTime: 1
+  _adjustChangeMoveSpeedAmount: 2
 --- !u!114 &806347939411337014
 MonoBehaviour:
   m_ObjectHideFlags: 0
