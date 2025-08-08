@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3566a095a8531d94dbf66e6ab3948f9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _obstacleToSpawn: {fileID: 7264125426370874599, guid: 0c80ec0af0712aa46866501e319e145a, type: 3}
+  _obstaclesToSpawn: []
   _appleSpawnChance: 0.3
   _coinSpawnChance: 0.5
 --- !u!1 &7420965107876451311

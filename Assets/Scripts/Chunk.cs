@@ -4,7 +4,7 @@ using UnityEngine;
 public class Chunk : MonoBehaviour
 {
     //each 2.5f the lane
-    [SerializeField] GameObject _obstacleToSpawn;
+    [SerializeField] GameObject[] _obstaclesToSpawn;
     // [SerializeField] GameObject _applePrefab;
     // [SerializeField] GameObject _coinPrefab;
     [SerializeField] float _appleSpawnChance = 0.3f;
@@ -61,8 +61,12 @@ public class Chunk : MonoBehaviour
 
     private void SpawnObstacles()
     {
-        int fencesToSpawn = Random.Range(1, _lanesCoordinates.Length);
-        for (int i = 0; i < fencesToSpawn; i++)
+        if (_obstaclesToSpawn == null || _obstaclesToSpawn.Length <= 0)
+        {
+            return;
+        }
+        int amountToSpawn = Random.Range(1, _lanesCoordinates.Length);
+        for (int i = 0; i < amountToSpawn; i++)
         {
             if (_availableLanesIndexes.Count <= 0)
             {
@@ -71,7 +75,8 @@ public class Chunk : MonoBehaviour
             int selectedLane = SelectLaneIndex();
             float xPosition = transform.position.x + _lanesCoordinates[selectedLane];
             Vector3 spawnPosition = new Vector3(xPosition, transform.position.y, transform.position.z);
-            GameObject newObstacle = Instantiate(_obstacleToSpawn, spawnPosition, Quaternion.identity, this.transform);
+            GameObject prefabToSpawn = _obstaclesToSpawn[Random.Range(0, _obstaclesToSpawn.Length)];
+            GameObject newObstacle = Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity, this.transform);
             _spawnedObstacles.Add(newObstacle);
             _occupiedLanes.Add(selectedLane);
         }
