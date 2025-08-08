@@ -5918,7 +5918,7 @@ Transform:
   m_GameObject: {fileID: 1582126939}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 60}
+  m_LocalPosition: {x: 0, y: 0, z: 50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5975,7 +5975,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cameraController: {fileID: 577167648}
-  _startingChunksAmmount: 12
+  _startingChunksAmmount: 6
   _chunkParentTransform: {fileID: 703072076}
   _levelSettings: {fileID: 11400000, guid: e36a5c3c5d4babe44bf4ecd2ced9592c, type: 2}
 --- !u!4 &2018537116
