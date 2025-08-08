@@ -9,22 +9,38 @@ public class Chunk : MonoBehaviour
     // [SerializeField] GameObject _coinPrefab;
     [SerializeField] float _appleSpawnChance = 0.3f;
     [SerializeField] float _coinSpawnChance = 0.5f;
-    List<int> _availableLanesIndexes = new List<int>();
-    private const int _maxCoinsToSpawn = 5;
-    private const float _chunckLength = 10f;
+    // private const int _maxCoinsToSpawn = 5;
+    // private const float _chunckLength = 10f;
     private LevelGenerator _levelGenerator;
+    private List<int> _availableLanesIndexes = new List<int>();
     float[] _lanesCoordinates;
     private List<GameObject> _spawnedObstacles = new List<GameObject>();
-    public void Initialize(LevelGenerator levelGenerator)
+    private List<int> _occupiedLanes = new List<int>();
+    public void Initialize(LevelGenerator levelGenerator, List<int> alreadyObstructedLanes)
+    {
+        ClearObstacles();
+        _occupiedLanes.Clear();
+        _levelGenerator = levelGenerator;
+        _lanesCoordinates = _levelGenerator.GetLevelSettings().Lanes;
+        InitializeAvailableLanesIndexes();
+        RemoveAlreadyObstructedLanes(alreadyObstructedLanes);
+        SpawnObstacles();
+    }
+
+    private void ClearObstacles()
     {
         foreach (GameObject obstacle in _spawnedObstacles)
         {
             Destroy(obstacle);
         }
-        _levelGenerator = levelGenerator;
-        _lanesCoordinates = _levelGenerator.GetLevelSettings().Lanes;
-        InitializeAvailableLanesIndexes();
-        SpawnObstacles();
+    }
+
+    private void RemoveAlreadyObstructedLanes(List<int> alreadyObstructedLanes)
+    {
+        foreach (var lane in alreadyObstructedLanes)
+        {
+            _availableLanesIndexes.Remove(lane);
+        }
     }
 
     private void InitializeAvailableLanesIndexes()
@@ -38,7 +54,7 @@ public class Chunk : MonoBehaviour
 
     // private void Start()
     // {
-        
+
     //     // SpawnApple();
     //     // SpawnCoins();
     // }
@@ -57,6 +73,7 @@ public class Chunk : MonoBehaviour
             Vector3 spawnPosition = new Vector3(xPosition, transform.position.y, transform.position.z);
             GameObject newObstacle = Instantiate(_obstacleToSpawn, spawnPosition, Quaternion.identity, this.transform);
             _spawnedObstacles.Add(newObstacle);
+            _occupiedLanes.Add(selectedLane);
         }
     }
     private void SpawnApple()
@@ -104,4 +121,6 @@ public class Chunk : MonoBehaviour
         _availableLanesIndexes.RemoveAt(randomLaneIndex);
         return selectedLane;
     }
+
+    public List<int> GetOccupiedLanes() => _occupiedLanes;
 }

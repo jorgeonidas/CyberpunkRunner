@@ -60,11 +60,11 @@ public class LevelGenerator : MonoBehaviour
     private void InitializeNewChunk(Chunk newChunk)
     {
         List<int> preOccupiedLanes = new List<int>();
-        // if (_chunksList != null && _chunksList.Count() > 0)
-        // {
-        //     preOccupiedLanes.AddRange(_chunksList.Last().GetOccuppiedLanes());
-        // }
-        newChunk.Initialize(this/*, preOccupiedLanes*/);
+        if (_chunksList != null && _chunksList.Count() > 0)
+        {
+            preOccupiedLanes.AddRange(_chunksList.Last().GetOccupiedLanes());
+        }
+        newChunk.Initialize(this, preOccupiedLanes);
     }
 
     private Chunk GetRandomChunkFromPool()
