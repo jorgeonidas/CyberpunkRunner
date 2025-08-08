@@ -883,7 +883,7 @@ GameObject:
   - component: {fileID: 832575519}
   - component: {fileID: 832575518}
   m_Layer: 0
-  m_Name: Global Volume
+  m_Name: GlobalVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5903,7 +5903,7 @@ GameObject:
   - component: {fileID: 1582126940}
   - component: {fileID: 1582126941}
   m_Layer: 0
-  m_Name: VehiclesSpawner
+  m_Name: MovingObjecsSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5917,13 +5917,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1582126939}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &1582126941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5942,9 +5942,14 @@ MonoBehaviour:
   - {fileID: 4567192481507592078, guid: 7a832253072d35f48b8cd91df8e2c2ac, type: 3}
   - {fileID: 5636691015862934582, guid: da44f6ed357d80d46b02337f9b9de248, type: 3}
   - {fileID: 4567192481507592078, guid: a8a59271eaffb224390b3ee97f4735f3, type: 3}
+  _coinPrefab:
+  - {fileID: 3370881533412048526, guid: cd7ed1cf530f1c645be1e6fd4563f2ed, type: 3}
   _spawnInterval: 1
-  _vehicleSpeed: 20
-  _spawnZOffset: 5
+  _objectsSpeed: 20
+  _spawnZOffset: 0
+  _maxCoinsToSpawn: 5
+  _coinLineLength: 10
+  _coinSpawnChance: 0.6
 --- !u!1 &2018537114
 GameObject:
   m_ObjectHideFlags: 0

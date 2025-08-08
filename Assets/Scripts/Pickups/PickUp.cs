@@ -2,11 +2,11 @@ using UnityEngine;
 
 public abstract class PickUp : MonoBehaviour
 {
-    [SerializeField] float _rotationSpeed = 180f;
+    //[SerializeField] float _rotationSpeed = 180f;
 
     private void Update()
     {
-        transform.Rotate(0, _rotationSpeed * Time.deltaTime, 0);
+        //transform.Rotate(0, _rotationSpeed * Time.deltaTime, 0);
     }
     void OnTriggerEnter(Collider other)
     {

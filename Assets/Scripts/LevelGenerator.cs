@@ -140,9 +140,7 @@ public class LevelGenerator : MonoBehaviour
     public void ChangeChunkMoveSpeed(float speedAmount)
     {
         _currentChunkMoveSpeed += speedAmount;
-        _currentChunkMoveSpeed = Mathf.Clamp(_currentChunkMoveSpeed, _levelSettings.MinChunkMoveSpeed, _levelSettings.MaxChunkMoveSpeed);
-        //TODO: modify gravity? use physics obstacles at all?
-        //Physics.gravity = new Vector3(Physics.gravity.x, Physics.gravity.y, Physics.gravity.z - speedAmount);
+        _currentChunkMoveSpeed = Mathf.Clamp(_currentChunkMoveSpeed, _levelSettings.InitialChunkSpeed, _levelSettings.MaxChunkMoveSpeed);
         _cameraController.ChangeCaeramFOV(speedAmount);
     }
 
