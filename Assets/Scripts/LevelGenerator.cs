@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 
 public class LevelGenerator : MonoBehaviour
 {
+    public static Action OnChunkPlaced;
     public static Action<float> OnChangeSpeedAmount;
     [SerializeField] CameraController _cameraController;
     [SerializeField] int _startingChunksAmmount = 12;
@@ -97,6 +98,7 @@ public class LevelGenerator : MonoBehaviour
                 _chunksList.Remove(chunk);
                 ReleaseChunk(chunk);
                 PlaceNewChunk();
+                OnChunkPlaced?.Invoke();
             }
         }
     }

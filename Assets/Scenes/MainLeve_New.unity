@@ -5949,7 +5949,6 @@ MonoBehaviour:
   _spawnZOffset: 0
   _maxCoinsToSpawn: 5
   _coinLineLength: 10
-  _coinSpawnChance: 0.6
 --- !u!1 &2018537114
 GameObject:
   m_ObjectHideFlags: 0
