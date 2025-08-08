@@ -11,15 +11,15 @@ public class MovingObjectsSpawner : MonoBehaviour
     [SerializeField] float _objectsSpeed = 10f;
     [SerializeField] float _spawnZOffset = 5f;
     //coins
-    [SerializeField] int _maxCoinsToSpawn = 5;
+    [SerializeField] int _maxCoinsToSpawn = 10;
     [SerializeField] float _coinLineLength = 10f; // equivalente al largo de un chunk visual
-    [SerializeField] float _coinSpawnChance = 0.6f;
+    //[SerializeField] float _coinSpawnChance = 0.6f;
 
     private float _timer;
     private List<float> _lanes = new List<float>();
-    List<float> _availableLanes = new List<float>();
+    private List<int> _previousVehicleLanes = new List<int>();  // evitar repetición
+    private List<int> _currentAvailableLanes = new List<int>(); // para el ciclo actual
     private float _despawnZ;
-    int _prevRandomLaneIndex = -1;
 
     private void Start()
     {
@@ -39,72 +39,78 @@ public class MovingObjectsSpawner : MonoBehaviour
         _timer -= Time.deltaTime;
         if (_timer <= 0f)
         {
-            SpawnVehicle();
-            SpawnCoins();
+            PrepareLaneAvailability();               // reinicia lanes
+            SpawnVehicles();                         // ocupa algunos
+            SpawnCoins();                            // usa los que queden
             _timer = _spawnInterval;
         }
     }
 
-    private void SpawnVehicle()
+    private void SpawnVehicles()
     {
-        int randomLaneIndex = SelecRandomLaneIndex();
-        _prevRandomLaneIndex = randomLaneIndex;
-        float xPos = transform.position.x + _lanes[randomLaneIndex];
-        float zPos = transform.position.z + _spawnZOffset;
-        MovingObject prefab = _vehiclePrefab[Random.Range(0, _vehiclePrefab.Length)];
-        MovingObject vehicle = Instantiate(prefab, new Vector3(xPos, 0f, zPos), transform.rotation);
-        vehicle.Initialize(_objectsSpeed, _despawnZ);
-    }
+        List<int> allowedLanes = _currentAvailableLanes
+            .Except(_previousVehicleLanes)  // evita repetir
+            .ToList();
 
-    private int SelecRandomLaneIndex()
-    {
-        _availableLanes.Clear();
-        _availableLanes.AddRange(_lanes);
-        if (_prevRandomLaneIndex != -1)
+        List<int> usedThisCycle = new List<int>();
+        int vehicleCount = Random.Range(1, Mathf.Min(3, allowedLanes.Count + 1)); // 1 o 2
+
+        for (int i = 0; i < vehicleCount; i++)
         {
-            float laneToRemove = _lanes[_prevRandomLaneIndex];
-            _availableLanes.Remove(laneToRemove);
-        }
-        int randomLaneInAvailable = Random.Range(0, _availableLanes.Count);
-        int laneIndex = _lanes.IndexOf(_availableLanes[randomLaneInAvailable]);
-        return laneIndex;
-    }
+            if (allowedLanes.Count == 0)
+            {
+                break;
+            }
 
+            int randomIndex = Random.Range(0, allowedLanes.Count);
+            int laneIndex = allowedLanes[randomIndex];
+            allowedLanes.RemoveAt(randomIndex);
+
+            float xPos = transform.position.x + _lanes[laneIndex];
+            float zPos = transform.position.z + _spawnZOffset;
+
+            MovingObject prefab = _vehiclePrefab[Random.Range(0, _vehiclePrefab.Length)];
+            MovingObject vehicle = Instantiate(prefab, new Vector3(xPos, 0f, zPos), transform.rotation);
+            vehicle.Initialize(_objectsSpeed, _despawnZ);
+
+            _currentAvailableLanes.Remove(laneIndex); // marcar como ocupada
+            usedThisCycle.Add(laneIndex);
+        }
+
+        _previousVehicleLanes = usedThisCycle; // guardar para el próximo ciclo
+    }
     private void SpawnCoins()
     {
-        if (/*Random.value >= _coinSpawnChance ||*/ _lanes.Count == 0)
+        if (_currentAvailableLanes.Count == 0)
         {
             return;
         }
 
-        // Elegir lane diferente al del vehículo
-        List<int> availableIndexes = Enumerable.Range(0, _lanes.Count).ToList();
-        if (_prevRandomLaneIndex != -1)
-        {
-            availableIndexes.Remove(_prevRandomLaneIndex);
-        }
+        int laneIndex = _currentAvailableLanes[Random.Range(0, _currentAvailableLanes.Count)];
+        _currentAvailableLanes.Remove(laneIndex); // ocupar la lane
 
-        if (availableIndexes.Count == 0)
-        {
-            return;
-        }
-
-        int selectedLaneIndex = availableIndexes[Random.Range(0, availableIndexes.Count)];
-        float xPosition = transform.position.x + _lanes[selectedLaneIndex];
-
-        // Determinar cantidad y espaciado
+        float xPosition = transform.position.x + _lanes[laneIndex];
         int coinsToSpawn = Random.Range(1, _maxCoinsToSpawn + 1);
         float spacing = _coinLineLength / _maxCoinsToSpawn;
         float startZ = transform.position.z + _spawnZOffset + _coinLineLength / 2f;
-        //refactor to put any prefab?s
+
         for (int i = 0; i < coinsToSpawn; i++)
         {
-            float zPosition = startZ - spacing * i;
-            Vector3 spawnPosition = new Vector3(xPosition, 0f, zPosition);
+            float zPos = startZ - spacing * i;
+            Vector3 spawnPos = new Vector3(xPosition, 0f, zPos);
 
             MovingObject prefab = _coinPrefab[Random.Range(0, _coinPrefab.Length)];
-            MovingObject coin = Instantiate(prefab, spawnPosition, transform.rotation);
+            MovingObject coin = Instantiate(prefab, spawnPos, transform.rotation);
             coin.Initialize(_objectsSpeed, _despawnZ);
+        }
+    }
+
+    private void PrepareLaneAvailability()
+    {
+        _currentAvailableLanes.Clear();
+        for (int i = 0; i < _lanes.Count; i++)
+        {
+            _currentAvailableLanes.Add(i);
         }
     }
 }
