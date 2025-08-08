@@ -3,7 +3,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    //todo initialize from somwhere else
     [SerializeField] LevelSettings _levelSettings;
     [SerializeField] private float _moveSpeed = 5f;
     [SerializeField] private float _horizontalLimit = 4f;

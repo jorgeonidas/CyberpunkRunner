@@ -50,10 +50,21 @@ public class LevelGenerator : MonoBehaviour
     private void PlaceNewChunk()
     {
         Chunk newChunk = GetRandomChunkFromPool();
+        InitializeNewChunk(newChunk);
         newChunk.transform.position = CalculateSpawnPosition();
         newChunk.transform.rotation = Quaternion.identity;
         newChunk.transform.SetParent(_chunkParentTransform);
         _chunksList.Add(newChunk);
+    }
+
+    private void InitializeNewChunk(Chunk newChunk)
+    {
+        List<int> preOccupiedLanes = new List<int>();
+        // if (_chunksList != null && _chunksList.Count() > 0)
+        // {
+        //     preOccupiedLanes.AddRange(_chunksList.Last().GetOccuppiedLanes());
+        // }
+        newChunk.Initialize(this/*, preOccupiedLanes*/);
     }
 
     private Chunk GetRandomChunkFromPool()
@@ -114,8 +125,8 @@ public class LevelGenerator : MonoBehaviour
     private Chunk InstantiateNewChunk(Chunk prefab)
     {
         Chunk newChunk = Instantiate(prefab, _chunkParentTransform);
-        newChunk.Initialize(this);
         newChunk.gameObject.name = prefab.name;
+        InitializeNewChunk(newChunk);
         return newChunk;
     }
 
