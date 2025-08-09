@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 1679322725428831109}
   - component: {fileID: 3370881533412048526}
   - component: {fileID: 1036067562009736170}
+  - component: {fileID: 7246594060548260529}
+  - component: {fileID: 7264362720763687795}
   m_Layer: 0
   m_Name: Vehicle_SwipeCar
   m_TagString: Untagged
@@ -46,7 +48,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19920603f6b8e0a4da26d2daf8b16dc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 5
 --- !u!65 &1036067562009736170
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -68,6 +69,31 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.5, y: 2.2553887, z: 3.5260797}
   m_Center: {x: 0, y: 1.1506944, z: -0.10408968}
+--- !u!114 &7246594060548260529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7264125426370874599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b6271a1b64d4064a8a5d0888a9a0bc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7264362720763687795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7264125426370874599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7664aaaa194fc54894d51dc87ad71e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _despawnZ: -20
 --- !u!1001 &1509675173038769161
 PrefabInstance:
   m_ObjectHideFlags: 0

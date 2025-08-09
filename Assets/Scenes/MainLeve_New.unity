@@ -255,6 +255,26 @@ MonoBehaviour:
     objectPrefab: {fileID: 1533778231171789797, guid: 7b57a1b15a651fc41a8cc47372309616, type: 3}
     defaultCapacity: 100
     maxSize: 200
+    prewarm: 60
+  - key: VehicleObstacle_1
+    objectPrefab: {fileID: 7246594060548260529, guid: 0c80ec0af0712aa46866501e319e145a, type: 3}
+    defaultCapacity: 20
+    maxSize: 50
+    prewarm: 10
+  - key: VehicleObstacle_2
+    objectPrefab: {fileID: 8446282707843283889, guid: 7a832253072d35f48b8cd91df8e2c2ac, type: 3}
+    defaultCapacity: 20
+    maxSize: 50
+    prewarm: 10
+  - key: VehicleObstacle_3
+    objectPrefab: {fileID: 8446282707843283889, guid: a8a59271eaffb224390b3ee97f4735f3, type: 3}
+    defaultCapacity: 20
+    maxSize: 50
+    prewarm: 10
+  - key: VehicleObstacle_4
+    objectPrefab: {fileID: 319571539525165065, guid: da44f6ed357d80d46b02337f9b9de248, type: 3}
+    defaultCapacity: 20
+    maxSize: 50
     prewarm: 10
 --- !u!4 &329498683
 Transform:
@@ -5987,6 +6007,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _levelSettings: {fileID: 11400000, guid: e36a5c3c5d4babe44bf4ecd2ced9592c, type: 2}
+  _vehicleObstaclesIds:
+  - VehicleObstacle_1
+  - VehicleObstacle_2
+  - VehicleObstacle_3
+  - VehicleObstacle_4
   _spawnInterval: 1
   _objectsSpeed: 20
   _spawnZOffset: 0

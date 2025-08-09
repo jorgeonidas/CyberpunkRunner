@@ -5,6 +5,7 @@ using UnityEngine;
 public class MovingObjectsSpawner : MonoBehaviour
 {
     [SerializeField] LevelSettings _levelSettings;
+    [SerializeField] string[] _vehicleObstaclesIds;
    // [SerializeField] MovingObject[] _vehiclePrefab;
     [SerializeField] float _spawnInterval = 3f;
     [SerializeField] float _objectsSpeed = 10f;
@@ -44,44 +45,45 @@ public class MovingObjectsSpawner : MonoBehaviour
     private void PlaceProps()
     {
         PrepareLaneAvailability();               // reinicia lanes
-        //SpawnVehicles();                         // ocupa algunos
+        SpawnVehicles();                         // ocupa algunos
         SpawnCoins();
     }
 
-    // private void SpawnVehicles()
-    // {
-    //     List<int> allowedLanes = _currentAvailableLanes
-    //         .Except(_previousVehicleLanes)  // evita repetir
-    //         .ToList();
+    private void SpawnVehicles()
+    {
+        List<int> allowedLanes = _currentAvailableLanes
+            .Except(_previousVehicleLanes)  // evita repetir
+            .ToList();
 
-    //     List<int> obstructedThisCycle = new List<int>();
-    //     int vehicleCount = Random.Range(1, Mathf.Min(_lanes.Count, allowedLanes.Count + 1));
+        List<int> obstructedThisCycle = new List<int>();
+        int vehicleCount = Random.Range(1, Mathf.Min(_lanes.Count, allowedLanes.Count + 1));
 
-    //     for (int i = 0; i < vehicleCount; i++)
-    //     {
-    //         if (allowedLanes.Count == 0)
-    //         {
-    //             break;
-    //         }
+        for (int i = 0; i < vehicleCount; i++)
+        {
+            if (allowedLanes.Count == 0)
+            {
+                break;
+            }
 
-    //         int randomIndex = Random.Range(0, allowedLanes.Count);
-    //         int laneIndex = allowedLanes[randomIndex];
-    //         allowedLanes.RemoveAt(randomIndex);
+            int randomIndex = Random.Range(0, allowedLanes.Count);
+            int laneIndex = allowedLanes[randomIndex];
+            allowedLanes.RemoveAt(randomIndex);
 
-    //         float xPos = transform.position.x + _lanes[laneIndex];
-    //         float halfLength = _chunkLength / 2f;
-    //         float zPos = transform.position.z + Random.Range(-halfLength, halfLength);
+            float xPos = transform.position.x + _lanes[laneIndex];
+            float halfLength = _chunkLength / 2f;
+            float zPos = transform.position.z + Random.Range(-halfLength, halfLength);
 
-    //         MovingObject prefab = _vehiclePrefab[Random.Range(0, _vehiclePrefab.Length)];
-    //         MovingObject vehicle = Instantiate(prefab, new Vector3(xPos, 0f, zPos), transform.rotation);
-    //         vehicle.Initialize(_objectsSpeed);
+            // MovingObject prefab = _vehiclePrefab[Random.Range(0, _vehiclePrefab.Length)];
+            // MovingObject vehicle = Instantiate(prefab, new Vector3(xPos, 0f, zPos), transform.rotation);
+            // vehicle.Initialize(_objectsSpeed);
+            string vehicleId = _vehicleObstaclesIds[Random.Range(0, _vehicleObstaclesIds.Length)];
+            PoolManager.Instance.Get(vehicleId, new Vector3(xPos, 0f, zPos), transform.rotation);
+            _currentAvailableLanes.Remove(laneIndex); 
+            obstructedThisCycle.Add(laneIndex);
+        }
 
-    //         _currentAvailableLanes.Remove(laneIndex); 
-    //         obstructedThisCycle.Add(laneIndex);
-    //     }
-
-    //     _previousVehicleLanes = obstructedThisCycle; 
-    // }
+        _previousVehicleLanes = obstructedThisCycle; 
+    }
     private void SpawnCoins()
     {
         if (_currentAvailableLanes.Count == 0)
