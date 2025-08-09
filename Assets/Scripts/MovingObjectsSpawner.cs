@@ -6,7 +6,6 @@ public class MovingObjectsSpawner : MonoBehaviour
 {
     [SerializeField] LevelSettings _levelSettings;
     [SerializeField] string[] _vehicleObstaclesIds;
-    [SerializeField] float _spawnInterval = 3f;
     [SerializeField] float _spawnZOffset = 5f;
     [SerializeField] int _maxCoinsToSpawn = 10;
     private List<float> _lanes = new List<float>();
@@ -14,7 +13,7 @@ public class MovingObjectsSpawner : MonoBehaviour
     private List<int> _currentAvailableLanes = new List<int>();
     float _chunkLength;
     private float[] _horizontalLanes;
-
+    private string[] _powerupsIds = { PoolObjectIDs.SpeedBoost };
     private void Start()
     {
         Initialize();
@@ -39,20 +38,20 @@ public class MovingObjectsSpawner : MonoBehaviour
 
     private void PlaceProps()
     {
-        PrepareLaneAvailability();               
-        SpawnVehicles();                         
+        PrepareLaneAvailability();
+        SpawnVehicles();
         SpawnCoins();
+        SpawnPowerup();
     }
 
     private void SpawnVehicles()
     {
         List<float> availableHorizontalLanes = new List<float>();
         availableHorizontalLanes.AddRange(_horizontalLanes);
+
         List<int> allowedLanes = _currentAvailableLanes.Except(_previousVehicleLanes).ToList();
         List<int> obstructedThisCycle = new List<int>();
         int laesOcuppiedCoiunt = Random.Range(1, Mathf.Min(_lanes.Count, allowedLanes.Count + 1));
-        float halfLength = _chunkLength / 2f;
-
         for (int i = 0; i < laesOcuppiedCoiunt; i++)
         {
             if (allowedLanes.Count == 0)
@@ -60,10 +59,11 @@ public class MovingObjectsSpawner : MonoBehaviour
                 break;
             }
 
-            int randomIndex = Random.Range(0, allowedLanes.Count);
-            int laneIndex = allowedLanes[randomIndex];
-            allowedLanes.RemoveAt(randomIndex);
-            float xPos = transform.position.x + _lanes[laneIndex];
+            int randomVerticalLaneIndex = Random.Range(0, allowedLanes.Count);
+            int laneIndex = allowedLanes[randomVerticalLaneIndex];
+            allowedLanes.RemoveAt(randomVerticalLaneIndex);
+
+            float xPos = GetXPosition(laneIndex);
 
             int horizontalLaneIndex = Random.Range(0, availableHorizontalLanes.Count);
             float zCoordinate = availableHorizontalLanes[horizontalLaneIndex];
@@ -85,10 +85,8 @@ public class MovingObjectsSpawner : MonoBehaviour
             return;
         }
 
-        int laneIndex = _currentAvailableLanes[Random.Range(0, _currentAvailableLanes.Count)];
-        _currentAvailableLanes.Remove(laneIndex); // ocupar la lane
-
-        float xPosition = transform.position.x + _lanes[laneIndex];
+        int verticalLalenIndex = GetAvailableVerticalLane();
+        float xPosition = GetXPosition(verticalLalenIndex);
         int coinsToSpawn = Random.Range(1, _maxCoinsToSpawn);
         float spacing = _chunkLength / _maxCoinsToSpawn;
         float startZ = transform.position.z + _spawnZOffset + _chunkLength / 2f;
@@ -99,6 +97,32 @@ public class MovingObjectsSpawner : MonoBehaviour
             Vector3 spawnPos = new Vector3(xPosition, 0f, zPos);
             PoolManager.Instance.Get(PoolObjectIDs.Coin, spawnPos, transform.rotation);
         }
+    }
+
+    public void SpawnPowerup()
+    {
+        if (_currentAvailableLanes.Count == 0)
+        {
+            return;
+        }
+        int verticalLaneIndex = GetAvailableVerticalLane();
+        int horizontalLaneIndex = Random.Range(0, _horizontalLanes.Length);
+        float zCoordinate = _horizontalLanes[horizontalLaneIndex];
+        Vector3 spawnPos = new Vector3(GetXPosition(verticalLaneIndex), 0f, transform.position.z + zCoordinate);
+        //test
+        PoolManager.Instance.Get(_powerupsIds.First(), spawnPos, transform.rotation);
+    }
+
+    private float GetXPosition(int verticalLalenIndex)
+    {
+        return transform.position.x + _lanes[verticalLalenIndex];
+    }
+
+    private int GetAvailableVerticalLane()
+    {
+        int laneIndex = _currentAvailableLanes[Random.Range(0, _currentAvailableLanes.Count)];
+        _currentAvailableLanes.Remove(laneIndex);
+        return laneIndex;
     }
 
     private void PrepareLaneAvailability()

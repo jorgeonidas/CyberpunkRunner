@@ -119,7 +119,13 @@ public class LevelGenerator : MonoBehaviour
                 },
                 actionOnGet: (chunk) => chunk.gameObject.SetActive(true),
                 actionOnRelease: (chunk) => chunk.gameObject.SetActive(false),
-                actionOnDestroy: (chunk) => Destroy(chunk.gameObject)
+                actionOnDestroy: (chunk) =>
+                {
+                    if (chunk)
+                    {
+                        Destroy(chunk.gameObject);
+                    }
+                }
             ));
         }
     }

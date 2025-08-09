@@ -40,13 +40,12 @@ public class PoolManager : MonoBehaviour
                 createFunc: () =>
                 {
                     var obj = Instantiate(cfg.objectPrefab);
-                    // Poner inactivo al crear evita parpadeos antes de "Get".
                     obj.gameObject.SetActive(false);
                     return obj;
                 },
                 actionOnGet: (obj) =>
                 {
-                    obj.Pool ??= pool;     // asigna referencia al pool
+                    obj.Pool ??= pool;     // ?? assing if not assigned
                     obj.gameObject.SetActive(true);
                     obj.OnGetFromPool();
                 },
@@ -57,7 +56,10 @@ public class PoolManager : MonoBehaviour
                 },
                 actionOnDestroy: (obj) =>
                 {
-                    if (obj) Destroy(obj.gameObject);
+                    if (obj)
+                    {
+                        Destroy(obj.gameObject);
+                    }
                 },
                 collectionCheck: true,
                 defaultCapacity: Mathf.Max(1, cfg.defaultCapacity),

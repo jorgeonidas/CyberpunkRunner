@@ -5,9 +5,6 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] LevelSettings _levelSettings;
     [SerializeField] private float _moveSpeed = 5f;
-    [SerializeField] private float _horizontalLimit = 4f;
-    [SerializeField] private float zMaxLimit = 2f;
-    [SerializeField] private float zMinLimit = -1f;
     private float[] _lanes;
     private Rigidbody _playerRigidbody;
     VehicleLeaning _vehicleaning;

@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class Chunk : MonoBehaviour
 {
-    [SerializeField] GameObject[] _obstaclesToSpawn;
-    [SerializeField] float _appleSpawnChance = 0.3f;
-    [SerializeField] float _coinSpawnChance = 0.5f;
+    // [SerializeField] GameObject[] _obstaclesToSpawn;
+    // [SerializeField] float _appleSpawnChance = 0.3f;
+    // [SerializeField] float _coinSpawnChance = 0.5f;
     private LevelGenerator _levelGenerator;
     private List<int> _availableLanesIndexes = new List<int>();
     float[] _lanesCoordinates;
@@ -45,14 +45,6 @@ public class Chunk : MonoBehaviour
             _availableLanesIndexes.Add(i);
         }
     }
-
-    // private int SelectLaneIndex()
-    // {
-    //     int randomLaneIndex = Random.Range(0, _availableLanesIndexes.Count);
-    //     int selectedLane = _availableLanesIndexes[randomLaneIndex];
-    //     _availableLanesIndexes.RemoveAt(randomLaneIndex);
-    //     return selectedLane;
-    // }
 
     public List<int> GetOccupiedLanes() => _occupiedLanes;
 }

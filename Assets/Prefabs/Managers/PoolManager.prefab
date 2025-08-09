@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &906122786468316356
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3203273890964047145}
+  - component: {fileID: 4664264224182392238}
+  m_Layer: 0
+  m_Name: PoolManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3203273890964047145
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 906122786468316356}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4664264224182392238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 906122786468316356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c280dae8b4b27fe4090b822314fd02af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _configs:
+  - key: Coin
+    objectPrefab: {fileID: 1533778231171789797, guid: 7b57a1b15a651fc41a8cc47372309616, type: 3}
+    defaultCapacity: 100
+    maxSize: 200
+    prewarm: 60
+  - key: SpeedBoost
+    objectPrefab: {fileID: 3527117324728761569, guid: 6b337659086f2c143800c3b2b377f49c, type: 3}
+    defaultCapacity: 4
+    maxSize: 8
+    prewarm: 2
+  - key: VehicleObstacle_1
+    objectPrefab: {fileID: 7246594060548260529, guid: 0c80ec0af0712aa46866501e319e145a, type: 3}
+    defaultCapacity: 20
+    maxSize: 50
+    prewarm: 10
+  - key: VehicleObstacle_2
+    objectPrefab: {fileID: 8446282707843283889, guid: 7a832253072d35f48b8cd91df8e2c2ac, type: 3}
+    defaultCapacity: 20
+    maxSize: 50
+    prewarm: 10
+  - key: VehicleObstacle_3
+    objectPrefab: {fileID: 8446282707843283889, guid: a8a59271eaffb224390b3ee97f4735f3, type: 3}
+    defaultCapacity: 20
+    maxSize: 50
+    prewarm: 10
+  - key: VehicleObstacle_4
+    objectPrefab: {fileID: 4032396584561504956, guid: 864730ad01d145c49b336a24a479c547, type: 3}
+    defaultCapacity: 20
+    maxSize: 50
+    prewarm: 10
