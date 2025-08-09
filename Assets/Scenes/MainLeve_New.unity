@@ -6092,62 +6092,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4664264224182392238, guid: 21178cf3a9a50094f948f4352dd54a33, type: 3}
-      propertyPath: _configs.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4664264224182392238, guid: 21178cf3a9a50094f948f4352dd54a33, type: 3}
-      propertyPath: _configs.Array.data[1].key
-      value: VehicleObstacle_4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4664264224182392238, guid: 21178cf3a9a50094f948f4352dd54a33, type: 3}
-      propertyPath: _configs.Array.data[2].key
-      value: VehicleObstacle_1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4664264224182392238, guid: 21178cf3a9a50094f948f4352dd54a33, type: 3}
-      propertyPath: _configs.Array.data[3].key
-      value: VehicleObstacle_2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4664264224182392238, guid: 21178cf3a9a50094f948f4352dd54a33, type: 3}
-      propertyPath: _configs.Array.data[4].key
-      value: VehicleObstacle_3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4664264224182392238, guid: 21178cf3a9a50094f948f4352dd54a33, type: 3}
-      propertyPath: _configs.Array.data[5].key
-      value: VehicleObstacle_4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4664264224182392238, guid: 21178cf3a9a50094f948f4352dd54a33, type: 3}
-      propertyPath: _configs.Array.data[5].maxSize
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 4664264224182392238, guid: 21178cf3a9a50094f948f4352dd54a33, type: 3}
-      propertyPath: _configs.Array.data[5].prewarm
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4664264224182392238, guid: 21178cf3a9a50094f948f4352dd54a33, type: 3}
-      propertyPath: _configs.Array.data[1].objectPrefab
-      value: 
-      objectReference: {fileID: 4032396584561504956, guid: 864730ad01d145c49b336a24a479c547, type: 3}
-    - target: {fileID: 4664264224182392238, guid: 21178cf3a9a50094f948f4352dd54a33, type: 3}
-      propertyPath: _configs.Array.data[2].objectPrefab
-      value: 
-      objectReference: {fileID: 7246594060548260529, guid: 0c80ec0af0712aa46866501e319e145a, type: 3}
-    - target: {fileID: 4664264224182392238, guid: 21178cf3a9a50094f948f4352dd54a33, type: 3}
-      propertyPath: _configs.Array.data[3].objectPrefab
-      value: 
-      objectReference: {fileID: 8446282707843283889, guid: 7a832253072d35f48b8cd91df8e2c2ac, type: 3}
-    - target: {fileID: 4664264224182392238, guid: 21178cf3a9a50094f948f4352dd54a33, type: 3}
-      propertyPath: _configs.Array.data[4].objectPrefab
-      value: 
-      objectReference: {fileID: 8446282707843283889, guid: a8a59271eaffb224390b3ee97f4735f3, type: 3}
-    - target: {fileID: 4664264224182392238, guid: 21178cf3a9a50094f948f4352dd54a33, type: 3}
-      propertyPath: _configs.Array.data[5].objectPrefab
-      value: 
-      objectReference: {fileID: 4032396584561504956, guid: 864730ad01d145c49b336a24a479c547, type: 3}
-    - target: {fileID: 4664264224182392238, guid: 21178cf3a9a50094f948f4352dd54a33, type: 3}
-      propertyPath: _configs.Array.data[5].defaultCapacity
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

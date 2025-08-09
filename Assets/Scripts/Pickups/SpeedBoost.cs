@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ApplePickUp : PickUp
+public class SpeedBoost : PickUp
 {
     [SerializeField] float _adjustChangeMoveSpeedAmount = 3f;
     protected override void OnPickUp()
