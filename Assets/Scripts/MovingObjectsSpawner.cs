@@ -6,18 +6,15 @@ public class MovingObjectsSpawner : MonoBehaviour
 {
     [SerializeField] LevelSettings _levelSettings;
     [SerializeField] string[] _vehicleObstaclesIds;
-   // [SerializeField] MovingObject[] _vehiclePrefab;
     [SerializeField] float _spawnInterval = 3f;
-    [SerializeField] float _objectsSpeed = 10f;
     [SerializeField] float _spawnZOffset = 5f;
     [SerializeField] int _maxCoinsToSpawn = 10;
-
-    //private float _timer;
     private List<float> _lanes = new List<float>();
-    private List<int> _previousVehicleLanes = new List<int>();  // evitar repetición
-    private List<int> _currentAvailableLanes = new List<int>(); // para el ciclo actual
-    //private float _despawnZ;
+    private List<int> _previousVehicleLanes = new List<int>(); 
+    private List<int> _currentAvailableLanes = new List<int>();
     float _chunkLength;
+    private float[] _horizontalLanes;
+
     private void Start()
     {
         Initialize();
@@ -36,29 +33,27 @@ public class MovingObjectsSpawner : MonoBehaviour
     public void Initialize()
     {
         _lanes = _levelSettings.Lanes.ToList();
-        //TODO: may be a Z value in the future
-        //_despawnZ = Camera.main.transform.position.z - (_levelSettings.ChunkLength * 2);
-        // _timer = Random.Range(0f, _spawnInterval);
+        _horizontalLanes = _levelSettings.HorizontalLanes;
         _chunkLength = _levelSettings.ChunkLength;
     }
 
     private void PlaceProps()
     {
-        PrepareLaneAvailability();               // reinicia lanes
-        SpawnVehicles();                         // ocupa algunos
+        PrepareLaneAvailability();               
+        SpawnVehicles();                         
         SpawnCoins();
     }
 
     private void SpawnVehicles()
     {
-        List<int> allowedLanes = _currentAvailableLanes
-            .Except(_previousVehicleLanes)  // evita repetir
-            .ToList();
-
+        List<float> availableHorizontalLanes = new List<float>();
+        availableHorizontalLanes.AddRange(_horizontalLanes);
+        List<int> allowedLanes = _currentAvailableLanes.Except(_previousVehicleLanes).ToList();
         List<int> obstructedThisCycle = new List<int>();
-        int vehicleCount = Random.Range(1, Mathf.Min(_lanes.Count, allowedLanes.Count + 1));
+        int laesOcuppiedCoiunt = Random.Range(1, Mathf.Min(_lanes.Count, allowedLanes.Count + 1));
+        float halfLength = _chunkLength / 2f;
 
-        for (int i = 0; i < vehicleCount; i++)
+        for (int i = 0; i < laesOcuppiedCoiunt; i++)
         {
             if (allowedLanes.Count == 0)
             {
@@ -68,17 +63,16 @@ public class MovingObjectsSpawner : MonoBehaviour
             int randomIndex = Random.Range(0, allowedLanes.Count);
             int laneIndex = allowedLanes[randomIndex];
             allowedLanes.RemoveAt(randomIndex);
-
             float xPos = transform.position.x + _lanes[laneIndex];
-            float halfLength = _chunkLength / 2f;
-            float zPos = transform.position.z + Random.Range(-halfLength, halfLength);
 
-            // MovingObject prefab = _vehiclePrefab[Random.Range(0, _vehiclePrefab.Length)];
-            // MovingObject vehicle = Instantiate(prefab, new Vector3(xPos, 0f, zPos), transform.rotation);
-            // vehicle.Initialize(_objectsSpeed);
+            int horizontalLaneIndex = Random.Range(0, availableHorizontalLanes.Count);
+            float zCoordinate = availableHorizontalLanes[horizontalLaneIndex];
+            availableHorizontalLanes.RemoveAt(horizontalLaneIndex);
+            float zPos = transform.position.z + zCoordinate;
+
             string vehicleId = _vehicleObstaclesIds[Random.Range(0, _vehicleObstaclesIds.Length)];
             PoolManager.Instance.Get(vehicleId, new Vector3(xPos, 0f, zPos), transform.rotation);
-            _currentAvailableLanes.Remove(laneIndex); 
+            _currentAvailableLanes.Remove(laneIndex);
             obstructedThisCycle.Add(laneIndex);
         }
 
@@ -95,7 +89,7 @@ public class MovingObjectsSpawner : MonoBehaviour
         _currentAvailableLanes.Remove(laneIndex); // ocupar la lane
 
         float xPosition = transform.position.x + _lanes[laneIndex];
-        int coinsToSpawn = Random.Range(1, _maxCoinsToSpawn + 1);
+        int coinsToSpawn = Random.Range(1, _maxCoinsToSpawn);
         float spacing = _chunkLength / _maxCoinsToSpawn;
         float startZ = transform.position.z + _spawnZOffset + _chunkLength / 2f;
 
@@ -103,7 +97,6 @@ public class MovingObjectsSpawner : MonoBehaviour
         {
             float zPos = startZ - spacing * i;
             Vector3 spawnPos = new Vector3(xPosition, 0f, zPos);
-            //moving objects will initialize throug speed manager
             PoolManager.Instance.Get(PoolObjectIDs.Coin, spawnPos, transform.rotation);
         }
     }
