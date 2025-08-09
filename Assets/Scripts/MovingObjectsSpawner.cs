@@ -101,11 +101,8 @@ public class MovingObjectsSpawner : MonoBehaviour
         {
             float zPos = startZ - spacing * i;
             Vector3 spawnPos = new Vector3(xPosition, 0f, zPos);
-            PooledObject poolCoin = PoolManager.Instance.Get(PoolObjectIDs.Coin, spawnPos, transform.rotation);
-            if (poolCoin.TryGetComponent(out MovingObject movingObject))
-            {
-                movingObject.Initialize(_objectsSpeed);
-            }
+            //moving objects will initialize throug speed manager
+            PoolManager.Instance.Get(PoolObjectIDs.Coin, spawnPos, transform.rotation);
         }
     }
 
