@@ -6,7 +6,6 @@ public class MovingObjectsSpawner : MonoBehaviour
 {
     [SerializeField] LevelSettings _levelSettings;
    // [SerializeField] MovingObject[] _vehiclePrefab;
-    [SerializeField] MovingObject[] _coinPrefab;
     [SerializeField] float _spawnInterval = 3f;
     [SerializeField] float _objectsSpeed = 10f;
     [SerializeField] float _spawnZOffset = 5f;
@@ -102,11 +101,6 @@ public class MovingObjectsSpawner : MonoBehaviour
         {
             float zPos = startZ - spacing * i;
             Vector3 spawnPos = new Vector3(xPosition, 0f, zPos);
-
-            // MovingObject prefab = _coinPrefab[Random.Range(0, _coinPrefab.Length)];
-            // MovingObject coin = Instantiate(prefab, spawnPos, transform.rotation);
-            // coin.Initialize(_objectsSpeed);
-
             PooledObject poolCoin = PoolManager.Instance.Get(PoolObjectIDs.Coin, spawnPos, transform.rotation);
             if (poolCoin.TryGetComponent(out MovingObject movingObject))
             {
