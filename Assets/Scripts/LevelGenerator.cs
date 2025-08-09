@@ -128,7 +128,6 @@ public class LevelGenerator : MonoBehaviour
     {
         Chunk newChunk = Instantiate(prefab, _chunkParentTransform);
         newChunk.gameObject.name = prefab.name;
-        InitializeNewChunk(newChunk);
         return newChunk;
     }
 

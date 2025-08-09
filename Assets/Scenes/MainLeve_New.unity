@@ -221,6 +221,56 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &329498681
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 329498683}
+  - component: {fileID: 329498682}
+  m_Layer: 0
+  m_Name: PoolManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &329498682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 329498681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c280dae8b4b27fe4090b822314fd02af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _configs:
+  - key: Coin
+    objectPrefab: {fileID: 1533778231171789797, guid: 7b57a1b15a651fc41a8cc47372309616, type: 3}
+    defaultCapacity: 100
+    maxSize: 200
+    prewarm: 10
+--- !u!4 &329498683
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 329498681}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.118599, y: -14.831134, z: 77.88146}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -5948,7 +5998,6 @@ MonoBehaviour:
   _objectsSpeed: 20
   _spawnZOffset: 0
   _maxCoinsToSpawn: 5
-  _coinLineLength: 10
 --- !u!1 &2018537114
 GameObject:
   m_ObjectHideFlags: 0
@@ -6072,3 +6121,4 @@ SceneRoots:
   - {fileID: 361537828}
   - {fileID: 252323634}
   - {fileID: 1084188773}
+  - {fileID: 329498683}
