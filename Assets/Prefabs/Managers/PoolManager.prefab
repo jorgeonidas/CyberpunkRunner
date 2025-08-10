@@ -55,6 +55,11 @@ MonoBehaviour:
     defaultCapacity: 4
     maxSize: 8
     prewarm: 2
+  - key: Invincible
+    objectPrefab: {fileID: 3527117324728761569, guid: d6bedf4e2733d58468bb028453786677, type: 3}
+    defaultCapacity: 4
+    maxSize: 8
+    prewarm: 2
   - key: VehicleObstacle_1
     objectPrefab: {fileID: 7246594060548260529, guid: 0c80ec0af0712aa46866501e319e145a, type: 3}
     defaultCapacity: 20

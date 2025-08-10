@@ -34,11 +34,17 @@ public class Player : MonoBehaviour
 
     }
 
+    public void SetInvincible(bool invincible)
+    {
+        _playerCollisionHandler.SetInvincible(invincible);
+    }
+
     private void SetPlayerDead()
     {
         if (!_playerDead)
         {
             _playerDead = true;
+            _playerController.enabled = false;
             OnPlayerDied?.Invoke();
             Debug.Log($"Player died");
         }

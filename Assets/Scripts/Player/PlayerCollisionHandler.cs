@@ -7,10 +7,12 @@ public class PlayerCollisionHandler : MonoBehaviour
     [SerializeField] float _hitCooldownTime = 1f;
     [SerializeField] float _adjustChangeMoveSpeedAmount = 1f;
     bool _hitCooldownActive;
+    bool _isInvincible;
     float _hitCooldownTimer;
 
     private void Start()
     {
+        _isInvincible = false;
         ActivateHitCooldown();
     }
 
@@ -28,6 +30,12 @@ public class PlayerCollisionHandler : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
+        if (_isInvincible)
+        {
+            Destroy(other.gameObject);
+            return;
+        }
+
         if (_hitCooldownActive)
         {
             return;
@@ -41,5 +49,12 @@ public class PlayerCollisionHandler : MonoBehaviour
     {
         _hitCooldownTimer = _hitCooldownTime;
         _hitCooldownActive = true;
+    }
+
+    public void SetInvincible(bool invincible)
+    {
+        _isInvincible = invincible;
+        Debug.Log($"_isInvincible {_isInvincible}");
+        //some shield vfx
     }
 }

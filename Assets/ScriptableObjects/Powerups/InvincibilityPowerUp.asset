@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fbb1150c5286ea4bb4b1da64f70fc1a, type: 3}
-  m_Name: SpeedBoost
+  m_Script: {fileID: 11500000, guid: 3ca7fc69235f84c499b28ffe15195ad9, type: 3}
+  m_Name: InvincibilityPowerUp
   m_EditorClassIdentifier: 
-  _id: SpeedBoost
+  _id: Invincible
   _duration: 3
-  _speedToAdd: 6
