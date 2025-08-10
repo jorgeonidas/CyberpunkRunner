@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Player _player;
     [SerializeField] SpeedManager _speedManager;
     [SerializeField] LevelGenerator _leveGenerator;
+    public SpeedManager SpeedManager => _speedManager;
     private bool _gameOver = false;
     private void Awake()
     {

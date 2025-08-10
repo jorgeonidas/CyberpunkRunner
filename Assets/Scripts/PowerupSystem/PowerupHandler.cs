@@ -72,14 +72,17 @@ public class PowerupHandler : MonoBehaviour
             return;
         }
 
-        if (_activePowerups.ContainsKey(pickedPowerUp.Id))
+        if (_powerupTimers.ContainsKey(pickedPowerUp.Id))
         {
+            float remaining = _powerupTimers[pickedPowerUp.Id];
+            remaining += pickedPowerUp.Duration;
+            _powerupTimers[pickedPowerUp.Id] = remaining;
             return;
         }
 
-        float duration = pickedPowerUp.StartEffect(_player, GameManager.Instance);
+        float duration = pickedPowerUp.Duration;
+        pickedPowerUp.StartEffect(_player, GameManager.Instance);
         _powerupTimers.Add(pickedPowerUp.Id, duration);
         _activePowerups.Add(pickedPowerUp.Id, pickedPowerUp);
-
     }
 }

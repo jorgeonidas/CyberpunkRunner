@@ -9,8 +9,9 @@ public class SpeedManager : MonoBehaviour
     [SerializeField] private float _currentMovingChunkSpeed;
     public float CurrentChunksMoveSpeed => _currentMovingChunkSpeed;
     public float CurrentMovingObjectsSpeed => _currentMovingObjectsSpeed;
-    public float initialChunkSpeed;
-    public float initialObjectsSpeed;
+    private float initialChunkSpeed;
+    private float initialObjectsSpeed;
+    private bool _stopped = false;
     private void Start()
     {
         initialChunkSpeed = _currentMovingChunkSpeed = _levelSettings.InitialChunkSpeed;
@@ -33,13 +34,25 @@ public class SpeedManager : MonoBehaviour
 
     public void Stop()
     {
+        _stopped = true;
         _currentMovingChunkSpeed = 0;
         _currentMovingObjectsSpeed = 0;//in the meantime I figure out a player dead animation
     }
 
     public void Restart()
     {
+        _stopped = false;
         _currentMovingChunkSpeed = initialChunkSpeed;
         _currentMovingObjectsSpeed = initialObjectsSpeed;
+    }
+
+    public void AddSpeed(float speed)
+    {
+        if (_stopped)
+        {
+            return;
+        }
+        _currentMovingChunkSpeed += speed;
+        _currentMovingObjectsSpeed += speed;
     }
 }
