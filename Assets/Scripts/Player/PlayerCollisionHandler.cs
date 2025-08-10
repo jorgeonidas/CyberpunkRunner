@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PlayerCollisionHandler : MonoBehaviour
 {
+    public Action OnPlayerCollided;
     [SerializeField] float _hitCooldownTime = 1f;
     [SerializeField] float _adjustChangeMoveSpeedAmount = 1f;
     bool _hitCooldownActive;
@@ -33,7 +34,7 @@ public class PlayerCollisionHandler : MonoBehaviour
         }
         Debug.Log(other.gameObject.name);
         ActivateHitCooldown();
-        //LevelGenerator.OnChangeSpeedAmount?.Invoke(-_adjustChangeMoveSpeedAmount);
+        OnPlayerCollided?.Invoke();
     }
 
     private void ActivateHitCooldown()

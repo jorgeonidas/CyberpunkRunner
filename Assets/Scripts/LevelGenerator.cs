@@ -8,30 +8,34 @@ using Random = UnityEngine.Random;
 public class LevelGenerator : MonoBehaviour
 {
     public static Action OnChunkPlaced;
-    public static Action<float> OnChangeSpeedAmount;
-    //[SerializeField] CameraController _cameraController;
     [SerializeField] int _startingChunksAmmount = 12;
     [SerializeField] Transform _chunkParentTransform;
     [SerializeField] LevelSettings _levelSettings;
     List<Chunk> _chunksList = new List<Chunk>();
     private Dictionary<string, ObjectPool<Chunk>> _chunkPools;
-    private float _currentChunkMoveSpeed;
-
+    private SpeedManager _speedManager;
     #region UnityLifeCycle    
     private void Start()
     {
-        InitializeChunksPool();
-        SpawnChunks();
+        // InitializeChunksPool();
+        // SpawnChunks();
     }
 
     private void OnEnable()
     {
-        OnChangeSpeedAmount += ChangeChunkMoveSpeed;
+
     }
 
     private void OnDisable()
     {
-        OnChangeSpeedAmount -= ChangeChunkMoveSpeed;
+
+    }
+
+    public void Initialize(SpeedManager speedManager)
+    {
+        _speedManager = speedManager;
+        InitializeChunksPool();
+        SpawnStartingChunks();
     }
 
     private void Update()
@@ -40,7 +44,7 @@ public class LevelGenerator : MonoBehaviour
     }
     #endregion
 
-    private void SpawnChunks()
+    private void SpawnStartingChunks()
     {
         for (int i = 0; i < _startingChunksAmmount; i++)
         {
@@ -91,7 +95,7 @@ public class LevelGenerator : MonoBehaviour
         for (int i = 0; i < _chunksList.Count; i++)
         {
             Chunk chunk = _chunksList[i];
-            chunk.transform.Translate(Vector3.back * _currentChunkMoveSpeed * Time.deltaTime);
+            chunk.transform.Translate(Vector3.back * _speedManager.CurrentChunksMoveSpeed * Time.deltaTime);
 
             if (chunk.transform.position.z <= Camera.main.transform.position.z - _levelSettings.ChunkLength)
             {
@@ -106,7 +110,6 @@ public class LevelGenerator : MonoBehaviour
     #region Pooling
     private void InitializeChunksPool()
     {
-        _currentChunkMoveSpeed = _levelSettings.InitialChunkSpeed;
         _chunkPools = new Dictionary<string, ObjectPool<Chunk>>();
         foreach (var prefab in _levelSettings.ChunkPrefab)
         {
@@ -143,13 +146,6 @@ public class LevelGenerator : MonoBehaviour
         _chunkPools[chunkName].Release(chunk);
     }
     #endregion
-
-    public void ChangeChunkMoveSpeed(float speedAmount)
-    {
-        _currentChunkMoveSpeed += speedAmount;
-        _currentChunkMoveSpeed = Mathf.Clamp(_currentChunkMoveSpeed, _levelSettings.InitialChunkSpeed, _levelSettings.MaxChunkMoveSpeed);
-       // _cameraController.ChangeCaeramFOV(speedAmount);
-    }
 
     public LevelSettings GetLevelSettings() => _levelSettings;
 }

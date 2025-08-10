@@ -4,9 +4,14 @@ using UnityEngine;
 public class SpeedManager : MonoBehaviour
 {
     [SerializeField] LevelSettings _levelSettings;
-    private float _currentMovingObjectsSpeed;
+    [Header("For testing, but theyre initialized from setting")]
+    [SerializeField] private float _currentMovingObjectsSpeed;
+    [SerializeField] private float _currentMovingChunkSpeed;
+    public float CurrentChunksMoveSpeed => _currentMovingChunkSpeed;
+    public float CurrentMovingObjectsSpeed => _currentMovingObjectsSpeed;
     private void Start()
     {
+        _currentMovingChunkSpeed = _levelSettings.InitialChunkSpeed;
         _currentMovingObjectsSpeed = _levelSettings.InitialObjectsSpeed;
     }
     private void OnEnable()
@@ -21,6 +26,6 @@ public class SpeedManager : MonoBehaviour
 
     private void InitializeMovingObject(MovingObject movingObject)
     {
-        movingObject.Initialize(_currentMovingObjectsSpeed);
+        movingObject.Initialize(this);
     }
 }

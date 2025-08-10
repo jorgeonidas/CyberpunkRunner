@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class MovingObject : MonoBehaviour
 {
+    private SpeedManager _speedManager;
     public static Action<MovingObject> OnAnyMovingObjectSpawned;
-    private float _speed;
 
     private void OnEnable()
     {
@@ -16,14 +16,14 @@ public class MovingObject : MonoBehaviour
         OnAnyMovingObjectSpawned?.Invoke(this);
     }
 
-    public void Initialize(float speed)
+    public void Initialize(SpeedManager speedManager)
     {
-        _speed = speed;
+        _speedManager = speedManager;
     }
 
 
     private void Update()
     {
-        transform.Translate(Vector3.forward * _speed * Time.deltaTime);
+        transform.Translate(Vector3.forward * _speedManager.CurrentMovingObjectsSpeed * Time.deltaTime);
     }
 }
