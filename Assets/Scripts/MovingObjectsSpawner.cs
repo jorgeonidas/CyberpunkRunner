@@ -41,7 +41,7 @@ public class MovingObjectsSpawner : MonoBehaviour
         PrepareLaneAvailability();
         SpawnVehicles();
         SpawnCoins();
-        //SpawnPowerup();
+        SpawnPowerup();
     }
 
     private void SpawnVehicles()
