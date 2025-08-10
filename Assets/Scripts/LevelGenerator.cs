@@ -9,7 +9,7 @@ public class LevelGenerator : MonoBehaviour
 {
     public static Action OnChunkPlaced;
     public static Action<float> OnChangeSpeedAmount;
-    [SerializeField] CameraController _cameraController;
+    //[SerializeField] CameraController _cameraController;
     [SerializeField] int _startingChunksAmmount = 12;
     [SerializeField] Transform _chunkParentTransform;
     [SerializeField] LevelSettings _levelSettings;
@@ -148,7 +148,7 @@ public class LevelGenerator : MonoBehaviour
     {
         _currentChunkMoveSpeed += speedAmount;
         _currentChunkMoveSpeed = Mathf.Clamp(_currentChunkMoveSpeed, _levelSettings.InitialChunkSpeed, _levelSettings.MaxChunkMoveSpeed);
-        _cameraController.ChangeCaeramFOV(speedAmount);
+       // _cameraController.ChangeCaeramFOV(speedAmount);
     }
 
     public LevelSettings GetLevelSettings() => _levelSettings;

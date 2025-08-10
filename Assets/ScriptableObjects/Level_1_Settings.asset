@@ -13,14 +13,17 @@ MonoBehaviour:
   m_Name: Level_1_Settings
   m_EditorClassIdentifier: 
   _chunkPrefab:
-  - {fileID: 3106525454637678067, guid: 9a74ff6d92d29b940822edcab15a6eb6, type: 3}
-  - {fileID: 3106525454637678067, guid: a9826c3d7df6bc64ca5347e0d63db76a, type: 3}
-  _chunkLength: 10
+  - {fileID: 984339345658737003, guid: 5e95db2018aec0047b01632afdf6fef1, type: 3}
+  _chunkLength: 15
   _lanes:
   - -3
   - 0
   - 3
-  _initialChunkSpeed: 12
+  _horizontalLanes:
+  - -5
+  - 0
+  - 5
+  _initialChunkSpeed: 10
   _maxChunkMoveSpeed: 15
   _initialObjectsSpeed: 16
   _maxObjectsSpeed: 15
