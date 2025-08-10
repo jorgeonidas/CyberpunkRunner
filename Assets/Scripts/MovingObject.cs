@@ -11,11 +11,6 @@ public class MovingObject : MonoBehaviour
         OnAnyMovingObjectSpawned?.Invoke(this);
     }
 
-    private void OnDisable()
-    {
-        OnAnyMovingObjectSpawned?.Invoke(this);
-    }
-
     public void Initialize(SpeedManager speedManager)
     {
         _speedManager = speedManager;
