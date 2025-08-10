@@ -12,6 +12,7 @@ public class PlayerCollisionHandler : MonoBehaviour
     {
         ActivateHitCooldown();
     }
+
     private void Update()
     {
         if (_hitCooldownActive)
@@ -23,6 +24,7 @@ public class PlayerCollisionHandler : MonoBehaviour
             }
         }
     }
+
     void OnCollisionEnter(Collision other)
     {
         if (_hitCooldownActive)
@@ -31,7 +33,7 @@ public class PlayerCollisionHandler : MonoBehaviour
         }
         Debug.Log(other.gameObject.name);
         ActivateHitCooldown();
-        LevelGenerator.OnChangeSpeedAmount?.Invoke(-_adjustChangeMoveSpeedAmount);
+        //LevelGenerator.OnChangeSpeedAmount?.Invoke(-_adjustChangeMoveSpeedAmount);
     }
 
     private void ActivateHitCooldown()

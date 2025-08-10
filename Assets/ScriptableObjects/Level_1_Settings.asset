@@ -23,7 +23,7 @@ MonoBehaviour:
   - -5
   - 0
   - 5
-  _initialChunkSpeed: 10
+  _initialChunkSpeed: 14
   _maxChunkMoveSpeed: 15
-  _initialObjectsSpeed: 16
+  _initialObjectsSpeed: 20
   _maxObjectsSpeed: 15
