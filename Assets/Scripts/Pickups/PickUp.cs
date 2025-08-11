@@ -16,7 +16,7 @@ public abstract class PickUp : MonoBehaviour
             OnPickUp();
             if (_vfxSpawner)
             {
-                _vfxSpawner.PlayParticleEffect(other.transform.position + Vector3.up * 0.5f);
+                _vfxSpawner.PlayParticleEffect(other.transform.position);
             }
             _pooled.Release();
         }

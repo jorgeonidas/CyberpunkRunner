@@ -13,7 +13,7 @@ public class MovingObjectsSpawner : MonoBehaviour
     private List<int> _currentAvailableLanes = new List<int>();
     float _chunkLength;
     private float[] _horizontalLanes;
-    private string[] _powerupsIds = { PoolObjectIDs.Invincible };
+    private string[] _powerupsIds = { PoolObjectIDs.SpeedBoost };
     private void Start()
     {
         Initialize();
