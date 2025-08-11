@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -8719212087644237097}
   - component: {fileID: 1533778231171789797}
   - component: {fileID: -2732467150225652828}
+  - component: {fileID: 8907547727281242133}
   m_Layer: 0
   m_Name: CoinPickup
   m_TagString: Untagged
@@ -109,6 +110,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _despawnZ: -20
+--- !u!114 &8907547727281242133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 211386016494728453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1d23ade68d16d7439f67f65153ee11d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _particleSystem: {fileID: 7097724835498873851, guid: be44aaeae982fcb48a21adb8dc5ec191, type: 3}
 --- !u!1 &7420548770909788941
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,6 +180,10 @@ PrefabInstance:
     - target: {fileID: 2701371198782746121, guid: ab7079beca09c4a45a24d22df07e346f, type: 3}
       propertyPath: m_Name
       value: SM_Powerup_Coin_Gold
+      objectReference: {fileID: 0}
+    - target: {fileID: 2701371198782746121, guid: ab7079beca09c4a45a24d22df07e346f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6979741681050572492, guid: ab7079beca09c4a45a24d22df07e346f, type: 3}
       propertyPath: m_LocalScale.x
