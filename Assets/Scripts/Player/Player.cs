@@ -4,6 +4,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public Action OnPlayerDied;
+    public Action<string, float> OnPowerUpActivated;
     PlayerController _playerController;
     PlayerCollisionHandler _playerCollisionHandler;
     private bool _playerDead;

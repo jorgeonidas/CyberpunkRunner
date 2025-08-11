@@ -77,12 +77,14 @@ public class PowerupHandler : MonoBehaviour
             float remaining = _powerupTimers[pickedPowerUp.Id];
             remaining += pickedPowerUp.Duration;
             _powerupTimers[pickedPowerUp.Id] = remaining;
-            return;
         }
-
-        float duration = pickedPowerUp.Duration;
-        pickedPowerUp.StartEffect(GameManager.Instance);
-        _powerupTimers.Add(pickedPowerUp.Id, duration);
-        _activePowerups.Add(pickedPowerUp.Id, pickedPowerUp);
+        else
+        {
+            float duration = pickedPowerUp.Duration;
+            pickedPowerUp.StartEffect(GameManager.Instance);
+            _powerupTimers.Add(pickedPowerUp.Id, duration);
+            _activePowerups.Add(pickedPowerUp.Id, pickedPowerUp);
+        }
+        _player.OnPowerUpActivated?.Invoke(pickedPowerUp.Id, pickedPowerUp.Duration);
     }
 }

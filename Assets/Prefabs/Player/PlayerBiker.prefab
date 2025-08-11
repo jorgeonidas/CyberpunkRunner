@@ -29,6 +29,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6360500859918546062}
   - {fileID: 7548648361517365710}
   m_Father: {fileID: 3601182532256503496}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -63,6 +64,37 @@ Transform:
   m_Children:
   - {fileID: 4475173635144245094}
   m_Father: {fileID: 7548648361517365710}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6980322998602337392
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6360500859918546062}
+  m_Layer: 0
+  m_Name: ParticlesLoopTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6360500859918546062
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6980322998602337392}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.1762762, z: -0.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5527743240850662282}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8028125100094935181
 GameObject:
@@ -253,13 +285,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b72a6800e011c44aa6c9d8ec20bcf6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _vfxTransform: {fileID: 3692638120399547552}
-  _loopVfxData:
-  - vfxId: SpeedBoost
-    _loopVfxPrevab: {fileID: 0}
-  - vfxId: Invincible
-    _loopVfxPrevab: {fileID: 0}
+  _vfxTransform: {fileID: 6360500859918546062}
   _vehicleExhaust: {fileID: 86674093522793484}
+  _loopVfxData:
+  - vfxId: Invincible
+    loopVfxPrefab: {fileID: 198985388140249450, guid: 9e6a3712f81a89b42bbdd75925b2bf2c, type: 3}
 --- !u!114 &86674093522793484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -381,11 +411,6 @@ PrefabInstance:
 --- !u!4 &990474407017040229 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2629155273942458698, guid: ecfe2e7ecf15d0347a5544e53ff9120f, type: 3}
-  m_PrefabInstance: {fileID: 3009105983800780847}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &3692638120399547552 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1944604225028326543, guid: ecfe2e7ecf15d0347a5544e53ff9120f, type: 3}
   m_PrefabInstance: {fileID: 3009105983800780847}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4470795116312568162
