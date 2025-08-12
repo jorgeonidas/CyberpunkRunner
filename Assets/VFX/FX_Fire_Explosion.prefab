@@ -42,7 +42,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1209615476248102}
   serializedVersion: 8
   lengthInSec: 3
-  simulationSpeed: 1
+  simulationSpeed: 2
   stopAction: 0
   cullingMode: 3
   ringBufferMode: 0
@@ -106,7 +106,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 1
+  moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -4590,7 +4590,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: f3053f8556ff7cf4fb59de5cf109104e, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4685,7 +4684,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1228365099249328}
   serializedVersion: 8
   lengthInSec: 3
-  simulationSpeed: 1
+  simulationSpeed: 2
   stopAction: 0
   cullingMode: 3
   ringBufferMode: 0
@@ -4749,7 +4748,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 1
+  moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -4894,8 +4893,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 2
-      minScalar: 1.5
+      scalar: 3.5
+      minScalar: 2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5232,7 +5231,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.01
+      value: 0.1
       mode: 0
       spread: 0
       speed:
@@ -9242,7 +9241,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 417cbbf4755e392408e489080c4ede09, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9307,6 +9305,7 @@ GameObject:
   - component: {fileID: 198195352207415246}
   - component: {fileID: 199942670210766882}
   - component: {fileID: -6331053207474754198}
+  - component: {fileID: 6393201787350629706}
   m_Layer: 0
   m_Name: FX_Fire_Explosion
   m_TagString: Untagged
@@ -9340,7 +9339,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1809022330002312}
   serializedVersion: 8
   lengthInSec: 3
-  simulationSpeed: 1
+  simulationSpeed: 2
   stopAction: 0
   cullingMode: 3
   ringBufferMode: 0
@@ -9404,7 +9403,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 1
+  moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -9550,7 +9549,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 3
       scalar: 1
-      minScalar: 0.4
+      minScalar: 0.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -9887,7 +9886,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.01
+      value: 0.5
       mode: 0
       spread: 0
       speed:
@@ -13897,7 +13896,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 417cbbf4755e392408e489080c4ede09, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -13960,5 +13958,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fad62a4d0c0d7af468c2289e0574a81e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6393201787350629706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809022330002312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19920603f6b8e0a4da26d2daf8b16dc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

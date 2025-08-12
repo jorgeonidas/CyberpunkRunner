@@ -90,3 +90,8 @@ MonoBehaviour:
     defaultCapacity: 20
     maxSize: 50
     prewarm: 10
+  - key: VFX_Explosion
+    objectPrefab: {fileID: -6331053207474754198, guid: 78cca44bf058e5949bc927ce669a1271, type: 3}
+    defaultCapacity: 20
+    maxSize: 50
+    prewarm: 10
