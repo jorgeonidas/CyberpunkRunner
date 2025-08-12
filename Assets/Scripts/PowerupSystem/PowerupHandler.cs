@@ -71,20 +71,21 @@ public class PowerupHandler : MonoBehaviour
             Debug.LogError($"Invalid powerup id for {pickedPowerUp} is null or empty");
             return;
         }
-
-        if (_powerupTimers.ContainsKey(pickedPowerUp.Id))
+        
+        float powerupDuration = pickedPowerUp.Duration;
+        string powerUpId = pickedPowerUp.Id;
+        _player.OnPowerUpActivated?.Invoke(powerUpId,powerupDuration);
+        if (_powerupTimers.ContainsKey(powerUpId))
         {
-            float remaining = _powerupTimers[pickedPowerUp.Id];
-            remaining += pickedPowerUp.Duration;
-            _powerupTimers[pickedPowerUp.Id] = remaining;
+            float remaining = _powerupTimers[powerUpId];
+            remaining += powerupDuration;
+            _powerupTimers[powerUpId] = remaining;
         }
         else
         {
-            float duration = pickedPowerUp.Duration;
             pickedPowerUp.StartEffect(GameManager.Instance);
-            _powerupTimers.Add(pickedPowerUp.Id, duration);
-            _activePowerups.Add(pickedPowerUp.Id, pickedPowerUp);
+            _powerupTimers.Add(powerUpId, powerupDuration);
+            _activePowerups.Add(powerUpId, pickedPowerUp);
         }
-        _player.OnPowerUpActivated?.Invoke(pickedPowerUp.Id, pickedPowerUp.Duration);
     }
 }
