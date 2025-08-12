@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6102532361577344744}
   - component: {fileID: 720258775406159706}
+  - component: {fileID: 4981948302037896105}
   m_Layer: 0
-  m_Name: DestroyedCar
+  m_Name: Vehicle_SwipeCar_Destroyed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,6 +61,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4981948302037896105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131806961171339590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 806f8ea35723ea547bfd54dd3db75e31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _upForceMin: 5
+  _upForceMax: 10
+  _backForce: 5
+  _sideForce: 10
+  _torque: 5
 --- !u!1001 &3491665935292794559
 PrefabInstance:
   m_ObjectHideFlags: 0

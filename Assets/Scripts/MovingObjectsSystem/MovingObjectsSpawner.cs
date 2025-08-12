@@ -6,14 +6,13 @@ public class MovingObjectsSpawner : MonoBehaviour
 {
     [SerializeField] LevelSettings _levelSettings;
     [SerializeField] string[] _vehicleObstaclesIds;
-    [SerializeField] float _spawnZOffset = 5f;
     [SerializeField] int _maxCoinsToSpawn = 10;
     private List<float> _lanes = new List<float>();
     private List<int> _previousVehicleLanes = new List<int>(); 
     private List<int> _currentAvailableLanes = new List<int>();
     float _chunkLength;
     private float[] _horizontalLanes;
-    private string[] _powerupsIds = { StringConstants.PowerupIds.SpeedBoost };
+    private string[] _powerupsIds = { StringConstants.PowerupIds.Invincible };
     private void Start()
     {
         Initialize();
@@ -89,7 +88,7 @@ public class MovingObjectsSpawner : MonoBehaviour
         float xPosition = GetXPosition(verticalLalenIndex);
         int coinsToSpawn = Random.Range(1, _maxCoinsToSpawn);
         float spacing = _chunkLength / _maxCoinsToSpawn;
-        float startZ = transform.position.z + _spawnZOffset + _chunkLength / 2f;
+        float startZ = transform.position.z + _chunkLength / 2f;
 
         for (int i = 0; i < coinsToSpawn; i++)
         {

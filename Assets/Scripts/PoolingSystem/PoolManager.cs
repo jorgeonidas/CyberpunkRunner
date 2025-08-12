@@ -41,6 +41,7 @@ public class PoolManager : MonoBehaviour
                 {
                     PooledObject poolObject = Instantiate(configuration.objectPrefab);
                     poolObject.Pool ??= pool;     // ?? assing if not assigned
+                    poolObject.SetPoolObjectId(configuration.key);
                     poolObject.transform.parent = this.transform;
                     poolObject.gameObject.SetActive(false);
                     return poolObject;

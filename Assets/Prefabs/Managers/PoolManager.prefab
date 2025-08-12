@@ -80,8 +80,23 @@ MonoBehaviour:
     defaultCapacity: 20
     maxSize: 50
     prewarm: 10
-  - key: VehicleObstacle_4
-    objectPrefab: {fileID: 4032396584561504956, guid: 864730ad01d145c49b336a24a479c547, type: 3}
+  - key: VehicleObstacle_1_Destroyed
+    objectPrefab: {fileID: 4981948302037896105, guid: a021bdabce7220c4fa4b8d91c9f5b7e2, type: 3}
+    defaultCapacity: 20
+    maxSize: 50
+    prewarm: 10
+  - key: VehicleObstacle_2_Destroyed
+    objectPrefab: {fileID: 4016864125754604111, guid: 2dc6a7874acf32f40a16db3c3357a46c, type: 3}
+    defaultCapacity: 20
+    maxSize: 50
+    prewarm: 10
+  - key: VehicleObstacle_3_Destroyed
+    objectPrefab: {fileID: 4016864125754604111, guid: 078e04b3b26d3df49975f93302f0819c, type: 3}
+    defaultCapacity: 20
+    maxSize: 50
+    prewarm: 10
+  - key: VehicleObstacle_4_Destroyed
+    objectPrefab: {fileID: 4016864125754604111, guid: cdb620c6461b7ff4f8edcbe5e8d9becd, type: 3}
     defaultCapacity: 20
     maxSize: 50
     prewarm: 10
