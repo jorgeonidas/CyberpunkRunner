@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class DestructibleObstacle : MonoBehaviour, IDestroy
 {
+    VFXSpawner _vfxSpawner;
     PooledObject _poolObject;
     void Awake()
     {
@@ -9,12 +10,16 @@ public class DestructibleObstacle : MonoBehaviour, IDestroy
         {
             _poolObject = poolObject;
         }
+        if (TryGetComponent<VFXSpawner>(out VFXSpawner vfxSpawner))
+        {
+            _vfxSpawner = vfxSpawner;
+        }
     }
+
     public void DestroyMe()
     {
-        if (_poolObject)
-        {
-            _poolObject.Release();
-        }
+        //play vfx spawn destroyed vehicle
+        _vfxSpawner?.PlayParticleEffect(transform.position);
+        _poolObject?.Release();
     }
 }

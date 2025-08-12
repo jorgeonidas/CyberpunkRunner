@@ -178,6 +178,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hitCooldownTime: 1
   _adjustChangeMoveSpeedAmount: 1
+  _testInvincible: 1
 --- !u!114 &6758020255909572474
 MonoBehaviour:
   m_ObjectHideFlags: 0

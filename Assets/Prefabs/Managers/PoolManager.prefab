@@ -80,3 +80,13 @@ MonoBehaviour:
     defaultCapacity: 20
     maxSize: 50
     prewarm: 10
+  - key: VehicleObstacle_4
+    objectPrefab: {fileID: 4032396584561504956, guid: 864730ad01d145c49b336a24a479c547, type: 3}
+    defaultCapacity: 20
+    maxSize: 50
+    prewarm: 10
+  - key: VFX_Coin
+    objectPrefab: {fileID: 9199874876770903639, guid: be44aaeae982fcb48a21adb8dc5ec191, type: 3}
+    defaultCapacity: 20
+    maxSize: 50
+    prewarm: 10

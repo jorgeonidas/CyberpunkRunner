@@ -32,44 +32,45 @@ public class PoolManager : MonoBehaviour
 
     private void SetupPools()
     {
-        foreach (var cfg in _configs)
+        foreach (var configuration in _configs)
         {
             ObjectPool<PooledObject> pool = null;
 
             pool = new ObjectPool<PooledObject>(
                 createFunc: () =>
                 {
-                    var obj = Instantiate(cfg.objectPrefab);
-                    obj.gameObject.SetActive(false);
-                    return obj;
+                    PooledObject poolObject = Instantiate(configuration.objectPrefab);
+                    poolObject.Pool ??= pool;     // ?? assing if not assigned
+                    poolObject.transform.parent = this.transform;
+                    poolObject.gameObject.SetActive(false);
+                    return poolObject;
                 },
-                actionOnGet: (obj) =>
+                actionOnGet: (poolObject) =>
                 {
-                    obj.Pool ??= pool;     // ?? assing if not assigned
-                    obj.gameObject.SetActive(true);
-                    obj.OnGetFromPool();
+                    poolObject.gameObject.SetActive(true);
+                    poolObject.OnGetFromPool();
                 },
-                actionOnRelease: (obj) =>
+                actionOnRelease: (poolObject) =>
                 {
-                    obj.OnReleaseToPool();
-                    obj.gameObject.SetActive(false);
+                    poolObject.OnReleaseToPool();
+                    poolObject.gameObject.SetActive(false);
                 },
-                actionOnDestroy: (obj) =>
+                actionOnDestroy: (poolObject) =>
                 {
-                    if (obj)
+                    if (poolObject)
                     {
-                        Destroy(obj.gameObject);
+                        Destroy(poolObject.gameObject);
                     }
                 },
                 collectionCheck: true,
-                defaultCapacity: Mathf.Max(1, cfg.defaultCapacity),
-                maxSize: Mathf.Max(1, cfg.maxSize)
+                defaultCapacity: Mathf.Max(1, configuration.defaultCapacity),
+                maxSize: Mathf.Max(1, configuration.maxSize)
             );
 
-            _pools[cfg.key] = pool;
+            _pools[configuration.key] = pool;
 
             // Precalienta si quieres
-            for (int i = 0; i < cfg.prewarm; i++)
+            for (int i = 0; i < configuration.prewarm; i++)
             {
                 var o = pool.Get();
                 pool.Release(o);

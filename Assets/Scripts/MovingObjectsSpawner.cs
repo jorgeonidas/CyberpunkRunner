@@ -13,7 +13,7 @@ public class MovingObjectsSpawner : MonoBehaviour
     private List<int> _currentAvailableLanes = new List<int>();
     float _chunkLength;
     private float[] _horizontalLanes;
-    private string[] _powerupsIds = { PoolObjectIDs.Invincible };
+    private string[] _powerupsIds = { StringConstants.PowerupIds.SpeedBoost };
     private void Start()
     {
         Initialize();
@@ -95,7 +95,7 @@ public class MovingObjectsSpawner : MonoBehaviour
         {
             float zPos = startZ - spacing * i;
             Vector3 spawnPos = new Vector3(xPosition, 0f, zPos);
-            PoolManager.Instance.Get(PoolObjectIDs.Coin, spawnPos, transform.rotation);
+            PoolManager.Instance.Get(StringConstants.Coin, spawnPos, transform.rotation);
         }
     }
 

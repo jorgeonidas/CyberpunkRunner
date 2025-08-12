@@ -6,6 +6,8 @@ public class PlayerCollisionHandler : MonoBehaviour
     public Action OnPlayerCollided;
     [SerializeField] float _hitCooldownTime = 1f;
     [SerializeField] float _adjustChangeMoveSpeedAmount = 1f;
+    [Header("Test Invincible")]
+    [SerializeField] bool _testInvincible = false;
     bool _hitCooldownActive;
     bool _isInvincible;
     float _hitCooldownTimer;
@@ -13,6 +15,10 @@ public class PlayerCollisionHandler : MonoBehaviour
     private void Start()
     {
         _isInvincible = false;
+        if (_testInvincible)
+        {
+            _isInvincible = _testInvincible;//carefull here
+        }
         ActivateHitCooldown();
     }
 
@@ -32,7 +38,10 @@ public class PlayerCollisionHandler : MonoBehaviour
     {
         if (_isInvincible)
         {
-            Destroy(other.gameObject);
+            if (other.transform.TryGetComponent<IDestroy>(out IDestroy obstacle))
+            {
+                obstacle.DestroyMe();
+            }
             return;
         }
 
