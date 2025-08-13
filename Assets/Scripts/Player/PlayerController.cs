@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     private float[] _lanes;
     private Rigidbody _playerRigidbody;
     private Vector3 _targetPosition;
-    private int _currentLane = 0; 
+    private int _currentLane = 0;
     private void Awake()
     {
         _playerRigidbody = GetComponent<Rigidbody>();

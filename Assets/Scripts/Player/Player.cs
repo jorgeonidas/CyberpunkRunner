@@ -5,14 +5,17 @@ public class Player : MonoBehaviour
 {
     public Action OnPlayerDied;
     public Action<string, float> OnPowerUpActivated;
+    [SerializeField] GameObject _playerCharacterVisuals;
     PlayerController _playerController;
     PlayerCollisionHandler _playerCollisionHandler;
+    private RagdollSpawner _ragdollSpawner;
     private bool _playerDead;
 
     private void Awake()
     {
         _playerController = GetComponent<PlayerController>();
         _playerCollisionHandler = GetComponent<PlayerCollisionHandler>();
+        TryGetComponent(out _ragdollSpawner);
     }
 
     private void OnEnable()
@@ -32,7 +35,7 @@ public class Player : MonoBehaviour
 
     public void Initialize()
     {
-
+        _playerCharacterVisuals.SetActive(true);
     }
 
     public void SetInvincible(bool invincible)
@@ -46,6 +49,8 @@ public class Player : MonoBehaviour
         {
             _playerDead = true;
             _playerController.enabled = false;
+            _playerCharacterVisuals.SetActive(false);
+            _ragdollSpawner?.SpawnRagdoll();
             OnPlayerDied?.Invoke();
             Debug.Log($"Player died");
         }
