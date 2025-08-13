@@ -8,9 +8,15 @@ public class PlayerCollisionHandler : MonoBehaviour
     [SerializeField] float _adjustChangeMoveSpeedAmount = 1f;
     [Header("Test Invincible")]
     [SerializeField] bool _testInvincible = false;
+    ScreenShakeSource _screenShakeSource;
     bool _hitCooldownActive;
     bool _isInvincible;
     float _hitCooldownTimer;
+
+    private void Awake()
+    {
+        TryGetComponent(out _screenShakeSource);
+    }
 
     private void Start()
     {
@@ -36,22 +42,37 @@ public class PlayerCollisionHandler : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        if (_isInvincible)
+        if (!other.transform.CompareTag(StringConstants.OBSTACLE_TAG))
         {
-            if (other.transform.TryGetComponent<IDestroy>(out IDestroy obstacle))
-            {
-                obstacle.DestroyMe();
-            }
             return;
         }
 
-        if (_hitCooldownActive)
+        if (_isInvincible)
         {
-            return;
+            HandleInvincibleCollision(other);
         }
-        Debug.Log(other.gameObject.name);
+        else
+        {
+            HandleVulnerableCollision(other);
+        }
+    }
+
+    private void HandleInvincibleCollision(Collision other)
+    {
+        if (other.transform.TryGetComponent<IDestroy>(out IDestroy obstacle))
+        {
+            _screenShakeSource?.ShakeCamera();
+            obstacle.DestroyMe();
+        }
+    }
+
+    private void HandleVulnerableCollision(Collision other)
+    {
+        if (_hitCooldownActive) return;
+
         ActivateHitCooldown();
         OnPlayerCollided?.Invoke();
+        _screenShakeSource?.ShakeCamera();
     }
 
     private void ActivateHitCooldown()
@@ -64,6 +85,5 @@ public class PlayerCollisionHandler : MonoBehaviour
     {
         _isInvincible = invincible;
         Debug.Log($"_isInvincible {_isInvincible}");
-        //some shield vfx
     }
 }

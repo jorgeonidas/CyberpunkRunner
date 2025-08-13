@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MovingObject : MonoBehaviour
 {
-    private SpeedManager _speedManager;
+    protected SpeedManager _speedManager;
     public static Action<MovingObject> OnAnyMovingObjectSpawned;
 
     private void OnEnable()
@@ -17,7 +17,7 @@ public class MovingObject : MonoBehaviour
     }
 
 
-    private void Update()
+    protected void Update()
     {
         transform.Translate(Vector3.forward * _speedManager.CurrentMovingObjectsSpeed * Time.deltaTime);
     }

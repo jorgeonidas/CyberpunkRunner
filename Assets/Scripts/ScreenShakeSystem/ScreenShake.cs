@@ -40,7 +40,7 @@ public class ScreenShake : MonoBehaviour
         impulseSource.DefaultVelocity = profile.DefaultVelocity;
         impulseSource.ImpulseDefinition.CustomImpulseShape = profile.ImpulseCurve;
 
-        //impulse listener settings
+        //Impulse listener settings
         _cinemachineImpulseListener.ReactionSettings.AmplitudeGain = profile.ListenerAmplitude;
         _cinemachineImpulseListener.ReactionSettings.FrequencyGain = profile.ListenerFrequency;
         _cinemachineImpulseListener.ReactionSettings.Duration = profile.ListenerDuration;
