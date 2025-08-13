@@ -5,10 +5,11 @@ public class PlayerCollisionHandler : MonoBehaviour
 {
     public Action OnPlayerCollided;
     [SerializeField] float _hitCooldownTime = 1f;
-    [SerializeField] float _adjustChangeMoveSpeedAmount = 1f;
+    
     [Header("Test Invincible")]
     [SerializeField] bool _testInvincible = false;
     ScreenShakeSource _screenShakeSource;
+    Collider _playerCollider;
     bool _hitCooldownActive;
     bool _isInvincible;
     float _hitCooldownTimer;
@@ -16,6 +17,7 @@ public class PlayerCollisionHandler : MonoBehaviour
     private void Awake()
     {
         TryGetComponent(out _screenShakeSource);
+        _playerCollider = GetComponent<Collider>(); 
     }
 
     private void Start()
@@ -68,7 +70,10 @@ public class PlayerCollisionHandler : MonoBehaviour
 
     private void HandleVulnerableCollision(Collision other)
     {
-        if (_hitCooldownActive) return;
+        if (_hitCooldownActive)
+        {
+            return;
+        }
 
         ActivateHitCooldown();
         OnPlayerCollided?.Invoke();
@@ -85,5 +90,10 @@ public class PlayerCollisionHandler : MonoBehaviour
     {
         _isInvincible = invincible;
         Debug.Log($"_isInvincible {_isInvincible}");
+    }
+
+    public void EnableCollider(bool enable)
+    {
+        _playerCollider.enabled = enable;
     }
 }
