@@ -7,13 +7,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _moveSpeed = 5f;
     private float[] _lanes;
     private Rigidbody _playerRigidbody;
-    VehicleLeaning _vehicleaning;
     private Vector3 _targetPosition;
     private int _currentLane = 0; 
     private void Awake()
     {
         _playerRigidbody = GetComponent<Rigidbody>();
-        _vehicleaning = GetComponent<VehicleLeaning>();
     }
 
     private void Start()
@@ -50,10 +48,6 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 newPosition = Vector3.MoveTowards(_playerRigidbody.position, _targetPosition, _moveSpeed * Time.fixedDeltaTime);
         _playerRigidbody.MovePosition(newPosition);
-        if (_vehicleaning)
-        {
-            _vehicleaning.LeanHorizontal(_playerRigidbody.linearVelocity.normalized.x);
-        }
     }
 
     private void SetTargetLanePosition()

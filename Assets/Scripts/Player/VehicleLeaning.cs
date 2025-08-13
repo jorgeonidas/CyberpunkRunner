@@ -4,27 +4,32 @@ using UnityEngine;
 
 public class VehicleLeaning : MonoBehaviour
 {
-    [SerializeField] Transform _vehicleTransform;
-    [SerializeField] float _leaningAmount = 35;
-    [SerializeField] float _leaningLength = 1f;
-    Sequence _leanSequence;
+    [SerializeField] Transform _visual;           // modelo de la moto
+    [SerializeField] float _maxLean = 45f;        // grados
+    [SerializeField] float _smoothTime = 0.08f;   // suavizado
+    [SerializeField] float _speedToMaxLean = 8f;  // m/s para alcanzar maxLean
 
-    public void LeanHorizontal(float horizontalDirection)
+    Rigidbody _playerRigidBody;
+    float currentLean, leanVel;
+    Quaternion initialLocalRot;
+
+    void Awake()
     {
-        Vector3 currentEulerRotation = transform.rotation.eulerAngles;
-        float zRot = -(horizontalDirection * _leaningAmount);
-        Vector3 newRotation = new Vector3(currentEulerRotation.x, currentEulerRotation.y, zRot);
-
-        TryKillSequence();
-        _leanSequence = DOTween.Sequence();
-        _leanSequence.Append(transform.DOLocalRotate(newRotation, _leaningLength, RotateMode.Fast));
+        _playerRigidBody = GetComponent<Rigidbody>();
+        initialLocalRot = _visual ? _visual.localRotation : Quaternion.identity;
     }
 
-    private void TryKillSequence()
+    void FixedUpdate()
     {
-        if (_leanSequence != null && _leanSequence.IsActive())
+        float lateralSpeed = _playerRigidBody.linearVelocity.x;
+        float normalizedMinusPlusLeaning = Mathf.Clamp(lateralSpeed / _speedToMaxLean, -1f, 1f);
+        float target = normalizedMinusPlusLeaning * _maxLean;
+
+        currentLean = Mathf.SmoothDampAngle(currentLean, target, ref leanVel, _smoothTime);
+
+        if (_visual)
         {
-            _leanSequence.Kill();
+            _visual.localRotation = initialLocalRot * Quaternion.Euler(0f, 0f, -currentLean);
         }
     }
 
