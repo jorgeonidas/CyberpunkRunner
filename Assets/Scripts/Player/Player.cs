@@ -49,6 +49,7 @@ public class Player : MonoBehaviour
         {
             _playerDead = true;
             _playerController.enabled = false;
+            _playerCollisionHandler.EnableCollider(false);
             _playerCharacterVisuals.SetActive(false);
             _ragdollSpawner?.SpawnRagdoll();
             OnPlayerDied?.Invoke();
