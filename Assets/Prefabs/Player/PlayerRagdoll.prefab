@@ -1147,7 +1147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cbfb8117f479b2439218125ada8d8b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _explosiveForce: 15
+  _explosiveForce: 30
   _ragdollRootBone: {fileID: 2268501918300439152}
 --- !u!1 &4396470161290725617
 GameObject:

@@ -32,11 +32,14 @@ public class SpeedManager : MonoBehaviour
         movingObject.Initialize(this);
     }
 
-    public void Stop()
+    public void Stop(bool gameOver = false)
     {
         _stopped = true;
         _currentMovingChunkSpeed = 0;
-        _currentMovingObjectsSpeed = 0;//in the meantime I figure out a player dead animation
+        if (!gameOver)
+        {
+            _currentMovingObjectsSpeed = 0;
+        }
     }
 
     public void Restart()

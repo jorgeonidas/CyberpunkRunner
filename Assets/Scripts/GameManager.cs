@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
         if (!_gameOver)
         {
             _gameOver = true;
-            _speedManager.Stop();
+            _speedManager.Stop(_gameOver);
             OnGameOver?.Invoke();
         }
     }

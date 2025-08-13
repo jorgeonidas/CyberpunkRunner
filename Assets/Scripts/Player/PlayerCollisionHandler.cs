@@ -48,18 +48,14 @@ public class PlayerCollisionHandler : MonoBehaviour
         {
             return;
         }
-
-        if (_isInvincible)
-        {
-            HandleInvincibleCollision(other);
-        }
-        else
+        HandleObstacleCollision(other);
+        if (!_isInvincible)
         {
             HandleVulnerableCollision(other);
         }
     }
 
-    private void HandleInvincibleCollision(Collision other)
+    private void HandleObstacleCollision(Collision other)
     {
         if (other.transform.TryGetComponent<IDestroy>(out IDestroy obstacle))
         {
