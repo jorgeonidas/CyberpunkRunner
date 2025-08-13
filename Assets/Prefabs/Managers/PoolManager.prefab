@@ -80,6 +80,11 @@ MonoBehaviour:
     defaultCapacity: 20
     maxSize: 50
     prewarm: 10
+  - key: PlayerBike_Destroyed
+    objectPrefab: {fileID: 4981948302037896105, guid: 5c411577f678bca4596a25736245d6e9, type: 3}
+    defaultCapacity: 1
+    maxSize: 4
+    prewarm: 1
   - key: VehicleObstacle_1_Destroyed
     objectPrefab: {fileID: 4981948302037896105, guid: a021bdabce7220c4fa4b8d91c9f5b7e2, type: 3}
     defaultCapacity: 20

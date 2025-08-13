@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d8c2ef4092d3ef47a6a85cec55c7e0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerCharacterVisuals: {fileID: 619178734363326521}
+  _playerCharacterVisuals: {fileID: 3038982819313421986}
 --- !u!114 &4917855377038807386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,7 +182,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hitCooldownTime: 1
-  _adjustChangeMoveSpeedAmount: 1
   _testInvincible: 0
 --- !u!114 &6758020255909572474
 MonoBehaviour:
@@ -501,11 +500,6 @@ PrefabInstance:
 --- !u!4 &196365912294730360 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3133340076421939799, guid: ecfe2e7ecf15d0347a5544e53ff9120f, type: 3}
-  m_PrefabInstance: {fileID: 3009105983800780847}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &619178734363326521 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2402035107989884950, guid: ecfe2e7ecf15d0347a5544e53ff9120f, type: 3}
   m_PrefabInstance: {fileID: 3009105983800780847}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &990474407017040229 stripped

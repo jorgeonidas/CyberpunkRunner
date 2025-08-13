@@ -52,6 +52,7 @@ public class Player : MonoBehaviour
             _playerCollisionHandler.EnableCollider(false);
             _playerCharacterVisuals.SetActive(false);
             _ragdollSpawner?.SpawnRagdoll();
+            PoolManager.Instance.Get("PlayerBike_Destroyed", transform.position, transform.rotation);
             OnPlayerDied?.Invoke();
             Debug.Log($"Player died");
         }
