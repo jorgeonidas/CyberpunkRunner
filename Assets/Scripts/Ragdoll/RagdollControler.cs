@@ -1,16 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RagdollControler : MonoBehaviour
 {
+    [SerializeField] private float _explosiveForce = 20f;
     [SerializeField] private Transform _ragdollRootBone;
-
     public void Setup(Transform originalRootBone)
     {
         MatchAllChildTransforms(originalRootBone, _ragdollRootBone);
-        Vector3 randomDir = new Vector3(Random.Range(-1f,+1f), 0, Random.Range(-1f,+1f));
-        ApplyExplosionToRagdoll(_ragdollRootBone, 300f, transform.position + randomDir, 10);
+        ApplyForceToRagdol(_ragdollRootBone, _explosiveForce);
     }
 
     private void MatchAllChildTransforms(Transform root, Transform clone)
@@ -28,16 +25,17 @@ public class RagdollControler : MonoBehaviour
         }
     }
 
-    private void ApplyExplosionToRagdoll(Transform root, float explosionForce, Vector3 explosionPosition, float explosionRange)
+    private void ApplyForceToRagdol(Transform root, float explosionForce)
     {
         foreach (Transform child in root)
         {
             if (child.TryGetComponent<Rigidbody>(out Rigidbody childRigidbody))
             {
-                childRigidbody.AddExplosionForce(explosionForce, explosionPosition, explosionRange);
+                childRigidbody.AddForce(
+                new Vector3(Random.Range(-explosionForce, explosionForce), explosionForce, Random.Range(explosionForce/2, explosionForce)),
+                ForceMode.Impulse);
             }
-            //Recursive call to apply explosion force to all child bones
-            ApplyExplosionToRagdoll(child, explosionForce, explosionPosition, explosionRange);
+            ApplyForceToRagdol(child, explosionForce);
         }
     }
 }
