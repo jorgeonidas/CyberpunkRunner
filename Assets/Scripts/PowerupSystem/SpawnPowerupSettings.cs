@@ -35,8 +35,9 @@ public class SpawnPowerupSettings : ScriptableObject
                 break; 
             }
         }
+#if UNITY_EDITOR
         Debug.Log($"<color=green>randomChance {randomChance} probabilityTotal {probabilityTotal} chosenDrop {chosenDrop?.Id}</color>");
+#endif
         return chosenDrop;
-
     }
 }
