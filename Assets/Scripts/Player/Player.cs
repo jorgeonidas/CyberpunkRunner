@@ -43,6 +43,11 @@ public class Player : MonoBehaviour
         _playerCollisionHandler.SetInvincible(invincible);
     }
 
+    public void AddMoveSpeed(float speed)
+    {
+        _playerController.AddMoveSpeed(speed);
+    }
+
     private void SetPlayerDead()
     {
         if (!_playerDead)

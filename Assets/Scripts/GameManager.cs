@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Player _player;
     [SerializeField] SpeedManager _speedManager;
     [SerializeField] LevelGenerator _leveGenerator;
-    public SpeedManager SpeedManager => _speedManager;
+    //public SpeedManager SpeedManager => _speedManager;
     public Player Player => _player;
     private bool _gameOver = false;
     private void Awake()
@@ -37,6 +37,12 @@ public class GameManager : MonoBehaviour
     void OnDisable()
     {
         _player.OnPlayerDied -= Player_OnPlayerDied;
+    }
+
+    public void AddSpeed(float speed)
+    {
+        _speedManager.AddSpeed(speed);
+        _player.AddMoveSpeed(speed);
     }
 
     private void Player_OnPlayerDied()

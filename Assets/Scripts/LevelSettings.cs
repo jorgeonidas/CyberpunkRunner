@@ -9,7 +9,6 @@ public class LevelSettings : ScriptableObject
     [SerializeField] float[] _lanes = { -3f, 0f, 3f };
     [SerializeField] float[] _horizontalLanes = { -3f, 0f, 3f };
 
-
     public Chunk[] ChunkPrefab => _chunkPrefab;
     public float ChunkLength => _chunkLength;
     public float[] Lanes => _lanes;

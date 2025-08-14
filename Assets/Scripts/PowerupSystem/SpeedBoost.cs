@@ -8,12 +8,14 @@ public class SpeedBoost : PowerupBase
     protected override void ApplyEffect()
     {
         Debug.Log($"Applying speed boost");
-        _gameManager.SpeedManager.AddSpeed(_speedToAdd);
+        _gameManager.AddSpeed(_speedToAdd);
+        //incrase player side speed as well
     }
 
     public override void RevertEffect()
     {
         Debug.Log($"Speed boost Reverted");
-        _gameManager.SpeedManager.AddSpeed(-_speedToAdd);
+        _gameManager.AddSpeed(-_speedToAdd);
+        //restart player side speed
     }
 }

@@ -4,21 +4,41 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] LevelSettings _levelSettings;
-    [SerializeField] private float _moveSpeed = 5f;
+    [SerializeField] SpeedSettings _speedSettings;
     private float[] _lanes;
     private Rigidbody _playerRigidbody;
     private Vector3 _targetPosition;
     private int _currentLane = 0;
+    private float _defaultSideMoveSpeed = 5f;
+    private float _currentSideMoveSpeed = 5f;
     private void Awake()
     {
         _playerRigidbody = GetComponent<Rigidbody>();
+
     }
 
     private void Start()
     {
+        InitializePlayerCurrentLane();
+        InitializeMoveSpeed();
+        SetTargetLanePosition();
+    }
+
+    private void FixedUpdate()
+    {
+        HandleMovement();
+    }
+
+    private void InitializeMoveSpeed()
+    {
+        _defaultSideMoveSpeed = _speedSettings.PlayerSideMovingSpeed;
+        _currentSideMoveSpeed = _defaultSideMoveSpeed;
+    }
+
+    private void InitializePlayerCurrentLane()
+    {
         _lanes = _levelSettings.Lanes;
         _currentLane = _lanes.Length / 2;
-        SetTargetLanePosition();
     }
 
     public void MoveLeft(InputAction.CallbackContext conext)
@@ -39,14 +59,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    public void AddMoveSpeed(float speed)
     {
-        HandleMovement();
+        _currentSideMoveSpeed += speed;
     }
 
     private void HandleMovement()
     {
-        Vector3 newPosition = Vector3.MoveTowards(_playerRigidbody.position, _targetPosition, _moveSpeed * Time.fixedDeltaTime);
+        Vector3 newPosition = Vector3.MoveTowards(_playerRigidbody.position, _targetPosition, _currentSideMoveSpeed * Time.fixedDeltaTime);
         _playerRigidbody.MovePosition(newPosition);
     }
 

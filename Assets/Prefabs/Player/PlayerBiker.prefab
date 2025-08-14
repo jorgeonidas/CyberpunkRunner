@@ -189,7 +189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _levelSettings: {fileID: 11400000, guid: e36a5c3c5d4babe44bf4ecd2ced9592c, type: 2}
-  _moveSpeed: 8
+  _speedSettings: {fileID: 11400000, guid: 033cbadaf4363054b83e46f7a7ae7aec, type: 2}
 --- !u!114 &7801529265794400478
 MonoBehaviour:
   m_ObjectHideFlags: 0
