@@ -17,7 +17,7 @@ public class PlayerCollisionHandler : MonoBehaviour
     private void Awake()
     {
         TryGetComponent(out _screenShakeSource);
-        _playerCollider = GetComponent<Collider>(); 
+        _playerCollider = GetComponentInChildren<Collider>(); 
     }
 
     private void Start()
