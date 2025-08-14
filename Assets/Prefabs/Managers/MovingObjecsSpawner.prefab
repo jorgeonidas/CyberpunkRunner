@@ -45,11 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _levelSettings: {fileID: 11400000, guid: e36a5c3c5d4babe44bf4ecd2ced9592c, type: 2}
+  _powerUpSetting: {fileID: 11400000, guid: 45481120953bc9f4895843ed8b99aabc, type: 2}
   _vehicleObstaclesIds:
   - VehicleObstacle_1
   - VehicleObstacle_2
   - VehicleObstacle_3
   - VehicleObstacle_4
-  _spawnInterval: 1
-  _spawnZOffset: 0
   _maxCoinsToSpawn: 5

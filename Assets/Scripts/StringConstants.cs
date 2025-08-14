@@ -15,6 +15,7 @@ public static class StringConstants
 
     public class PowerupIds
     {
+        public const string None = "None";
         public const string SpeedBoost = "SpeedBoost";
         public const string Invincible = "Invincible";
     }

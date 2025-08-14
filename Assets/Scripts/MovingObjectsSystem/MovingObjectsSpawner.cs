@@ -5,6 +5,7 @@ using UnityEngine;
 public class MovingObjectsSpawner : MonoBehaviour
 {
     [SerializeField] LevelSettings _levelSettings;
+    [SerializeField] SpawnPowerupSettings _powerUpSetting;
     [SerializeField] string[] _vehicleObstaclesIds;
     [SerializeField] int _maxCoinsToSpawn = 10;
     private List<float> _lanes = new List<float>();
@@ -12,7 +13,6 @@ public class MovingObjectsSpawner : MonoBehaviour
     private List<int> _currentAvailableLanes = new List<int>();
     float _chunkLength;
     private float[] _horizontalLanes;
-    private string[] _powerupsIds = { StringConstants.PowerupIds.Invincible };
     private void Start()
     {
         Initialize();
@@ -108,8 +108,12 @@ public class MovingObjectsSpawner : MonoBehaviour
         int horizontalLaneIndex = Random.Range(0, _horizontalLanes.Length);
         float zCoordinate = _horizontalLanes[horizontalLaneIndex];
         Vector3 spawnPos = new Vector3(GetXPosition(verticalLaneIndex), 0f, transform.position.z + zCoordinate);
-        //test
-        PoolManager.Instance.Get(_powerupsIds.First(), spawnPos, transform.rotation);
+        var chosenPowerup = _powerUpSetting.ChoosePowerup();
+        if (chosenPowerup != null && chosenPowerup.Id !=StringConstants.PowerupIds.None)
+        {
+            PoolManager.Instance.Get(chosenPowerup.Id, spawnPos, transform.rotation);
+        }
+
     }
 
     private float GetXPosition(int verticalLalenIndex)

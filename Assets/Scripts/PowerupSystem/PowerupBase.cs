@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PowerupBase", menuName = "Scriptable Objects/PowerupBase")]
 public abstract class PowerupBase : ScriptableObject
 {
     [SerializeField] string _id;
@@ -18,7 +17,5 @@ public abstract class PowerupBase : ScriptableObject
     }
 
     protected abstract void ApplyEffect();
-
     public abstract void RevertEffect();
-
 }
