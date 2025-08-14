@@ -16,6 +16,13 @@ public class PowerupHandler : MonoBehaviour
     void Start()
     {
         PowerupPickup.OnAnyPowerupPicked += PowerupPickup_OnAnyPowerupPicked;
+        _player.OnPlayerDied += Player_OnPlayerDied;
+    }
+
+    private void OnDisable()
+    {
+        PowerupPickup.OnAnyPowerupPicked -= PowerupPickup_OnAnyPowerupPicked;
+        _player.OnPlayerDied -= Player_OnPlayerDied;
     }
 
     private void Update()
@@ -57,11 +64,6 @@ public class PowerupHandler : MonoBehaviour
         }
     }
 
-    private void OnDisable()
-    {
-        PowerupPickup.OnAnyPowerupPicked -= PowerupPickup_OnAnyPowerupPicked;
-    }
-
     private void PowerupPickup_OnAnyPowerupPicked(PowerupBase pickedPowerUp)
     {
         Debug.Log($"Player picked {pickedPowerUp}");
@@ -71,10 +73,10 @@ public class PowerupHandler : MonoBehaviour
             Debug.LogError($"Invalid powerup id for {pickedPowerUp} is null or empty");
             return;
         }
-        
+
         float powerupDuration = pickedPowerUp.Duration;
         string powerUpId = pickedPowerUp.Id;
-        _player.OnPowerUpActivated?.Invoke(powerUpId,powerupDuration);
+        _player.OnPowerUpActivated?.Invoke(powerUpId, powerupDuration);
         if (_powerupTimers.ContainsKey(powerUpId))
         {
             float remaining = _powerupTimers[powerUpId];
@@ -87,5 +89,20 @@ public class PowerupHandler : MonoBehaviour
             _powerupTimers.Add(powerUpId, powerupDuration);
             _activePowerups.Add(powerUpId, pickedPowerUp);
         }
+    }
+
+    private void Player_OnPlayerDied()
+    {
+        ClearAllPowerUps();
+    }
+
+    private void ClearAllPowerUps()
+    {
+        _powerupTimers.Clear();
+        foreach (var kvp in _activePowerups)
+        {
+            kvp.Value.RevertEffect();
+        }
+        _activePowerups.Clear();
     }
 }
