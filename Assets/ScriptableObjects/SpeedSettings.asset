@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: SpeedSettings
   m_EditorClassIdentifier: 
   _initialChunkSpeed: 14
-  _maxChunkSpeed: 22
+  _maxChunkSpeed: 24
   _initialObjectsSpeed: 20
-  _maxObjectsSpeed: 28
+  _maxObjectsSpeed: 30
   _acceleration: 12
   _deceleration: 14
   _playerSideMovingSpeed: 8
+  _chunkSpeedIncreaseCycle: 10
+  _speedDifficultyIncrementPerCycle: 5
