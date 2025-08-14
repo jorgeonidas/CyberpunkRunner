@@ -7,7 +7,6 @@ public class VFXSpawner : MonoBehaviour
 
     public void PlayParticleEffect(Vector3 position)
     {
-        Debug.Log($"Trying to play {_poolId}");
         PoolManager.Instance?.Get(_poolId, position + Vector3.up * _yOffset, transform.rotation);
     }
 }

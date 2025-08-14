@@ -8,7 +8,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] Player _player;
     [SerializeField] SpeedManager _speedManager;
     [SerializeField] LevelGenerator _leveGenerator;
-    //public SpeedManager SpeedManager => _speedManager;
+    CameraController _cameraController;
+
     public Player Player => _player;
     private bool _gameOver = false;
     private void Awake()
@@ -23,7 +24,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        //will generate the player
         _player.OnPlayerDied += Player_OnPlayerDied;
         _leveGenerator.Initialize(_speedManager);
         _gameOver = false;
@@ -38,11 +38,15 @@ public class GameManager : MonoBehaviour
     {
         _player.OnPlayerDied -= Player_OnPlayerDied;
     }
-
+    public void SetCameraController(CameraController cameraController)
+    {
+        _cameraController = cameraController;
+    }
     public void AddSpeed(float speed)
     {
         _speedManager.AddSpeed(speed);
         _player.AddMoveSpeed(speed);
+        _cameraController.ChangeCaeramFOV(speed);
     }
 
     private void Player_OnPlayerDied()
