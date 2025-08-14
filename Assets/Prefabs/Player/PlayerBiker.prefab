@@ -317,8 +317,6 @@ MonoBehaviour:
   _loopVfxData:
   - vfxId: Invincible
     loopVfxPrefab: {fileID: 198985388140249450, guid: 9e6a3712f81a89b42bbdd75925b2bf2c, type: 3}
-  - vfxId: SpeedBoost
-    loopVfxPrefab: {fileID: 198061243068776072, guid: 087dd57e6bc33a24ea19c860af39175f, type: 3}
 --- !u!114 &197229381577994216
 MonoBehaviour:
   m_ObjectHideFlags: 0
