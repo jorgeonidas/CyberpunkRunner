@@ -7,15 +7,15 @@ public class SpeedManager : MonoBehaviour
     [Header("For testing, but theyre initialized from setting")]
     [SerializeField] private float _currentMovingObjectsSpeed;
     [SerializeField] private float _currentMovingChunkSpeed;
-    [Header("speed change acceleration/deceleration")]
-    [SerializeField] private float _acceleration = 14f;
-    [SerializeField] private float _deceleration = 20f;
     public float CurrentChunksMoveSpeed => _currentMovingChunkSpeed;
     public float CurrentMovingObjectsSpeed => _currentMovingObjectsSpeed;
-    private float _initialChunkSpeed;
-    private float _initialObjectsSpeed;
+    private float _initialChunkSpeed => _speedSettings.InitialChunkSpeed;
+    private float _maxChunkSpeed => _speedSettings.MaxChunkSpeed;
+    private float _initialObjectsSpeed => _speedSettings.InitialObjectsSpeed;
+    private float _maxObjectsSpeed => _speedSettings.MaxObjectsSpeed;
     private float _targetChunkSpeed;
     private float _targetObjectsSpeed;
+    private int _chunksPassed;
     private bool _stopped = false;
     private void Start()
     {
@@ -24,6 +24,8 @@ public class SpeedManager : MonoBehaviour
 
     private void Initialize()
     {
+        _stopped = false;
+        _chunksPassed = 0;
         InitializeChunksSpeeds();
         InitialieObjectsSpeeds();
     }
@@ -32,14 +34,12 @@ public class SpeedManager : MonoBehaviour
     {
         //chunks
         _currentMovingChunkSpeed = 0;
-        _initialChunkSpeed = _speedSettings.InitialChunkSpeed;
         _targetChunkSpeed = _initialChunkSpeed;
     }
 
     private void InitialieObjectsSpeeds()
     {
         _currentMovingObjectsSpeed = 0;
-        _initialObjectsSpeed = _speedSettings.InitialObjectsSpeed;
         _targetObjectsSpeed = _initialObjectsSpeed;
     }
 
@@ -55,7 +55,6 @@ public class SpeedManager : MonoBehaviour
 
     private void Update()
     {
-
         _currentMovingChunkSpeed = MoveTowarsTargetSpeed(_currentMovingChunkSpeed, _targetChunkSpeed);
         _currentMovingObjectsSpeed = MoveTowarsTargetSpeed(_currentMovingObjectsSpeed, _targetObjectsSpeed);
     }
@@ -64,7 +63,7 @@ public class SpeedManager : MonoBehaviour
     {
         if (targetSpeed > currentSpeed)
         {
-            currentSpeed += _acceleration * Time.deltaTime;
+            currentSpeed += _speedSettings.Acceleration * Time.deltaTime;
             if (currentSpeed > targetSpeed)
             {
                 currentSpeed = targetSpeed;
@@ -72,13 +71,12 @@ public class SpeedManager : MonoBehaviour
         }
         else
         {
-            currentSpeed -= _deceleration * Time.deltaTime;
+            currentSpeed -= _speedSettings.Deceleration * Time.deltaTime;
             if (currentSpeed < targetSpeed)
             {
                 currentSpeed = targetSpeed;
             }
         }
-
         return Mathf.Max(0f, currentSpeed);
     }
 
@@ -97,13 +95,7 @@ public class SpeedManager : MonoBehaviour
         }
     }
 
-    public void Restart()
-    {
-        _stopped = false;
-        Initialize();
-    }
-
-    public void AddSpeed(float speed)
+    public void AddSpeedBonus(float speed)
     {
         if (_stopped)
         {
@@ -111,5 +103,25 @@ public class SpeedManager : MonoBehaviour
         }
         _targetChunkSpeed = _currentMovingChunkSpeed + speed;
         _targetObjectsSpeed = _currentMovingObjectsSpeed + speed;
+    }
+
+    public void TryIncreaseSpeedDifficulty()
+    {
+        _chunksPassed++;
+        if (_chunksPassed % _speedSettings.ChunkSpeedIncreaseCycle == 0)
+        {
+            //reached the max difficulty speeds
+            if (!_stopped && (_currentMovingChunkSpeed >= _maxChunkSpeed && _currentMovingObjectsSpeed >= _maxObjectsSpeed))
+            {
+                return;
+            }
+            IncreaseSpeedClampled(_speedSettings.SpeedDifficultyIncrementPerCycle);
+        }
+    }
+
+    private void IncreaseSpeedClampled(float increase)
+    {
+        _targetChunkSpeed = Mathf.Clamp(_currentMovingChunkSpeed + increase, 0, _maxChunkSpeed);
+        _targetObjectsSpeed = Mathf.Clamp(_currentMovingObjectsSpeed + increase, 0, _maxObjectsSpeed);
     }
 }

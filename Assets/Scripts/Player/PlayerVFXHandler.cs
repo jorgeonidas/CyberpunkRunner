@@ -107,7 +107,7 @@ public class PlayerVFXHandler : MonoBehaviour
     {
         if (!_vfxInstances.TryGetValue(vfxId, out ParticleSystem vfxInstance))
         {
-            Debug.LogError($"VFX with id '{vfxId}' not found");
+            Debug.LogWarning($"VFX with id '{vfxId}' not found");
             return;
         }
 

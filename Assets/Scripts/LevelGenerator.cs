@@ -17,8 +17,7 @@ public class LevelGenerator : MonoBehaviour
     #region UnityLifeCycle    
     private void Start()
     {
-        // InitializeChunksPool();
-        // SpawnChunks();
+
     }
 
     private void OnEnable()
@@ -144,6 +143,7 @@ public class LevelGenerator : MonoBehaviour
     {
         string chunkName = chunk.name;
         _chunkPools[chunkName].Release(chunk);
+        _speedManager.TryIncreaseSpeedDifficulty();
     }
     #endregion
 

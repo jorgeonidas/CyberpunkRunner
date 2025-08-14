@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
     }
     public void AddSpeed(float speed)
     {
-        _speedManager.AddSpeed(speed);
+        _speedManager.AddSpeedBonus(speed);
         _player.AddMoveSpeed(speed);
         _cameraController.ChangeCaeramFOV(speed);
     }
