@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SpeedManager : MonoBehaviour
 {
-    [SerializeField] LevelSettings _levelSettings;
+    [SerializeField] SpeedSettings _speedSettings;
     [Header("For testing, but theyre initialized from setting")]
     [SerializeField] private float _currentMovingObjectsSpeed;
     [SerializeField] private float _currentMovingChunkSpeed;
@@ -32,14 +32,14 @@ public class SpeedManager : MonoBehaviour
     {
         //chunks
         _currentMovingChunkSpeed = 0;
-        _initialChunkSpeed = _levelSettings.InitialChunkSpeed;
+        _initialChunkSpeed = _speedSettings.InitialChunkSpeed;
         _targetChunkSpeed = _initialChunkSpeed;
     }
 
     private void InitialieObjectsSpeeds()
     {
         _currentMovingObjectsSpeed = 0;
-        _initialObjectsSpeed = _levelSettings.InitialObjectsSpeed;
+        _initialObjectsSpeed = _speedSettings.InitialObjectsSpeed;
         _targetObjectsSpeed = _initialObjectsSpeed;
     }
 

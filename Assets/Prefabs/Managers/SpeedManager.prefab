@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 203a845ab5998da41ab12182450af18b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelSettings: {fileID: 11400000, guid: e36a5c3c5d4babe44bf4ecd2ced9592c, type: 2}
+  _speedSettings: {fileID: 11400000, guid: 033cbadaf4363054b83e46f7a7ae7aec, type: 2}
   _currentMovingObjectsSpeed: 0
   _currentMovingChunkSpeed: 0
   _acceleration: 12

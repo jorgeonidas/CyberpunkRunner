@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: InvincibilityPowerUp
   m_EditorClassIdentifier: 
   _id: Invincible
-  _duration: 3
+  _duration: 5

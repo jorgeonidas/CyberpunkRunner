@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fbb1150c5286ea4bb4b1da64f70fc1a, type: 3}
-  m_Name: SpeedBoost
+  m_Script: {fileID: 11500000, guid: ea703d19bdc76f44b8c612f317256de7, type: 3}
+  m_Name: SpeedSettings
   m_EditorClassIdentifier: 
-  _id: SpeedBoost
-  _duration: 5
-  _speedToAdd: 8
+  _initialChunkSpeed: 14
+  _initialObjectsSpeed: 20
+  _acceleration: 12
+  _deceleration: 14
