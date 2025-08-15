@@ -239,6 +239,7 @@ MonoBehaviour:
   _panelCatalog: {fileID: 252323636}
   _scoreChangedEvent: {fileID: 11400000, guid: 0567639da38f41d4aa6d8a0c1bf7e01a, type: 2}
   _gamestateChangedEvent: {fileID: 11400000, guid: 0b762577dfa80cd44b6b9f389dfc830c, type: 2}
+  _powerupActivationEvent: {fileID: 11400000, guid: f04f76adb73da214fb76033fbb7166b0, type: 2}
 --- !u!114 &252323636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1108,6 +1109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngameHUD
   _tachometerUI: {fileID: 738406088}
   _scoreText: {fileID: 774736833}
+  _powerupUIManager: {fileID: 1828327942}
 --- !u!224 &774736832 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6982199235662231182, guid: bc1bfbd47a63b58459a0f073317d63bc, type: 3}
@@ -1833,11 +1835,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 203a845ab5998da41ab12182450af18b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &1742569082 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 4235563176773073261, guid: cfe755677de38df44869b442057ae966, type: 3}
-  m_PrefabInstance: {fileID: 7784698401602228987}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1793735475
 GameObject:
   m_ObjectHideFlags: 0
@@ -1894,6 +1891,7 @@ GameObject:
   - component: {fileID: 1828327938}
   - component: {fileID: 1828327940}
   - component: {fileID: 1828327941}
+  - component: {fileID: 1828327942}
   m_Layer: 5
   m_Name: PowerupsDisplayerUI
   m_TagString: Untagged
@@ -1912,8 +1910,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1742569082}
+  m_Children: []
   m_Father: {fileID: 756039773}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
@@ -1955,6 +1952,20 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1828327942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1828327937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5af7f02af4f31dc4890eae4dea05df37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PowerupUIManager
+  powerupsDisplayerUI: {fileID: 1828327938}
+  powerupItemPrefab: {fileID: 4655159877390999283, guid: cfe755677de38df44869b442057ae966, type: 3}
 --- !u!114 &2123149225 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3325524038902242171, guid: cfc08fb5607198d4494aa2197ba1f91b, type: 3}
@@ -2212,103 +2223,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b98f92ef614dac04ba80233e54ed86b0, type: 3}
---- !u!1001 &7784698401602228987
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1828327938}
-    m_Modifications:
-    - target: {fileID: 4235563176773073261, guid: cfe755677de38df44869b442057ae966, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4235563176773073261, guid: cfe755677de38df44869b442057ae966, type: 3}
-      propertyPath: m_Pivot.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4235563176773073261, guid: cfe755677de38df44869b442057ae966, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4235563176773073261, guid: cfe755677de38df44869b442057ae966, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4235563176773073261, guid: cfe755677de38df44869b442057ae966, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4235563176773073261, guid: cfe755677de38df44869b442057ae966, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4235563176773073261, guid: cfe755677de38df44869b442057ae966, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 4235563176773073261, guid: cfe755677de38df44869b442057ae966, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 4235563176773073261, guid: cfe755677de38df44869b442057ae966, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4235563176773073261, guid: cfe755677de38df44869b442057ae966, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4235563176773073261, guid: cfe755677de38df44869b442057ae966, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4235563176773073261, guid: cfe755677de38df44869b442057ae966, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4235563176773073261, guid: cfe755677de38df44869b442057ae966, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4235563176773073261, guid: cfe755677de38df44869b442057ae966, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4235563176773073261, guid: cfe755677de38df44869b442057ae966, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4235563176773073261, guid: cfe755677de38df44869b442057ae966, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4235563176773073261, guid: cfe755677de38df44869b442057ae966, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4235563176773073261, guid: cfe755677de38df44869b442057ae966, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4235563176773073261, guid: cfe755677de38df44869b442057ae966, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4235563176773073261, guid: cfe755677de38df44869b442057ae966, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4655159877390999283, guid: cfe755677de38df44869b442057ae966, type: 3}
-      propertyPath: m_Name
-      value: PowerupDisplayerUIItem
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: cfe755677de38df44869b442057ae966, type: 3}
 --- !u!1001 &7861985044729214841
 PrefabInstance:
   m_ObjectHideFlags: 0

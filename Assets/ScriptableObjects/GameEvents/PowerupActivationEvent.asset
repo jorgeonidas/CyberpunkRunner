@@ -9,10 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fbb1150c5286ea4bb4b1da64f70fc1a, type: 3}
-  m_Name: SpeedBoostPowerUp
-  m_EditorClassIdentifier: 
-  _id: SpeedBoost
-  _icon: {fileID: 21300000, guid: 3b7036e9b051ca640b6efe1f6d0a4166, type: 3}
-  _duration: 5
-  _speedToAdd: 5
+  m_Script: {fileID: 11500000, guid: 5010c8e99b5327648afa707df06541c0, type: 3}
+  m_Name: PowerupActivationEvent
+  m_EditorClassIdentifier: Assembly-CSharp::PowerupActivationEvent

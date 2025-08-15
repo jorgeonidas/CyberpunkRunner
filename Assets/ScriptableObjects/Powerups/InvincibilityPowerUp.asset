@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: InvincibilityPowerUp
   m_EditorClassIdentifier: 
   _id: Invincible
+  _icon: {fileID: 21300000, guid: 162be6f621b0d8245b26dc63aee7cd62, type: 3}
   _duration: 5

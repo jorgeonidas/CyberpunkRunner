@@ -8,6 +8,7 @@ public class IngameUIManager : MonoBehaviour, IUIPanelsOrganizer
     [Header("Events")]
     [SerializeField] ScoreChangedEvent _scoreChangedEvent;
     [SerializeField] GameStateChangedEvent _gamestateChangedEvent;
+    [SerializeField] PowerupActivationEvent _powerupActivationEvent;
     IngameHUD _ingameHud;
     void Awake()
     {
@@ -26,17 +27,24 @@ public class IngameUIManager : MonoBehaviour, IUIPanelsOrganizer
     {
         _scoreChangedEvent.OnEventRaised += OnScoreChanged;
         _gamestateChangedEvent.OnEventRaised += OnGameStateChanged;
+        _powerupActivationEvent.OnEventRaised += OnPowerupActivated;
     }
 
     void OnDisable()
     {
         _scoreChangedEvent.OnEventRaised -= OnScoreChanged;
         _gamestateChangedEvent.OnEventRaised -= OnGameStateChanged;
+        _powerupActivationEvent.OnEventRaised -= OnPowerupActivated;    
     }
 
     private void OnScoreChanged(int score)
     {
         _ingameHud.SetScore(score);
+    }
+
+    private void OnPowerupActivated(PowerupBase powerupData)
+    {
+        _ingameHud.ActivatePowerup(powerupData);
     }
 
     private void OnGameStateChanged(GameState gameState)

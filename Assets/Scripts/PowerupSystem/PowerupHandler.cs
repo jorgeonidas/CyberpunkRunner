@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -9,19 +8,20 @@ public class PowerupHandler : MonoBehaviour
     Player _player;
     [SerializeField] SerializedDictionary<string, PowerupBase> _activePowerups = new SerializedDictionary<string, PowerupBase>();
     [SerializeField] SerializedDictionary<string, float> _powerupTimers = new SerializedDictionary<string, float>();
+    [SerializeField] PowerupActivationEvent _powerupActivationEvent;
     private void Awake()
     {
         _player = GetComponent<Player>();
     }
     void Start()
     {
-        PowerupPickup.OnAnyPowerupPicked += PowerupPickup_OnAnyPowerupPicked;
+       _powerupActivationEvent.OnEventRaised += PowerupPickup_OnAnyPowerupPicked;
         _player.OnPlayerDied += Player_OnPlayerDied;
     }
 
     private void OnDisable()
     {
-        PowerupPickup.OnAnyPowerupPicked -= PowerupPickup_OnAnyPowerupPicked;
+        _powerupActivationEvent.OnEventRaised -= PowerupPickup_OnAnyPowerupPicked;
         _player.OnPlayerDied -= Player_OnPlayerDied;
     }
 
