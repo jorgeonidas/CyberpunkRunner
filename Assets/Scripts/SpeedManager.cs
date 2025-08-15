@@ -9,6 +9,7 @@ public class SpeedManager : MonoBehaviour
     [SerializeField] private float _currentMovingChunkSpeed;
     public float CurrentChunksMoveSpeed => _currentMovingChunkSpeed;
     public float CurrentMovingObjectsSpeed => _currentMovingObjectsSpeed;
+    public float MaxChunkSpeed => _maxChunkSpeed;
     private float _initialChunkSpeed => _speedSettings.InitialChunkSpeed;
     private float _maxChunkSpeed => _speedSettings.MaxChunkSpeed;
     private float _initialObjectsSpeed => _speedSettings.InitialObjectsSpeed;
@@ -117,6 +118,11 @@ public class SpeedManager : MonoBehaviour
             }
             IncreaseSpeedClampled(_speedSettings.SpeedDifficultyIncrementPerCycle);
         }
+    }
+
+    public float GetCurrentChunksMoveSpeedInKmH()
+    {
+        return _currentMovingChunkSpeed * 3.6f;
     }
 
     private void IncreaseSpeedClampled(float increase)
