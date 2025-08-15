@@ -19,4 +19,11 @@ public static class StringConstants
         public const string SpeedBoost = "SpeedBoost";
         public const string Invincible = "Invincible";
     }
+
+    public class IngamePanels
+    {
+        public const string Pause = "Pause";
+        public const string GameOver = "GameOver";
+        public const string IngameHud = "IngameHud";
+    }
 }

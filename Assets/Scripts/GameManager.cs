@@ -1,17 +1,20 @@
 using System;
 using UnityEngine;
 
+public enum GameState { Playing, Paused, GameOver }
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    public Action OnGameOver;
+    //public Action OnGameOver;
     [SerializeField] Player _player;
     [SerializeField] SpeedManager _speedManager;
     [SerializeField] LevelGenerator _leveGenerator;
+    [SerializeField] GameStateChangedEvent _gameStateChangedEvent;
+    GameState _currentGameState;
     CameraController _cameraController;
 
     public Player Player => _player;
-    private bool _gameOver = false;
+
     private void Awake()
     {
         if (Instance != null)
@@ -26,7 +29,7 @@ public class GameManager : MonoBehaviour
     {
         _player.OnPlayerDied += Player_OnPlayerDied;
         _leveGenerator.Initialize(_speedManager);
-        _gameOver = false;
+        _currentGameState = GameState.Playing;
     }
 
     private void OnEnable()
@@ -52,11 +55,11 @@ public class GameManager : MonoBehaviour
     private void Player_OnPlayerDied()
     {
         //stop everything
-        if (!_gameOver)
+        if (_currentGameState != GameState.GameOver)
         {
-            _gameOver = true;
-            _speedManager.Stop(_gameOver);
-            OnGameOver?.Invoke();
+            _currentGameState = GameState.GameOver;
+            _speedManager.Stop(true);
+            _gameStateChangedEvent?.Raise(_currentGameState);
         }
     }
 }

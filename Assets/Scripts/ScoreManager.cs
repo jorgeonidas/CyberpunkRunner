@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
-    public static Action<int> OnScoreChanged;
-    [SerializeField] TextMeshProUGUI _scoreText;
+    public static Action<int> OnAddScoreEvent;
+    [SerializeField] ScoreChangedEvent _scoreChangedEvent;
     int _currentScore;
     private void Start()
     {
@@ -14,13 +14,13 @@ public class ScoreManager : MonoBehaviour
     }
     private void OnEnable()
     {
-        OnScoreChanged += AddScore;
+        OnAddScoreEvent += AddScore;
     }
 
     private void OnDisable()
     {
 
-        OnScoreChanged -= AddScore;
+        OnAddScoreEvent -= AddScore;
     }
 
     private void AddScore(int scoreToAdd)
@@ -31,6 +31,6 @@ public class ScoreManager : MonoBehaviour
 
     private void UpdateScoreText()
     {
-        _scoreText.text = $"SCORE: {_currentScore}";
+       _scoreChangedEvent.Raise(_currentScore);
     }
 }
