@@ -14,6 +14,7 @@ public class LevelGenerator : MonoBehaviour
     List<Chunk> _chunksList = new List<Chunk>();
     private Dictionary<string, ObjectPool<Chunk>> _chunkPools;
     private SpeedManager _speedManager;
+    private int _chunksSurpassed = 0;
     #region UnityLifeCycle    
     private void Start()
     {
@@ -33,6 +34,7 @@ public class LevelGenerator : MonoBehaviour
     public void Initialize(SpeedManager speedManager)
     {
         _speedManager = speedManager;
+        _chunksSurpassed = 0;
         InitializeChunksPool();
         SpawnStartingChunks();
     }
@@ -98,6 +100,7 @@ public class LevelGenerator : MonoBehaviour
 
             if (chunk.transform.position.z <= Camera.main.transform.position.z - _levelSettings.ChunkLength)
             {
+                _chunksSurpassed++;
                 _chunksList.Remove(chunk);
                 ReleaseChunk(chunk);
                 PlaceNewChunk();
@@ -141,11 +144,11 @@ public class LevelGenerator : MonoBehaviour
 
     private void ReleaseChunk(Chunk chunk)
     {
-        string chunkName = chunk.name;
-        _chunkPools[chunkName].Release(chunk);
-        _speedManager.TryIncreaseSpeedDifficulty();
+        string chunkId = chunk.name;
+        _chunkPools[chunkId].Release(chunk);
+        _speedManager.TryIncreaseSpeedDifficulty(_chunksSurpassed);
     }
     #endregion
-
+    public float GetDistanceTravelled() => _chunksSurpassed * _levelSettings.ChunkLength;
     public LevelSettings GetLevelSettings() => _levelSettings;
 }

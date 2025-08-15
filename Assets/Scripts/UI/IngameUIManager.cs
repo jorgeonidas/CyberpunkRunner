@@ -10,12 +10,14 @@ public class IngameUIManager : MonoBehaviour, IUIPanelsOrganizer
     [SerializeField] GameStateChangedEvent _gamestateChangedEvent;
     [SerializeField] PowerupActivationEvent _powerupActivationEvent;
     IngameHUD _ingameHud;
+    GameManager _gameManager;
     void Awake()
     {
         _panelCatalog.Initialize();
     }
     private void Start()
     {
+        _gameManager = GameManager.Instance;
         if (_panelCatalog.TryGet(StringConstants.IngamePanels.IngameHud, out IUIPanel hudPanel))
         {
             _ingameHud = hudPanel as IngameHUD;
@@ -28,13 +30,23 @@ public class IngameUIManager : MonoBehaviour, IUIPanelsOrganizer
         _scoreChangedEvent.OnEventRaised += OnScoreChanged;
         _gamestateChangedEvent.OnEventRaised += OnGameStateChanged;
         _powerupActivationEvent.OnEventRaised += OnPowerupActivated;
+        LevelGenerator.OnChunkPlaced += OnChunkPlaced;
     }
 
     void OnDisable()
     {
         _scoreChangedEvent.OnEventRaised -= OnScoreChanged;
         _gamestateChangedEvent.OnEventRaised -= OnGameStateChanged;
-        _powerupActivationEvent.OnEventRaised -= OnPowerupActivated;    
+        _powerupActivationEvent.OnEventRaised -= OnPowerupActivated;
+        LevelGenerator.OnChunkPlaced -= OnChunkPlaced;    
+    }
+
+    private void OnChunkPlaced()
+    {
+        if (_gameManager)
+        {
+            _ingameHud.SetTraveledDistance(_gameManager.GetDistanceTravelled());
+        }
     }
 
     private void OnScoreChanged(int score)

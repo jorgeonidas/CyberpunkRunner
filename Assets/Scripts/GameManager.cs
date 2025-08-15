@@ -51,6 +51,8 @@ public class GameManager : MonoBehaviour
         _player.AddMoveSpeed(speed);
         _cameraController.ChangeCaeramFOV(speed);
     }
+    
+    public float GetDistanceTravelled() => _leveGenerator.GetDistanceTravelled();
 
     private void Player_OnPlayerDied()
     {

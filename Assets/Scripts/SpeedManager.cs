@@ -16,7 +16,6 @@ public class SpeedManager : MonoBehaviour
     private float _maxObjectsSpeed => _speedSettings.MaxObjectsSpeed;
     private float _targetChunkSpeed;
     private float _targetObjectsSpeed;
-    private int _chunksPassed;
     private bool _stopped = false;
     private void Start()
     {
@@ -26,7 +25,6 @@ public class SpeedManager : MonoBehaviour
     private void Initialize()
     {
         _stopped = false;
-        _chunksPassed = 0;
         InitializeChunksSpeeds();
         InitialieObjectsSpeeds();
     }
@@ -106,10 +104,10 @@ public class SpeedManager : MonoBehaviour
         _targetObjectsSpeed = _currentMovingObjectsSpeed + speed;
     }
 
-    public void TryIncreaseSpeedDifficulty()
+    public void TryIncreaseSpeedDifficulty(int chunksPassed)
     {
-        _chunksPassed++;
-        if (_chunksPassed % _speedSettings.ChunkSpeedIncreaseCycle == 0)
+
+        if (chunksPassed % _speedSettings.ChunkSpeedIncreaseCycle == 0)
         {
             //reached the max difficulty speeds
             if (!_stopped && (_currentMovingChunkSpeed >= _maxChunkSpeed && _currentMovingObjectsSpeed >= _maxObjectsSpeed))
