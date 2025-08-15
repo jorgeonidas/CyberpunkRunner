@@ -44,7 +44,7 @@ public class TachometerUI : MonoBehaviour
         float targetAngle = Mathf.Lerp(_minAngle, _maxAngle, normalizedSpeed);
 
         needleTransform.localRotation = Quaternion.Euler(0f, 0f, targetAngle);
-        _currentSpeedText.text = $"{(currentSpeed * 10).ToString("f0")} Km/h";
+        _currentSpeedText.text = $"{(currentSpeed * 10).ToString("f0")}";
         _currentSpeedText.color = _colorGradient.Evaluate(normalizedSpeed);
     }
 }
