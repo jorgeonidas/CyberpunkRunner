@@ -9,9 +9,12 @@ public class MovingObjectsSpawner : MonoBehaviour
     [SerializeField] string[] _vehicleObstaclesIds;
     [SerializeField] int _minCoinsToSpawn = 3;
     [SerializeField] int _maxCoinsToSpawn = 10;
-    [SerializeField] float _spawmnInterval = 1f;
+    [Header("Spawn Settings")]
+    [SerializeField] float _spawnInterval = 1f;
+    [SerializeField] float _minSpawnSpeed = 0.7f;
+    [SerializeField] float _spawnIntervalDecreaseRate = 0.05f;
     private List<float> _lanes = new List<float>();
-    private List<int> _previousVehicleLanes = new List<int>(); 
+    private List<int> _previousVehicleLanes = new List<int>();
     private List<int> _currentAvailableLanes = new List<int>();
     float _chunkLength;
     private float[] _horizontalLanes;
@@ -23,12 +26,10 @@ public class MovingObjectsSpawner : MonoBehaviour
 
     private void OnEnable()
     {
-        //LevelGenerator.OnChunkPlaced += PlaceProps;
     }
 
     void OnDisable()
     {
-        //LevelGenerator.OnChunkPlaced -= PlaceProps;
     }
 
     private void Update()
@@ -36,13 +37,13 @@ public class MovingObjectsSpawner : MonoBehaviour
         if (Time.time >= _nextSpawnTime)
         {
             PlaceProps();
-            _nextSpawnTime = Time.time + _spawmnInterval;
+            _nextSpawnTime = Time.time + _spawnInterval;
         }
     }
 
-    public void Initialize()
+    private void Initialize()
     {
-        _nextSpawnTime = Time.time + _spawmnInterval;
+        _nextSpawnTime = Time.time + _spawnInterval;
         _lanes = _levelSettings.Lanes.ToList();
         _horizontalLanes = _levelSettings.HorizontalLanes;
         _chunkLength = _levelSettings.ChunkLength;
@@ -88,7 +89,7 @@ public class MovingObjectsSpawner : MonoBehaviour
             obstructedThisCycle.Add(laneIndex);
         }
 
-        _previousVehicleLanes = obstructedThisCycle; 
+        _previousVehicleLanes = obstructedThisCycle;
     }
     private void SpawnCoins()
     {
@@ -111,7 +112,7 @@ public class MovingObjectsSpawner : MonoBehaviour
         }
     }
 
-    public void SpawnPowerup()
+    private void SpawnPowerup()
     {
         if (_currentAvailableLanes.Count == 0)
         {
@@ -122,7 +123,7 @@ public class MovingObjectsSpawner : MonoBehaviour
         float zCoordinate = _horizontalLanes[horizontalLaneIndex];
         Vector3 spawnPos = new Vector3(GetXPosition(verticalLaneIndex), 0f, transform.position.z + zCoordinate);
         var chosenPowerup = _powerUpSetting.ChoosePowerup();
-        if (chosenPowerup != null && chosenPowerup.Id !=StringConstants.PowerupIds.None)
+        if (chosenPowerup != null && chosenPowerup.Id != StringConstants.PowerupIds.None)
         {
             PoolManager.Instance.Get(chosenPowerup.Id, spawnPos, transform.rotation);
         }
@@ -147,6 +148,14 @@ public class MovingObjectsSpawner : MonoBehaviour
         for (int i = 0; i < _lanes.Count; i++)
         {
             _currentAvailableLanes.Add(i);
+        }
+    }
+    
+    public void TryDecreaseSpawnrate()
+    {
+        if (_spawnInterval > _minSpawnSpeed)
+        {
+            _spawnInterval = Mathf.Max(_minSpawnSpeed, _spawnInterval - _spawnIntervalDecreaseRate);
         }
     }
 }

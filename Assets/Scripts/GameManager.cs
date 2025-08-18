@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] SpeedManager _speedManager;
     [SerializeField] LevelGenerator _leveGenerator;
     [SerializeField] GameStateChangedEvent _gameStateChangedEvent;
+    [SerializeField] MovingObjectsSpawner _movingObjectsSpawner;
     GameState _currentGameState;
     CameraController _cameraController;
 
@@ -34,11 +35,12 @@ public class GameManager : MonoBehaviour
 
     private void OnEnable()
     {
-
+        _speedManager.OnSpeedDifficultyIncreased += SpeedManager_OnSpeedDifficultyIncreased;
     }
 
     void OnDisable()
     {
+        _speedManager.OnSpeedDifficultyIncreased -= SpeedManager_OnSpeedDifficultyIncreased;
         _player.OnPlayerDied -= Player_OnPlayerDied;
     }
     public void SetCameraController(CameraController cameraController)
@@ -51,7 +53,7 @@ public class GameManager : MonoBehaviour
         _player.AddMoveSpeed(speed);
         _cameraController.ChangeCaeramFOV(speed);
     }
-    
+
     public float GetDistanceTravelled() => _leveGenerator.GetDistanceTravelled();
 
     private void Player_OnPlayerDied()
@@ -63,5 +65,10 @@ public class GameManager : MonoBehaviour
             _speedManager.Stop(true);
             _gameStateChangedEvent?.Raise(_currentGameState);
         }
+    }
+
+    private void SpeedManager_OnSpeedDifficultyIncreased()
+    {
+        _movingObjectsSpawner.TryDecreaseSpawnrate();
     }
 }

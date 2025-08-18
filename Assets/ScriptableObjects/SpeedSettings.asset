@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea703d19bdc76f44b8c612f317256de7, type: 3}
   m_Name: SpeedSettings
   m_EditorClassIdentifier: 
-  _initialChunkSpeed: 14
-  _maxChunkSpeed: 24
-  _initialObjectsSpeed: 20
-  _maxObjectsSpeed: 30
+  _initialChunkSpeed: 20
+  _maxChunkSpeed: 30
+  _initialObjectsSpeed: 25
+  _maxObjectsSpeed: 35
   _acceleration: 12
   _deceleration: 14
   _playerSideMovingSpeed: 8

@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class SpeedManager : MonoBehaviour
 {
+    public Action OnSpeedDifficultyIncreased;
     [SerializeField] SpeedSettings _speedSettings;
     [Header("For testing, but theyre initialized from setting")]
     [SerializeField] private float _currentMovingObjectsSpeed;
@@ -44,11 +45,13 @@ public class SpeedManager : MonoBehaviour
 
     private void OnEnable()
     {
+        OnSpeedDifficultyIncreased += TryIncreaseSpeedDifficulty;
         MovingObject.OnAnyMovingObjectSpawned += InitializeMovingObject;
     }
 
     private void OnDisable()
     {
+        OnSpeedDifficultyIncreased -= TryIncreaseSpeedDifficulty;   
         MovingObject.OnAnyMovingObjectSpawned -= InitializeMovingObject;
     }
 
@@ -106,16 +109,25 @@ public class SpeedManager : MonoBehaviour
 
     public void TryIncreaseSpeedDifficulty(int chunksPassed)
     {
-
         if (chunksPassed % _speedSettings.ChunkSpeedIncreaseCycle == 0)
         {
-            //reached the max difficulty speeds
-            if (!_stopped && (_currentMovingChunkSpeed >= _maxChunkSpeed && _currentMovingObjectsSpeed >= _maxObjectsSpeed))
-            {
-                return;
-            }
-            IncreaseSpeedClampled(_speedSettings.SpeedDifficultyIncrementPerCycle);
+            OnSpeedDifficultyIncreased?.Invoke();
         }
+    }
+
+    private void TryIncreaseSpeedDifficulty()
+    {
+        //game stopped
+        if (_stopped)
+        {
+            return;
+        }
+        //reached the max difficulty speeds
+        if (_currentMovingChunkSpeed >= _maxChunkSpeed && _currentMovingObjectsSpeed >= _maxObjectsSpeed)
+        {
+            return;
+        }
+        IncreaseSpeedClampled(_speedSettings.SpeedDifficultyIncrementPerCycle);
     }
 
     public float GetCurrentChunksMoveSpeedInKmH()
