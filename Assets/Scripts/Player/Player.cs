@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     PlayerCollisionHandler _playerCollisionHandler;
     private RagdollSpawner _ragdollSpawner;
     private bool _playerDead;
-
+    public bool IsPlayerDead => _playerDead;
     private void Awake()
     {
         _playerController = GetComponent<PlayerController>();

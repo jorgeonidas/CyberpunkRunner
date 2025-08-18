@@ -76,7 +76,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f979c0f87de8fa48a9d282b9f2548ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cameraController: {fileID: 0}
-  _startingChunksAmmount: 6
+  _startingChunksAmmount: 10
   _chunkParentTransform: {fileID: 790064319818070318}
   _levelSettings: {fileID: 11400000, guid: e36a5c3c5d4babe44bf4ecd2ced9592c, type: 2}

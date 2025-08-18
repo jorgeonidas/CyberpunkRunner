@@ -67,6 +67,10 @@ public class PowerupHandler : MonoBehaviour
     private void PowerupPickup_OnAnyPowerupPicked(PowerupBase pickedPowerUp)
     {
         Debug.Log($"Player picked {pickedPowerUp}");
+        if (_player.IsPlayerDead)
+        {
+            return;
+        }
 
         if (string.IsNullOrEmpty(pickedPowerUp.Id))
         {
