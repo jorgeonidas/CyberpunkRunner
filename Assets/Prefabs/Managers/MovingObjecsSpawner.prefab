@@ -51,4 +51,6 @@ MonoBehaviour:
   - VehicleObstacle_2
   - VehicleObstacle_3
   - VehicleObstacle_4
+  _minCoinsToSpawn: 3
   _maxCoinsToSpawn: 5
+  _spawmnInterval: 1.1

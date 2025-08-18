@@ -7,12 +7,15 @@ public class MovingObjectsSpawner : MonoBehaviour
     [SerializeField] LevelSettings _levelSettings;
     [SerializeField] SpawnPowerupSettings _powerUpSetting;
     [SerializeField] string[] _vehicleObstaclesIds;
+    [SerializeField] int _minCoinsToSpawn = 3;
     [SerializeField] int _maxCoinsToSpawn = 10;
+    [SerializeField] float _spawmnInterval = 1f;
     private List<float> _lanes = new List<float>();
     private List<int> _previousVehicleLanes = new List<int>(); 
     private List<int> _currentAvailableLanes = new List<int>();
     float _chunkLength;
     private float[] _horizontalLanes;
+    private float _nextSpawnTime;
     private void Start()
     {
         Initialize();
@@ -20,16 +23,26 @@ public class MovingObjectsSpawner : MonoBehaviour
 
     private void OnEnable()
     {
-        LevelGenerator.OnChunkPlaced += PlaceProps;
+        //LevelGenerator.OnChunkPlaced += PlaceProps;
     }
 
     void OnDisable()
     {
-        LevelGenerator.OnChunkPlaced -= PlaceProps;
+        //LevelGenerator.OnChunkPlaced -= PlaceProps;
+    }
+
+    private void Update()
+    {
+        if (Time.time >= _nextSpawnTime)
+        {
+            PlaceProps();
+            _nextSpawnTime = Time.time + _spawmnInterval;
+        }
     }
 
     public void Initialize()
     {
+        _nextSpawnTime = Time.time + _spawmnInterval;
         _lanes = _levelSettings.Lanes.ToList();
         _horizontalLanes = _levelSettings.HorizontalLanes;
         _chunkLength = _levelSettings.ChunkLength;
@@ -50,8 +63,8 @@ public class MovingObjectsSpawner : MonoBehaviour
 
         List<int> allowedLanes = _currentAvailableLanes.Except(_previousVehicleLanes).ToList();
         List<int> obstructedThisCycle = new List<int>();
-        int laesOcuppiedCoiunt = Random.Range(1, Mathf.Min(_lanes.Count, allowedLanes.Count + 1));
-        for (int i = 0; i < laesOcuppiedCoiunt; i++)
+        int laesOcuppiedCount = Random.Range(1, Mathf.Min(_lanes.Count, allowedLanes.Count + 1));
+        for (int i = 0; i < laesOcuppiedCount; i++)
         {
             if (allowedLanes.Count == 0)
             {
@@ -86,7 +99,7 @@ public class MovingObjectsSpawner : MonoBehaviour
 
         int verticalLalenIndex = GetAvailableVerticalLane();
         float xPosition = GetXPosition(verticalLalenIndex);
-        int coinsToSpawn = Random.Range(1, _maxCoinsToSpawn);
+        int coinsToSpawn = Random.Range(_minCoinsToSpawn, _maxCoinsToSpawn);
         float spacing = _chunkLength / _maxCoinsToSpawn;
         float startZ = transform.position.z + _chunkLength / 2f;
 
