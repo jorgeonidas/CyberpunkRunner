@@ -12,6 +12,7 @@ public class SpeedManager : MonoBehaviour
     public float CurrentChunksMoveSpeed => _currentMovingChunkSpeed;
     public float CurrentMovingObjectsSpeed => _currentMovingObjectsSpeed;
     public float MaxChunkSpeed => _maxChunkSpeed;
+     public float NormalizedChunkSpeed => CurrentChunksMoveSpeed / MaxChunkSpeed;
     private float _initialChunkSpeed => _speedSettings.InitialChunkSpeed;
     private float _maxChunkSpeed => _speedSettings.MaxChunkSpeed;
     private float _initialObjectsSpeed => _speedSettings.InitialObjectsSpeed;

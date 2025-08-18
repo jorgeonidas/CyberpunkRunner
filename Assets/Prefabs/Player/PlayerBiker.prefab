@@ -138,6 +138,8 @@ GameObject:
   - component: {fileID: 197229381577994216}
   - component: {fileID: 86674093522793484}
   - component: {fileID: 8405102246347163153}
+  - component: {fileID: 6700642730550638803}
+  - component: {fileID: 2282492392911993543}
   - component: {fileID: 4837316921628281203}
   - component: {fileID: 2581585842125369548}
   m_Layer: 0
@@ -359,6 +361,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _screenShakeProfile: {fileID: 11400000, guid: 785570ae52b67a2438c068fb5101fe0f, type: 2}
   _cinemachineImpulseSource: {fileID: 2581585842125369548}
+--- !u!114 &6700642730550638803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8028125100094935181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05cd8699c0aab8f439b109eda7a9b592, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerSoundsController
+--- !u!114 &2282492392911993543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8028125100094935181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 379eea3dc79929246892fa4d29c0a4e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LoopSfxEmmiter
+  sfxId: 3
 --- !u!54 &4837316921628281203
 Rigidbody:
   m_ObjectHideFlags: 0

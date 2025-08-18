@@ -6,16 +6,20 @@ public class Player : MonoBehaviour
     public Action OnPlayerDied;
     public Action<string, float> OnPowerUpActivated;
     [SerializeField] GameObject _playerCharacterVisuals;
+    private GameManager _gameManager;
     PlayerController _playerController;
     PlayerCollisionHandler _playerCollisionHandler;
+    PlayerSoundsController _playerSoundsController;
     private RagdollSpawner _ragdollSpawner;
     private bool _playerDead;
     public bool IsPlayerDead => _playerDead;
+    public float CurrentNormalizedSpeed => _gameManager.NormalizedChunkSpeed;
     private void Awake()
     {
         _playerController = GetComponent<PlayerController>();
         _playerCollisionHandler = GetComponent<PlayerCollisionHandler>();
         TryGetComponent(out _ragdollSpawner);
+        TryGetComponent(out _playerSoundsController);
     }
 
     private void OnEnable()
@@ -33,9 +37,14 @@ public class Player : MonoBehaviour
         SetPlayerDead();
     }
 
-    public void Initialize()
+    public void Initialize(GameManager gameManager)
     {
-        _playerCharacterVisuals.SetActive(true);
+        if (!_playerCharacterVisuals.activeSelf)
+        {
+            _playerCharacterVisuals.SetActive(true);
+        }
+        _playerSoundsController.PlayEngineLoopSfx();
+        _gameManager = gameManager;
     }
 
     public void SetInvincible(bool invincible)
@@ -57,6 +66,7 @@ public class Player : MonoBehaviour
             _playerCollisionHandler.EnableCollider(false);
             _playerCharacterVisuals.SetActive(false);
             _ragdollSpawner?.SpawnRagdoll();
+            _playerSoundsController.StopEngineLoopSfx();
             PoolManager.Instance.Get("PlayerBike_Destroyed", transform.position, transform.rotation);
             OnPlayerDied?.Invoke();
             Debug.Log($"Player died");

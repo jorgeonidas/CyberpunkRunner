@@ -13,8 +13,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] MovingObjectsSpawner _movingObjectsSpawner;
     GameState _currentGameState;
     CameraController _cameraController;
-
     public Player Player => _player;
+    public float NormalizedChunkSpeed => _speedManager.NormalizedChunkSpeed;
 
     private void Awake()
     {
@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        _player.Initialize(this);
         _player.OnPlayerDied += Player_OnPlayerDied;
         _leveGenerator.Initialize(_speedManager);
         _currentGameState = GameState.Playing;

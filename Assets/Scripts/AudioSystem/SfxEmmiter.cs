@@ -8,7 +8,7 @@ public class SfxEmmiter : MonoBehaviour
     {
         if (sfxId != SfxIdEnum.SfxId.None)
         {
-            SfxManager.Instance.PlaySfx(sfxId);
+            SfxManager.Instance.PlaySfx(sfxId, transform.position);
         }
     }
 }

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: CoinPickSFX
   m_EditorClassIdentifier: Assembly-CSharp::SfxData
   _clip: {fileID: 8300000, guid: 1ce937545bae70e4c8923d0bd3995250, type: 3}
-  _volume: 1
-  _minPitch: 1.2
-  _maxPitch: 0.8
+  _volume: 0.8
+  _minPitch: 1
+  _maxPitch: 0.9
