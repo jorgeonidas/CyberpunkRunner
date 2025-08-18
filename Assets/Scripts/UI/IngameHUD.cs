@@ -9,8 +9,7 @@ public class IngameHUD : AbstractUIPanel
     [SerializeField] TextMeshProUGUI _distanceTraveledText;
     [SerializeField] PowerupUIManager _powerupUIManager;
     public override string Id => StringConstants.IngamePanels.IngameHud;
-    float _distanceTraveled = 0;
-    //private Tweener _distanceTween;      // para evitar tweens acumulados
+    //private Tweener _distanceTween;
     public void SetScore(int score)
     {
         _scoreText.text = $"Score: {score}";

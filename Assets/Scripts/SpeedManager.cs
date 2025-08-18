@@ -5,6 +5,7 @@ public class SpeedManager : MonoBehaviour
 {
     public Action OnSpeedDifficultyIncreased;
     [SerializeField] SpeedSettings _speedSettings;
+    [SerializeField] SpeedChangedEvent _speedChangedEvent;
     [Header("For testing, but theyre initialized from setting")]
     [SerializeField] private float _currentMovingObjectsSpeed;
     [SerializeField] private float _currentMovingChunkSpeed;
@@ -54,32 +55,28 @@ public class SpeedManager : MonoBehaviour
         OnSpeedDifficultyIncreased -= TryIncreaseSpeedDifficulty;   
         MovingObject.OnAnyMovingObjectSpawned -= InitializeMovingObject;
     }
-
+    float _lastChunkSpeed = 0f;
     private void Update()
     {
-        _currentMovingChunkSpeed = MoveTowarsTargetSpeed(_currentMovingChunkSpeed, _targetChunkSpeed);
-        _currentMovingObjectsSpeed = MoveTowarsTargetSpeed(_currentMovingObjectsSpeed, _targetObjectsSpeed);
+        float newChunkSpeed = MoveTowardsTargetSpeed(_currentMovingChunkSpeed, _targetChunkSpeed);
+        float newObjectsSpeed = MoveTowardsTargetSpeed(_currentMovingObjectsSpeed, _targetObjectsSpeed);
+
+        // Detecta cambio significativo en la velocidad del chunk
+        if (!Mathf.Approximately(newChunkSpeed, _lastChunkSpeed))
+        {
+            _speedChangedEvent?.Raise(newChunkSpeed); // Dispara el evento
+            _lastChunkSpeed = newChunkSpeed;
+        }
+
+        _currentMovingChunkSpeed = newChunkSpeed;
+        _currentMovingObjectsSpeed = newObjectsSpeed;
     }
 
-    private float MoveTowarsTargetSpeed(float currentSpeed, float targetSpeed)
+    private float MoveTowardsTargetSpeed(float currentSpeed, float targetSpeed)
     {
-        if (targetSpeed > currentSpeed)
-        {
-            currentSpeed += _speedSettings.Acceleration * Time.deltaTime;
-            if (currentSpeed > targetSpeed)
-            {
-                currentSpeed = targetSpeed;
-            }
-        }
-        else
-        {
-            currentSpeed -= _speedSettings.Deceleration * Time.deltaTime;
-            if (currentSpeed < targetSpeed)
-            {
-                currentSpeed = targetSpeed;
-            }
-        }
-        return Mathf.Max(0f, currentSpeed);
+        float acceleration = targetSpeed > currentSpeed ? _speedSettings.Acceleration : _speedSettings.Deceleration;
+        float newSpeed = Mathf.MoveTowards(currentSpeed, targetSpeed, acceleration * Time.deltaTime);
+        return Mathf.Clamp(newSpeed, 0f, Mathf.Max(_maxChunkSpeed, _maxObjectsSpeed));
     }
 
     private void InitializeMovingObject(MovingObject movingObject)
