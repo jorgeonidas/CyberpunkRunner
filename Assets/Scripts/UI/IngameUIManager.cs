@@ -25,6 +25,15 @@ public class IngameUIManager : MonoBehaviour, IUIPanelsOrganizer
         Hide(StringConstants.IngamePanels.GameOver);
     }
 
+    private void Update()
+    {
+        if (_gameManager == null)
+        {
+            return;
+        }
+        _ingameHud.SetTraveledDistance(_gameManager.GetDistanceTravelled());
+    }
+
     void OnEnable()
     {
         _scoreChangedEvent.OnEventRaised += OnScoreChanged;
@@ -43,10 +52,7 @@ public class IngameUIManager : MonoBehaviour, IUIPanelsOrganizer
 
     private void OnChunkPlaced()
     {
-        if (_gameManager)
-        {
-            _ingameHud.SetTraveledDistance(_gameManager.GetDistanceTravelled());
-        }
+
     }
 
     private void OnScoreChanged(int score)

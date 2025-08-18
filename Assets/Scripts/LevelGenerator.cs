@@ -15,6 +15,7 @@ public class LevelGenerator : MonoBehaviour
     private Dictionary<string, ObjectPool<Chunk>> _chunkPools;
     private SpeedManager _speedManager;
     private int _chunksSurpassed = 0;
+    private float _distanceTravelled = 0f;
     #region UnityLifeCycle    
     private void Start()
     {
@@ -35,6 +36,7 @@ public class LevelGenerator : MonoBehaviour
     {
         _speedManager = speedManager;
         _chunksSurpassed = 0;
+        _distanceTravelled = 0f;
         InitializeChunksPool();
         SpawnStartingChunks();
     }
@@ -42,6 +44,7 @@ public class LevelGenerator : MonoBehaviour
     private void Update()
     {
         MoveChunks();
+        UpdateDistanceTravelled();
     }
     #endregion
 
@@ -148,7 +151,11 @@ public class LevelGenerator : MonoBehaviour
         _chunkPools[chunkId].Release(chunk);
         _speedManager.TryIncreaseSpeedDifficulty(_chunksSurpassed);
     }
+    private void UpdateDistanceTravelled()
+    {
+       _distanceTravelled += _speedManager.CurrentChunksMoveSpeed * Time.deltaTime;
+    }
     #endregion
-    public float GetDistanceTravelled() => _chunksSurpassed * _levelSettings.ChunkLength;
+    public float GetDistanceTravelled() => _distanceTravelled;
     public LevelSettings GetLevelSettings() => _levelSettings;
 }
