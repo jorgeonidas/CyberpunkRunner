@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7d0823b913dd3745b84c16c73a6a107, type: 3}
   m_Name: InvincibilityPowerUpLoopSFX
   m_EditorClassIdentifier: Assembly-CSharp::SfxData
-  _clips: []
-  _volume: 1
+  _clips:
+  - {fileID: 8300000, guid: fc8a9b9b91e26ff4f93d578cbc4ff043, type: 3}
+  _volume: 0.4
   _minPitch: 1
   _maxPitch: 1

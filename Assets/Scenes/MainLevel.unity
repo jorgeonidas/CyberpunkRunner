@@ -1720,8 +1720,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10710455998e6e14186d726f1d2088dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SfxManager
-  sfxDataContainer: {fileID: 11400000, guid: e5f788edfe3de8244a819bfb05841437, type: 2}
-  poolSize: 10
+  _sfxDataContainer: {fileID: 11400000, guid: e5f788edfe3de8244a819bfb05841437, type: 2}
+  _poolSize: 10
 --- !u!114 &2123149225 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3325524038902242171, guid: cfc08fb5607198d4494aa2197ba1f91b, type: 3}

@@ -15,7 +15,7 @@ public class PowerupHandler : MonoBehaviour
     }
     void Start()
     {
-       _powerupActivationEvent.OnEventRaised += PowerupPickup_OnAnyPowerupPicked;
+        _powerupActivationEvent.OnEventRaised += PowerupPickup_OnAnyPowerupPicked;
         _player.OnPlayerDied += Player_OnPlayerDied;
     }
 
@@ -78,6 +78,7 @@ public class PowerupHandler : MonoBehaviour
         float powerupDuration = pickedPowerUp.Duration;
         string powerUpId = pickedPowerUp.Id;
         _player.OnPowerUpActivated?.Invoke(powerUpId, powerupDuration);
+        SfxManager.Instance.PlayLoopSfx(pickedPowerUp.LoopSfxId, transform, pickedPowerUp.Id.GetHashCode());
         if (_powerupTimers.ContainsKey(powerUpId))
         {
             float remaining = _powerupTimers[powerUpId];
@@ -92,19 +93,19 @@ public class PowerupHandler : MonoBehaviour
         }
     }
 
+    private void Player_OnPlayerDied()
+    {
+        ClearAllPowerUps();
+    }
+
     private void RemoveExpiredPowerup(string id)
     {
         if (_activePowerups.TryGetValue(id, out var effect))
         {
-            effect.RevertEffect();
+            RevertPowerup(id, effect);
             _activePowerups.Remove(id);
         }
         _powerupTimers.Remove(id);
-    }
-
-    private void Player_OnPlayerDied()
-    {
-        ClearAllPowerUps();
     }
 
     private void ClearAllPowerUps()
@@ -112,8 +113,15 @@ public class PowerupHandler : MonoBehaviour
         _powerupTimers.Clear();
         foreach (var kvp in _activePowerups)
         {
-            kvp.Value.RevertEffect();
+            RevertPowerup(kvp.Key, kvp.Value);
         }
         _activePowerups.Clear();
     }
+
+    private void RevertPowerup(string id, PowerupBase effect)
+    {
+        effect.RevertEffect();
+        SfxManager.Instance.StopLoopSfx(id.GetHashCode());
+    }
+
 }

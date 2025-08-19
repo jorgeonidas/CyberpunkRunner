@@ -24,3 +24,5 @@ MonoBehaviour:
     _serializedList:
     - Key: 3
       Value: {fileID: 11400000, guid: c5d28f632d7760e44abc0b455ceb5f89, type: 2}
+    - Key: 4
+      Value: {fileID: 11400000, guid: b9ef587c2e11a114db0ab993dd7d2f82, type: 2}
