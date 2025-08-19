@@ -16,7 +16,11 @@ MonoBehaviour:
     _serializedList:
     - Key: 1
       Value: {fileID: 11400000, guid: 4e824090cbddb824ebc8b9e4b8645470, type: 2}
+    - Key: 3
+      Value: {fileID: 11400000, guid: ec8cf0846abd1784eb22f1eb68283867, type: 2}
+    - Key: 2
+      Value: {fileID: 11400000, guid: 25ecbb8c8c938124da798e352255ba91, type: 2}
   _loopSfxDataDictionary:
     _serializedList:
     - Key: 3
-      Value: {fileID: 0}
+      Value: {fileID: 11400000, guid: c5d28f632d7760e44abc0b455ceb5f89, type: 2}

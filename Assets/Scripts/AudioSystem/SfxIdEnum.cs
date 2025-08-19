@@ -6,11 +6,9 @@ public class SfxIdEnum
     {
         None = 0,
         CoinPickup = 1,
-        GameOver = 2,
-        LevelUp = 3,
-        PowerUp = 6,
-        ButtonClick = 8,
-        Explosion = 9,
+        Impact = 2,
+        SpeedPowerup = 3,
+        InvincibilityPowerup = 4,
     }
 
     public enum loopSfxId

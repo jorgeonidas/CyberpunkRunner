@@ -71,9 +71,9 @@ public class SfxManager : MonoBehaviour
     public void PlaySfx(SfxIdEnum.SfxId sfxId, Vector3 position)
     {
         var sfxData = sfxDataContainer.GetSfxData(sfxId);
-        if (sfxData != null && sfxData.Clip != null)
+        if (sfxData != null && sfxData.Clips != null)
         {
-            PlaySfx(sfxData.Clip, position, sfxData.Volume, sfxData.GetRandomPitch());
+            PlaySfx(sfxData.GetAudioClip(), position, sfxData.Volume, sfxData.GetRandomPitch());
         }
         else
         {
@@ -84,9 +84,9 @@ public class SfxManager : MonoBehaviour
     public void PlayLoopSfx(SfxIdEnum.loopSfxId sfxId, Vector3 postion, int instanceId = 0)
     {
         var sfxData = sfxDataContainer.GetLoopSfxData(sfxId);
-        if (sfxData != null && sfxData.Clip != null)
+        if (sfxData != null && sfxData.Clips != null)
         {
-            PlayLoopSfx(sfxData.Clip, postion, sfxData.Volume, sfxData.GetRandomPitch(), instanceId);
+            PlayLoopSfx(sfxData.GetAudioClip(), postion, sfxData.Volume, sfxData.GetRandomPitch(), instanceId);
         }
         else
         {

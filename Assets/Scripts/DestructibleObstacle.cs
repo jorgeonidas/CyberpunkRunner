@@ -4,18 +4,20 @@ public class DestructibleObstacle : MonoBehaviour, IDestroy
 {
     VFXSpawner _vfxSpawner;
     PooledObject _poolObject;
-
+    SfxEmmiter _sfxEmmiter;
 
     void Awake()
     {
         TryGetComponent(out _poolObject);
         TryGetComponent(out _vfxSpawner);
+        TryGetComponent(out _sfxEmmiter);
     }
 
     public void DestroyMe()
     {
         PoolManager.Instance?.Get(_poolObject.PoolObjectId + StringConstants.DestroyedSufix, transform.position, transform.rotation);
         _vfxSpawner?.PlayParticleEffect(transform.position);
+        _sfxEmmiter?.PlaySfx();
         _poolObject?.Release();
     }
 }
