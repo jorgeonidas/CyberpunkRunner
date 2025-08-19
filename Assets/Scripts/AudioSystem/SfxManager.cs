@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.SceneManagement;
 
 public class SfxManager : MonoBehaviour
 {
@@ -32,7 +33,7 @@ public class SfxManager : MonoBehaviour
             poolSize * 2
         );
     }
-
+    
     private AudioSource CreateAudioSource()
     {
         var go = new GameObject("PooledAudioSource");
@@ -81,12 +82,12 @@ public class SfxManager : MonoBehaviour
         }
     }
 
-    public void PlayLoopSfx(SfxIdEnum.loopSfxId sfxId, Vector3 postion, int instanceId = 0)
+    public void PlayLoopSfx(SfxIdEnum.loopSfxId sfxId, Vector3 postion, int instanceId)
     {
         var sfxData = sfxDataContainer.GetLoopSfxData(sfxId);
         if (sfxData != null && sfxData.Clips != null)
         {
-            PlayLoopSfx(sfxData.GetAudioClip(), postion, sfxData.Volume, sfxData.GetRandomPitch(), instanceId);
+            PlayLoopSfx(sfxData.GetAudioClip(), postion, instanceId, sfxData.Volume, sfxData.GetRandomPitch());
         }
         else
         {
@@ -100,7 +101,7 @@ public class SfxManager : MonoBehaviour
         StartCoroutine(ReleaseWhenDone(source));
     }
 
-    private void PlayLoopSfx(AudioClip clip, Vector3 postion, float volume = 1f, float pitch = 1f, int instanceId = 0)
+    private void PlayLoopSfx(AudioClip clip, Vector3 postion, int instanceId, float volume = 1f, float pitch = 1f)
     {
         if (_activeAudioSourcesLoops.ContainsKey(instanceId))
         {
@@ -110,14 +111,16 @@ public class SfxManager : MonoBehaviour
 
         AudioSource source = GetAudiSourceFromPool(clip, postion, volume, pitch, true);
         _activeAudioSourcesLoops.Add(instanceId, source);
+        Debug.Log($"<color=cyan>Playing loop SFX with instance ID '{instanceId}'</color>");
     }
 
     public void StopLoopSfx(int instanceId)
     {
         if (_activeAudioSourcesLoops.TryGetValue(instanceId, out var source))
         {
-            audioSourcePool.Release(source);
             _activeAudioSourcesLoops.Remove(instanceId);
+            audioSourcePool.Release(source);
+            Debug.Log($"<color=blue>stopped loop sfx with instance id {instanceId}</color>");
         }
         else
         {

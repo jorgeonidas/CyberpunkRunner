@@ -7,7 +7,6 @@ public class LoopSfxEmmiter : MonoBehaviour
     int _instanceId;
     private void Start()
     {
-        _instanceId = gameObject.GetInstanceID();
         _lastPosition = transform.position;
     }
 
@@ -25,6 +24,7 @@ public class LoopSfxEmmiter : MonoBehaviour
     {
         if (sfxId != SfxIdEnum.loopSfxId.None)
         {
+            _instanceId = gameObject.GetInstanceID();
             SfxManager.Instance.PlayLoopSfx(sfxId, transform.position, _instanceId);
         }
     }

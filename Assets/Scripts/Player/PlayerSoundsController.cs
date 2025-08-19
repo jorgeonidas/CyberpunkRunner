@@ -10,9 +10,13 @@ public class PlayerSoundsController : MonoBehaviour
         TryGetComponent(out _engineSoundEmmiter);
         _player = GetComponent<Player>();
     }
-
+    
     void Update()
     {
+        if(_player.IsPlayerDead)
+        {
+            return;
+        }
         _engineSoundEmmiter?.SetLoopPitch(_player.CurrentNormalizedSpeed * _engineTotalPitch);
     }
 
