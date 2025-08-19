@@ -52,15 +52,10 @@ public class PowerupHandler : MonoBehaviour
             }
         }
 
-        //revertir y remover powerups expirados
+        //revert expired powerups
         foreach (var id in expiredPowerups)
         {
-            if (_activePowerups.TryGetValue(id, out var effect))
-            {
-                effect.RevertEffect();
-                _activePowerups.Remove(id);
-            }
-            _powerupTimers.Remove(id);
+            RemoveExpiredPowerup(id);
         }
     }
 
@@ -78,6 +73,8 @@ public class PowerupHandler : MonoBehaviour
             return;
         }
 
+        Debug.Log($"powerUpIntId {pickedPowerUp.Id.GetHashCode()} for powerup {pickedPowerUp.Id}");
+
         float powerupDuration = pickedPowerUp.Duration;
         string powerUpId = pickedPowerUp.Id;
         _player.OnPowerUpActivated?.Invoke(powerUpId, powerupDuration);
@@ -93,6 +90,16 @@ public class PowerupHandler : MonoBehaviour
             _powerupTimers.Add(powerUpId, powerupDuration);
             _activePowerups.Add(powerUpId, pickedPowerUp);
         }
+    }
+
+    private void RemoveExpiredPowerup(string id)
+    {
+        if (_activePowerups.TryGetValue(id, out var effect))
+        {
+            effect.RevertEffect();
+            _activePowerups.Remove(id);
+        }
+        _powerupTimers.Remove(id);
     }
 
     private void Player_OnPlayerDied()

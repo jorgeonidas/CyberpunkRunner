@@ -1,18 +1,32 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
-using UnityEngine.SceneManagement;
+using static SfxIdEnum;
+
+public struct ActiveLoopSfx
+{
+    public Transform SourceTransform;
+    public AudioSource AudioSource;
+
+    public void UpdatePosition()
+    {
+        if (SourceTransform != null && AudioSource != null)
+        {
+            AudioSource.transform.position = SourceTransform.position;
+        }
+    }
+}
 
 public class SfxManager : MonoBehaviour
 {
     public static SfxManager Instance { get; private set; }
-    [SerializeField] private SfxDataContainer sfxDataContainer;
-    [SerializeField] private int poolSize = 10;
+    [SerializeField] private SfxDataContainer _sfxDataContainer;
+    [SerializeField] private int _poolSize = 10;
 
-    private ObjectPool<AudioSource> audioSourcePool;
-    private Dictionary<int, AudioSource> _activeAudioSourcesLoops = new Dictionary<int, AudioSource>();
+    private ObjectPool<AudioSource> _audioSourcePool;
+    private Dictionary<int, ActiveLoopSfx> _activeAudioSourcesLoops = new Dictionary<int, ActiveLoopSfx>();
+    private List<ActiveLoopSfx> _loopSfxList = new List<ActiveLoopSfx>();
     private void Awake()
     {
         if (Instance != null)
@@ -23,17 +37,25 @@ public class SfxManager : MonoBehaviour
         }
         Instance = this;
 
-        audioSourcePool = new ObjectPool<AudioSource>(
+        _audioSourcePool = new ObjectPool<AudioSource>(
             CreateAudioSource,
             OnGetAudioSource,
             OnReleaseAudioSource,
             OnDestroyAudioSource,
             false,
-            poolSize,
-            poolSize * 2
+            _poolSize,
+            _poolSize * 2
         );
     }
-    
+
+    private void Update()
+    {
+        foreach (var loopSfx in _loopSfxList)
+        {
+            loopSfx.UpdatePosition();
+        }
+    }
+
     private AudioSource CreateAudioSource()
     {
         var go = new GameObject("PooledAudioSource");
@@ -66,15 +88,15 @@ public class SfxManager : MonoBehaviour
     private IEnumerator ReleaseWhenDone(AudioSource source)
     {
         yield return new WaitWhile(() => source.isPlaying);
-        audioSourcePool.Release(source);
+        _audioSourcePool.Release(source);
     }
 
-    public void PlaySfx(SfxIdEnum.SfxId sfxId, Vector3 position)
+    public void PlaySfx(SfxId sfxId, Vector3 position)
     {
-        var sfxData = sfxDataContainer.GetSfxData(sfxId);
+        var sfxData = _sfxDataContainer.GetSfxData(sfxId);
         if (sfxData != null && sfxData.Clips != null)
         {
-            PlaySfx(sfxData.GetAudioClip(), position, sfxData.Volume, sfxData.GetRandomPitch());
+            StartPlaySfx(sfxData.GetAudioClip(), position, sfxData.Volume, sfxData.GetRandomPitch());
         }
         else
         {
@@ -82,12 +104,18 @@ public class SfxManager : MonoBehaviour
         }
     }
 
-    public void PlayLoopSfx(SfxIdEnum.loopSfxId sfxId, Vector3 postion, int instanceId)
+    private void StartPlaySfx(AudioClip clip, Vector3 position, float volume = 1f, float pitch = 1f)
     {
-        var sfxData = sfxDataContainer.GetLoopSfxData(sfxId);
+        AudioSource source = GetAudiSourceFromPool(clip, position, volume, pitch, false);
+        StartCoroutine(ReleaseWhenDone(source));
+    }
+
+    public void PlayLoopSfx(LoopSfxId sfxId, Transform sourceTransform, int instanceId)
+    {
+        var sfxData = _sfxDataContainer.GetLoopSfxData(sfxId);
         if (sfxData != null && sfxData.Clips != null)
         {
-            PlayLoopSfx(sfxData.GetAudioClip(), postion, instanceId, sfxData.Volume, sfxData.GetRandomPitch());
+            StartPlayLoopSfx(sfxData.GetAudioClip(), sourceTransform, instanceId, sfxData.Volume, sfxData.GetRandomPitch());
         }
         else
         {
@@ -95,13 +123,7 @@ public class SfxManager : MonoBehaviour
         }
     }
 
-    private void PlaySfx(AudioClip clip, Vector3 position, float volume = 1f, float pitch = 1f)
-    {
-        AudioSource source = GetAudiSourceFromPool(clip, position, volume, pitch, false);
-        StartCoroutine(ReleaseWhenDone(source));
-    }
-
-    private void PlayLoopSfx(AudioClip clip, Vector3 postion, int instanceId, float volume = 1f, float pitch = 1f)
+    private void StartPlayLoopSfx(AudioClip clip,  Transform sourceTransform, int instanceId, float volume = 1f, float pitch = 1f)
     {
         if (_activeAudioSourcesLoops.ContainsKey(instanceId))
         {
@@ -109,9 +131,20 @@ public class SfxManager : MonoBehaviour
             return;
         }
 
-        AudioSource source = GetAudiSourceFromPool(clip, postion, volume, pitch, true);
-        _activeAudioSourcesLoops.Add(instanceId, source);
+        AudioSource source = GetAudiSourceFromPool(clip, sourceTransform.position, volume, pitch, true);
+        ActiveLoopSfx activeLoop = new ActiveLoopSfx
+        {
+            SourceTransform = sourceTransform,
+            AudioSource = source
+        };
+        AddLoopSfx(instanceId, activeLoop);
         Debug.Log($"<color=cyan>Playing loop SFX with instance ID '{instanceId}'</color>");
+    }
+
+    private void AddLoopSfx(int instanceId, ActiveLoopSfx loopSfx)
+    {
+        _activeAudioSourcesLoops.Add(instanceId, loopSfx);
+        _loopSfxList.Add(loopSfx);
     }
 
     public void StopLoopSfx(int instanceId)
@@ -119,7 +152,8 @@ public class SfxManager : MonoBehaviour
         if (_activeAudioSourcesLoops.TryGetValue(instanceId, out var source))
         {
             _activeAudioSourcesLoops.Remove(instanceId);
-            audioSourcePool.Release(source);
+            _loopSfxList.Remove(source);
+            _audioSourcePool.Release(source.AudioSource);
             Debug.Log($"<color=blue>stopped loop sfx with instance id {instanceId}</color>");
         }
         else
@@ -130,7 +164,7 @@ public class SfxManager : MonoBehaviour
 
     private AudioSource GetAudiSourceFromPool(AudioClip clip, Vector3 position, float volume, float pitch, bool loop)
     {
-        var source = audioSourcePool.Get();
+        var source = _audioSourcePool.Get();
         source.transform.position = position;
         source.clip = clip;
         source.volume = volume;
@@ -140,18 +174,11 @@ public class SfxManager : MonoBehaviour
         return source;
     }
 
-    public void UpdateLoopSfxPosition(int instanceId, Vector3 position)
-    {
-        if (_activeAudioSourcesLoops.TryGetValue(instanceId, out var source))
-        {
-            source.transform.position = position;
-        }
-    }
     public void SetLoopSfxPitch(int instanceId, float pitch)
     {
         if (_activeAudioSourcesLoops.TryGetValue(instanceId, out var source))
         {
-            source.pitch = pitch;
+            source.AudioSource.pitch = pitch;
         }
         else
         {

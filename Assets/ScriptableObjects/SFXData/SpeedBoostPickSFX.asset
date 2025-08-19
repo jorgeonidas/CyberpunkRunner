@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7d0823b913dd3745b84c16c73a6a107, type: 3}
-  m_Name: SpeedBoostSFX
+  m_Name: SpeedBoostPickSFX
   m_EditorClassIdentifier: Assembly-CSharp::SfxData
   _clips:
   - {fileID: 8300000, guid: 202d00b4740ac74498959e06eacecfbb, type: 3}

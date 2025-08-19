@@ -5,7 +5,7 @@ using UnityEngine;
 public class SfxDataContainer : ScriptableObject
 {
     [SerializeField] private SerializedDictionary<SfxIdEnum.SfxId, SfxData> _sfxDataDictionary;
-    [SerializeField] private SerializedDictionary<SfxIdEnum.loopSfxId, SfxData> _loopSfxDataDictionary;
+    [SerializeField] private SerializedDictionary<SfxIdEnum.LoopSfxId, SfxData> _loopSfxDataDictionary;
 
     public SfxData GetSfxData(SfxIdEnum.SfxId sfxId)
     {
@@ -17,7 +17,7 @@ public class SfxDataContainer : ScriptableObject
         return null;
     }
     
-    public SfxData GetLoopSfxData(SfxIdEnum.loopSfxId sfxId)
+    public SfxData GetLoopSfxData(SfxIdEnum.LoopSfxId sfxId)
     {
         if (_loopSfxDataDictionary.TryGetValue(sfxId, out var sfxData))
         {

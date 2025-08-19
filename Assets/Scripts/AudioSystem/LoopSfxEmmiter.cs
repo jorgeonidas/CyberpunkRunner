@@ -1,8 +1,9 @@
 using UnityEngine;
+using static SfxIdEnum;
 
 public class LoopSfxEmmiter : MonoBehaviour
 {
-    [SerializeField] private SfxIdEnum.loopSfxId sfxId;
+    [SerializeField] private LoopSfxId sfxId;
     private Vector3 _lastPosition;
     int _instanceId;
     private void Start()
@@ -10,28 +11,13 @@ public class LoopSfxEmmiter : MonoBehaviour
         _lastPosition = transform.position;
     }
 
-    private void Update()
-    {
-        if (transform.position != _lastPosition)
-        {
-            UpdateLoopSfxPosition();
-            _lastPosition = transform.position;
-        }
-    }
-
-
     public void PlayLoopSfx()
     {
-        if (sfxId != SfxIdEnum.loopSfxId.None)
+        if (sfxId != LoopSfxId.None)
         {
             _instanceId = gameObject.GetInstanceID();
-            SfxManager.Instance.PlayLoopSfx(sfxId, transform.position, _instanceId);
+            SfxManager.Instance.PlayLoopSfx(sfxId, transform, _instanceId);
         }
-    }
-
-    public void UpdateLoopSfxPosition()
-    {
-        SfxManager.Instance.UpdateLoopSfxPosition(_instanceId, transform.position);
     }
 
     public void SetLoopPitch(float pitch)

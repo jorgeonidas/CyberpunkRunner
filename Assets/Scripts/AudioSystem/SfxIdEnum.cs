@@ -11,11 +11,12 @@ public class SfxIdEnum
         InvincibilityPowerup = 4,
     }
 
-    public enum loopSfxId
+    public enum LoopSfxId
     {
         None = 0,
         BackgroundMusic = 1,
         AmbientSound = 2,
         EngineLoop = 3,
+        ForceFieldLoop = 4,
     }
 }

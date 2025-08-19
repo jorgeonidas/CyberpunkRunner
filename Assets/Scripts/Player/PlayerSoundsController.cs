@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerSoundsController : MonoBehaviour
@@ -10,7 +11,7 @@ public class PlayerSoundsController : MonoBehaviour
         TryGetComponent(out _engineSoundEmmiter);
         _player = GetComponent<Player>();
     }
-    
+
     void Update()
     {
         if(_player.IsPlayerDead)
