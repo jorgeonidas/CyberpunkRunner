@@ -1,8 +1,10 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public Action OnPausedPressed;
     [SerializeField] LevelSettings _levelSettings;
     [SerializeField] SpeedSettings _speedSettings;
     private float[] _lanes;
@@ -56,6 +58,14 @@ public class PlayerController : MonoBehaviour
         {
             _currentLane = Mathf.Min(_currentLane + 1, _lanes.Length - 1);
             SetTargetLanePosition();
+        }
+    }
+
+    public void TogglePause(InputAction.CallbackContext conext)
+    {
+        if (conext.performed)
+        {
+            OnPausedPressed?.Invoke();
         }
     }
 

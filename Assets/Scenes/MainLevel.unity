@@ -1645,6 +1645,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreManager
   _coinCollectedEvent: {fileID: 11400000, guid: 0567639da38f41d4aa6d8a0c1bf7e01a, type: 2}
+  _gameStateChangedEvent: {fileID: 11400000, guid: 0b762577dfa80cd44b6b9f389dfc830c, type: 2}
 --- !u!4 &1793735477
 Transform:
   m_ObjectHideFlags: 0

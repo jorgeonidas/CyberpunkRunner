@@ -282,6 +282,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: d08c3107-6738-4376-9cd1-99620ba796a3
     m_ActionName: 'Player/MoveRigth[/Keyboard/d]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4917855377038807386}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: TogglePause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: dde1a221-8c7e-4b2a-8156-0356ae2d896b
+    m_ActionName: 'Player/PauseAndResume[/Keyboard/escape]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -373,6 +389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05cd8699c0aab8f439b109eda7a9b592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSoundsController
+  _engineTotalPitch: 3
 --- !u!114 &2282492392911993543
 MonoBehaviour:
   m_ObjectHideFlags: 0

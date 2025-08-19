@@ -4,6 +4,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public Action OnPlayerDied;
+    public Action OnPausePressed;
     public Action<string, float> OnPowerUpActivated;
     [SerializeField] GameObject _playerCharacterVisuals;
     private GameManager _gameManager;
@@ -25,11 +26,13 @@ public class Player : MonoBehaviour
     private void OnEnable()
     {
         _playerCollisionHandler.OnPlayerCollided += PlayerCollisionHandle_OnPlayerCollided;
+        _playerController.OnPausedPressed += PlayerController_OnPausedPressed;
     }
 
     private void OnDisable()
     {
         _playerCollisionHandler.OnPlayerCollided += PlayerCollisionHandle_OnPlayerCollided;
+        _playerController.OnPausedPressed += PlayerController_OnPausedPressed;
     }
 
     private void PlayerCollisionHandle_OnPlayerCollided()
@@ -71,5 +74,11 @@ public class Player : MonoBehaviour
             OnPlayerDied?.Invoke();
             Debug.Log($"Player died");
         }
+    }
+    
+    
+    private void PlayerController_OnPausedPressed()
+    {
+        OnPausePressed?.Invoke();
     }
 }

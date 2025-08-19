@@ -30,19 +30,17 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         _player.Initialize(this);
+        _speedManager.OnSpeedDifficultyIncreased += SpeedManager_OnSpeedDifficultyIncreased;          
         _player.OnPlayerDied += Player_OnPlayerDied;
+        _player.OnPausePressed += PlayerController_OnPausedPressed;
         _leveGenerator.Initialize(_speedManager);
         _currentGameState = GameState.Playing;
-    }
-
-    private void OnEnable()
-    {
-        _speedManager.OnSpeedDifficultyIncreased += SpeedManager_OnSpeedDifficultyIncreased;
     }
 
     void OnDisable()
     {
         _speedManager.OnSpeedDifficultyIncreased -= SpeedManager_OnSpeedDifficultyIncreased;
+        _player.OnPausePressed -= PlayerController_OnPausedPressed;
         _player.OnPlayerDied -= Player_OnPlayerDied;
     }
     public void SetCameraController(CameraController cameraController)
@@ -72,5 +70,21 @@ public class GameManager : MonoBehaviour
     private void SpeedManager_OnSpeedDifficultyIncreased()
     {
         _movingObjectsSpawner.TryDecreaseSpawnrate();
+    }
+
+    private void PlayerController_OnPausedPressed()
+    {
+        if (_currentGameState == GameState.Playing)
+        {
+            _currentGameState = GameState.Paused;
+            //_speedManager.Stop(false);
+        }
+        else if (_currentGameState == GameState.Paused)
+        {
+            _currentGameState = GameState.Playing;
+            // _speedManager.Resume();
+        }
+        Debug.Log($"Game state changed to {_currentGameState}");
+        _gameStateChangedEvent?.Raise(_currentGameState);
     }
 }
