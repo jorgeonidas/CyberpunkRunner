@@ -4,6 +4,6 @@ public class CoinPickUp : PickUp
 {
     protected override void OnPickUp()
     {
-        ScoreManager.OnAddScoreEvent?.Invoke(100);//TODO: a setting for coins
+        ScoreManager.OnCoinPickedEvent?.Invoke(10);//TODO: a setting for coins
     }
 }

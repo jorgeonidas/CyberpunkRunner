@@ -5,7 +5,6 @@ public enum GameState { Playing, Paused, GameOver }
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    //public Action OnGameOver;
     [SerializeField] Player _player;
     [SerializeField] SpeedManager _speedManager;
     [SerializeField] LevelGenerator _leveGenerator;
@@ -24,6 +23,8 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         Instance = this;
+        PlayerDataManager.Initialize();
+        Debug.Log($"{PlayerDataManager.GetCoins()} coins collected | {PlayerDataManager.GetRecordDistance()} record distance");
     }
 
     private void Start()
@@ -55,7 +56,7 @@ public class GameManager : MonoBehaviour
         _cameraController.ChangeCaeramFOV(speed);
     }
 
-    public float GetDistanceTravelled() => _leveGenerator.GetDistanceTravelled();
+    public int GetDistanceTravelled() => _leveGenerator.GetDistanceTravelled();
 
     private void Player_OnPlayerDied()
     {

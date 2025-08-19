@@ -10,25 +10,14 @@ public class IngameHUD : AbstractUIPanel
     [SerializeField] PowerupUIManager _powerupUIManager;
     public override string Id => StringConstants.IngamePanels.IngameHud;
     //private Tweener _distanceTween;
-    public void SetScore(int score)
+    public void SetCoinsPicked(int score)
     {
-        _scoreText.text = $"Score: {score}";
+        _scoreText.text = $"Coins: {score}";
     }
 
-    public void SetTraveledDistance(float distance)
+    public void SetTraveledDistance(int distance)
     {
-        // _distanceTween?.Kill();
-        // _distanceTween = DOVirtual.Float(
-        //     _distanceTraveled, distance, 0.2f,
-        //     x =>
-        //     {
-        //         _distanceTraveled = x;
-        //         _distanceTraveledText.SetText("{0}m", Mathf.RoundToInt(x));
-        //     }
-        // )
-        // .SetEase(Ease.OutQuad)
-        // .SetLink(gameObject);
-         _distanceTraveledText.SetText("{0}m", Mathf.RoundToInt(distance));
+         _distanceTraveledText.SetText("{0}m", distance);
     }
 
     public void ActivatePowerup(PowerupBase powerup)

@@ -156,6 +156,6 @@ public class LevelGenerator : MonoBehaviour
        _distanceTravelled += _speedManager.CurrentChunksMoveSpeed * Time.deltaTime;
     }
     #endregion
-    public float GetDistanceTravelled() => _distanceTravelled;
+    public int GetDistanceTravelled() => Mathf.RoundToInt(_distanceTravelled);
     public LevelSettings GetLevelSettings() => _levelSettings;
 }

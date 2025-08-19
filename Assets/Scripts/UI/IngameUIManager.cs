@@ -6,15 +6,17 @@ public class IngameUIManager : MonoBehaviour, IUIPanelsOrganizer
     [Header("Panels Catalog")]
     [SerializeField] UIPanelCatalog _panelCatalog;
     [Header("Events")]
-    [SerializeField] ScoreChangedEvent _scoreChangedEvent;
+    [SerializeField] CoinCollectedEvent _coinCollectedEvent;
     [SerializeField] GameStateChangedEvent _gamestateChangedEvent;
     [SerializeField] PowerupActivationEvent _powerupActivationEvent;
     IngameHUD _ingameHud;
     GameManager _gameManager;
+
     void Awake()
     {
         _panelCatalog.Initialize();
     }
+    
     private void Start()
     {
         _gameManager = GameManager.Instance;
@@ -36,28 +38,21 @@ public class IngameUIManager : MonoBehaviour, IUIPanelsOrganizer
 
     void OnEnable()
     {
-        _scoreChangedEvent.OnEventRaised += OnScoreChanged;
+        _coinCollectedEvent.OnEventRaised += OnScoreChanged;
         _gamestateChangedEvent.OnEventRaised += OnGameStateChanged;
         _powerupActivationEvent.OnEventRaised += OnPowerupActivated;
-        LevelGenerator.OnChunkPlaced += OnChunkPlaced;
     }
 
     void OnDisable()
     {
-        _scoreChangedEvent.OnEventRaised -= OnScoreChanged;
+        _coinCollectedEvent.OnEventRaised -= OnScoreChanged;
         _gamestateChangedEvent.OnEventRaised -= OnGameStateChanged;
-        _powerupActivationEvent.OnEventRaised -= OnPowerupActivated;
-        LevelGenerator.OnChunkPlaced -= OnChunkPlaced;    
-    }
-
-    private void OnChunkPlaced()
-    {
-
+        _powerupActivationEvent.OnEventRaised -= OnPowerupActivated; 
     }
 
     private void OnScoreChanged(int score)
     {
-        _ingameHud.SetScore(score);
+        _ingameHud.SetCoinsPicked(score);
     }
 
     private void OnPowerupActivated(PowerupBase powerupData)

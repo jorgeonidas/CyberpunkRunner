@@ -237,7 +237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _panelCatalog: {fileID: 252323636}
-  _scoreChangedEvent: {fileID: 11400000, guid: 0567639da38f41d4aa6d8a0c1bf7e01a, type: 2}
+  _coinCollectedEvent: {fileID: 11400000, guid: 0567639da38f41d4aa6d8a0c1bf7e01a, type: 2}
   _gamestateChangedEvent: {fileID: 11400000, guid: 0b762577dfa80cd44b6b9f389dfc830c, type: 2}
   _powerupActivationEvent: {fileID: 11400000, guid: f04f76adb73da214fb76033fbb7166b0, type: 2}
 --- !u!114 &252323636
@@ -1644,7 +1644,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 015149ee07e08794687970dd7021ea2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreManager
-  _scoreChangedEvent: {fileID: 11400000, guid: 0567639da38f41d4aa6d8a0c1bf7e01a, type: 2}
+  _coinCollectedEvent: {fileID: 11400000, guid: 0567639da38f41d4aa6d8a0c1bf7e01a, type: 2}
 --- !u!4 &1793735477
 Transform:
   m_ObjectHideFlags: 0
