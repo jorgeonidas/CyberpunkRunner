@@ -6,19 +6,22 @@ public class SpeedManager : MonoBehaviour
     public Action OnSpeedDifficultyIncreased;
     [SerializeField] SpeedSettings _speedSettings;
     [SerializeField] SpeedChangedEvent _speedChangedEvent;
+    [SerializeField] GameStateChangedEvent _gameStateChangedEvent;
     [Header("For testing, but theyre initialized from setting")]
     [SerializeField] private float _currentMovingObjectsSpeed;
     [SerializeField] private float _currentMovingChunkSpeed;
     public float CurrentChunksMoveSpeed => _currentMovingChunkSpeed;
     public float CurrentMovingObjectsSpeed => _currentMovingObjectsSpeed;
     public float MaxChunkSpeed => _maxChunkSpeed;
-     public float NormalizedChunkSpeed => CurrentChunksMoveSpeed / MaxChunkSpeed;
+    public float NormalizedChunkSpeed => CurrentChunksMoveSpeed / MaxChunkSpeed;
     private float _initialChunkSpeed => _speedSettings.InitialChunkSpeed;
     private float _maxChunkSpeed => _speedSettings.MaxChunkSpeed;
     private float _initialObjectsSpeed => _speedSettings.InitialObjectsSpeed;
     private float _maxObjectsSpeed => _speedSettings.MaxObjectsSpeed;
     private float _targetChunkSpeed;
     private float _targetObjectsSpeed;
+    float _chunkSpeedBeforeStop = 0f;
+    float _movingObjectSpeedBeforeStop = 0f;
     private bool _stopped = false;
     private void Start()
     {
@@ -49,13 +52,32 @@ public class SpeedManager : MonoBehaviour
     {
         OnSpeedDifficultyIncreased += TryIncreaseSpeedDifficulty;
         MovingObject.OnAnyMovingObjectSpawned += InitializeMovingObject;
+        _gameStateChangedEvent.OnEventRaised += OnGameStateChanged;
     }
 
     private void OnDisable()
     {
-        OnSpeedDifficultyIncreased -= TryIncreaseSpeedDifficulty;   
+        OnSpeedDifficultyIncreased -= TryIncreaseSpeedDifficulty;
         MovingObject.OnAnyMovingObjectSpawned -= InitializeMovingObject;
+        _gameStateChangedEvent.OnEventRaised -= OnGameStateChanged;
     }
+
+    private void OnGameStateChanged(GameState state)
+    {
+        switch (state)
+        {
+            case GameState.Playing:
+                Resume();
+                break;
+            case GameState.Paused:
+                Stop(false);
+                break;
+            case GameState.GameOver:
+                Stop(true);
+                break;
+        }
+    }
+
     float _lastChunkSpeed = 0f;
     private void Update()
     {
@@ -87,12 +109,22 @@ public class SpeedManager : MonoBehaviour
 
     public void Stop(bool gameOver = false)
     {
+        _chunkSpeedBeforeStop = _currentMovingChunkSpeed;
+        _movingObjectSpeedBeforeStop = _currentMovingObjectsSpeed;
+
         _stopped = true;
         _targetChunkSpeed = 0;
         if (!gameOver)
         {
             _targetObjectsSpeed = 0;
         }
+    }
+
+    public void Resume()
+    {
+        _stopped = false;
+        _targetChunkSpeed = _chunkSpeedBeforeStop;
+        _targetObjectsSpeed = _movingObjectSpeedBeforeStop;
     }
 
     public void AddSpeedBonus(float speed)

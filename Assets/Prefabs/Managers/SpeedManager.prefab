@@ -46,5 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speedSettings: {fileID: 11400000, guid: 033cbadaf4363054b83e46f7a7ae7aec, type: 2}
   _speedChangedEvent: {fileID: 11400000, guid: f17dcad1ee5415d4f8cf51924ca44772, type: 2}
+  _gameStateChangedEvent: {fileID: 11400000, guid: 0b762577dfa80cd44b6b9f389dfc830c, type: 2}
   _currentMovingObjectsSpeed: 0
   _currentMovingChunkSpeed: 0

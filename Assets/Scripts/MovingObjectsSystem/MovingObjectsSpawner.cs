@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MovingObjectsSpawner : MonoBehaviour
 {
+    [SerializeField] GameStateChangedEvent _gameStateChangedEvent;
     [SerializeField] LevelSettings _levelSettings;
     [SerializeField] SpawnPowerupSettings _powerUpSetting;
     [SerializeField] string[] _vehicleObstaclesIds;
@@ -19,6 +20,7 @@ public class MovingObjectsSpawner : MonoBehaviour
     float _chunkLength;
     private float[] _horizontalLanes;
     private float _nextSpawnTime;
+    private bool _stopped;
     private void Start()
     {
         Initialize();
@@ -26,14 +28,21 @@ public class MovingObjectsSpawner : MonoBehaviour
 
     private void OnEnable()
     {
+        _gameStateChangedEvent.OnEventRaised += OnGameStateChanged;
     }
 
     void OnDisable()
     {
+        _gameStateChangedEvent.OnEventRaised -= OnGameStateChanged; 
     }
 
     private void Update()
     {
+        if(_stopped)
+        {
+            return;
+        }
+
         if (Time.time >= _nextSpawnTime)
         {
             PlaceProps();
@@ -43,6 +52,7 @@ public class MovingObjectsSpawner : MonoBehaviour
 
     private void Initialize()
     {
+        _stopped = false;
         _nextSpawnTime = Time.time + _spawnInterval;
         _lanes = _levelSettings.Lanes.ToList();
         _horizontalLanes = _levelSettings.HorizontalLanes;
@@ -150,12 +160,39 @@ public class MovingObjectsSpawner : MonoBehaviour
             _currentAvailableLanes.Add(i);
         }
     }
-    
+
     public void TryDecreaseSpawnrate()
     {
         if (_spawnInterval > _minSpawnSpeed)
         {
             _spawnInterval = Mathf.Max(_minSpawnSpeed, _spawnInterval - _spawnIntervalDecreaseRate);
         }
+    }
+
+    private void OnGameStateChanged(GameState state)
+    {
+        switch (state)
+        {
+            case GameState.Playing:
+                Resume();
+                break;
+            case GameState.Paused:
+                Pause();
+                break;
+            case GameState.GameOver:
+                Pause();
+                break;
+        }
+    }
+
+    private void Pause()
+    {
+        _stopped = true;
+    }
+    
+    private void Resume()
+    {
+        _stopped = false;
+        _nextSpawnTime = Time.time + _spawnInterval;
     }
 }

@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c5c396632813a247a52216a58f0a0a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameStateChangedEvent: {fileID: 11400000, guid: 0b762577dfa80cd44b6b9f389dfc830c, type: 2}
   _levelSettings: {fileID: 11400000, guid: e36a5c3c5d4babe44bf4ecd2ced9592c, type: 2}
   _powerUpSetting: {fileID: 11400000, guid: 45481120953bc9f4895843ed8b99aabc, type: 2}
   _vehicleObstaclesIds:

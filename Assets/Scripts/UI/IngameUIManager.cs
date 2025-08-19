@@ -67,6 +67,12 @@ public class IngameUIManager : MonoBehaviour, IUIPanelsOrganizer
             case GameState.GameOver:
                 Show(StringConstants.IngamePanels.GameOver);
                 break;
+            case GameState.Paused:
+                //Show(StringConstants.IngamePanels.Pause);
+                break;
+            case GameState.Playing:
+                //Hide(StringConstants.IngamePanels.Pause);
+                break;
         }
     }
 
