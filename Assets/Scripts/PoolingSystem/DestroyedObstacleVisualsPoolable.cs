@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class DestroyedObstacleVisualsPoolable : PooledObject
@@ -8,6 +9,8 @@ public class DestroyedObstacleVisualsPoolable : PooledObject
     [SerializeField] float _backForce = 5f;
     [SerializeField] float _sideForce = 10f;
     [SerializeField] float _torque = 5f;
+    [SerializeField] bool _selfRelease = true;
+    [SerializeField] float _releaseDelay = 5f;
 
     private void Awake()
     {
@@ -27,6 +30,16 @@ public class DestroyedObstacleVisualsPoolable : PooledObject
             Random.Range(-_torque, _torque)
         );
         _rigidbody.AddTorque(randomTorque, ForceMode.Impulse);
+        if (_selfRelease)
+        {
+            StartCoroutine(ReleaseAfterDelay());
+        }
+    }
+
+    IEnumerator ReleaseAfterDelay()
+    {
+        yield return new WaitForSeconds(_releaseDelay);
+        Release();
     }
 
     public override void OnReleaseToPool()
