@@ -70,7 +70,7 @@ public class SpeedManager : MonoBehaviour
                 Resume();
                 break;
             case GameState.Paused:
-                Stop(false);
+                StopInmediatelly();
                 break;
             case GameState.GameOver:
                 Stop(true);
@@ -109,8 +109,7 @@ public class SpeedManager : MonoBehaviour
 
     public void Stop(bool gameOver = false)
     {
-        _chunkSpeedBeforeStop = _currentMovingChunkSpeed;
-        _movingObjectSpeedBeforeStop = _currentMovingObjectsSpeed;
+        SaveSpeedsBeforeStop();
 
         _stopped = true;
         _targetChunkSpeed = 0;
@@ -119,6 +118,23 @@ public class SpeedManager : MonoBehaviour
             _targetObjectsSpeed = 0;
         }
     }
+
+    public void StopInmediatelly()
+    {
+        SaveSpeedsBeforeStop();
+        _stopped = true;
+        _targetChunkSpeed = 0;
+        _targetObjectsSpeed = 0;
+        _currentMovingChunkSpeed = 0;
+        _currentMovingObjectsSpeed = 0;
+    }
+
+    private void SaveSpeedsBeforeStop()
+    {
+        _chunkSpeedBeforeStop = _currentMovingChunkSpeed;
+        _movingObjectSpeedBeforeStop = _currentMovingObjectsSpeed;
+    }
+
 
     public void Resume()
     {

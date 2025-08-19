@@ -74,16 +74,11 @@ public class GameManager : MonoBehaviour
 
     private void PlayerController_OnPausedPressed()
     {
-        if (_currentGameState == GameState.Playing)
+        if(_currentGameState == GameState.GameOver)
         {
-            _currentGameState = GameState.Paused;
-            //_speedManager.Stop(false);
+            return;
         }
-        else if (_currentGameState == GameState.Paused)
-        {
-            _currentGameState = GameState.Playing;
-            // _speedManager.Resume();
-        }
+        _currentGameState = _currentGameState == GameState.Playing ? GameState.Paused : GameState.Playing;
         Debug.Log($"Game state changed to {_currentGameState}");
         _gameStateChangedEvent?.Raise(_currentGameState);
     }
