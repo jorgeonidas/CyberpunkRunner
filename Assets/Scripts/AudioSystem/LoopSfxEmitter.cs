@@ -1,7 +1,7 @@
 using UnityEngine;
 using static SfxIdEnum;
 
-public class LoopSfxEmmiter : MonoBehaviour
+public class LoopSfxEmitter : MonoBehaviour
 {
     [SerializeField] private LoopSfxId sfxId;
     private Vector3 _lastPosition;

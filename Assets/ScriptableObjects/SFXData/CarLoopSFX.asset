@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7d0823b913dd3745b84c16c73a6a107, type: 3}
-  m_Name: EngineLoopSFX
+  m_Name: CarLoopSFX
   m_EditorClassIdentifier: Assembly-CSharp::SfxData
   _clips:
-  - {fileID: 8300000, guid: 5abc2494f98a5934c88f839c7f7aee95, type: 3}
-  _volume: 0.4
+  - {fileID: 8300000, guid: 89a2f186b36c6704ca2385f78575188d, type: 3}
+  _volume: 0.2
   _minPitch: 1
-  _maxPitch: 1
+  _maxPitch: 1.5

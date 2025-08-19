@@ -9,6 +9,7 @@ public class SfxIdEnum
         Impact = 2,
         SpeedPowerup = 3,
         InvincibilityPowerup = 4,
+        Whoosh = 5,
     }
 
     public enum LoopSfxId
@@ -16,7 +17,8 @@ public class SfxIdEnum
         None = 0,
         BackgroundMusic = 1,
         AmbientSound = 2,
-        EngineLoop = 3,
+        PlayerBikeEngineLoop = 3,
         ForceFieldLoop = 4,
+        CarEngineLoop = 5,
     }
 }

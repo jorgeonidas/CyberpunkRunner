@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7d0823b913dd3745b84c16c73a6a107, type: 3}
-  m_Name: EngineLoopSFX
+  m_Name: WhooshSfx
   m_EditorClassIdentifier: Assembly-CSharp::SfxData
   _clips:
-  - {fileID: 8300000, guid: 5abc2494f98a5934c88f839c7f7aee95, type: 3}
-  _volume: 0.4
-  _minPitch: 1
-  _maxPitch: 1
+  - {fileID: 8300000, guid: 3412e19a4ff4dcb44820e03987908da8, type: 3}
+  _volume: 1
+  _minPitch: 0.9
+  _maxPitch: 1.1

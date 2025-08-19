@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerSoundsController : MonoBehaviour
 {
     [SerializeField] private float _engineTotalPitch = 3f;
-    LoopSfxEmmiter _engineSoundEmmiter;
+    LoopSfxEmitter _engineSoundEmmiter;
     Player _player;
     void Awake()
     {

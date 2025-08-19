@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SfxEmmiter : MonoBehaviour
+public class SfxEmitter : MonoBehaviour
 {
     [SerializeField] private SfxIdEnum.SfxId sfxId;
 

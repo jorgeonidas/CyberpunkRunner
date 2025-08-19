@@ -4,7 +4,7 @@ public class DestructibleObstacle : MonoBehaviour, IDestroy
 {
     VFXSpawner _vfxSpawner;
     PooledObject _poolObject;
-    SfxEmmiter _sfxEmmiter;
+    SfxEmitter _sfxEmmiter;
 
     void Awake()
     {

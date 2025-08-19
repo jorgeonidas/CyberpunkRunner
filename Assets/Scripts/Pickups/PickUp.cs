@@ -5,7 +5,7 @@ public abstract class PickUp : MonoBehaviour
     private PooledObject _pooled;
     private VFXSpawner _vfxSpawner;
     private ScreenShakeSource _screenShakeSource;
-    private SfxEmmiter _sfxEmmiter;
+    private SfxEmitter _sfxEmmiter;
     private void Awake()
     {
         TryGetComponent(out _pooled);
