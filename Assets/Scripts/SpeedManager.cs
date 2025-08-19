@@ -131,8 +131,12 @@ public class SpeedManager : MonoBehaviour
 
     private void SaveSpeedsBeforeStop()
     {
-        _chunkSpeedBeforeStop = _currentMovingChunkSpeed;
-        _movingObjectSpeedBeforeStop = _currentMovingObjectsSpeed;
+        _chunkSpeedBeforeStop = _currentMovingChunkSpeed < _speedSettings.InitialChunkSpeed
+            ? _speedSettings.InitialChunkSpeed
+            : _currentMovingChunkSpeed;
+        _movingObjectSpeedBeforeStop = _currentMovingObjectsSpeed < _speedSettings.InitialObjectsSpeed
+            ? _speedSettings.InitialObjectsSpeed
+            : _currentMovingObjectsSpeed;
     }
 
 
