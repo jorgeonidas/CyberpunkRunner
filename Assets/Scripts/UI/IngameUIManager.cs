@@ -16,7 +16,7 @@ public class IngameUIManager : MonoBehaviour, IUIPanelsOrganizer
     {
         _panelCatalog.Initialize();
     }
-    
+
     private void Start()
     {
         _gameManager = GameManager.Instance;
@@ -25,6 +25,7 @@ public class IngameUIManager : MonoBehaviour, IUIPanelsOrganizer
             _ingameHud = hudPanel as IngameHUD;
         }
         Hide(StringConstants.IngamePanels.GameOver);
+        Hide(StringConstants.IngamePanels.Pause);
     }
 
     private void Update()
@@ -68,10 +69,10 @@ public class IngameUIManager : MonoBehaviour, IUIPanelsOrganizer
                 Show(StringConstants.IngamePanels.GameOver);
                 break;
             case GameState.Paused:
-                //Show(StringConstants.IngamePanels.Pause);
+                Show(StringConstants.IngamePanels.Pause);
                 break;
             case GameState.Playing:
-                //Hide(StringConstants.IngamePanels.Pause);
+                Hide(StringConstants.IngamePanels.Pause);
                 break;
         }
     }

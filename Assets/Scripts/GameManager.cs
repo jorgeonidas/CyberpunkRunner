@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     CameraController _cameraController;
     public Player Player => _player;
     public float NormalizedChunkSpeed => _speedManager.NormalizedChunkSpeed;
+    public GameState CurrentGameState => _currentGameState;
 
     private void Awake()
     {
@@ -30,7 +31,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         _player.Initialize(this);
-        _speedManager.OnSpeedDifficultyIncreased += SpeedManager_OnSpeedDifficultyIncreased;          
+        _speedManager.OnSpeedDifficultyIncreased += SpeedManager_OnSpeedDifficultyIncreased;
         _player.OnPlayerDied += Player_OnPlayerDied;
         _player.OnPausePressed += PlayerController_OnPausedPressed;
         _leveGenerator.Initialize(_speedManager);
@@ -56,6 +57,17 @@ public class GameManager : MonoBehaviour
 
     public int GetDistanceTravelled() => _leveGenerator.GetDistanceTravelled();
 
+    public void TooglePauseState()
+    {
+        if (_currentGameState == GameState.GameOver)
+        {
+            return;
+        }
+        _currentGameState = _currentGameState == GameState.Playing ? GameState.Paused : GameState.Playing;
+        Debug.Log($"Game state changed to {_currentGameState}");
+        _gameStateChangedEvent?.Raise(_currentGameState);
+    }
+
     private void Player_OnPlayerDied()
     {
         //stop everything
@@ -74,12 +86,7 @@ public class GameManager : MonoBehaviour
 
     private void PlayerController_OnPausedPressed()
     {
-        if(_currentGameState == GameState.GameOver)
-        {
-            return;
-        }
-        _currentGameState = _currentGameState == GameState.Playing ? GameState.Paused : GameState.Playing;
-        Debug.Log($"Game state changed to {_currentGameState}");
-        _gameStateChangedEvent?.Raise(_currentGameState);
+        TooglePauseState();
     }
+    
 }
