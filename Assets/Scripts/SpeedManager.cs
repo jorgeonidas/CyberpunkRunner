@@ -143,8 +143,8 @@ public class SpeedManager : MonoBehaviour
     public void Resume()
     {
         _stopped = false;
-        _targetChunkSpeed = _chunkSpeedBeforeStop;
-        _targetObjectsSpeed = _movingObjectSpeedBeforeStop;
+        _targetChunkSpeed = _currentMovingChunkSpeed = _chunkSpeedBeforeStop;
+        _targetObjectsSpeed = _currentMovingObjectsSpeed = _movingObjectSpeedBeforeStop;
     }
 
     public void AddSpeedBonus(float speed)
