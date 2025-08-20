@@ -4,28 +4,32 @@ using UnityEngine;
 
 public static class PlayerDataManager
 {
-    private static UserData currentUserData;
-
+    private static UserData _currentUserData;
     public static void Initialize()
     {
-        currentUserData = SaveSystem.LoadUserData();
-        Debug.Log("PlayerDataManager inicializado.");
+        _currentUserData = SaveSystem.LoadUserData();
+        Debug.Log($"PlayerDataManager inicializado.");
     }
 
     public static int GetRecordDistance()
     {
-        return currentUserData.recordDistance;
+        return _currentUserData.recordDistance;
     }
 
     public static void SetRecordDistance(int newRecordDistance)
     {
-        currentUserData.recordDistance = newRecordDistance;
+        _currentUserData.recordDistance = newRecordDistance;
         Debug.Log("Record Distance actualizado a: " + newRecordDistance);
     }
 
     public static int GetCoins()
     {
-        return currentUserData.coinsCollected;
+        return _currentUserData.coinsCollected;
+    }
+
+    public static UserGameSettings GetUserGameSettings()
+    {
+        return _currentUserData.userGameSettings;
     }
 
     public static void AddCoins(int coinsToAdd)
@@ -35,13 +39,19 @@ public static class PlayerDataManager
 
     public static void SetCoins(int newCoinsCollected)
     {
-        currentUserData.coinsCollected = newCoinsCollected;
+        _currentUserData.coinsCollected = newCoinsCollected;
         Debug.Log("Coins Collected actualizado a: " + newCoinsCollected);
+    }
+
+    public static void SetUserGameSettings(UserGameSettings userGameSettings)
+    {
+        _currentUserData.userGameSettings = userGameSettings;
+        Debug.Log("User Game Settings actualizado.");
     }
 
     public static void SaveData()
     {
-        SaveSystem.SaveUserData(currentUserData);
+        SaveSystem.SaveUserData(_currentUserData);
         Debug.Log("Datos del jugador guardados.");
     }
 }

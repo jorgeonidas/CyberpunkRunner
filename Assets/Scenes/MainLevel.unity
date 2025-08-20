@@ -1066,11 +1066,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2078098823674012637, guid: 9dd4bacf75401be4c8d48c0183f441df, type: 3}
       propertyPath: m_Name
-      value: SliderOption
+      value: SFXVolumeUiItem
       objectReference: {fileID: 0}
     - target: {fileID: 2958965494371555012, guid: 9dd4bacf75401be4c8d48c0183f441df, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4113160257672090708, guid: 9dd4bacf75401be4c8d48c0183f441df, type: 3}
+      propertyPath: settingId
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4501113468350970563, guid: 9dd4bacf75401be4c8d48c0183f441df, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1086,6 +1090,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 496624448849875875, guid: 9dd4bacf75401be4c8d48c0183f441df, type: 3}
   m_PrefabInstance: {fileID: 451802331}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &451802333 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4113160257672090708, guid: 9dd4bacf75401be4c8d48c0183f441df, type: 3}
+  m_PrefabInstance: {fileID: 451802331}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d9a9c505355a4c40b7a03bd724ca221, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FloatSettingUIItem
 --- !u!1 &577167645
 GameObject:
   m_ObjectHideFlags: 0
@@ -2764,6 +2779,7 @@ GameObject:
   - component: {fileID: 1926384077}
   - component: {fileID: 1926384080}
   - component: {fileID: 1926384079}
+  - component: {fileID: 1926384081}
   - component: {fileID: 1926384078}
   m_Layer: 5
   m_Name: PauseMenuPanel
@@ -2842,6 +2858,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1926384076}
   m_CullTransparentMesh: 1
+--- !u!114 &1926384081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926384076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1ff037b170283d4fb3d18bfdab466a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SettingsMenuUI
+  floatSettings:
+  - {fileID: 6903178411737995490}
+  - {fileID: 451802333}
 --- !u!114 &2123149225 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3325524038902242171, guid: cfc08fb5607198d4494aa2197ba1f91b, type: 3}
@@ -3286,7 +3317,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2078098823674012637, guid: 9dd4bacf75401be4c8d48c0183f441df, type: 3}
       propertyPath: m_Name
-      value: SliderOption
+      value: MusicVolumeUIItem
       objectReference: {fileID: 0}
     - target: {fileID: 2958965494371555012, guid: 9dd4bacf75401be4c8d48c0183f441df, type: 3}
       propertyPath: m_AnchorMax.y
@@ -3301,6 +3332,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9dd4bacf75401be4c8d48c0183f441df, type: 3}
+--- !u!114 &6903178411737995490 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4113160257672090708, guid: 9dd4bacf75401be4c8d48c0183f441df, type: 3}
+  m_PrefabInstance: {fileID: 6903178411737995489}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d9a9c505355a4c40b7a03bd724ca221, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FloatSettingUIItem
 --- !u!1001 &6939023377058274937
 PrefabInstance:
   m_ObjectHideFlags: 0

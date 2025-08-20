@@ -1,12 +1,6 @@
 using UnityEngine;
 using System.IO;
 
-[System.Serializable]
-public class UserData
-{
-    public int recordDistance;
-    public int coinsCollected;
-}
 
 public static class SaveSystem
 {

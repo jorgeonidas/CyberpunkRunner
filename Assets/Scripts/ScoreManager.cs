@@ -31,12 +31,16 @@ public class ScoreManager : MonoBehaviour
     {
         if (state == GameState.GameOver)
         {
-            PlayerDataManager.AddCoins(_coinsCollected);
-            PlayerDataManager.SetRecordDistance(GameManager.Instance.GetDistanceTravelled());
-            //test save file
-            PlayerDataManager.SaveData();
-
+            SaveCoinsAndTrySaveRecordToAccoun();
         }
+    }
+
+    private void SaveCoinsAndTrySaveRecordToAccoun()
+    {
+        PlayerDataManager.AddCoins(_coinsCollected);
+        //PlayerDataManager.SetRecordDistance(GameManager.Instance.GetDistanceTravelled());
+        //test save file
+        PlayerDataManager.SaveData();
     }
 
     private void AddScore(int scoreToAdd)

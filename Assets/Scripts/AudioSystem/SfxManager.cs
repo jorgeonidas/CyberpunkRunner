@@ -27,6 +27,8 @@ public class SfxManager : MonoBehaviour
     private ObjectPool<AudioSource> _audioSourcePool;
     private Dictionary<int, ActiveLoopSfx> _activeAudioSourcesLoops = new Dictionary<int, ActiveLoopSfx>();
     private List<ActiveLoopSfx> _loopSfxList = new List<ActiveLoopSfx>();
+    UserGameSettings _currentUserGameSettings;
+    
     private void Awake()
     {
         if (Instance != null)
@@ -46,6 +48,11 @@ public class SfxManager : MonoBehaviour
             _poolSize,
             _poolSize * 2
         );
+    }
+
+    private void Start()
+    {
+        _currentUserGameSettings = PlayerDataManager.GetUserGameSettings();
     }
 
     private void Update()
@@ -123,7 +130,7 @@ public class SfxManager : MonoBehaviour
         }
     }
 
-    private void StartPlayLoopSfx(AudioClip clip,  Transform sourceTransform, int instanceId, float volume = 1f, float pitch = 1f)
+    private void StartPlayLoopSfx(AudioClip clip, Transform sourceTransform, int instanceId, float volume = 1f, float pitch = 1f)
     {
         if (_activeAudioSourcesLoops.ContainsKey(instanceId))
         {
