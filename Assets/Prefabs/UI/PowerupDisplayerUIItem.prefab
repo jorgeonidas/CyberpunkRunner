@@ -136,6 +136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PowerupUIItem
   _powerUpIcon: {fileID: 9013411869755531891}
   _progressBar: {fileID: 2614403449663100553}
+  _gameStateChangedEvent: {fileID: 11400000, guid: 0b762577dfa80cd44b6b9f389dfc830c, type: 2}
 --- !u!1 &7529586112863395997
 GameObject:
   m_ObjectHideFlags: 0

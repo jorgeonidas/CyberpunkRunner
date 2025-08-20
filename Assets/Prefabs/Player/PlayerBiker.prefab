@@ -225,6 +225,7 @@ MonoBehaviour:
     m_Keys: []
     m_Values: []
   _powerupActivationEvent: {fileID: 11400000, guid: f04f76adb73da214fb76033fbb7166b0, type: 2}
+  _gameStateChangedEvent: {fileID: 11400000, guid: 0b762577dfa80cd44b6b9f389dfc830c, type: 2}
 --- !u!114 &2492954280592009525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,6 +337,7 @@ MonoBehaviour:
   _loopVfxData:
   - vfxId: Invincible
     loopVfxPrefab: {fileID: 198985388140249450, guid: 9e6a3712f81a89b42bbdd75925b2bf2c, type: 3}
+  _gameStateChangedEvent: {fileID: 11400000, guid: 0b762577dfa80cd44b6b9f389dfc830c, type: 2}
 --- !u!114 &197229381577994216
 MonoBehaviour:
   m_ObjectHideFlags: 0

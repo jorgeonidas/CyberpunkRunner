@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class PlayerVFXHandler : MonoBehaviour
+public class PlayerVFXHandler : MonoBehaviour, IGameStateChangedListener
 {
     [Serializable]
     public struct LoopVfxData
@@ -15,10 +15,13 @@ public class PlayerVFXHandler : MonoBehaviour
     [SerializeField] Transform _vfxTransform;
     [SerializeField] VehicleExhaust _vehicleExhaust;
     [SerializeField] private LoopVfxData[] _loopVfxData;
+    [SerializeField] private GameStateChangedEvent _gameStateChangedEvent;
     private readonly Dictionary<string, ParticleSystem> _vfxInstances = new Dictionary<string, ParticleSystem>();
     private readonly Dictionary<string, float> _activeVfxTimers = new Dictionary<string, float>();
 
     private Player _player;
+
+    public GameState CurrentGameState { get; set; }
 
     private void Awake()
     {
@@ -30,8 +33,9 @@ public class PlayerVFXHandler : MonoBehaviour
     {
         _player.OnPlayerDied += Player_OnPlayerDied;
         _player.OnPowerUpActivated += PlayLoopVFX;
+        _gameStateChangedEvent.OnEventRaised += OnGameStateChanged;
     }
-
+    
     private void OnDisable()
     {
         if (_player != null)
@@ -41,11 +45,17 @@ public class PlayerVFXHandler : MonoBehaviour
         // Detiene todos los efectos activos cuando el componente se desactiva.
         StopAllLoopVFX();
         _player.OnPowerUpActivated -= PlayLoopVFX;  
+        _gameStateChangedEvent.OnEventRaised -= OnGameStateChanged; 
     }
 
 
     private void Update()
     {
+        if (CurrentGameState == GameState.Paused)
+        {
+            return;
+        }
+
         if (_activeVfxTimers.Count == 0)
         {
             return;
@@ -147,5 +157,10 @@ public class PlayerVFXHandler : MonoBehaviour
             }
         }
         _activeVfxTimers.Clear();
+    }
+
+    public void OnGameStateChanged(GameState newGameState)
+    {
+        CurrentGameState = newGameState;
     }
 }

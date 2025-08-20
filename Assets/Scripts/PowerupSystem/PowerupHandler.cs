@@ -3,12 +3,16 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class PowerupHandler : MonoBehaviour
+public class PowerupHandler : MonoBehaviour, IGameStateChangedListener
 {
     Player _player;
     [SerializeField] SerializedDictionary<string, PowerupBase> _activePowerups = new SerializedDictionary<string, PowerupBase>();
     [SerializeField] SerializedDictionary<string, float> _powerupTimers = new SerializedDictionary<string, float>();
     [SerializeField] PowerupActivationEvent _powerupActivationEvent;
+    [Header("Game state changed event")]
+    [SerializeField] GameStateChangedEvent _gameStateChangedEvent;
+    public GameState CurrentGameState { get; set; }
+
     private void Awake()
     {
         _player = GetComponent<Player>();
@@ -17,16 +21,23 @@ public class PowerupHandler : MonoBehaviour
     {
         _powerupActivationEvent.OnEventRaised += PowerupPickup_OnAnyPowerupPicked;
         _player.OnPlayerDied += Player_OnPlayerDied;
+        _gameStateChangedEvent.OnEventRaised += OnGameStateChanged;
+
     }
 
     private void OnDisable()
     {
         _powerupActivationEvent.OnEventRaised -= PowerupPickup_OnAnyPowerupPicked;
         _player.OnPlayerDied -= Player_OnPlayerDied;
+        _gameStateChangedEvent.OnEventRaised -= OnGameStateChanged;
     }
 
     private void Update()
     {
+        if (CurrentGameState == GameState.Paused)
+        {
+            return;
+        }
 
         if (_powerupTimers.Count <= 0)
         {
@@ -124,4 +135,8 @@ public class PowerupHandler : MonoBehaviour
         SfxManager.Instance.StopLoopSfx(id.GetHashCode());
     }
 
+    public void OnGameStateChanged(GameState newGameState)
+    {
+        CurrentGameState = newGameState;
+    }
 }
