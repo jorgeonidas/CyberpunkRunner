@@ -2732,6 +2732,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1906377132}
   - component: {fileID: 1906377133}
+  - component: {fileID: 1906377134}
   m_Layer: 0
   m_Name: SfxManager
   m_TagString: Untagged
@@ -2768,6 +2769,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SfxManager
   _sfxDataContainer: {fileID: 11400000, guid: e5f788edfe3de8244a819bfb05841437, type: 2}
   _poolSize: 10
+--- !u!114 &1906377134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1906377131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7531b0dee7acc634e953384983b7e663, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UserSettingsAudioBridge
 --- !u!1 &1926384076
 GameObject:
   m_ObjectHideFlags: 0
@@ -2870,7 +2883,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1ff037b170283d4fb3d18bfdab466a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SettingsMenuUI
-  floatSettings:
+  _floatSettingsUIItems:
   - {fileID: 6903178411737995490}
   - {fileID: 451802333}
 --- !u!114 &2123149225 stripped

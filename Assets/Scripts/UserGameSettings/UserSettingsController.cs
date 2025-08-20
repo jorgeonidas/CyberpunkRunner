@@ -1,6 +1,7 @@
 using System;
 using AYellowpaper.SerializedCollections;
 using UnityEngine;
+using static UserSettingsType;
 
 [CreateAssetMenu(fileName = "UserSettingsController", menuName = "User Settings/UserGameSettingsController")]
 public class UserSettingsController : SingletonScriptableObject<UserSettingsController>
@@ -12,8 +13,8 @@ public class UserSettingsController : SingletonScriptableObject<UserSettingsCont
         public float minValue;
         public float maxValue;
     }
-
-    [SerializeField] SerializedDictionary<UserSettingsType.FloatSettingId, FloatSetting> _floatSettings;
+    public Action<FloatSettingId, float> OnFloatSettingChanged;
+    [SerializeField] SerializedDictionary<FloatSettingId, FloatSetting> _floatSettings;
     private UserGameSettings _userGameSettings;
 
     override protected void OnInitialize()
@@ -22,7 +23,7 @@ public class UserSettingsController : SingletonScriptableObject<UserSettingsCont
         _userGameSettings = PlayerDataManager.GetUserGameSettings();
     }
 
-    public void SetFloatSetting(UserSettingsType.FloatSettingId settingType, float value)
+    public void SetFloatSetting(FloatSettingId settingType, float value)
     {
         if (_floatSettings.ContainsKey(settingType))
         {
@@ -30,11 +31,11 @@ public class UserSettingsController : SingletonScriptableObject<UserSettingsCont
             float clampedValue = Mathf.Clamp(value, setting.minValue, setting.maxValue);
             switch (settingType)
             {
-                case UserSettingsType.FloatSettingId.MusicVolume:
+                case FloatSettingId.MusicVolume:
                     _userGameSettings.musicVolume = clampedValue;
                     Debug.Log($"Music Volume set to: {clampedValue}");
                     break;
-                case UserSettingsType.FloatSettingId.SFXVolume:
+                case FloatSettingId.SFXVolume:
                     _userGameSettings.sfxVolume = clampedValue;
                     Debug.Log($"SFX Volume set to: {clampedValue}");
                     break;
@@ -42,6 +43,7 @@ public class UserSettingsController : SingletonScriptableObject<UserSettingsCont
                     Debug.LogWarning($"Unhandled setting type: {settingType}");
                     break;
             }
+            OnFloatSettingChanged?.Invoke(settingType, clampedValue);
         }
         else
         {
@@ -49,15 +51,15 @@ public class UserSettingsController : SingletonScriptableObject<UserSettingsCont
         }
     }
 
-    public float GetFloatSetting(UserSettingsType.FloatSettingId settingType)
+    public float GetFloatSetting(FloatSettingId settingType)
     {
         if (_floatSettings.ContainsKey(settingType))
         {
             switch (settingType)
             {
-                case UserSettingsType.FloatSettingId.MusicVolume:
+                case FloatSettingId.MusicVolume:
                     return _userGameSettings.musicVolume;
-                case UserSettingsType.FloatSettingId.SFXVolume:
+                case FloatSettingId.SFXVolume:
                     return _userGameSettings.sfxVolume;
                 default:
                     Debug.LogWarning($"Unhandled setting type: {settingType}");

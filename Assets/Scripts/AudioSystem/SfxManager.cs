@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public struct ActiveLoopSfx
 {
     public Transform SourceTransform;
     public AudioSource AudioSource;
+    public float DefaultVolume;
 
     public void UpdatePosition()
     {
@@ -26,9 +28,7 @@ public class SfxManager : MonoBehaviour
 
     private ObjectPool<AudioSource> _audioSourcePool;
     private Dictionary<int, ActiveLoopSfx> _activeAudioSourcesLoops = new Dictionary<int, ActiveLoopSfx>();
-    private List<ActiveLoopSfx> _loopSfxList = new List<ActiveLoopSfx>();
-    UserGameSettings _currentUserGameSettings;
-    
+    private float _currentSfxVolume;
     private void Awake()
     {
         if (Instance != null)
@@ -52,12 +52,12 @@ public class SfxManager : MonoBehaviour
 
     private void Start()
     {
-        _currentUserGameSettings = PlayerDataManager.GetUserGameSettings();
+
     }
 
     private void Update()
     {
-        foreach (var loopSfx in _loopSfxList)
+        foreach (var loopSfx in _activeAudioSourcesLoops.Values)
         {
             loopSfx.UpdatePosition();
         }
@@ -113,7 +113,8 @@ public class SfxManager : MonoBehaviour
 
     private void StartPlaySfx(AudioClip clip, Vector3 position, float volume = 1f, float pitch = 1f)
     {
-        AudioSource source = GetAudiSourceFromPool(clip, position, volume, pitch, false);
+        float totalVolume = volume * _currentSfxVolume; // Apply current SFX volume setting
+        AudioSource source = GetAudiSourceFromPool(clip, position, totalVolume, pitch, false);
         StartCoroutine(ReleaseWhenDone(source));
     }
 
@@ -142,8 +143,10 @@ public class SfxManager : MonoBehaviour
         ActiveLoopSfx activeLoop = new ActiveLoopSfx
         {
             SourceTransform = sourceTransform,
-            AudioSource = source
+            AudioSource = source,
+            DefaultVolume = volume
         };
+        source.volume = activeLoop.DefaultVolume * _currentSfxVolume; // Apply current SFX volume setting
         AddLoopSfx(instanceId, activeLoop);
         Debug.Log($"<color=cyan>Playing loop SFX with instance ID '{instanceId}'</color>");
     }
@@ -151,7 +154,6 @@ public class SfxManager : MonoBehaviour
     private void AddLoopSfx(int instanceId, ActiveLoopSfx loopSfx)
     {
         _activeAudioSourcesLoops.Add(instanceId, loopSfx);
-        _loopSfxList.Add(loopSfx);
     }
 
     public void StopLoopSfx(int instanceId)
@@ -159,7 +161,7 @@ public class SfxManager : MonoBehaviour
         if (_activeAudioSourcesLoops.TryGetValue(instanceId, out var source))
         {
             _activeAudioSourcesLoops.Remove(instanceId);
-            _loopSfxList.Remove(source);
+            //_loopSfxList.Remove(source);
             _audioSourcePool.Release(source.AudioSource);
             Debug.Log($"<color=blue>stopped loop sfx with instance id {instanceId}</color>");
         }
@@ -190,6 +192,15 @@ public class SfxManager : MonoBehaviour
         else
         {
             Debug.LogWarning($"No active Loop SFX found with instance ID '{instanceId}'.");
+        }
+    }
+
+    public void SetSfxVolume(float newSfxVolume)
+    {
+        _currentSfxVolume = newSfxVolume;
+        foreach (var loopSfx in _activeAudioSourcesLoops.Values)
+        {
+            loopSfx.AudioSource.volume = loopSfx.DefaultVolume * _currentSfxVolume;
         }
     }
 }
