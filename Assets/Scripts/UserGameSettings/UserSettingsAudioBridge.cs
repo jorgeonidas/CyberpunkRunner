@@ -6,20 +6,13 @@ public class UserSettingsAudioBridge : MonoBehaviour
     void Awake()
     {
         _soundMixerManager = GetComponent<SoundMixerManager>();
-        if (_soundMixerManager == null)
-        {
-            Debug.LogError("SoundMixerManager not found in the scene.");
-            return;
-        }
-
-        // Initialize audio settings based on user preferences
-        _soundMixerManager.SetSfxVolume(UserSettingsController.Instance.GetFloatSetting(UserSettingsType.FloatSettingId.SFXVolume));
-        _soundMixerManager.SetMusicVolime(UserSettingsController.Instance.GetFloatSetting(UserSettingsType.FloatSettingId.MusicVolume));
     }
 
     private void Start()
-    {
-        //SfxManager.Instance.SetSfxVolume(UserSettingsController.Instance.GetFloatSetting(UserSettingsType.FloatSettingId.SFXVolume));
+    { 
+        // Initialize audio settings based on user preferences
+        _soundMixerManager.SetSfxVolume(UserSettingsController.Instance.GetFloatSetting(UserSettingsType.FloatSettingId.SFXVolume));
+        _soundMixerManager.SetMusicVolime(UserSettingsController.Instance.GetFloatSetting(UserSettingsType.FloatSettingId.MusicVolume));
     }
 
     private void OnEnable()
