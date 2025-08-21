@@ -36,6 +36,12 @@ public class GameManager : MonoBehaviour
         _player.OnPausePressed += PlayerController_OnPausedPressed;
         _leveGenerator.Initialize(_speedManager);
         _currentGameState = GameState.Playing;
+
+        //play background music
+        if(SfxManager.Instance != null)
+        {
+            SfxManager.Instance.PlayMusic(SfxIdEnum.SoundTrackId.GamePlay);
+        }
     }
 
     void OnDisable()

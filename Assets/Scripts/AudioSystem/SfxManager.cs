@@ -28,6 +28,7 @@ public class SfxManager : MonoBehaviour
     [Header("Audio Mixer Groups")]
     [SerializeField] private AudioMixerGroup _sfxMixerGroup;
     [SerializeField] private AudioMixerGroup _musicMixerGroup;
+    [SerializeField] private MusicManager _musicManager;
     private int _poolSize = 10;
 
     private ObjectPool<AudioSource> _audioSourcePool;
@@ -199,5 +200,16 @@ public class SfxManager : MonoBehaviour
         {
             Debug.LogWarning($"No active Loop SFX found with instance ID '{instanceId}'.");
         }
+    }
+
+    public void PlayMusic(SoundTrackId trackId)
+    {
+        var soundTrackData = _sfxDataContainer.GetSoundTrackData(trackId);
+        _musicManager.PlayMusic(soundTrackData.GetAudioClip(), soundTrackData.Volume, true);
+    }
+
+    public void StopMusic()
+    {
+        _musicManager.StopMusic();
     }
 }

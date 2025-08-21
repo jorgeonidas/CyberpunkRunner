@@ -1689,6 +1689,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1906377132}
   - component: {fileID: 1906377133}
+  - component: {fileID: 1906377137}
   - component: {fileID: 1906377134}
   - component: {fileID: 1906377135}
   - component: {fileID: 1906377136}
@@ -1729,6 +1730,7 @@ MonoBehaviour:
   _sfxDataContainer: {fileID: 11400000, guid: e5f788edfe3de8244a819bfb05841437, type: 2}
   _sfxMixerGroup: {fileID: -8634968368874430954, guid: 1e185e227688c4840a5a7eaa0504b5c4, type: 2}
   _musicMixerGroup: {fileID: -7801061296199127838, guid: 1e185e227688c4840a5a7eaa0504b5c4, type: 2}
+  _musicManager: {fileID: 1906377137}
 --- !u!114 &1906377134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1765,8 +1767,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -7801061296199127838, guid: 1e185e227688c4840a5a7eaa0504b5c4, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 7b725d0d8197d934d9027e033566bcb3, type: 3}
-  m_PlayOnAwake: 1
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -1851,6 +1853,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1906377137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1906377131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74dcc2a386fcb5e4697409097b10ed19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MusicManager
+  _audioSource: {fileID: 1906377136}
 --- !u!224 &1926384077 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2208976741309421964, guid: 2795d4d13ed43c04abb70e7409675b92, type: 3}

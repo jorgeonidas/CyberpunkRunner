@@ -19,7 +19,7 @@ public class SfxDataContainer : ScriptableObject
         Debug.LogWarning($"SFX Data not found for ID: {sfxId}");
         return null;
     }
-    
+
     public SfxData GetLoopSfxData(LoopSfxId sfxId)
     {
         if (_loopSfxDataDictionary.TryGetValue(sfxId, out var sfxData))
@@ -27,6 +27,16 @@ public class SfxDataContainer : ScriptableObject
             return sfxData;
         }
         Debug.LogWarning($"Loop SFX Data not found for ID: {sfxId}");
+        return null;
+    }
+    
+    public SfxData GetSoundTrackData(SoundTrackId sfxId)
+    {
+        if (_soundTrackDictionary.TryGetValue(sfxId, out var sfxData))
+        {
+            return sfxData;
+        }
+        Debug.LogWarning($"Sound Track Data not found for ID: {sfxId}");
         return null;
     }
 }
