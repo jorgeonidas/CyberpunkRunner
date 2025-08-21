@@ -6,7 +6,7 @@ public class TachometerUI : MonoBehaviour
 {
     [Header("UI Elements")]
     [SerializeField] private RectTransform needleTransform;
-    //[SerializeField] private Image _fillImage;
+    [SerializeField] private Image _fillImage;
     [SerializeField] private Gradient _colorGradient;
     [SerializeField] private TextMeshProUGUI _currentSpeedText;
 
@@ -16,7 +16,7 @@ public class TachometerUI : MonoBehaviour
     [Header("Needle Settings")]
     [SerializeField] private float _minAngle = -90f; // Ángulo mínimo de la aguja
     [SerializeField] private float _maxAngle = 90f;  // Ángulo máximo de la aguja
-
+    [SerializeField] private float _maxFillImageAmount = 0.7f; // Máximo valor de la imagen de relleno
     private float currentSpeed;
     private float _maxSpeed = 100f;
 
@@ -42,9 +42,12 @@ public class TachometerUI : MonoBehaviour
         float normalizedSpeed = Mathf.Clamp01(currentSpeed / _maxSpeed);
 
         float targetAngle = Mathf.Lerp(_minAngle, _maxAngle, normalizedSpeed);
+        float targerFill = Mathf.Lerp(0, _maxFillImageAmount, normalizedSpeed);
 
+        _fillImage.fillAmount = targerFill;
         needleTransform.localRotation = Quaternion.Euler(0f, 0f, targetAngle);
         _currentSpeedText.text = $"{(currentSpeed * 10).ToString("f0")}";
         _currentSpeedText.color = _colorGradient.Evaluate(normalizedSpeed);
+        _fillImage.color = _colorGradient.Evaluate(normalizedSpeed);
     }
 }
