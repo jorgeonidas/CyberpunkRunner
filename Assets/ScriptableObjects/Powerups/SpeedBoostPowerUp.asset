@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SpeedBoostPowerUp
   m_EditorClassIdentifier: 
   _id: SpeedBoost
-  _icon: {fileID: 21300000, guid: 3b7036e9b051ca640b6efe1f6d0a4166, type: 3}
+  _icon: {fileID: 21300000, guid: 56aa9c7f839a91d4d8db30046bf13997, type: 3}
+  _loopSfxId: 0
   _duration: 5
   _speedToAdd: 5
