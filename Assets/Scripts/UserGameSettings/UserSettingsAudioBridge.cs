@@ -30,10 +30,10 @@ public class UserSettingsAudioBridge : MonoBehaviour
         switch (id)
         {
             case UserSettingsType.FloatSettingId.MusicVolume:
-                _soundMixerManager.SetSfxVolume(UserSettingsController.Instance.GetFloatSetting(UserSettingsType.FloatSettingId.SFXVolume));
+                _soundMixerManager.SetMusicVolime(value);
                 break;
             case UserSettingsType.FloatSettingId.SFXVolume:
-                _soundMixerManager.SetSfxVolume(UserSettingsController.Instance.GetFloatSetting(UserSettingsType.FloatSettingId.SFXVolume));
+                _soundMixerManager.SetSfxVolume(value);
                 break;
             default:
                 Debug.LogWarning($"Unhandled setting type: {id}");

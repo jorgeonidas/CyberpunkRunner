@@ -51,6 +51,8 @@ public class SfxManager : MonoBehaviour
             _poolSize,
             _poolSize * 2
         );
+
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
