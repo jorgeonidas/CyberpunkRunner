@@ -2769,7 +2769,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SfxManager
   _sfxDataContainer: {fileID: 11400000, guid: e5f788edfe3de8244a819bfb05841437, type: 2}
-  _poolSize: 10
+  _sfxMixerGroup: {fileID: -8634968368874430954, guid: 1e185e227688c4840a5a7eaa0504b5c4, type: 2}
+  _musicMixerGroup: {fileID: -7801061296199127838, guid: 1e185e227688c4840a5a7eaa0504b5c4, type: 2}
 --- !u!114 &1906377134
 MonoBehaviour:
   m_ObjectHideFlags: 0
