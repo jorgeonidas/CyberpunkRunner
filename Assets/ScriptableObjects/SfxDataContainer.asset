@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42cc9434fea1cb74ab5d5977a249a0ef, type: 3}
   m_Name: SfxDataContainer
   m_EditorClassIdentifier: Assembly-CSharp::SfxDataContainer
+  _soundTrackDictionary:
+    _serializedList:
+    - Key: 2
+      Value: {fileID: 11400000, guid: 2bd435add13eb784db48d61f8a271eba, type: 2}
   _sfxDataDictionary:
     _serializedList:
     - Key: 1

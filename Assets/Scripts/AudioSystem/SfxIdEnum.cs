@@ -21,4 +21,13 @@ public class SfxIdEnum
         ForceFieldLoop = 4,
         CarEngineLoop = 5,
     }
+
+    public enum SoundTrackId
+    {
+        None = 0,
+        MainMenu = 1,
+        GamePlay = 2,
+        GameOver = 3,
+        Victory = 4,
+    }
 }

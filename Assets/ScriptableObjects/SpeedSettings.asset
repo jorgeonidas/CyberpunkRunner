@@ -20,4 +20,4 @@ MonoBehaviour:
   _deceleration: 14
   _playerSideMovingSpeed: 8
   _chunkSpeedIncreaseCycle: 10
-  _speedDifficultyIncrementPerCycle: 2
+  _speedDifficultyIncrementPerCycle: 1

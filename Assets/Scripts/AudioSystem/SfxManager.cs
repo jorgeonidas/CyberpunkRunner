@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.Pool;
 using static SfxIdEnum;
 
@@ -24,11 +25,13 @@ public class SfxManager : MonoBehaviour
 {
     public static SfxManager Instance { get; private set; }
     [SerializeField] private SfxDataContainer _sfxDataContainer;
-    [SerializeField] private int _poolSize = 10;
+    [Header("Audio Mixer Groups")]
+    [SerializeField] private AudioMixerGroup _sfxMixerGroup;
+    [SerializeField] private AudioMixerGroup _musicMixerGroup;
+    private int _poolSize = 10;
 
     private ObjectPool<AudioSource> _audioSourcePool;
     private Dictionary<int, ActiveLoopSfx> _activeAudioSourcesLoops = new Dictionary<int, ActiveLoopSfx>();
-    private float _currentSfxVolume;
     private void Awake()
     {
         if (Instance != null)
@@ -113,8 +116,8 @@ public class SfxManager : MonoBehaviour
 
     private void StartPlaySfx(AudioClip clip, Vector3 position, float volume = 1f, float pitch = 1f)
     {
-        float totalVolume = volume * _currentSfxVolume; // Apply current SFX volume setting
-        AudioSource source = GetAudiSourceFromPool(clip, position, totalVolume, pitch, false);
+        float totalVolume = volume; // Apply current SFX volume setting
+        AudioSource source = GetAudiSourceFromPool(clip, position, totalVolume, pitch, false, _sfxMixerGroup);
         StartCoroutine(ReleaseWhenDone(source));
     }
 
@@ -139,14 +142,14 @@ public class SfxManager : MonoBehaviour
             return;
         }
 
-        AudioSource source = GetAudiSourceFromPool(clip, sourceTransform.position, volume, pitch, true);
+        AudioSource source = GetAudiSourceFromPool(clip, sourceTransform.position, volume, pitch, true, _sfxMixerGroup);
         ActiveLoopSfx activeLoop = new ActiveLoopSfx
         {
             SourceTransform = sourceTransform,
             AudioSource = source,
             DefaultVolume = volume
         };
-        source.volume = activeLoop.DefaultVolume * _currentSfxVolume; // Apply current SFX volume setting
+        source.volume = activeLoop.DefaultVolume; // Apply current SFX volume setting
         AddLoopSfx(instanceId, activeLoop);
         Debug.Log($"<color=cyan>Playing loop SFX with instance ID '{instanceId}'</color>");
     }
@@ -171,7 +174,7 @@ public class SfxManager : MonoBehaviour
         }
     }
 
-    private AudioSource GetAudiSourceFromPool(AudioClip clip, Vector3 position, float volume, float pitch, bool loop)
+    private AudioSource GetAudiSourceFromPool(AudioClip clip, Vector3 position, float volume, float pitch, bool loop, AudioMixerGroup mixerGroup)
     {
         var source = _audioSourcePool.Get();
         source.transform.position = position;
@@ -179,6 +182,7 @@ public class SfxManager : MonoBehaviour
         source.volume = volume;
         source.pitch = pitch;
         source.loop = loop;
+        source.outputAudioMixerGroup = mixerGroup;
         source.Play();
         return source;
     }
@@ -192,15 +196,6 @@ public class SfxManager : MonoBehaviour
         else
         {
             Debug.LogWarning($"No active Loop SFX found with instance ID '{instanceId}'.");
-        }
-    }
-
-    public void SetSfxVolume(float newSfxVolume)
-    {
-        _currentSfxVolume = newSfxVolume;
-        foreach (var loopSfx in _activeAudioSourcesLoops.Values)
-        {
-            loopSfx.AudioSource.volume = loopSfx.DefaultVolume * _currentSfxVolume;
         }
     }
 }

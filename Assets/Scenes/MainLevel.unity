@@ -2733,6 +2733,7 @@ GameObject:
   - component: {fileID: 1906377132}
   - component: {fileID: 1906377133}
   - component: {fileID: 1906377134}
+  - component: {fileID: 1906377135}
   m_Layer: 0
   m_Name: SfxManager
   m_TagString: Untagged
@@ -2781,6 +2782,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7531b0dee7acc634e953384983b7e663, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UserSettingsAudioBridge
+--- !u!114 &1906377135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1906377131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6481020dd30335f4685709af505c51a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SoundMixerManager
+  _audioMixer: {fileID: 24100000, guid: 1e185e227688c4840a5a7eaa0504b5c4, type: 2}
 --- !u!1 &1926384076
 GameObject:
   m_ObjectHideFlags: 0

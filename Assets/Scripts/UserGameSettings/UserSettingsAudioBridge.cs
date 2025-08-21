@@ -2,9 +2,24 @@ using UnityEngine;
 
 public class UserSettingsAudioBridge : MonoBehaviour
 {
+    SoundMixerManager _soundMixerManager;
+    void Awake()
+    {
+        _soundMixerManager = GetComponent<SoundMixerManager>();
+        if (_soundMixerManager == null)
+        {
+            Debug.LogError("SoundMixerManager not found in the scene.");
+            return;
+        }
+
+        // Initialize audio settings based on user preferences
+        _soundMixerManager.SetSfxVolume(UserSettingsController.Instance.GetFloatSetting(UserSettingsType.FloatSettingId.SFXVolume));
+        _soundMixerManager.SetMusicVolime(UserSettingsController.Instance.GetFloatSetting(UserSettingsType.FloatSettingId.MusicVolume));
+    }
+
     private void Start()
     {
-        SfxManager.Instance.SetSfxVolume(UserSettingsController.Instance.GetFloatSetting(UserSettingsType.FloatSettingId.SFXVolume));
+        //SfxManager.Instance.SetSfxVolume(UserSettingsController.Instance.GetFloatSetting(UserSettingsType.FloatSettingId.SFXVolume));
     }
 
     private void OnEnable()
@@ -21,11 +36,11 @@ public class UserSettingsAudioBridge : MonoBehaviour
     {
         switch (id)
         {
-            // case UserSettingsType.FloatSettingId.MusicVolume:
-            //     AudioManager.Instance.SetMusicVolume(value);
-            //     break;
+            case UserSettingsType.FloatSettingId.MusicVolume:
+                _soundMixerManager.SetSfxVolume(UserSettingsController.Instance.GetFloatSetting(UserSettingsType.FloatSettingId.SFXVolume));
+                break;
             case UserSettingsType.FloatSettingId.SFXVolume:
-                SfxManager.Instance.SetSfxVolume(value);
+                _soundMixerManager.SetSfxVolume(UserSettingsController.Instance.GetFloatSetting(UserSettingsType.FloatSettingId.SFXVolume));
                 break;
             default:
                 Debug.LogWarning($"Unhandled setting type: {id}");

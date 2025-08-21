@@ -1,13 +1,16 @@
 using AYellowpaper.SerializedCollections;
 using UnityEngine;
+using static SfxIdEnum;
 
 [CreateAssetMenu(fileName = "SfxDataContainer", menuName = "Game SFX/SfxDataContainer")]
 public class SfxDataContainer : ScriptableObject
 {
-    [SerializeField] private SerializedDictionary<SfxIdEnum.SfxId, SfxData> _sfxDataDictionary;
-    [SerializeField] private SerializedDictionary<SfxIdEnum.LoopSfxId, SfxData> _loopSfxDataDictionary;
+    [Header("Sound Tracks")]
+    [SerializeField] private SerializedDictionary<SoundTrackId, SfxData> _soundTrackDictionary;
+    [SerializeField] private SerializedDictionary<SfxId, SfxData> _sfxDataDictionary;
+    [SerializeField] private SerializedDictionary<LoopSfxId, SfxData> _loopSfxDataDictionary;
 
-    public SfxData GetSfxData(SfxIdEnum.SfxId sfxId)
+    public SfxData GetSfxData(SfxId sfxId)
     {
         if (_sfxDataDictionary.TryGetValue(sfxId, out var sfxData))
         {
@@ -17,7 +20,7 @@ public class SfxDataContainer : ScriptableObject
         return null;
     }
     
-    public SfxData GetLoopSfxData(SfxIdEnum.LoopSfxId sfxId)
+    public SfxData GetLoopSfxData(LoopSfxId sfxId)
     {
         if (_loopSfxDataDictionary.TryGetValue(sfxId, out var sfxData))
         {
