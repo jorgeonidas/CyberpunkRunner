@@ -1,5 +1,4 @@
 using System;
-using TMPro;
 using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
@@ -10,6 +9,8 @@ public class ScoreManager : MonoBehaviour
     [Header("Events to Listen")]
     [SerializeField] GameStateChangedEvent _gameStateChangedEvent;
     int _coinsCollected;
+    public int CoinsCollected => _coinsCollected;
+
     private void Start()
     {
         _coinsCollected = 0;
@@ -17,33 +18,21 @@ public class ScoreManager : MonoBehaviour
     }
     private void OnEnable()
     {
-        OnCoinPickedEvent += AddScore;
-        _gameStateChangedEvent.OnEventRaised += OnGameStateChanged;
+        OnCoinPickedEvent += AddToCollectedCoins;
     }
 
     private void OnDisable()
     {
-        OnCoinPickedEvent -= AddScore;
-        _gameStateChangedEvent.OnEventRaised -= OnGameStateChanged; 
+        OnCoinPickedEvent -= AddToCollectedCoins;
     }
 
-    private void OnGameStateChanged(GameState state)
+    public void SaveCoinsCollected()
     {
-        if (state == GameState.GameOver)
-        {
-            SaveCoinsAndTrySaveRecordToAccoun();
-        }
-    }
-
-    private void SaveCoinsAndTrySaveRecordToAccoun()
-    {
-        PlayerDataManager.AddCoins(_coinsCollected);
-        //PlayerDataManager.SetRecordDistance(GameManager.Instance.GetDistanceTravelled());
-        //test save file
+        PlayerDataManager.AddCoins(CoinsCollected);
         PlayerDataManager.SaveData();
     }
 
-    private void AddScore(int scoreToAdd)
+    private void AddToCollectedCoins(int scoreToAdd)
     {
         _coinsCollected += scoreToAdd;
         UpdateScoreText();
@@ -51,6 +40,6 @@ public class ScoreManager : MonoBehaviour
 
     private void UpdateScoreText()
     {
-       _coinCollectedEvent.Raise(_coinsCollected);
+       _coinCollectedEvent.Raise(CoinsCollected);
     }
 }

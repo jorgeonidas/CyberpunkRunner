@@ -34,6 +34,10 @@ public class IngameUIManager : MonoBehaviour, IUIPanelsOrganizer
         {
             return;
         }
+        if(_gameManager.CurrentGameState != GameState.Playing)
+        {
+            return;
+        }
         _ingameHud.SetTraveledDistance(_gameManager.GetDistanceTravelled());
     }
 
@@ -79,17 +83,17 @@ public class IngameUIManager : MonoBehaviour, IUIPanelsOrganizer
 
     public void Show(string panelId)
     {
-        if (_panelCatalog.TryGet(panelId, out IUIPanel gameOver))
+        if (_panelCatalog.TryGet(panelId, out IUIPanel panel))
         {
-            gameOver.Show();
+            panel.Show();
         }
     }
 
     public void Hide(string panelId)
     {
-        if (_panelCatalog.TryGet(panelId, out IUIPanel gameOver))
+        if (_panelCatalog.TryGet(panelId, out IUIPanel panel))
         {
-            gameOver.Hide();
+            panel.Hide();
         }
     }
 }

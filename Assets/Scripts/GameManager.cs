@@ -10,11 +10,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] LevelGenerator _leveGenerator;
     [SerializeField] GameStateChangedEvent _gameStateChangedEvent;
     [SerializeField] MovingObjectsSpawner _movingObjectsSpawner;
+    [SerializeField] ScoreManager _scoreManager;
     GameState _currentGameState;
     CameraController _cameraController;
     public Player Player => _player;
     public float NormalizedChunkSpeed => _speedManager.NormalizedChunkSpeed;
     public GameState CurrentGameState => _currentGameState;
+    public int CoinsCollected => _scoreManager == null ? 0 : _scoreManager.CoinsCollected;
 
     private void Awake()
     {
@@ -62,6 +64,11 @@ public class GameManager : MonoBehaviour
     }
 
     public int GetDistanceTravelled() => _leveGenerator.GetDistanceTravelled();
+
+    public void SaveCollectedCoins()
+    {
+        _scoreManager.SaveCoinsCollected();
+    }
 
     public void TooglePauseState()
     {
