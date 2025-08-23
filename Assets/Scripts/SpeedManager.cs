@@ -6,7 +6,7 @@ public class SpeedManager : MonoBehaviour
     public Action OnSpeedDifficultyIncreased;
     [SerializeField] SpeedSettings _speedSettings;
     [SerializeField] SpeedChangedEvent _speedChangedEvent;
-    [SerializeField] GameStateChangedEvent _gameStateChangedEvent;
+    //[SerializeField] GameStateChangedEvent _gameStateChangedEvent;
     [Header("For testing, but theyre initialized from setting")]
     [SerializeField] private float _currentMovingObjectsSpeed;
     [SerializeField] private float _currentMovingChunkSpeed;
@@ -52,30 +52,14 @@ public class SpeedManager : MonoBehaviour
     {
         OnSpeedDifficultyIncreased += TryIncreaseSpeedDifficulty;
         MovingObject.OnAnyMovingObjectSpawned += InitializeMovingObject;
-        _gameStateChangedEvent.OnEventRaised += OnGameStateChanged;
+        //_gameStateChangedEvent.OnEventRaised += OnGameStateChanged;
     }
 
     private void OnDisable()
     {
         OnSpeedDifficultyIncreased -= TryIncreaseSpeedDifficulty;
         MovingObject.OnAnyMovingObjectSpawned -= InitializeMovingObject;
-        _gameStateChangedEvent.OnEventRaised -= OnGameStateChanged;
-    }
-
-    private void OnGameStateChanged(GameState state)
-    {
-        switch (state)
-        {
-            case GameState.Playing:
-                Resume();
-                break;
-            case GameState.Paused:
-                StopInmediatelly();
-                break;
-            case GameState.GameOver:
-                Stop(true);
-                break;
-        }
+        //_gameStateChangedEvent.OnEventRaised -= OnGameStateChanged;
     }
 
     float _lastChunkSpeed = 0f;

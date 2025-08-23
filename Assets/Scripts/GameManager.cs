@@ -36,11 +36,12 @@ public class GameManager : MonoBehaviour
         _speedManager.OnSpeedDifficultyIncreased += SpeedManager_OnSpeedDifficultyIncreased;
         _player.OnPlayerDied += Player_OnPlayerDied;
         _player.OnPausePressed += PlayerController_OnPausedPressed;
+        _gameStateChangedEvent.OnEventRaised += OnGameStateChanged;
         _leveGenerator.Initialize(_speedManager);
         _currentGameState = GameState.Playing;
 
         //play background music
-        if(SfxManager.Instance != null)
+        if (SfxManager.Instance != null)
         {
             SfxManager.Instance.PlayMusic(SfxIdEnum.SoundTrackId.GamePlay);
         }
@@ -51,7 +52,9 @@ public class GameManager : MonoBehaviour
         _speedManager.OnSpeedDifficultyIncreased -= SpeedManager_OnSpeedDifficultyIncreased;
         _player.OnPausePressed -= PlayerController_OnPausedPressed;
         _player.OnPlayerDied -= Player_OnPlayerDied;
+        _gameStateChangedEvent.OnEventRaised -= OnGameStateChanged;
     }
+    
     public void SetCameraController(CameraController cameraController)
     {
         _cameraController = cameraController;
@@ -101,5 +104,21 @@ public class GameManager : MonoBehaviour
     {
         TooglePauseState();
     }
-    
+
+    private void OnGameStateChanged(GameState state)
+    {
+        switch (state)
+        {
+            case GameState.Playing:
+                _speedManager.Resume();
+                break;
+            case GameState.Paused:
+                _speedManager.StopInmediatelly();
+                break;
+            case GameState.GameOver:
+                _speedManager.Stop(true);
+                break;
+        }
+    }
+
 }
