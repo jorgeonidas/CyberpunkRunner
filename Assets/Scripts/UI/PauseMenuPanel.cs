@@ -16,6 +16,7 @@ public class PauseMenuPanel : AbstractUIPanel
     
     public void OnQuitButtonPressed()
     {
-        //gameManager.ToMainMenu();
+        //TODO: need a confirmation dialog here.
+        ScenesManager.ToMainMenu();
     }
 }

@@ -3,11 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class ScenesManager : MonoBehaviour
 {
-    private const string MAIN_MENU = "MainMenu";
+    private const string MAIN_MENU = "MainMenuScene";
     private const string GAME_SCENE = "MainLevel";
     public static ScenesManager Instance { get; private set; }
-
-    [SerializeField] private float _fadeDuration = 0.5f;
     [SerializeField] CanvasFader _fadder;
 
     private void Awake()
