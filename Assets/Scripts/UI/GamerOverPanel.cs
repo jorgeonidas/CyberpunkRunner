@@ -29,7 +29,7 @@ public class GamerOverPanel : AbstractUIPanel
         _earnedCoinsText.text = $"COINS: {_gameManager.CoinsCollected}";
         base.Show();
     }
-    
+
     public void Retry()
     {
         _gameManager.SaveCollectedCoins();
@@ -38,7 +38,14 @@ public class GamerOverPanel : AbstractUIPanel
 
     public void GoToMainMenu()
     {
-        _gameManager.SaveCollectedCoins();
-        ScenesManager.ToMainMenu();
+        Hide();
+        PopupFactory.ShowConfirmationPopup("Go to main menu", "Are you sure you want to quit to main menu?", "Yes", () =>
+        {
+            _gameManager.SaveCollectedCoins();
+            ScenesManager.ToMainMenu();
+        }, true, "No", () =>
+        {
+            Show();
+        });
     }
 }

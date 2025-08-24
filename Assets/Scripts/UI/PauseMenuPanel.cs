@@ -13,10 +13,16 @@ public class PauseMenuPanel : AbstractUIPanel
     {
         _gameManager.TooglePauseState();
     }
-    
+
     public void OnQuitButtonPressed()
     {
-        //TODO: need a confirmation dialog here.
-        ScenesManager.ToMainMenu();
+        Hide();
+        PopupFactory.ShowConfirmationPopup("Go to main menu", "Are you sure you want to quit to main menu?", "Yes", () =>
+        {
+            ScenesManager.ToMainMenu();
+        }, true, "No", () =>
+        {
+            Show();
+        });
     }
 }
