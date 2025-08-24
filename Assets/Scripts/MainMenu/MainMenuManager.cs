@@ -20,6 +20,7 @@ public class MainMenuManager : MonoBehaviour
     public void Start()
     {
         _levelGenerator.Initialize(_speedManager);
+        SfxManager.Instance.PlayMusic(SfxIdEnum.SoundTrackId.MainMenu);
     }
 
     public void ToGameScene()
