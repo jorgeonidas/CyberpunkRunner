@@ -1041,6 +1041,7 @@ GameObject:
   m_Component:
   - component: {fileID: 946161340}
   - component: {fileID: 946161342}
+  - component: {fileID: 946161343}
   m_Layer: 5
   m_Name: MainMenuPanel
   m_TagString: Untagged
@@ -1077,6 +1078,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 946161339}
   m_CullTransparentMesh: 1
+--- !u!114 &946161343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 946161339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7563b876bad3e44fbe1cfb2ca515f3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MainMenuPanel
 --- !u!1 &1084188770
 GameObject:
   m_ObjectHideFlags: 0
@@ -1175,7 +1188,7 @@ PrefabInstance:
     - target: {fileID: 6754706405781987559, guid: c5147ad83de606341bb05a6d184b4fee, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 709671329}
+      objectReference: {fileID: 946161343}
     - target: {fileID: 6754706405781987559, guid: c5147ad83de606341bb05a6d184b4fee, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -1186,7 +1199,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6754706405781987559, guid: c5147ad83de606341bb05a6d184b4fee, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: MainMenuManager, Assembly-CSharp
+      value: MainMenuPanel, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6754706405781987559, guid: c5147ad83de606341bb05a6d184b4fee, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName

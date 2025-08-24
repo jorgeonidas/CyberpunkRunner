@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class AbstractUIPanel : MonoBehaviour, IUIPanel
 {
-    public virtual string Id => string.Empty;
+    public abstract string Id { get; }
 
     public virtual void Hide()
     {

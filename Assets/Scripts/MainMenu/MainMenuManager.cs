@@ -5,7 +5,7 @@ public class MainMenuManager : MonoBehaviour
     public static MainMenuManager Instance { get; private set; }
     [SerializeField] private SpeedManager _speedManager;
     [SerializeField] private LevelGenerator _levelGenerator;
-    
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -22,12 +22,12 @@ public class MainMenuManager : MonoBehaviour
         _levelGenerator.Initialize(_speedManager);
     }
 
-    public void OnPlayButtonPressed()
+    public void ToGameScene()
     {
         ScenesManager.ToGameScene();
     }
 
-    public void OnQuitButtonPressed()
+    public void QuitGame()
     {
         Application.Quit();
     }
