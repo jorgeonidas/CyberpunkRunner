@@ -4,6 +4,7 @@ using UnityEngine;
 
 public static class PlayerDataManager
 {
+    public static event Action OnCurrencyChanged;
     private static UserData _currentUserData;
     public static void Initialize()
     {
@@ -53,5 +54,6 @@ public static class PlayerDataManager
     {
         SaveSystem.SaveUserData(_currentUserData);
         Debug.Log("Datos del jugador guardados.");
+        OnCurrencyChanged?.Invoke();
     }
 }
