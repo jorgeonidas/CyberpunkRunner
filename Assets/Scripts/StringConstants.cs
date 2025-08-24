@@ -26,4 +26,12 @@ public static class StringConstants
         public const string GameOver = "GameOver";
         public const string IngameHud = "IngameHud";
     }
+
+    public class MainMenuPanels
+    {
+        public const string MainMenu = "MainMenu";
+        public const string SettingsMenu = "SettingsMenu";
+        // public const string ShopMenu = "ShopMenu";
+        // public const string CharacterSelectionMenu = "CharacterSelectionMenu";
+    }
 }

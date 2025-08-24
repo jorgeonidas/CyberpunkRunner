@@ -1,21 +1,14 @@
 using System;
 using UnityEngine;
 
-public class IngameUIManager : MonoBehaviour, IUIPanelsOrganizer
+public class IngameUIManager : UIPanelsOrganizer
 {
-    [Header("Panels Catalog")]
-    [SerializeField] UIPanelCatalog _panelCatalog;
     [Header("Events")]
     [SerializeField] CoinCollectedEvent _coinCollectedEvent;
     [SerializeField] GameStateChangedEvent _gamestateChangedEvent;
     [SerializeField] PowerupActivationEvent _powerupActivationEvent;
     IngameHUD _ingameHud;
     GameManager _gameManager;
-
-    void Awake()
-    {
-        _panelCatalog.Initialize();
-    }
 
     private void Start()
     {
@@ -78,22 +71,6 @@ public class IngameUIManager : MonoBehaviour, IUIPanelsOrganizer
             case GameState.Playing:
                 Hide(StringConstants.IngamePanels.Pause);
                 break;
-        }
-    }
-
-    public void Show(string panelId)
-    {
-        if (_panelCatalog.TryGet(panelId, out IUIPanel panel))
-        {
-            panel.Show();
-        }
-    }
-
-    public void Hide(string panelId)
-    {
-        if (_panelCatalog.TryGet(panelId, out IUIPanel panel))
-        {
-            panel.Hide();
         }
     }
 }
