@@ -70,6 +70,7 @@ MonoBehaviour:
   baseParts:
   - {fileID: 3588444777822696719, guid: 5ddd386a5e85cb945bde89905e1f9931, type: 3}
   - {fileID: 7446166425198531211, guid: 1208b804578a56d41b6284df1e72a535, type: 3}
+  - {fileID: 7234322236937779054, guid: 6ff92c68bdb963e4cb20b433929ff6fe, type: 3}
   middleParts:
   - {fileID: 4683719736975886910, guid: 80ce6c131b584104088e45824b77c653, type: 3}
   - {fileID: 6434700479729483485, guid: b4060c90ce822574f80d67735d894b59, type: 3}

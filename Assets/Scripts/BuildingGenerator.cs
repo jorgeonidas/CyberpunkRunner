@@ -11,8 +11,15 @@ public class BuildingGenerator : MonoBehaviour
     public GameObject[] baseParts;
     public GameObject[] middleParts;
     public GameObject[] topParts;
+    [SerializeField] private bool _testAutoBuild = false;
     private Material _pickedMaterial;
-
+    private void Start()
+    {
+        if (_testAutoBuild)
+        {
+            Build();
+        }
+    }
     public void Build()
     {
 

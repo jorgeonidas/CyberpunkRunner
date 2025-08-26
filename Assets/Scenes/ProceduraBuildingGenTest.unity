@@ -503,6 +503,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 358722135814993529, guid: 9847f36d073ec934eb7a526117048454, type: 3}
+      propertyPath: _testAutoBuild
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 942291589532865396, guid: 9847f36d073ec934eb7a526117048454, type: 3}
       propertyPath: m_Name
       value: BuildingGenerator
