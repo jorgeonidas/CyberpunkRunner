@@ -139,6 +139,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4569711826196023961, guid: 0c80ec0af0712aa46866501e319e145a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4569711826196023961, guid: 0c80ec0af0712aa46866501e319e145a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4569711826196023961, guid: 0c80ec0af0712aa46866501e319e145a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6146559070689927713, guid: 0c80ec0af0712aa46866501e319e145a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6146559070689927713, guid: 0c80ec0af0712aa46866501e319e145a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6146559070689927713, guid: 0c80ec0af0712aa46866501e319e145a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.4
+      objectReference: {fileID: 0}
     - target: {fileID: 7264125426370874599, guid: 0c80ec0af0712aa46866501e319e145a, type: 3}
       propertyPath: m_Name
       value: Vehicle_Taxi
