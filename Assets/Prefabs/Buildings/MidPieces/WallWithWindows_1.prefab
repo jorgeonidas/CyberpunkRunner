@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1714583241883961206}
   - component: {fileID: 1724709373213276234}
   - component: {fileID: 1682575945253310022}
+  - component: {fileID: 4373197565310946918}
   m_Layer: 0
   m_Name: WallWithWindows_1
   m_TagString: Untagged
@@ -115,6 +116,24 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43195106354888040, guid: 5f7b69a8d9190254d947349a41ada463, type: 2}
+--- !u!114 &4373197565310946918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1709154178417435078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20d9d3471431e8e43b11a1c7b0ccc1c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PropVisuals
+  _meshFilter: {fileID: 1714583241883961206}
+  _meshRenderers:
+  - {fileID: 1724709373213276234}
+  - {fileID: 6079744273284150239}
+  - {fileID: 414193085746887381}
+  - {fileID: 7984645138417673482}
 --- !u!1001 &427240910991139399
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -184,6 +203,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad75cc67b4fcb83428eb34ae411bb3c4, type: 3}
+--- !u!23 &414193085746887381 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 23185618816833682, guid: ad75cc67b4fcb83428eb34ae411bb3c4, type: 3}
+  m_PrefabInstance: {fileID: 427240910991139399}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &424271153659825481 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4095704560758542, guid: ad75cc67b4fcb83428eb34ae411bb3c4, type: 3}
@@ -263,6 +287,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4095704560758542, guid: ad75cc67b4fcb83428eb34ae411bb3c4, type: 3}
   m_PrefabInstance: {fileID: 6056717005923855181}
   m_PrefabAsset: {fileID: 0}
+--- !u!23 &6079744273284150239 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 23185618816833682, guid: ad75cc67b4fcb83428eb34ae411bb3c4, type: 3}
+  m_PrefabInstance: {fileID: 6056717005923855181}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7970658033914543512
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -335,5 +364,10 @@ PrefabInstance:
 --- !u!4 &7967987343881933462 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4095704560758542, guid: ad75cc67b4fcb83428eb34ae411bb3c4, type: 3}
+  m_PrefabInstance: {fileID: 7970658033914543512}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &7984645138417673482 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 23185618816833682, guid: ad75cc67b4fcb83428eb34ae411bb3c4, type: 3}
   m_PrefabInstance: {fileID: 7970658033914543512}
   m_PrefabAsset: {fileID: 0}
