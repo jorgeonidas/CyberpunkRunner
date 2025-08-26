@@ -107,9 +107,14 @@ public class PropScatterRectangle : MonoBehaviour
                 }
             }
 
-            var go = (Application.isPlaying)
+            GameObject go;
+#if UNITY_EDITOR
+            go = Application.isPlaying
                 ? Instantiate(prefab, worldPos, rot, _container)
                 : (GameObject)UnityEditor.PrefabUtility.InstantiatePrefab(prefab, _container);
+#else
+            go = Instantiate(prefab, worldPos, rot, _container);
+#endif
 
             go.transform.position = worldPos;
             go.transform.rotation = rot;
