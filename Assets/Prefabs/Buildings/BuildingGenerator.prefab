@@ -46,6 +46,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BuildingGenerator
   minPieces: 2
   maxPieces: 5
+  materialVariants:
+  - {fileID: 2100000, guid: 5b103efddde787a45ac844ebc57b0aca, type: 2}
+  - {fileID: 2100000, guid: 55c0cd122e2ec5d4eb6df00a2966824b, type: 2}
+  - {fileID: 2100000, guid: 16baf78d55bdd7b44bf9d50edffd3241, type: 2}
+  - {fileID: 2100000, guid: 4334c1afd5d33194b851aae4a7c4f9e3, type: 2}
+  - {fileID: 2100000, guid: d8ff1947f6875f94998cfbbd28f2b751, type: 2}
+  - {fileID: 2100000, guid: a1260db7eb4efe7478246fda2858823d, type: 2}
+  - {fileID: 2100000, guid: 316dc25e2b60cf84e84e83a0a0995b59, type: 2}
+  - {fileID: 2100000, guid: f0dd791a13593c24092eab330b4af2a1, type: 2}
+  - {fileID: 2100000, guid: 7c930a77c2c60a749af7a8afd9f8163e, type: 2}
+  - {fileID: 2100000, guid: 225e7340f239c124c9bfac44ef8dbda2, type: 2}
+  - {fileID: 2100000, guid: eb43ccf57eac0174194f68627fecf001, type: 2}
+  - {fileID: 2100000, guid: 3f74aff155264e942b8bd6ebc1f78268, type: 2}
+  - {fileID: 2100000, guid: 08ba515e3c063a64bbec69a2c933acd7, type: 2}
+  - {fileID: 2100000, guid: 1b701687f546d7a48924043a4de4f2bf, type: 2}
+  - {fileID: 2100000, guid: 86c886b27b55b4c4aaece649eea0a079, type: 2}
+  - {fileID: 2100000, guid: 51cf3e7710a033d46b4a1f0514895eec, type: 2}
+  - {fileID: 2100000, guid: 1b3f510c14fcc24419370fa386429eac, type: 2}
+  - {fileID: 2100000, guid: e43e0848fad28db439d9411118a7fc32, type: 2}
+  - {fileID: 2100000, guid: f48d74d319b42e046888964c0831d020, type: 2}
+  - {fileID: 2100000, guid: 7910c4de4f114e343a611b5cdfb7b8d8, type: 2}
   baseParts:
   - {fileID: 3588444777822696719, guid: 5ddd386a5e85cb945bde89905e1f9931, type: 3}
   - {fileID: 7446166425198531211, guid: 1208b804578a56d41b6284df1e72a535, type: 3}

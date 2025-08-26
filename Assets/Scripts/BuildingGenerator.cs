@@ -7,17 +7,20 @@ public class BuildingGenerator : MonoBehaviour
 {
     public int minPieces = 5;
     public int maxPieces = 20;
+    public Material[] materialVariants;
     public GameObject[] baseParts;
     public GameObject[] middleParts;
     public GameObject[] topParts;
+    private Material _pickedMaterial;
 
     public void Build()
     {
 
         int targetPieces = Random.Range(minPieces, maxPieces);
+        _pickedMaterial = materialVariants[Random.Range(0, materialVariants.Length)];
         float heightOffset = 0;
         heightOffset += SpawnPieceLayer(baseParts, heightOffset);
-        
+
 
         for (int i = 2; i < targetPieces; i++)
         {
@@ -39,6 +42,11 @@ public class BuildingGenerator : MonoBehaviour
             Mesh cloneMesh = meshFilter.mesh;
             Bounds bounds = cloneMesh.bounds;
             heightOffset = bounds.size.y;
+
+            if (clone.TryGetComponent<MeshRenderer>(out MeshRenderer meshRenderer))
+            {
+                meshRenderer.material = _pickedMaterial;
+            }
         }
         clone.transform.SetParent(this.transform);
         return heightOffset;
