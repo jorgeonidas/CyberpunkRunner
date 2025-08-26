@@ -5,14 +5,14 @@ using UnityEngine;
 public class IngameHUD : AbstractUIPanel
 {
     [SerializeField] TachometerUI _tachometerUI;
-    [SerializeField] TextMeshProUGUI _scoreText;
+    [SerializeField] TextMeshProUGUI _coinsText;
     [SerializeField] TextMeshProUGUI _distanceTraveledText;
     [SerializeField] PowerupUIManager _powerupUIManager;
     public override string Id => StringConstants.IngamePanels.IngameHud;
     //private Tweener _distanceTween;
     public void SetCoinsPicked(int score)
     {
-        _scoreText.text = $"Coins: {score}";
+        _coinsText.text = $"{score}";
     }
 
     public void SetTraveledDistance(int distance)

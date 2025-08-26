@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &942291589532865396
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8056035507809877587}
+  - component: {fileID: 358722135814993529}
+  m_Layer: 0
+  m_Name: BuildingGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8056035507809877587
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 942291589532865396}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &358722135814993529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 942291589532865396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64fc3e5a31d2eab4aae8f1385032b69c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BuildingGenerator
+  minPieces: 2
+  maxPieces: 5
+  baseParts:
+  - {fileID: 3588444777822696719, guid: 5ddd386a5e85cb945bde89905e1f9931, type: 3}
+  - {fileID: 7446166425198531211, guid: 1208b804578a56d41b6284df1e72a535, type: 3}
+  middleParts:
+  - {fileID: 4683719736975886910, guid: 80ce6c131b584104088e45824b77c653, type: 3}
+  - {fileID: 6434700479729483485, guid: b4060c90ce822574f80d67735d894b59, type: 3}
+  - {fileID: 6885751029055845866, guid: 30746299dfca2e340aae973fe1b4f33c, type: 3}
+  - {fileID: 3495549645584753499, guid: d2c81bea404e76b40945e214aa68aa5c, type: 3}
+  - {fileID: 1709154178417435078, guid: 633690241567420469d65aaf39f45f6a, type: 3}
+  - {fileID: 835492323154206051, guid: a6c932ce9441e6442a65d03628d9c687, type: 3}
+  topParts:
+  - {fileID: 499087125029077577, guid: 17d17c5864a83294e901cd96f0a13ea5, type: 3}
+  - {fileID: 174360609907199384, guid: 8eb9aa3bbc1397e438bc06493808a049, type: 3}
+  - {fileID: 2286294091712599714, guid: 21c40f96519420e41a1d3b88cdab4008, type: 3}
+  - {fileID: 8261090503610277283, guid: 4d13ef2a87599eb40b216ecd1976fee6, type: 3}
