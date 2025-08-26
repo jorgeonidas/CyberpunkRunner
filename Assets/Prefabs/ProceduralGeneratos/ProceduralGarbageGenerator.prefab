@@ -49,13 +49,15 @@ MonoBehaviour:
   - {fileID: 1643597253178200, guid: 6f8a5731d498a7941ae27c87225b97f7, type: 3}
   - {fileID: 1381458013738074, guid: 841772c057afff444a19598c79562f6c, type: 3}
   - {fileID: 1161437526377032, guid: 0a257c3bc10a86c4abdc82e3baec91e1, type: 3}
-  - {fileID: 1128724691704192, guid: c827c24f41bb1224aa742a2a9b9f2aa4, type: 3}
-  - {fileID: 1284679517027656, guid: 49403e0fe06c5a94caf8def848fd9941, type: 3}
+  - {fileID: 1470531676708312, guid: 712c5d98f7d5ef947ba35471213eefd1, type: 3}
+  - {fileID: 1978802262545914, guid: 48d192eb8a23949438252bf695765d4d, type: 3}
+  - {fileID: 1107258382206988, guid: f4e7aafddc507f340b682560df2b00f6, type: 3}
+  - {fileID: 1666473614531686, guid: e3fae3baab587ff4f92eebeebe23cb58, type: 3}
   _size: {x: 6, y: 14}
-  _densityPerSquareMeter: 0.07
-  _minSeparation: 0.6
+  _densityPerSquareMeter: 0.02
+  _minSeparation: 0.2
   _attemptsMultiplier: 15
-  _seed: 1760422862
+  _seed: 907157731
   _autoRandomSeed: 1
   _yRotationRange: {x: 0, y: 360}
   _uniformScaleRange: {x: 1, y: 1}
