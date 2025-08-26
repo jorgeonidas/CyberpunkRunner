@@ -86,4 +86,4 @@ MonoBehaviour:
   - {fileID: 7029806738123185508, guid: 660f8f2cb982d6e4aab52ea368258e5c, type: 3}
   - {fileID: 7263855142833823311, guid: bbd68853dc21cf04f83dd12e4910e648, type: 3}
   - {fileID: 7995451243018199682, guid: c5a2312f8443eff41afe0b3c31e316d3, type: 3}
-  _testAutoBuild: 1
+  _testAutoBuild: 0

@@ -11,23 +11,17 @@ public class BuildingGenerator : MonoBehaviour
     public GameObject[] baseParts;
     public GameObject[] middleParts;
     public GameObject[] topParts;
-    [SerializeField] private bool _testAutoBuild = false;
     private Material _pickedMaterial;
-    private void Start()
-    {
-        if (_testAutoBuild)
-        {
-            Build();
-        }
-    }
+
+    [ContextMenu("Generate")]
     public void Build()
     {
+        ClearBuilding();
 
         int targetPieces = Random.Range(minPieces, maxPieces);
         _pickedMaterial = materialVariants[Random.Range(0, materialVariants.Length)];
         float heightOffset = 0;
         heightOffset += SpawnPieceLayer(baseParts, heightOffset);
-
 
         for (int i = 2; i < targetPieces; i++)
         {
@@ -67,5 +61,20 @@ public class BuildingGenerator : MonoBehaviour
         }
     }
 
-
+    private void ClearBuilding()
+    {
+        while (transform.childCount > 0)
+        {
+            Transform child = transform.GetChild(0);
+            //when is called from context menu
+            if (Application.isEditor && !Application.isPlaying)
+            {
+                DestroyImmediate(child.gameObject);
+            }
+            else
+            {
+                Destroy(child.gameObject);
+            }
+        }
+    }
 }
