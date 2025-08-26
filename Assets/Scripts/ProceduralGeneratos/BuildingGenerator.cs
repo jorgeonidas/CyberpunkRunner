@@ -31,6 +31,12 @@ public class BuildingGenerator : MonoBehaviour
         SpawnPieceLayer(topParts, heightOffset);
     }
 
+    [ContextMenu("Clear Generated")]
+    public void ClearGenerate()
+    {
+        ClearBuilding();
+    }
+
     float SpawnPieceLayer(GameObject[] pieceArray, float inputHeight)
     {
         Transform randomTransform = pieceArray[Random.Range(0, pieceArray.Length)].transform;
