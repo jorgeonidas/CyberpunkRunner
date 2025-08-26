@@ -49,14 +49,23 @@ public class BuildingGenerator : MonoBehaviour
             Mesh cloneMesh = meshFilter.mesh;
             Bounds bounds = cloneMesh.bounds;
             heightOffset = bounds.size.y;
-
-            if (clone.TryGetComponent<MeshRenderer>(out MeshRenderer meshRenderer))
-            {
-                meshRenderer.material = _pickedMaterial;
-            }
         }
+        SetMaterialRecursively(clone, _pickedMaterial);
         clone.transform.SetParent(this.transform);
         return heightOffset;
     }
+
+    void SetMaterialRecursively(GameObject obj, Material material)
+    {
+        if (obj.TryGetComponent<MeshRenderer>(out MeshRenderer meshRenderer))
+        {
+            meshRenderer.material = material;
+        }
+        foreach (Transform child in obj.transform)
+        {
+            SetMaterialRecursively(child.gameObject, material);
+        }
+    }
+
 
 }
