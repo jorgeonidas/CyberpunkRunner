@@ -45,11 +45,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PropSpawner
   _propPrefabs:
-  - {fileID: 1790194864708156, guid: b9aa404ea67c0ae41b1fc669a5b71369, type: 3}
-  - {fileID: 1524463652553156, guid: b282c4fd850a09140a26df0c2e17439e, type: 3}
-  - {fileID: 1284679517027656, guid: 49403e0fe06c5a94caf8def848fd9941, type: 3}
-  - {fileID: 1776388541684078, guid: a56da3c44063ebe4e8fdac7b93bf1969, type: 3}
-  - {fileID: 1128724691704192, guid: c827c24f41bb1224aa742a2a9b9f2aa4, type: 3}
-  - {fileID: 1341259235766940, guid: 7f93e1c20bd4df647865b27d7d1aaf19, type: 3}
+  - {fileID: 5162621426900584458, guid: bf0f03741b7771b4d97b2d277cf91548, type: 3}
+  - {fileID: 7577710958219940087, guid: ca1540b95c8fbff47b917ca60295b27c, type: 3}
+  - {fileID: 4260754557559009154, guid: 6cb8d3fbe13d25a4f8bbb67f35dde342, type: 3}
+  - {fileID: 1964036544443410063, guid: 9990ac3e8b287a046990c477052f3083, type: 3}
+  - {fileID: 7480030764517099237, guid: 9eced13d24be36c4d937527442d48fc9, type: 3}
+  - {fileID: 3635450484775330356, guid: bbe2e51973430b44bbd35f135b2ad1c0, type: 3}
   _parent: {fileID: 8183996337960793896}
   _spawnOnStart: 1
