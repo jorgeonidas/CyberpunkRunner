@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54a37d6885b4f6f499d77d39102171ef, type: 3}
   m_Name: StoreCatalog
   m_EditorClassIdentifier: Assembly-CSharp::StoreCatalog
-  _items: []
+  _items:
+  - {fileID: 11400000, guid: acf427e29a2fba344b0d9905eaf6b377, type: 2}
+  - {fileID: 11400000, guid: d76e120e47cd1354a88f3dac04edec8d, type: 2}
+  - {fileID: 11400000, guid: b59ff9f40cff34b4987ad638a3715a6c, type: 2}

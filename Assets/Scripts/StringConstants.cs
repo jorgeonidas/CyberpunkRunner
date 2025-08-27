@@ -8,6 +8,7 @@ public static class StringConstants
     public const string Coin = "Coin";
     public const string DestroyedSufix = "_Destroyed";
     public const string VehicleObstaclePrefix = "VehicleObstacle_";
+    public const string DefaultItem = "Default";
     public class AnimatioTriggers
     {
         public static readonly string HIT = "Hit";
@@ -31,7 +32,7 @@ public static class StringConstants
     {
         public const string MainMenu = "MainMenu";
         public const string SettingsMenu = "SettingsMenu";
-        // public const string ShopMenu = "ShopMenu";
+        public const string ShopMenu = "ShopMenu";
         // public const string CharacterSelectionMenu = "CharacterSelectionMenu";
     }
 }

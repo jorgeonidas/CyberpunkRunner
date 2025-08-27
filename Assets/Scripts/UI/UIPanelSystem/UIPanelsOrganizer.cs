@@ -8,7 +8,6 @@ public class UIPanelsOrganizer : MonoBehaviour, IUIPanelsOrganizer
     {
         _panelCatalog.Initialize();
     }
-
     public void Show(string panelId)
     {
         if (_panelCatalog.TryGet(panelId, out IUIPanel panel))

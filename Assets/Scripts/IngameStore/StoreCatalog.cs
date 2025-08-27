@@ -15,6 +15,6 @@ public class StoreCatalog : ScriptableObject
 
     public IEnumerable<StoreItemSO> All => _items;
     public StoreItemSO GetById(string id) => _byId[id];
-    public IEnumerable<StoreItemSO> ByCategory(ProductCategory cat) =>
+    public IEnumerable<StoreItemSO> GetByCategory(ProductCategory cat) =>
         _items.Where(i => i.Category == cat);
 }

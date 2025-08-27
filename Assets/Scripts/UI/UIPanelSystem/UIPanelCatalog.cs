@@ -17,4 +17,12 @@ public class UIPanelCatalog : MonoBehaviour
 
     public bool TryGet(string id, out IUIPanel panel) => _panels.TryGetValue(id, out panel);
     public IEnumerable<IUIPanel> AllPanels() => _panels.Values;
+
+    public void HideAllPanels()
+    {
+        foreach (var panel in AllPanels())
+        {
+            panel.Hide();
+        }
+    }
 }
