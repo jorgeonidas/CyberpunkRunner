@@ -146,6 +146,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FX_Flame_Booster_01
       objectReference: {fileID: 0}
+    - target: {fileID: 1325620532855614, guid: eab0ff9626d52cf45b04b5d03faecc2b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4634224576167428, guid: eab0ff9626d52cf45b04b5d03faecc2b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -188,7 +192,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 198740915752801168, guid: eab0ff9626d52cf45b04b5d03faecc2b, type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 0.5
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 198740915752801168, guid: eab0ff9626d52cf45b04b5d03faecc2b, type: 3}
       propertyPath: InitialModule.startSize.minMaxState

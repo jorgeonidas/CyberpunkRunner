@@ -51,6 +51,7 @@ public class PlayerVFXHandler : MonoBehaviour, IGameStateChangedListener
 
     private void Update()
     {
+        _vehicleExhaust.SetFlameSize(_player.CurrentNormalizedSpeed);
         if (CurrentGameState == GameState.Paused)
         {
             return;

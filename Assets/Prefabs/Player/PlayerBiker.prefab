@@ -366,6 +366,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _particleSystem: {fileID: 4380143952579572466}
+  _maxParticleSize: 0.8
+  _floatMinParticleSize: 0.2
 --- !u!114 &8405102246347163153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -606,6 +608,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 198740915752801168, guid: eab0ff9626d52cf45b04b5d03faecc2b, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198740915752801168, guid: eab0ff9626d52cf45b04b5d03faecc2b, type: 3}
       propertyPath: InitialModule.startSize.scalar
       value: 0.5
       objectReference: {fileID: 0}
@@ -619,6 +625,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 198740915752801168, guid: eab0ff9626d52cf45b04b5d03faecc2b, type: 3}
       propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198911688229030356, guid: eab0ff9626d52cf45b04b5d03faecc2b, type: 3}
+      propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 199280525087405178, guid: eab0ff9626d52cf45b04b5d03faecc2b, type: 3}
