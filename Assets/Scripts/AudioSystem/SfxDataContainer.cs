@@ -8,6 +8,7 @@ public class SfxDataContainer : ScriptableObject
     [Header("Sound Tracks")]
     [SerializeField] private SerializedDictionary<SoundTrackId, SfxData> _soundTrackDictionary;
     [SerializeField] private SerializedDictionary<SfxId, SfxData> _sfxDataDictionary;
+    [SerializeField] private SerializedDictionary<UISfxId, SfxData> _uiSfxDataDictionary;
     [SerializeField] private SerializedDictionary<LoopSfxId, SfxData> _loopSfxDataDictionary;
 
     public SfxData GetSfxData(SfxId sfxId)
@@ -17,6 +18,16 @@ public class SfxDataContainer : ScriptableObject
             return sfxData;
         }
         Debug.LogWarning($"SFX Data not found for ID: {sfxId}");
+        return null;
+    }
+
+    public SfxData GetUISfxData(UISfxId uISfxId)
+    {
+        if (_uiSfxDataDictionary.TryGetValue(uISfxId, out var sfxData))
+        {
+            return sfxData;
+        }
+        Debug.LogWarning($"SFX Data not found for ID: {uISfxId}");
         return null;
     }
 

@@ -117,6 +117,19 @@ public class SfxManager : MonoBehaviour
         }
     }
 
+    public void PlayUISfx(UISfxId uISfxId)
+    {
+        var sfxData = _sfxDataContainer.GetUISfxData(uISfxId);
+        if (sfxData != null && sfxData.Clips != null)
+        {
+            StartPlaySfx(sfxData.GetAudioClip(), Vector3.zero, sfxData.Volume);
+        }
+        else
+        {
+            Debug.LogWarning($"UI SFX with ID '{uISfxId}' not found or has no clip assigned.");
+        }
+    }
+
     private void StartPlaySfx(AudioClip clip, Vector3 position, float volume = 1f, float pitch = 1f)
     {
         float totalVolume = volume; // Apply current SFX volume setting

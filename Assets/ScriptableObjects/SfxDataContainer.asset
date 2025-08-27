@@ -28,6 +28,18 @@ MonoBehaviour:
       Value: {fileID: 11400000, guid: 25ecbb8c8c938124da798e352255ba91, type: 2}
     - Key: 5
       Value: {fileID: 11400000, guid: b23f725a85c47ee40b08a3dd50d9c8b1, type: 2}
+  _uiSfxDataDictionary:
+    _serializedList:
+    - Key: 0
+      Value: {fileID: 11400000, guid: 6e9ad2afd45e618488a0d7acb3e4fc64, type: 2}
+    - Key: 1
+      Value: {fileID: 11400000, guid: a291cb2392619e24fbeb6fa0ad216864, type: 2}
+    - Key: 2
+      Value: {fileID: 11400000, guid: 07d5c11e78472344ca6f834f40747913, type: 2}
+    - Key: 3
+      Value: {fileID: 11400000, guid: 01a2f781d62914d4cb942e4955a13b7a, type: 2}
+    - Key: 4
+      Value: {fileID: 11400000, guid: e39d4e938088bed4c8bf03bf79cc00c6, type: 2}
   _loopSfxDataDictionary:
     _serializedList:
     - Key: 3

@@ -10,6 +10,16 @@ public class SfxIdEnum
         SpeedPowerup = 3,
         InvincibilityPowerup = 4,
         Whoosh = 5,
+        //UI
+    }
+
+    public enum UISfxId
+    {
+        click = 0,
+        back = 1,
+        slide = 2,
+        confirm = 3,
+        cancel = 4,
     }
 
     public enum LoopSfxId

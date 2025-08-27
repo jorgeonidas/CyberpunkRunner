@@ -29,6 +29,7 @@ public class ConfirmationPopup : AbstractUIPanel
         _confirmButton.onClick.AddListener(() =>
         {
             onConfirm?.Invoke();
+            SfxManager.Instance?.PlayUISfx(SfxIdEnum.UISfxId.confirm);
             Hide();
         });
 
@@ -39,6 +40,7 @@ public class ConfirmationPopup : AbstractUIPanel
             _cancelButton.onClick.AddListener(() =>
             {
                 onCancel?.Invoke();
+                SfxManager.Instance?.PlayUISfx(SfxIdEnum.UISfxId.cancel);
                 Hide();
             });
         }
