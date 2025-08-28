@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.IO;
+using Newtonsoft.Json;
 
 
 public static class SaveSystem
@@ -8,17 +9,27 @@ public static class SaveSystem
 
     public static void SaveUserData(UserData userData)
     {
-        string json = JsonUtility.ToJson(userData, true);
+        string json = JsonConvert.SerializeObject(userData, Formatting.Indented);
         File.WriteAllText(filePath, json);
         Debug.Log("Datos guardados en: " + filePath);
     }
 
     public static UserData LoadUserData()
     {
+        Debug.Log($"Cargando datos desde: {filePath}");
         if (File.Exists(filePath))
         {
             string json = File.ReadAllText(filePath);
-            UserData userData = JsonUtility.FromJson<UserData>(json);
+
+            // Deserializar
+            UserData userData = JsonConvert.DeserializeObject<UserData>(json);
+
+            if (userData == null)
+            {
+                Debug.LogWarning("Error al deserializar, creando datos nuevos.");
+                return new UserData();
+            }
+
             Debug.Log("Datos cargados desde: " + filePath);
             return userData;
         }

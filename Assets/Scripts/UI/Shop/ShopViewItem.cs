@@ -20,6 +20,12 @@ public class ShopViewItem : MonoBehaviour
         OnItemSelected = onItemSelected;
     }
 
+    public void RefreshBadges(bool onwed, bool equipped)
+    {
+        _ownedBadge.SetActive(onwed);
+        _equippedBadge.SetActive(equipped);
+    }
+
     public void OnClick()
     {
         OnItemSelected?.Invoke(_storeItem.Id, _storeItem.Category);

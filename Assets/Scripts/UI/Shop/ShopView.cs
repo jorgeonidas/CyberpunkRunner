@@ -22,6 +22,9 @@ public class ShopView : MonoBehaviour
             {
                 var newItem = Instantiate(_shopViewItemPrefab, _itemsContainer);
                 newItem.Initialize(item, ItemSelected);
+                bool owned = PlayerDataManager.CheckIfProductIsOwned(_productCategory, item.Id);
+                bool equipped = PlayerDataManager.CheckIfProductIsEquipped(_productCategory, item.Id);
+                newItem.RefreshBadges(owned, equipped);
                 _shopItems.Add(newItem);
             }
         }
@@ -36,11 +39,6 @@ public class ShopView : MonoBehaviour
         }
 
         //testing: apply paint to bike
-
-        //todo: 
-        //check if owned to show the equip button
-        //if is equipped show the button unequip and display the default material
-        //if not owner showthe purchase button
         OnItemSelected?.Invoke(productId, category);
     }
 }

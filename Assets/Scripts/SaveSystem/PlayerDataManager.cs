@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -14,22 +15,23 @@ public static class PlayerDataManager
 
     public static int GetRecordDistance()
     {
-        return _currentUserData.recordDistance;
+        return _currentUserData.RecordDistance;
     }
 
     public static void SetRecordDistance(int newRecordDistance)
     {
-        _currentUserData.recordDistance = newRecordDistance;
+        _currentUserData.RecordDistance = newRecordDistance;
         Debug.Log("Record Distance actualizado a: " + newRecordDistance);
     }
 
     public static int GetCoins()
     {
-        return _currentUserData.coinsCollected;
+        return _currentUserData.CoinsCollected;
     }
 
     public static UserGameSettings GetUserGameSettings()
     {
+        Debug.Log($"user game settings? {_currentUserData != null} {_currentUserData.userGameSettings != null}");
         return _currentUserData.userGameSettings;
     }
 
@@ -40,7 +42,7 @@ public static class PlayerDataManager
 
     public static void SetCoins(int newCoinsCollected)
     {
-        _currentUserData.coinsCollected = newCoinsCollected;
+        _currentUserData.CoinsCollected = newCoinsCollected;
         Debug.Log("Coins Collected actualizado a: " + newCoinsCollected);
     }
 
@@ -49,6 +51,33 @@ public static class PlayerDataManager
         _currentUserData.userGameSettings = userGameSettings;
         Debug.Log("User Game Settings actualizado.");
     }
+
+    public static List<string> GetOwnedProductsByCategory(ProductCategory category)
+    {
+        return _currentUserData.GetOwnedProductsByCategory(category);
+    }
+
+    public static bool CheckIfProductIsOwned(ProductCategory category, string productId)
+    {
+        return _currentUserData.CheckIfProductIsOwned(category, productId);
+    }
+
+    public static bool CheckIfProductIsEquipped(ProductCategory category, string productId)
+    {
+        return _currentUserData.CheckIfProductIsEquipped(category, productId);
+    }
+
+
+    public static void AddOwnedProduct(ProductCategory category, string productId)
+    {
+        _currentUserData.AddOwnedProduct(category, productId);
+    }
+
+    public static void Equip(ProductCategory category, string productId)
+    {
+        _currentUserData.Equip(category, productId);
+    }
+
 
     public static void SaveData()
     {

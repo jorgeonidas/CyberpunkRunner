@@ -23,6 +23,5 @@ public class FloatSettingUIItem : SettingsUIItemBase<FloatSettingId, float>
     {
         UpdateValue(newValue);
         OnValueChanged?.Invoke(settingId, newValue);
-        Debug.Log($"Setting {settingId} updated to {newValue}");
     }
 }
