@@ -4,24 +4,65 @@ using UnityEngine.UI;
 
 public class ShopPanel : AbstractUIPanel
 {
-    public static Action<string, ProductCategory> OnItemSelected;
+    public static Action<ProductCategory, string> OnItemSelected;
     public override string Id => StringConstants.MainMenuPanels.ShopMenu;
     [Header("Shop Elements")]
     [SerializeField] Button _equipButton;
     [SerializeField] GameObject _equippedLabel;
     [SerializeField] Button _purchaseButton;
-    //[SerializeField] Ted _purchaseButton;
     [SerializeField] ShopView _paintShop;
+    [SerializeField] StoreCatalog _catalog;
+
+    StoreItemSO _selectedStoreItem;
+    private void Start() {
+        //TODO: a manager to handle all data???
+        _catalog.Init();
+    }
+
+    private void OnEnable()
+    {
+        PlayerDataManager.OnItemEquipped += OnItemEquipped;
+    }
+
+    private void OnDisable()
+    {
+        PlayerDataManager.OnItemEquipped -= OnItemEquipped;    
+    }
 
     public override void Show()
     {
-        _paintShop.InitializeShopItems(ItemSelected);
+        _paintShop.InitializeShopItems(_catalog, ItemSelected);
         base.Show();
     }
 
     private void ItemSelected(string itemId, ProductCategory category)
     {
         Debug.Log($"itemId {itemId} category {category}");
-        OnItemSelected?.Invoke(itemId, category );
+        HandleSelectedItemState(category ,itemId);
+        OnItemSelected?.Invoke(category, itemId);
+    }
+
+    private void HandleSelectedItemState(ProductCategory category, string itemId)
+    {
+        _selectedStoreItem = _catalog.GetById(itemId);
+        bool owned = PlayerDataManager.CheckIfProductIsOwned(category, itemId);
+        _purchaseButton.gameObject.SetActive(!owned);
+
+        bool isEquipped = PlayerDataManager.CheckIfProductIsEquipped(category, itemId);
+        _equipButton.gameObject.SetActive(owned && !isEquipped);
+        _equippedLabel.gameObject.SetActive(owned && isEquipped);
+    }
+
+    private void OnItemEquipped(ProductCategory category, string arg2)
+    {
+        HandleSelectedItemState(category, _selectedStoreItem.Id);
+        //refresh items statuses
+        _paintShop.RefreshProductsList();
+    }
+
+    public void OnEquiButtonPressed()
+    {
+        Debug.Log($"Try equip {_selectedStoreItem.Id}");
+        PlayerDataManager.Equip(_selectedStoreItem.Category, _selectedStoreItem.Id);
     }
 }

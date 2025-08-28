@@ -18,11 +18,13 @@ public class PlayerBikePainter : MonoBehaviour
                                       .ToArray();
         ApplyPaint(_currentPaintId);
         ShopPanel.OnItemSelected += OnItemSelected;
+        PlayerDataManager.OnItemEquipped += OnItemSelected;
     }
 
-    void OnDisable()
+    private void OnDestroy()
     {
         ShopPanel.OnItemSelected -= OnItemSelected;
+        PlayerDataManager.OnItemEquipped -= OnItemSelected;
     }
 
     public void ApplyPaint(string paintId)
@@ -35,7 +37,7 @@ public class PlayerBikePainter : MonoBehaviour
         }
     }
 
-    private void OnItemSelected(string productId, ProductCategory category)
+    private void OnItemSelected(ProductCategory category, string productId)
     {
         if (category == ProductCategory.Paint)
         {

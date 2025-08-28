@@ -344,7 +344,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d4cfe58665c2f843b3aeca8b904fc2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShopView
-  _catalog: {fileID: 11400000, guid: 7bdaa2ea8d05c4546afe219e6093cd0e, type: 2}
   _productCategory: 0
   _shopViewItemPrefab: {fileID: 5963980427210326192, guid: 7fd2d52b356ef1648a5729c91c3d631e, type: 3}
   _itemsContainer: {fileID: 665734872}
@@ -1961,6 +1960,7 @@ MonoBehaviour:
   _equippedLabel: {fileID: 475699344}
   _purchaseButton: {fileID: 1311355074271980017}
   _paintShop: {fileID: 324602597}
+  _catalog: {fileID: 11400000, guid: 7bdaa2ea8d05c4546afe219e6093cd0e, type: 2}
 --- !u!1 &1228140830
 GameObject:
   m_ObjectHideFlags: 0
@@ -3141,7 +3141,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2452846700351041806}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1110383864}
+        m_TargetAssemblyTypeName: ShopPanel, Assembly-CSharp
+        m_MethodName: OnEquiButtonPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2452846700351041795
 GameObject:
   m_ObjectHideFlags: 0

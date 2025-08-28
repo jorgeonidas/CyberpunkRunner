@@ -5,6 +5,7 @@ using UnityEngine;
 
 public static class PlayerDataManager
 {
+    public static Action<ProductCategory, string> OnItemEquipped;
     public static event Action OnCurrencyChanged;
     private static UserData _currentUserData;
     public static void Initialize()
@@ -76,6 +77,8 @@ public static class PlayerDataManager
     public static void Equip(ProductCategory category, string productId)
     {
         _currentUserData.Equip(category, productId);
+        SaveData();
+        OnItemEquipped?.Invoke(category, productId);
     }
 
 
