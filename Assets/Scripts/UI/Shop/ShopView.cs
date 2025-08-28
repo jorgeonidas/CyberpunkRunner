@@ -21,10 +21,10 @@ public class ShopView : MonoBehaviour
             foreach (StoreItemSO item in _products)
             {
                 var newItem = Instantiate(_shopViewItemPrefab, _itemsContainer);
-                newItem.Initialize(item, ItemSelected);
                 bool owned = PlayerDataManager.CheckIfProductIsOwned(_productCategory, item.Id);
                 bool equipped = PlayerDataManager.CheckIfProductIsEquipped(_productCategory, item.Id);
-                newItem.RefreshBadges(owned, equipped);
+                Debug.Log($"_productCategory {_productCategory} item.Id {item.Id} owned {owned} equipped {equipped}");
+                newItem.Initialize(item, ItemSelected, owned, equipped);
                 _shopItems.Add(newItem);
             }
         }
