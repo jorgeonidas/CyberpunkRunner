@@ -111,6 +111,7 @@ GameObject:
   - component: {fileID: 2282492392911993543}
   - component: {fileID: 4837316921628281203}
   - component: {fileID: 2581585842125369548}
+  - component: {fileID: 6358090529405687154}
   - component: {fileID: 7331299940704789771}
   m_Layer: 0
   m_Name: PlayerBiker
@@ -457,6 +458,22 @@ MonoBehaviour:
     DissipationDistance: 100
     PropagationSpeed: 343
   DefaultVelocity: {x: 0, y: -1, z: 0}
+--- !u!114 &6358090529405687154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8028125100094935181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d561d90b329414e4cb5136e647c1851e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CosmetisInventory
+  _cosmeticsSlots:
+    _serializedList:
+    - Key: 0
+      Value: {fileID: 7331299940704789771}
 --- !u!114 &7331299940704789771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -469,7 +486,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e71b4a96c75e83d43b875ad1e07eb750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerBikePainter
-  _storeCatalog: {fileID: 11400000, guid: 7bdaa2ea8d05c4546afe219e6093cd0e, type: 2}
   _meshRenderer: {fileID: 7538738527826382924}
 --- !u!1001 &3009105983800780847
 PrefabInstance:

@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class ShopPanel : AbstractUIPanel
 {
-    public static Action<ProductCategory, string> OnItemSelected;
     public override string Id => StringConstants.MainMenuPanels.ShopMenu;
     [Header("Shop Elements")]
     [SerializeField] Button _equipButton;
@@ -12,21 +11,22 @@ public class ShopPanel : AbstractUIPanel
     [SerializeField] Button _purchaseButton;
     [SerializeField] ShopView _paintShop;
     StoreCatalog _catalog => StoreCatalog.Instance;
-
     StoreItemSO _selectedStoreItem;
-    private void Start() {
+    
+    private void Start()
+    {
         //TODO: a manager to handle all data???
         _catalog.Init();
     }
 
     private void OnEnable()
     {
-        //UserDataServiceSO.Instance.OnItemEquipped += OnItemEquipped;
+        UserDataServiceSO.Instance.OnEquippedChanged += OnItemEquipped;
     }
 
     private void OnDisable()
     {
-        //UserDataServiceSO.Instance.OnItemEquipped -= OnItemEquipped;    
+        UserDataServiceSO.Instance.OnEquippedChanged -= OnItemEquipped;    
     }
 
     public override void Show()
@@ -38,8 +38,9 @@ public class ShopPanel : AbstractUIPanel
     private void ItemSelected(string itemId, ProductCategory category)
     {
         Debug.Log($"itemId {itemId} category {category}");
-        HandleSelectedItemState(category ,itemId);
-        OnItemSelected?.Invoke(category, itemId);
+        HandleSelectedItemState(category, itemId);
+        // OnItemSelected?.Invoke(category, itemId);
+        UserDataServiceSO.Instance.OnPreviewItem?.Invoke(category, itemId);
     }
 
     private void HandleSelectedItemState(ProductCategory category, string itemId)

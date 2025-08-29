@@ -2,46 +2,40 @@ using System.Linq;
 using UnityEngine;
 using System;
 
-public class PlayerBikePainter : MonoBehaviour
+public class PlayerBikePainter : AbstractInventorySlot
 {
-    //TODO: for testing we need to pull the store catallog from somehere
-    // [SerializeField] StoreCatalog _storeCatalog;
     [Header("Bike Mesh filter")]
     [SerializeField] MeshRenderer _meshRenderer;
-    //PaintItemSO[] availablePaints;
-    private string _currentPaintId = StringConstants.DefaultItem;
+    PaintItemSO _defaultPaint;
+    PaintItemSO _equippedItem;
 
+
+    public override ProductCategory ProductCategory => ProductCategory.Paint;
     private void Start()
     {
-        // availablePaints = _storeCatalog.GetByCategory(ProductCategory.Paint)
-        //                               .OfType<PaintItemSO>()
-        //                               .ToArray();
-        ApplyPaint(_currentPaintId);
-        ShopPanel.OnItemSelected += OnItemSelected;
-       // UserDataServiceSO.Instance.OnItemEquipped += OnItemSelected;
+        _defaultPaint = StoreCatalog.Instance.GetStoreItemSO(ProductCategory, StringConstants.DefaultItem) as PaintItemSO;
     }
 
-    private void OnDestroy()
+    public void ApplyPaint(Material material)
     {
-        ShopPanel.OnItemSelected -= OnItemSelected;
-        //PlayerDataManager.OnItemEquipped -= OnItemSelected;
+        _meshRenderer.material = material;
     }
 
-    public void ApplyPaint(string paintId)
+    public override void Equip(StoreItemSO storeItemSO)
     {
-        // var currentPaint = availablePaints.Where(x => x.Id == paintId).FirstOrDefault();
-        // Debug.Log($"paintId {paintId} found? {currentPaint != null}");
-        // if (currentPaint != null && _meshRenderer != null)
-        // {
-        //     _meshRenderer.material = currentPaint.PaintMaterial;
-        // }
+        var paintProduct = storeItemSO as PaintItemSO;
+        ApplyPaint(paintProduct.PaintMaterial);
+        _equippedItem = paintProduct;
     }
 
-    private void OnItemSelected(ProductCategory category, string productId)
+    public override void Preview(StoreItemSO storeItemSO)
     {
-        if (category == ProductCategory.Paint)
-        {
-            ApplyPaint(productId);
-        }
+        var paintProduct = storeItemSO as PaintItemSO;
+        ApplyPaint(paintProduct.PaintMaterial);
+    }
+
+    public override void Unequip()
+    {
+        Equip(_defaultPaint);
     }
 }

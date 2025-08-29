@@ -7,13 +7,13 @@ using Newtonsoft.Json.Converters;
 [CreateAssetMenu(fileName = "UserDataServiceSO", menuName = "Game/Services/UserDataService")]
 public class UserDataServiceSO : SingletonScriptableObject<UserDataServiceSO>
 {
-
     private UserData _data;
     private JsonSerializerSettings _jsonSettings;
 
     public event Action OnCurrencyChanged;
     public event Action OnInventoryChanged;
     public event Action<ProductCategory, string> OnEquippedChanged;
+    public Action<ProductCategory, string> OnPreviewItem;
 
     [Header("Storage")]
     [SerializeField] private string fileName = "userdata.json";
@@ -22,7 +22,8 @@ public class UserDataServiceSO : SingletonScriptableObject<UserDataServiceSO>
     public void Initialize()
     {
         //Json Config
-        _jsonSettings = new JsonSerializerSettings {
+        _jsonSettings = new JsonSerializerSettings
+        {
             Formatting = Formatting.Indented
         };
         _jsonSettings.Converters.Add(new StringEnumConverter());
@@ -95,5 +96,10 @@ public class UserDataServiceSO : SingletonScriptableObject<UserDataServiceSO>
         _data.Equip(category, productId);
         Save();
         OnEquippedChanged?.Invoke(category, productId);
+    }
+
+    public void Preview(ProductCategory category, string productId)
+    {
+        OnPreviewItem?.Invoke(category, productId);
     }
 }

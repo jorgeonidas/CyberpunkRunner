@@ -58,9 +58,9 @@ public class UserSettingsController : SingletonScriptableObject<UserSettingsCont
             switch (settingType)
             {
                 case FloatSettingId.MusicVolume:
-                    return _userGameSettings.musicVolume;
+                    return _userGameSettings != null ? _userGameSettings.musicVolume : 1;
                 case FloatSettingId.SFXVolume:
-                    return _userGameSettings.sfxVolume;
+                    return _userGameSettings != null ? _userGameSettings.sfxVolume : 1;
                 default:
                     Debug.LogWarning($"Unhandled setting type: {settingType}");
                     return 0f;

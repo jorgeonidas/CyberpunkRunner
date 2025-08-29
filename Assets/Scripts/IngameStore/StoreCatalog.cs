@@ -17,4 +17,9 @@ public class StoreCatalog : SingletonScriptableObject<StoreCatalog>
     public StoreItemSO GetById(string id) => _byId[id];
     public IEnumerable<StoreItemSO> GetByCategory(ProductCategory cat) =>
         _items.Where(i => i.Category == cat);
+
+    public StoreItemSO GetStoreItemSO(ProductCategory cat, string id)
+    {
+        return GetByCategory(cat).FirstOrDefault(i => i.Id == id);
+    }
 }
