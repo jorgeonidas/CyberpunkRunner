@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "StoreCatalog", menuName = "Ingame Store/StoreCatalog")]
-public class StoreCatalog : ScriptableObject
+public class StoreCatalog : SingletonScriptableObject<StoreCatalog>
 {
     [SerializeField] private List<StoreItemSO> _items = new();
     private Dictionary<string, StoreItemSO> _byId;

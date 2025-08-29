@@ -5,17 +5,17 @@ using System;
 public class PlayerBikePainter : MonoBehaviour
 {
     //TODO: for testing we need to pull the store catallog from somehere
-    [SerializeField] StoreCatalog _storeCatalog;
+    // [SerializeField] StoreCatalog _storeCatalog;
     [Header("Bike Mesh filter")]
     [SerializeField] MeshRenderer _meshRenderer;
-    PaintItemSO[] availablePaints;
+    //PaintItemSO[] availablePaints;
     private string _currentPaintId = StringConstants.DefaultItem;
 
     private void Start()
     {
-        availablePaints = _storeCatalog.GetByCategory(ProductCategory.Paint)
-                                      .OfType<PaintItemSO>()
-                                      .ToArray();
+        // availablePaints = _storeCatalog.GetByCategory(ProductCategory.Paint)
+        //                               .OfType<PaintItemSO>()
+        //                               .ToArray();
         ApplyPaint(_currentPaintId);
         ShopPanel.OnItemSelected += OnItemSelected;
        // UserDataServiceSO.Instance.OnItemEquipped += OnItemSelected;
@@ -29,12 +29,12 @@ public class PlayerBikePainter : MonoBehaviour
 
     public void ApplyPaint(string paintId)
     {
-        var currentPaint = availablePaints.Where(x => x.Id == paintId).FirstOrDefault();
-        Debug.Log($"paintId {paintId} found? {currentPaint != null}");
-        if (currentPaint != null && _meshRenderer != null)
-        {
-            _meshRenderer.material = currentPaint.PaintMaterial;
-        }
+        // var currentPaint = availablePaints.Where(x => x.Id == paintId).FirstOrDefault();
+        // Debug.Log($"paintId {paintId} found? {currentPaint != null}");
+        // if (currentPaint != null && _meshRenderer != null)
+        // {
+        //     _meshRenderer.material = currentPaint.PaintMaterial;
+        // }
     }
 
     private void OnItemSelected(ProductCategory category, string productId)

@@ -11,7 +11,7 @@ public class ShopPanel : AbstractUIPanel
     [SerializeField] GameObject _equippedLabel;
     [SerializeField] Button _purchaseButton;
     [SerializeField] ShopView _paintShop;
-    [SerializeField] StoreCatalog _catalog;
+    StoreCatalog _catalog => StoreCatalog.Instance;
 
     StoreItemSO _selectedStoreItem;
     private void Start() {

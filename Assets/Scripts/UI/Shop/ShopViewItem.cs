@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ShopViewItem : MonoBehaviour
 {
-    public Action<string, ProductCategory> OnItemSelected;
+    private Action<string, ProductCategory> OnItemSelected;
     [SerializeField] Image _itemIcon;
     [SerializeField] GameObject _ownedBadge;
     [SerializeField] GameObject _equippedBadge;
