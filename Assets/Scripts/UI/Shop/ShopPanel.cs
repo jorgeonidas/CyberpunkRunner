@@ -13,12 +13,6 @@ public class ShopPanel : AbstractUIPanel
     StoreCatalog _catalog => StoreCatalog.Instance;
     StoreItemSO _selectedStoreItem;
     
-    private void Start()
-    {
-        //TODO: a manager to handle all data???
-        _catalog.Init();
-    }
-
     private void OnEnable()
     {
         UserDataServiceSO.Instance.OnEquippedChanged += OnItemEquipped;
@@ -39,8 +33,7 @@ public class ShopPanel : AbstractUIPanel
     {
         Debug.Log($"itemId {itemId} category {category}");
         HandleSelectedItemState(category, itemId);
-        // OnItemSelected?.Invoke(category, itemId);
-        UserDataServiceSO.Instance.OnPreviewItem?.Invoke(category, itemId);
+        UserDataServiceSO.Instance.Preview(category, itemId);
     }
 
     private void HandleSelectedItemState(ProductCategory category, string itemId)
@@ -57,7 +50,6 @@ public class ShopPanel : AbstractUIPanel
     private void OnItemEquipped(ProductCategory category, string arg2)
     {
         HandleSelectedItemState(category, _selectedStoreItem.Id);
-        //refresh items statuses
         _paintShop.RefreshProductsList();
     }
 
