@@ -56,11 +56,6 @@ public class SfxManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    private void Start()
-    {
-
-    }
-
     private void Update()
     {
         foreach (var loopSfx in _activeAudioSourcesLoops.Values)

@@ -45,22 +45,4 @@ public class ScenesManager : MonoBehaviour
 
         Instance._fadder.FadeOut();
     }
-
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-    private static void EnsureSceneManagerExists()
-    {
-        if (Instance == null)
-        {
-            GameObject prefab = Resources.Load<GameObject>("ScenesManager");
-            if (prefab != null)
-            {
-                GameObject go = GameObject.Instantiate(prefab);
-                DontDestroyOnLoad(go);
-            }
-            else
-            {
-                Debug.LogError("ScenesManager prefab not found in Resources!");
-            }
-        }
-    }
 }
