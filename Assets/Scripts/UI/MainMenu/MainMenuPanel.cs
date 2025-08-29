@@ -15,7 +15,7 @@ public class MainMenuPanel : AbstractUIPanel
 
     private void TryDisplayHiScore()
     {
-        int highScore = PlayerDataManager.GetRecordDistance();
+        int highScore = UserDataServiceSO.Instance.GetRecordDistance();
         _highScoreContainer.SetActive(highScore > 0);
         _highScoreText.text = $"High Score:\n{highScore}m";
     }

@@ -30,7 +30,7 @@ public class SetupBootstrap : MonoBehaviour
 
         // 2) Inicializar servicios/sistemas (orden recomendado)
         // User data / save system
-        // UserDataServiceSO.Instance.Initialize();
+        UserDataServiceSO.Instance.Initialize();
 
         // Audio (volúmenes desde user data)
         // AudioManager.Instance.Initialize();

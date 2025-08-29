@@ -16,14 +16,13 @@ public class GamerOverPanel : AbstractUIPanel
 
     public override void Show()
     {
-        int lastRecordDistance = PlayerDataManager.GetRecordDistance();
+        int lastRecordDistance = UserDataServiceSO.Instance.GetRecordDistance();
         int traveledDistance = _gameManager.GetDistanceTravelled();
         bool isNewRecord = traveledDistance > lastRecordDistance;
         _newRecordGameobject.SetActive(isNewRecord && lastRecordDistance > 0);
         if (isNewRecord)
         {
-            PlayerDataManager.SetRecordDistance(traveledDistance);
-            PlayerDataManager.SaveData();
+            UserDataServiceSO.Instance.SetRecord(traveledDistance);
         }
         _traveledDistanceText.text = $"DISTANCE: {traveledDistance}m";
         _earnedCoinsText.text = $"COINS: {_gameManager.CoinsCollected}";

@@ -12,17 +12,17 @@ public class CurrencyDisplayer : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerDataManager.OnCurrencyChanged += UpdateCurrencyDisplay;
+        UserDataServiceSO.Instance.OnCurrencyChanged += UpdateCurrencyDisplay;
     }
 
     private void OnDisable()
     {
-        PlayerDataManager.OnCurrencyChanged -= UpdateCurrencyDisplay;
+        UserDataServiceSO.Instance.OnCurrencyChanged -= UpdateCurrencyDisplay;
     }
 
     private void UpdateCurrencyDisplay()
     {
-        int currency = PlayerDataManager.GetCoins();
+        int currency = UserDataServiceSO.Instance.GetCoins();
         _currencyText.text = currency.ToString();
     }
 }

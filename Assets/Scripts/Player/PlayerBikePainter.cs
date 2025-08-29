@@ -18,13 +18,13 @@ public class PlayerBikePainter : MonoBehaviour
                                       .ToArray();
         ApplyPaint(_currentPaintId);
         ShopPanel.OnItemSelected += OnItemSelected;
-        PlayerDataManager.OnItemEquipped += OnItemSelected;
+       // UserDataServiceSO.Instance.OnItemEquipped += OnItemSelected;
     }
 
     private void OnDestroy()
     {
         ShopPanel.OnItemSelected -= OnItemSelected;
-        PlayerDataManager.OnItemEquipped -= OnItemSelected;
+        //PlayerDataManager.OnItemEquipped -= OnItemSelected;
     }
 
     public void ApplyPaint(string paintId)

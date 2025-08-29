@@ -21,12 +21,12 @@ public class ShopPanel : AbstractUIPanel
 
     private void OnEnable()
     {
-        PlayerDataManager.OnItemEquipped += OnItemEquipped;
+        //UserDataServiceSO.Instance.OnItemEquipped += OnItemEquipped;
     }
 
     private void OnDisable()
     {
-        PlayerDataManager.OnItemEquipped -= OnItemEquipped;    
+        //UserDataServiceSO.Instance.OnItemEquipped -= OnItemEquipped;    
     }
 
     public override void Show()
@@ -45,10 +45,10 @@ public class ShopPanel : AbstractUIPanel
     private void HandleSelectedItemState(ProductCategory category, string itemId)
     {
         _selectedStoreItem = _catalog.GetById(itemId);
-        bool owned = PlayerDataManager.CheckIfProductIsOwned(category, itemId);
+        bool owned = UserDataServiceSO.Instance.Owns(category, itemId);
         _purchaseButton.gameObject.SetActive(!owned);
 
-        bool isEquipped = PlayerDataManager.CheckIfProductIsEquipped(category, itemId);
+        bool isEquipped = UserDataServiceSO.Instance.IsEquipped(category, itemId);
         _equipButton.gameObject.SetActive(owned && !isEquipped);
         _equippedLabel.gameObject.SetActive(owned && isEquipped);
     }
@@ -63,6 +63,6 @@ public class ShopPanel : AbstractUIPanel
     public void OnEquiButtonPressed()
     {
         Debug.Log($"Try equip {_selectedStoreItem.Id}");
-        PlayerDataManager.Equip(_selectedStoreItem.Category, _selectedStoreItem.Id);
+        UserDataServiceSO.Instance.Equip(_selectedStoreItem.Category, _selectedStoreItem.Id);
     }
 }

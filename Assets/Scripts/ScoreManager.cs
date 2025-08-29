@@ -28,8 +28,7 @@ public class ScoreManager : MonoBehaviour
 
     public void SaveCoinsCollected()
     {
-        PlayerDataManager.AddCoins(CoinsCollected);
-        PlayerDataManager.SaveData();
+        UserDataServiceSO.Instance.AddCoins(CoinsCollected);
     }
 
     private void AddToCollectedCoins(int scoreToAdd)

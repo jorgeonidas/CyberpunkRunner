@@ -16,11 +16,11 @@ public class UserSettingsController : SingletonScriptableObject<UserSettingsCont
     public Action<FloatSettingId, float> OnFloatSettingChanged;
     [SerializeField] SerializedDictionary<FloatSettingId, FloatSetting> _floatSettings;
     private UserGameSettings _userGameSettings;
-
+    private UserDataServiceSO _userData;
     override protected void OnInitialize()
     {
-        PlayerDataManager.Initialize();
-        _userGameSettings = PlayerDataManager.GetUserGameSettings();
+        _userData = UserDataServiceSO.Instance;
+        _userGameSettings = _userData.GetSettings();
     }
 
     public void SetFloatSetting(FloatSettingId settingType, float value)
@@ -33,11 +33,11 @@ public class UserSettingsController : SingletonScriptableObject<UserSettingsCont
             {
                 case FloatSettingId.MusicVolume:
                     _userGameSettings.musicVolume = clampedValue;
-                    Debug.Log($"Music Volume set to: {clampedValue}");
+                   // Debug.Log($"Music Volume set to: {clampedValue}");
                     break;
                 case FloatSettingId.SFXVolume:
                     _userGameSettings.sfxVolume = clampedValue;
-                    Debug.Log($"SFX Volume set to: {clampedValue}");
+                    //Debug.Log($"SFX Volume set to: {clampedValue}");
                     break;
                 default:
                     Debug.LogWarning($"Unhandled setting type: {settingType}");
@@ -83,7 +83,6 @@ public class UserSettingsController : SingletonScriptableObject<UserSettingsCont
 
     public void SaveSettings()
     {
-        PlayerDataManager.SetUserGameSettings(_userGameSettings);
-        PlayerDataManager.SaveData();
+        _userData.UpdateGameSettings(_userGameSettings);
     }   
 }

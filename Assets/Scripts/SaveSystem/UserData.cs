@@ -10,14 +10,14 @@ public class UserData
     private int _recordDistance;
     private int _coinsCollected;
     public UserGameSettings userGameSettings;
-    private SerializedDictionary<ProductCategory, List<string>> _onwedProducts;
-    private SerializedDictionary<ProductCategory, string> _equippedProducts;
+    private Dictionary<ProductCategory, List<string>> _onwedProducts;
+    private Dictionary<ProductCategory, string> _equippedProducts;
 
     public int CoinsCollected { get => _coinsCollected; set => _coinsCollected = value; }
     public int RecordDistance { get => _recordDistance; set => _recordDistance = value; }
-    public SerializedDictionary<ProductCategory, List<string>> OnwedProducts { get => _onwedProducts; set => _onwedProducts = value; }
+    public Dictionary<ProductCategory, List<string>> OnwedProducts { get => _onwedProducts; set => _onwedProducts = value; }
     //one equpped product per category
-    public SerializedDictionary<ProductCategory, string> EquippedProducts { get => _equippedProducts; set => _equippedProducts = value; }
+    public Dictionary<ProductCategory, string> EquippedProducts { get => _equippedProducts; set => _equippedProducts = value; }
 
     public UserData()
     {

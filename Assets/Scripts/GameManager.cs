@@ -26,8 +26,6 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         Instance = this;
-        PlayerDataManager.Initialize();
-        Debug.Log($"{PlayerDataManager.GetCoins()} coins collected | {PlayerDataManager.GetRecordDistance()} record distance");
     }
 
     private void Start()

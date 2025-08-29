@@ -22,8 +22,8 @@ public class ShopView : MonoBehaviour
             foreach (StoreItemSO item in _products)
             {
                 var newItem = Instantiate(_shopViewItemPrefab, _itemsContainer);
-                bool owned = PlayerDataManager.CheckIfProductIsOwned(_productCategory, item.Id);
-                bool equipped = PlayerDataManager.CheckIfProductIsEquipped(_productCategory, item.Id);
+                bool owned = UserDataServiceSO.Instance.Owns(_productCategory, item.Id);
+                bool equipped = UserDataServiceSO.Instance.IsEquipped(_productCategory, item.Id);
                 Debug.Log($"_productCategory {_productCategory} item.Id {item.Id} owned {owned} equipped {equipped}");
                 newItem.Initialize(item, ItemSelected, owned, equipped);
                 newItem.SetSelected(owned && equipped);
@@ -37,8 +37,8 @@ public class ShopView : MonoBehaviour
     {
         foreach (ShopViewItem item in _shopItems)
         {
-            bool owned = PlayerDataManager.CheckIfProductIsOwned(_productCategory, item.ProductId);
-            bool equipped = PlayerDataManager.CheckIfProductIsEquipped(_productCategory, item.ProductId);
+            bool owned = UserDataServiceSO.Instance.Owns(_productCategory, item.ProductId);
+            bool equipped = UserDataServiceSO.Instance.IsEquipped(_productCategory, item.ProductId);
             item.RefreshBadges(owned, equipped);
         }
     }
