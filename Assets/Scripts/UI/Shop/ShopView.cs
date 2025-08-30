@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShopView : MonoBehaviour
 {
-    public Action<string, ProductCategory> OnItemSelected;
+    public Action<ProductCategory, string> OnItemSelected;
     [SerializeField] ProductCategory _productCategory;
     [SerializeField] ShopViewItem _shopViewItemPrefab;
     [SerializeField] Transform _itemsContainer;
@@ -12,7 +12,7 @@ public class ShopView : MonoBehaviour
     private List<ShopViewItem> _shopItems;
     StoreCatalog _catalog;
 
-    public void InitializeShopItems(StoreCatalog catalog, Action<string, ProductCategory> onItemSelected)
+    public void InitializeShopItems(StoreCatalog catalog, Action<ProductCategory, string> onItemSelected)
     {
         _catalog = catalog;
         if (_products == null)
@@ -29,7 +29,7 @@ public class ShopView : MonoBehaviour
                 newItem.SetSelected(owned && equipped);
                 if (owned && equipped)
                 {
-                    onItemSelected?.Invoke(item.Id, _productCategory);
+                    onItemSelected?.Invoke(_productCategory, item.Id);
                 }
                 _shopItems.Add(newItem);
             }
@@ -55,6 +55,6 @@ public class ShopView : MonoBehaviour
         }
 
         //testing: apply paint to bike
-        OnItemSelected?.Invoke(productId, category);
+        OnItemSelected?.Invoke(category, productId);
     }
 }

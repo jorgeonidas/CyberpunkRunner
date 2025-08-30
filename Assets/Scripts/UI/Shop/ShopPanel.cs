@@ -19,11 +19,14 @@ public class ShopPanel : AbstractUIPanel
     private void OnEnable()
     {
         UserDataServiceSO.Instance.OnEquippedChanged += OnItemEquipped;
+        UserDataServiceSO.Instance.OnInventoryChanged += ItemSelected;
+
     }
 
     private void OnDisable()
     {
         UserDataServiceSO.Instance.OnEquippedChanged -= OnItemEquipped;
+        UserDataServiceSO.Instance.OnInventoryChanged -= ItemSelected;
     }
 
     public override void Show()
@@ -33,7 +36,7 @@ public class ShopPanel : AbstractUIPanel
         base.Show();
     }
 
-    private void ItemSelected(string itemId, ProductCategory category)
+    private void ItemSelected(ProductCategory category,string itemId)
     {
         Debug.Log($"itemId {itemId} category {category}");
         HandleSelectedItemState(category, itemId);
@@ -59,10 +62,10 @@ public class ShopPanel : AbstractUIPanel
         _equipButton.gameObject.SetActive(owned && !isEquipped);
         _equippedLabel.gameObject.SetActive(owned && isEquipped);
         _priceText.gameObject.SetActive(!owned);
-        
+
     }
 
-    private void OnItemEquipped(ProductCategory category, string arg2)
+    private void OnItemEquipped(ProductCategory category, string itemId)
     {
         HandleSelectedItemState(category, _selectedStoreItem.Id);
         _paintShop.RefreshProductsList();
@@ -81,8 +84,13 @@ public class ShopPanel : AbstractUIPanel
             Debug.LogError($"No item selected");
             return;
         }
-
-
+        bool isAffordable = IsItemAffordable(_selectedStoreItem);
+        if (isAffordable)
+        {
+            UserDataServiceSO.Instance.AddOwned(_selectedStoreItem.Category, _selectedStoreItem.Id);
+            UserDataServiceSO.Instance.AddCoins(-_selectedStoreItem.Price);
+            _paintShop.RefreshProductsList();
+        }
     }
 
     public bool IsItemAffordable(StoreItemSO product)

@@ -11,7 +11,7 @@ public class UserDataServiceSO : SingletonScriptableObject<UserDataServiceSO>
     private JsonSerializerSettings _jsonSettings;
 
     public event Action OnCurrencyChanged;
-    public event Action OnInventoryChanged;
+    public event Action<ProductCategory, string> OnInventoryChanged;
     public event Action<ProductCategory, string> OnEquippedChanged;
     public Action<ProductCategory, string> OnPreviewItem;
 
@@ -76,7 +76,7 @@ public class UserDataServiceSO : SingletonScriptableObject<UserDataServiceSO>
         OnCurrencyChanged?.Invoke();
     }
 
-    public void AddCoins(int delta) => SetCoins(_data.CoinsCollected + Mathf.Max(0, delta));
+    public void AddCoins(int coinsToAdd) => SetCoins(_data.CoinsCollected + coinsToAdd);
 
     public void SetRecord(int distance)
     {
@@ -88,7 +88,7 @@ public class UserDataServiceSO : SingletonScriptableObject<UserDataServiceSO>
     {
         _data.AddOwnedProduct(category, productId);
         Save();
-        OnInventoryChanged?.Invoke();
+        OnInventoryChanged?.Invoke(category, productId);
     }
 
     public void Equip(ProductCategory category, string productId)
