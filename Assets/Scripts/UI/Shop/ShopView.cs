@@ -27,6 +27,10 @@ public class ShopView : MonoBehaviour
                 Debug.Log($"_productCategory {_productCategory} item.Id {item.Id} owned {owned} equipped {equipped}");
                 newItem.Initialize(item, ItemSelected, owned, equipped);
                 newItem.SetSelected(owned && equipped);
+                if (owned && equipped)
+                {
+                    onItemSelected?.Invoke(item.Id, _productCategory);
+                }
                 _shopItems.Add(newItem);
             }
         }
