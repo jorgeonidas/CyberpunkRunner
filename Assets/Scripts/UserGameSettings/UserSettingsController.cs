@@ -63,13 +63,13 @@ public class UserSettingsController : SingletonScriptableObject<UserSettingsCont
                     return _userGameSettings != null ? _userGameSettings.sfxVolume : 1;
                 default:
                     Debug.LogWarning($"Unhandled setting type: {settingType}");
-                    return 0f;
+                    return 1f;
             }
         }
         else
         {
             Debug.LogWarning($"Setting type {settingType} not found in settings dictionary.");
-            return 0f;
+            return 1f;
         }
     }
 

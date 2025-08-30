@@ -9,8 +9,9 @@ public class UserSettingsAudioBridge : MonoBehaviour
     }
 
     private void Start()
-    { 
+    {
         // Initialize audio settings based on user preferences
+        Debug.Log($"MusicVolume {UserSettingsController.Instance.GetFloatSetting(UserSettingsType.FloatSettingId.MusicVolume)}");
         _soundMixerManager.SetSfxVolume(UserSettingsController.Instance.GetFloatSetting(UserSettingsType.FloatSettingId.SFXVolume));
         _soundMixerManager.SetMusicVolime(UserSettingsController.Instance.GetFloatSetting(UserSettingsType.FloatSettingId.MusicVolume));
     }

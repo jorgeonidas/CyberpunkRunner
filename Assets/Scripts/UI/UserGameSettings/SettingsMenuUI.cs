@@ -9,6 +9,7 @@ public class SettingsMenuUI : MonoBehaviour
     {
         foreach (var setting in _floatSettingsUIItems)
         {
+            Debug.Log($"{setting.SettingId} value {_userSettingsController.GetFloatSetting(setting.SettingId)}");
             setting.Initialize(_userSettingsController.GetFloatSetting(setting.SettingId), OnFloatSettingChanged);
         }
     }

@@ -41,7 +41,7 @@ public class UserDataServiceSO : SingletonScriptableObject<UserDataServiceSO>
     private void Sanitize()
     {
         if (_data.userGameSettings == null) _data.userGameSettings = new UserGameSettings();
-        if (_data.OnwedProducts == null) _data.OnwedProducts = new Dictionary<ProductCategory, List<string>>();
+        if (_data.OwnedProducts == null) _data.OwnedProducts = new Dictionary<ProductCategory, List<string>>();
         if (_data.EquippedProducts == null) _data.EquippedProducts = new Dictionary<ProductCategory, string>();
     }
 
