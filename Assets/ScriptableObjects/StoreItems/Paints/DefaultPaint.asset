@@ -16,5 +16,5 @@ MonoBehaviour:
   _displayNameKey: Default
   _category: 0
   _price: 0
-  _thumbnail: {fileID: 21300000, guid: 3dc57d6d132ca7348b1218210400cb67, type: 3}
+  _thumbnail: {fileID: 21300000, guid: 5d5fcb009cc0add468fbe4d82f7865ba, type: 3}
   _paintMaterial: {fileID: 2100000, guid: 06d40dc2e1401784eb420a0d2d5d7235, type: 2}

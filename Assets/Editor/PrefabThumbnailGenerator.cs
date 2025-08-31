@@ -3,6 +3,9 @@
 
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEditor.SceneManagement;
+using UnityEngine.Rendering;
 
 public class PrefabThumbnailGenerator : EditorWindow
 {
@@ -14,12 +17,33 @@ public class PrefabThumbnailGenerator : EditorWindow
 
     // View / camera controls
     private enum ViewPreset { Front_Z, Back_Z, Right_X, Left_X, Top_Y, Bottom_Y, Iso_30, Iso_45, Custom }
-    private ViewPreset view = ViewPreset.Right_X; // Default fits your bike case (local +Z aligns with world +X)
+    private ViewPreset view = ViewPreset.Right_X; // Default useful when prefab +Z aligns with world +X
     private bool useOrthographic = false;
     private float orthoPadding = 1.15f; // >1 adds margin in orthographic
     private float fov = 35f;            // Perspective FOV
     // Custom yaw/pitch/roll (applied around prefab's local axes)
     private Vector3 customEuler = new Vector3(0f, 0f, 0f);
+
+    // Lighting controls
+    private enum LightingMode { SceneLighting, CustomDirectional, UnlitFlat }
+    // Default requested: CustomDirectional
+    private LightingMode lightingMode = LightingMode.CustomDirectional;
+    private Color ambientColor = new Color(0.25f, 0.25f, 0.28f, 1f);
+    private Color lightColor = Color.white;
+    private float lightIntensity = 1.2f;
+    private Vector3 lightEuler = new Vector3(50f, 30f, 0f); // pitch, yaw, roll for the key light
+
+    // Backup container for global RenderSettings
+    private struct LightingBackup
+    {
+        public bool fog;
+        public Color ambientLight;
+        public AmbientMode ambientMode;
+        public DefaultReflectionMode reflectionMode;
+        public int reflectionResolution;
+        public float reflectionIntensity;
+        public Material skybox;
+    }
 
     private Camera renderCamera;
 
@@ -52,6 +76,18 @@ public class PrefabThumbnailGenerator : EditorWindow
             customEuler = EditorGUILayout.Vector3Field("Custom (Yaw/Pitch/Roll)", customEuler);
 
         EditorGUILayout.Space();
+        GUILayout.Label("Lighting", EditorStyles.boldLabel);
+        lightingMode = (LightingMode)EditorGUILayout.EnumPopup("Lighting Mode", lightingMode);
+
+        if (lightingMode == LightingMode.CustomDirectional)
+        {
+            ambientColor = EditorGUILayout.ColorField("Ambient Color", ambientColor);
+            lightColor = EditorGUILayout.ColorField("Key Light Color", lightColor);
+            lightIntensity = EditorGUILayout.Slider("Key Light Intensity", lightIntensity, 0f, 5f);
+            lightEuler = EditorGUILayout.Vector3Field("Key Light Rotation", lightEuler);
+        }
+
+        EditorGUILayout.Space();
 
         if (GUILayout.Button("Generate Thumbnail"))
         {
@@ -73,52 +109,112 @@ public class PrefabThumbnailGenerator : EditorWindow
         renderCamera = cameraObject.AddComponent<Camera>();
         SetupCamera(renderCamera, useOrthographic, fov);
 
-        // Instantiate the prefab temporarily (as a prefab instance, not a copy)
+        // Create a temp scene so lighting can be isolated if needed
+        Scene tempScene = default;
+        bool useTempScene = (lightingMode != LightingMode.SceneLighting);
+
+        if (useTempScene)
+            tempScene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Additive);
+
+        // Instantiate the prefab
         GameObject instance = (GameObject)PrefabUtility.InstantiatePrefab(prefabToRender);
         instance.transform.position = Vector3.zero;
 
-        // Calculate bounds (world space) and build view rotation aligned to prefab's local axes
-        Bounds bounds = CalculateBounds(instance);
-        Quaternion viewRot = GetViewRotation(instance.transform, view, customEuler);
+        // Move objects to temp scene if we are isolating
+        if (useTempScene)
+        {
+            SceneManager.MoveGameObjectToScene(instance, tempScene);
+            SceneManager.MoveGameObjectToScene(cameraObject, tempScene);
+        }
 
-        // Match camera aspect to thumbnail resolution so fitting math is correct
-        float aspect = Mathf.Max(1e-3f, (float)thumbnailWidth / Mathf.Max(1, thumbnailHeight));
-        renderCamera.aspect = aspect;
+        // Optionally override lighting
+        LightingBackup backup = default;
+        GameObject tempLightGO = null;
+        Material[] cachedMaterials = null;
 
-        // Position / orient camera to fit bounds
-        PositionCameraToFitBounds(renderCamera, bounds, viewRot, useOrthographic, orthoPadding);
+        try
+        {
+            if (lightingMode == LightingMode.CustomDirectional)
+            {
+                backup = BackupLighting();
+                ApplyCustomLighting(ambientColor);
 
-        // Create a RenderTexture and render
-        RenderTexture rt = new RenderTexture(thumbnailWidth, thumbnailHeight, 24, RenderTextureFormat.ARGB32);
-        var prevActive = RenderTexture.active;
-        var prevTarget = renderCamera.targetTexture;
+                tempLightGO = CreateDirectionalLight(lightEuler, lightColor, lightIntensity, useTempScene ? (Scene?)tempScene : null);
 
-        renderCamera.targetTexture = rt;
-        renderCamera.Render();
+                // Turn off probes for stable, reproducible thumbnails
+                foreach (var r in instance.GetComponentsInChildren<Renderer>())
+                {
+                    r.lightProbeUsage = LightProbeUsage.Off;
+                    r.reflectionProbeUsage = ReflectionProbeUsage.Off;
+                }
+            }
+            else if (lightingMode == LightingMode.UnlitFlat)
+            {
+                backup = BackupLighting();
+                ApplyUnlitEnvironment();
 
-        // Readback to Texture2D (PNG)
-        RenderTexture.active = rt;
-        Texture2D thumbnail = new Texture2D(thumbnailWidth, thumbnailHeight, TextureFormat.RGBA32, false);
-        thumbnail.ReadPixels(new Rect(0, 0, thumbnailWidth, thumbnailHeight), 0, 0);
-        thumbnail.Apply();
+                // Temporarily replace materials with Unlit/Color (non-destructive)
+                cachedMaterials = ForceUnlit(instance);
+            }
 
-        // Save to disk
-        if (!System.IO.Directory.Exists(savePath))
-            System.IO.Directory.CreateDirectory(savePath);
+            // Compute bounds / orientation
+            Bounds bounds = CalculateBounds(instance);
+            Quaternion viewRot = GetViewRotation(instance.transform, view, customEuler);
 
-        string filePath = $"{savePath}{prefabToRender.name}_Thumbnail.png";
-        System.IO.File.WriteAllBytes(filePath, thumbnail.EncodeToPNG());
-        Debug.Log($"Thumbnail saved to: {filePath}");
+            // Match camera aspect to target resolution
+            float aspect = Mathf.Max(1e-3f, (float)thumbnailWidth / Mathf.Max(1, thumbnailHeight));
+            renderCamera.aspect = aspect;
 
-        // Cleanup
-        RenderTexture.active = prevActive;
-        renderCamera.targetTexture = prevTarget;
+            // Position/orient camera to fit the object
+            PositionCameraToFitBounds(renderCamera, bounds, viewRot, useOrthographic, orthoPadding);
 
-        DestroyImmediate(rt);
-        DestroyImmediate(cameraObject);
-        DestroyImmediate(instance);
+            // Render to RT
+            RenderTexture rt = new RenderTexture(thumbnailWidth, thumbnailHeight, 24, RenderTextureFormat.ARGB32);
+            var prevActive = RenderTexture.active;
+            var prevTarget = renderCamera.targetTexture;
 
-        // Refresh the Asset Database to show the new file
+            renderCamera.targetTexture = rt;
+            renderCamera.Render();
+
+            RenderTexture.active = rt;
+            Texture2D thumbnail = new Texture2D(thumbnailWidth, thumbnailHeight, TextureFormat.RGBA32, false);
+            thumbnail.ReadPixels(new Rect(0, 0, thumbnailWidth, thumbnailHeight), 0, 0);
+            thumbnail.Apply();
+
+            // Save PNG
+            if (!System.IO.Directory.Exists(savePath))
+                System.IO.Directory.CreateDirectory(savePath);
+
+            string filePath = $"{savePath}{prefabToRender.name}_Thumbnail.png";
+            System.IO.File.WriteAllBytes(filePath, thumbnail.EncodeToPNG());
+            Debug.Log($"Thumbnail saved to: {filePath}");
+
+            // Cleanup RT bindings
+            RenderTexture.active = prevActive;
+            renderCamera.targetTexture = prevTarget;
+
+            DestroyImmediate(rt);
+        }
+        finally
+        {
+            // Restore materials if we forced unlit
+            if (cachedMaterials != null)
+                RestoreMaterials(instance, cachedMaterials);
+
+            // Restore global lighting if we altered it
+            if (lightingMode == LightingMode.CustomDirectional || lightingMode == LightingMode.UnlitFlat)
+                RestoreLighting(backup);
+
+            if (tempLightGO) DestroyImmediate(tempLightGO);
+
+            DestroyImmediate(cameraObject);
+            DestroyImmediate(instance);
+
+            // Close temp scene if created
+            if (useTempScene)
+                EditorSceneManager.CloseScene(tempScene, true);
+        }
+
         AssetDatabase.Refresh();
     }
 
@@ -129,9 +225,7 @@ public class PrefabThumbnailGenerator : EditorWindow
     {
         Renderer[] renderers = obj.GetComponentsInChildren<Renderer>();
         if (renderers.Length == 0)
-        {
             return new Bounds(obj.transform.position, Vector3.zero);
-        }
 
         Bounds bounds = renderers[0].bounds;
         foreach (Renderer renderer in renderers)
@@ -242,7 +336,6 @@ public class PrefabThumbnailGenerator : EditorWindow
         else
         {
             // Perspective: derive distance from FOV to fit the largest dimension.
-            // Fit by height primarily; also ensure width fits by taking the max.
             Vector3 ext = b.extents;
 
             // Project extents like we did for ortho to get halfH/halfW in view space
@@ -267,5 +360,98 @@ public class PrefabThumbnailGenerator : EditorWindow
         }
 
         cam.transform.LookAt(center, cam.transform.up);
+    }
+
+    // ===== Lighting helpers =====
+
+    private LightingBackup BackupLighting()
+    {
+        return new LightingBackup
+        {
+            fog = RenderSettings.fog,
+            ambientLight = RenderSettings.ambientLight,
+            ambientMode = RenderSettings.ambientMode,
+            reflectionMode = RenderSettings.defaultReflectionMode,
+            reflectionResolution = RenderSettings.defaultReflectionResolution,
+            reflectionIntensity = RenderSettings.reflectionIntensity,
+            skybox = RenderSettings.skybox
+        };
+    }
+
+    private void RestoreLighting(LightingBackup b)
+    {
+        RenderSettings.fog = b.fog;
+        RenderSettings.ambientLight = b.ambientLight;
+        RenderSettings.ambientMode = b.ambientMode;
+        RenderSettings.defaultReflectionMode = b.reflectionMode;
+        RenderSettings.defaultReflectionResolution = b.reflectionResolution;
+        RenderSettings.reflectionIntensity = b.reflectionIntensity;
+        RenderSettings.skybox = b.skybox;
+    }
+
+    // Flat ambient, no reflections/fog. Suitable base for Unlit or controlled lighting.
+    private void ApplyUnlitEnvironment()
+    {
+        RenderSettings.fog = false;
+        RenderSettings.ambientMode = AmbientMode.Flat;
+        RenderSettings.ambientLight = Color.white;
+        RenderSettings.defaultReflectionMode = DefaultReflectionMode.Custom;
+        RenderSettings.reflectionIntensity = 0f;
+        RenderSettings.skybox = null;
+    }
+
+    // Flat ambient + single key directional light (created separately).
+    private void ApplyCustomLighting(Color ambient)
+    {
+        RenderSettings.fog = false;
+        RenderSettings.ambientMode = AmbientMode.Flat;
+        RenderSettings.ambientLight = ambient;
+        RenderSettings.defaultReflectionMode = DefaultReflectionMode.Custom;
+        RenderSettings.reflectionIntensity = 0f; // keep reflections out for consistency
+        RenderSettings.skybox = null;
+    }
+
+    // Creates a temp directional light; if a scene is provided, it is moved there
+    private GameObject CreateDirectionalLight(Vector3 euler, Color color, float intensity, Scene? moveToScene = null)
+    {
+        var go = new GameObject("ThumbnailKeyLight");
+        var light = go.AddComponent<Light>();
+        light.type = LightType.Directional;
+        light.color = color;
+        light.intensity = intensity;
+        light.shadows = LightShadows.None;
+        go.transform.rotation = Quaternion.Euler(euler);
+
+        if (moveToScene.HasValue)
+            SceneManager.MoveGameObjectToScene(go, moveToScene.Value);
+
+        return go;
+    }
+
+    // Non-destructive material swap to Unlit/Color during render, then restore
+    private Material[] ForceUnlit(GameObject root)
+    {
+        var renderers = root.GetComponentsInChildren<Renderer>(true);
+        var originals = new Material[renderers.Length];
+        Shader unlit = Shader.Find("Unlit/Color");
+
+        for (int i = 0; i < renderers.Length; i++)
+        {
+            originals[i] = renderers[i].sharedMaterial;
+            if (unlit != null)
+            {
+                var m = new Material(unlit);
+                m.color = Color.white;
+                renderers[i].sharedMaterial = m;
+            }
+        }
+        return originals;
+    }
+
+    private void RestoreMaterials(GameObject root, Material[] originals)
+    {
+        var renderers = root.GetComponentsInChildren<Renderer>(true);
+        for (int i = 0; i < renderers.Length && i < originals.Length; i++)
+            renderers[i].sharedMaterial = originals[i];
     }
 }

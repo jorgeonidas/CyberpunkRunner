@@ -16,5 +16,5 @@ MonoBehaviour:
   _displayNameKey: Paint Red
   _category: 0
   _price: 1000
-  _thumbnail: {fileID: 21300000, guid: f25217d67ce6bf2489a1b89b11c8e0f7, type: 3}
+  _thumbnail: {fileID: 21300000, guid: ad0fb61e983d19e4f8b6cbd17c28bb1f, type: 3}
   _paintMaterial: {fileID: 2100000, guid: 7910c4de4f114e343a611b5cdfb7b8d8, type: 2}
