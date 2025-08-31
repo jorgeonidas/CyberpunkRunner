@@ -29,7 +29,6 @@ public class UserDataServiceSO : SingletonScriptableObject<UserDataServiceSO>
         _jsonSettings.Converters.Add(new StringEnumConverter());
 
         _data = SaveToJson.Load<UserData>(fileName, _jsonSettings) ?? new UserData();
-        Sanitize();
         Debug.Log("[UserDataService] Initialized");
     }
 
@@ -37,14 +36,6 @@ public class UserDataServiceSO : SingletonScriptableObject<UserDataServiceSO>
     {
         SaveToJson.Save(fileName, _data, _jsonSettings);
     }
-
-    private void Sanitize()
-    {
-        if (_data.userGameSettings == null) _data.userGameSettings = new UserGameSettings();
-        if (_data.OwnedProducts == null) _data.OwnedProducts = new Dictionary<ProductCategory, List<string>>();
-        if (_data.EquippedProducts == null) _data.EquippedProducts = new Dictionary<ProductCategory, string>();
-    }
-
     // ----- Read API -----
     public int GetCoins() => _data.CoinsCollected;
     public int GetRecordDistance() => _data.RecordDistance;

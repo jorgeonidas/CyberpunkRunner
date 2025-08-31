@@ -58,19 +58,14 @@ public class UserSettingsController : SingletonScriptableObject<UserSettingsCont
             switch (settingType)
             {
                 case FloatSettingId.MusicVolume:
-                    return _userGameSettings != null ? _userGameSettings.musicVolume : 1;
+                    return _userGameSettings.musicVolume;
                 case FloatSettingId.SFXVolume:
-                    return _userGameSettings != null ? _userGameSettings.sfxVolume : 1;
-                default:
-                    Debug.LogWarning($"Unhandled setting type: {settingType}");
-                    return 1f;
+                    return _userGameSettings.sfxVolume;
             }
         }
-        else
-        {
-            Debug.LogWarning($"Setting type {settingType} not found in settings dictionary.");
-            return 1f;
-        }
+
+        Debug.LogWarning($"Setting type {settingType} not found in settings dictionary.");
+        return 1f;
     }
 
     public void SetToDefaultSettings()
