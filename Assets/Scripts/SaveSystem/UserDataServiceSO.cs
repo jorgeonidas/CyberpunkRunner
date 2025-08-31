@@ -14,7 +14,7 @@ public class UserDataServiceSO : SingletonScriptableObject<UserDataServiceSO>
     public event Action<ProductCategory, string> OnInventoryChanged;
     public event Action<ProductCategory, string> OnEquippedChanged;
     public Action<ProductCategory, string> OnPreviewItem;
-    public Action<ProductCategory> OnUnequipItem;
+    public Action<ProductCategory> OnRevertItem;
 
     [Header("Storage")]
     [SerializeField] private string fileName = "userdata.json";
@@ -98,6 +98,6 @@ public class UserDataServiceSO : SingletonScriptableObject<UserDataServiceSO>
 
     public void Unequip(ProductCategory category)
     {
-        OnUnequipItem?.Invoke(category);
+        OnRevertItem?.Invoke(category);
     }
 }

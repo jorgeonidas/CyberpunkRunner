@@ -34,8 +34,8 @@ public class PlayerBikePainter : AbstractInventorySlot
         ApplyPaint(paintProduct.PaintMaterial);
     }
 
-    public override void Unequip()
+    public override void Revert()
     {
-        Equip(_defaultPaint);
+        Equip(_equippedItem);
     }
 }

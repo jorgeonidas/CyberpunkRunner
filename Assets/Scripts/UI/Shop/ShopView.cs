@@ -60,6 +60,6 @@ public class ShopView : MonoBehaviour
 
     private void OnDisable()
     {
-        UserDataServiceSO.Instance.OnUnequipItem?.Invoke(_productCategory);
+        UserDataServiceSO.Instance.OnRevertItem?.Invoke(_productCategory);
     }
 }

@@ -13,14 +13,14 @@ public class CosmetisInventory : MonoBehaviour
         Initialize();
         _userDataService.OnEquippedChanged += EquipItem;
         _userDataService.OnPreviewItem += PreviewItem;
-        _userDataService.OnUnequipItem += UnequipItem;
+        _userDataService.OnRevertItem += UnequipItem;
     }
 
     void OnDestroy()
     {
         _userDataService.OnEquippedChanged -= EquipItem;
         _userDataService.OnPreviewItem -= PreviewItem;
-        _userDataService.OnUnequipItem -= UnequipItem;
+        _userDataService.OnRevertItem -= UnequipItem;
     }
 
     public void Initialize()
@@ -54,7 +54,7 @@ public class CosmetisInventory : MonoBehaviour
     {
         if (_cosmeticsSlots.ContainsKey(category))
         {
-            _cosmeticsSlots[category].Unequip();
+            _cosmeticsSlots[category].Revert();
         }
     }
 }
