@@ -16,6 +16,8 @@ public class SetupBootstrap : MonoBehaviour
         {
             Finish(); return;
         }
+        
+        UserDataServiceSO.Instance.Initialize();
 
         // 1) Instanciar managers persistentes
         if (ScenesManager.Instance == null && scenesManagerPrefab != null)
@@ -30,7 +32,7 @@ public class SetupBootstrap : MonoBehaviour
 
         // 2) Inicializar servicios/sistemas (orden recomendado)
         // User data / save system
-        UserDataServiceSO.Instance.Initialize();
+
        // StoreCatalog.Instance.Init();
 
         // Audio (volúmenes desde user data)
