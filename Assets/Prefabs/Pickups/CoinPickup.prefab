@@ -76,6 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d479e931f98da4a4ca1fce7d4e4d6b1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _coinSetting: {fileID: 11400000, guid: 26bd166d7d970914087c09a36183df50, type: 2}
 --- !u!114 &-8719212087644237097
 MonoBehaviour:
   m_ObjectHideFlags: 0

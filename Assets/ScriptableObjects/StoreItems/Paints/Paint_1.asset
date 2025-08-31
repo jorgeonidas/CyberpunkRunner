@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Paint_1
   m_EditorClassIdentifier: Assembly-CSharp::PaintItemSO
   _id: Paint_1
-  _displayNameKey: Yellow Paint
+  _displayNameKey: Mustard
   _category: 0
   _price: 1000
   _thumbnail: {fileID: 21300000, guid: b72599480e699664fbcbbc522501316e, type: 3}

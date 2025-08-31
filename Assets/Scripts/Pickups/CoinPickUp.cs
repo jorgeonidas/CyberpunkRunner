@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class CoinPickUp : PickUp
 {
+    [SerializeField] CurrencySetting _coinSetting;
     protected override void OnPickUp()
     {
-        ScoreManager.OnCoinPickedEvent?.Invoke(10);//TODO: a setting for coins
+        ScoreManager.OnCoinPickedEvent?.Invoke(_coinSetting.CoinValue);
     }
 }
