@@ -14,6 +14,7 @@ public class UserDataServiceSO : SingletonScriptableObject<UserDataServiceSO>
     public event Action<ProductCategory, string> OnInventoryChanged;
     public event Action<ProductCategory, string> OnEquippedChanged;
     public Action<ProductCategory, string> OnPreviewItem;
+    public Action<ProductCategory> OnUnequipItem;
 
     [Header("Storage")]
     [SerializeField] private string fileName = "userdata.json";
@@ -89,8 +90,14 @@ public class UserDataServiceSO : SingletonScriptableObject<UserDataServiceSO>
         OnEquippedChanged?.Invoke(category, productId);
     }
 
+    //should move this to another manager
     public void Preview(ProductCategory category, string productId)
     {
         OnPreviewItem?.Invoke(category, productId);
+    }
+
+    public void Unequip(ProductCategory category)
+    {
+        OnUnequipItem?.Invoke(category);
     }
 }

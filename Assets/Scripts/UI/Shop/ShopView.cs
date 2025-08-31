@@ -57,4 +57,9 @@ public class ShopView : MonoBehaviour
         //testing: apply paint to bike
         OnItemSelected?.Invoke(category, productId);
     }
+
+    private void OnDisable()
+    {
+        UserDataServiceSO.Instance.OnUnequipItem?.Invoke(_productCategory);
+    }
 }

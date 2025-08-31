@@ -1,3 +1,4 @@
+using System;
 using AYellowpaper.SerializedCollections;
 using UnityEngine;
 
@@ -12,12 +13,14 @@ public class CosmetisInventory : MonoBehaviour
         Initialize();
         _userDataService.OnEquippedChanged += EquipItem;
         _userDataService.OnPreviewItem += PreviewItem;
+        _userDataService.OnUnequipItem += UnequipItem;
     }
 
     void OnDestroy()
     {
         _userDataService.OnEquippedChanged -= EquipItem;
         _userDataService.OnPreviewItem -= PreviewItem;
+        _userDataService.OnUnequipItem -= UnequipItem;
     }
 
     public void Initialize()
@@ -44,6 +47,14 @@ public class CosmetisInventory : MonoBehaviour
         if (_cosmeticsSlots.ContainsKey(category))
         {
             _cosmeticsSlots[category].Preview(_storeCatalog.GetItemById(category, id));
+        }
+    }
+
+    private void UnequipItem(ProductCategory category)
+    {
+        if (_cosmeticsSlots.ContainsKey(category))
+        {
+            _cosmeticsSlots[category].Unequip();
         }
     }
 }
