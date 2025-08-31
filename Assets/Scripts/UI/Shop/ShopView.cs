@@ -18,7 +18,7 @@ public class ShopView : MonoBehaviour
         if (_products == null)
         {
             _shopItems = new List<ShopViewItem>();
-            _products = _catalog.GetByCategory(_productCategory);
+            _products = _catalog.GetItemsByCategory(_productCategory);
             foreach (StoreItemSO item in _products)
             {
                 var newItem = Instantiate(_shopViewItemPrefab, _itemsContainer);

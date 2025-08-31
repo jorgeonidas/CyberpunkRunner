@@ -45,7 +45,7 @@ public class ShopPanel : AbstractUIPanel
 
     private void HandleSelectedItemState(ProductCategory category, string itemId)
     {
-        _selectedStoreItem = _catalog.GetById(itemId);
+        _selectedStoreItem = _catalog.GetItemById(category, itemId);
         bool owned = UserDataServiceSO.Instance.Owns(category, itemId);
 
         _purchaseButton.gameObject.SetActive(!owned);

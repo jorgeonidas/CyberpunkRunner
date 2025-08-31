@@ -13,7 +13,7 @@ public class PlayerBikePainter : AbstractInventorySlot
     public override ProductCategory ProductCategory => ProductCategory.Paint;
     private void Start()
     {
-        _defaultPaint = StoreCatalog.Instance.GetStoreItemSO(ProductCategory, StringConstants.DefaultItem) as PaintItemSO;
+        _defaultPaint = StoreCatalog.Instance.GetItemById(ProductCategory, StringConstants.DefaultItem) as PaintItemSO;
     }
 
     public void ApplyPaint(Material material)

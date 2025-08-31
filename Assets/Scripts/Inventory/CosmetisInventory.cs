@@ -35,7 +35,7 @@ public class CosmetisInventory : MonoBehaviour
     {
         if (_cosmeticsSlots.ContainsKey(category))
         {
-            _cosmeticsSlots[category].Equip(_storeCatalog.GetStoreItemSO(category, id));
+            _cosmeticsSlots[category].Equip(_storeCatalog.GetItemById(category, id));
         }
     }
 
@@ -43,7 +43,7 @@ public class CosmetisInventory : MonoBehaviour
     {
         if (_cosmeticsSlots.ContainsKey(category))
         {
-            _cosmeticsSlots[category].Preview(_storeCatalog.GetStoreItemSO(category, id));
+            _cosmeticsSlots[category].Preview(_storeCatalog.GetItemById(category, id));
         }
     }
 }
