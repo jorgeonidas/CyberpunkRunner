@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Chunk : MonoBehaviour
 {
+    public Action OnChunkInitialized;
     private LevelGenerator _levelGenerator;
     private List<int> _availableLanesIndexes = new List<int>();
     float[] _lanesCoordinates;
@@ -16,6 +18,7 @@ public class Chunk : MonoBehaviour
         _lanesCoordinates = _levelGenerator.GetLevelSettings().Lanes;
         InitializeAvailableLanesIndexes();
         RemoveAlreadyObstructedLanes(alreadyObstructedLanes);
+        OnChunkInitialized?.Invoke();
     }
 
     private void ClearObstacles()

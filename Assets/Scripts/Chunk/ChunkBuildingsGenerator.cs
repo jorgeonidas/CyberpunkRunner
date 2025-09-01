@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class ChunkBuildingsGenerator : MonoBehaviour
 {
+    [SerializeField] Chunk _chunk;
     [SerializeField] BuildingGenerator[] _buildingGeneratos;
     [SerializeField] PropScatterRectangle[] _proprScatters;
     void Start()
     {
-        GenerateBuildings();
         for (int i = 0; i < _proprScatters.Length; i++)
         {
             _proprScatters[i].Generate();
@@ -15,10 +15,15 @@ public class ChunkBuildingsGenerator : MonoBehaviour
 
     private void OnEnable()
     {
-        GenerateBuildings();
+        _chunk.OnChunkInitialized += GenerateBuildings;
     }
 
-    private void GenerateBuildings()
+    void OnDisable()
+    {
+        _chunk.OnChunkInitialized -= GenerateBuildings;
+    }
+
+    public void GenerateBuildings()
     {
         for (int i = 0; i < _buildingGeneratos.Length; i++)
         {

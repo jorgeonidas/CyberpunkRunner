@@ -162,6 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f0d8d44c10a7c545b2960e61ba9650c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChunkBuildingsGenerator
+  _chunk: {fileID: 984339345658737003}
   _buildingGeneratos:
   - {fileID: 1559979257873944779}
   - {fileID: 3194741763288848866}
