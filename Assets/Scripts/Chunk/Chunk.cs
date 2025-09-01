@@ -3,9 +3,6 @@ using UnityEngine;
 
 public class Chunk : MonoBehaviour
 {
-    // [SerializeField] GameObject[] _obstaclesToSpawn;
-    // [SerializeField] float _appleSpawnChance = 0.3f;
-    // [SerializeField] float _coinSpawnChance = 0.5f;
     private LevelGenerator _levelGenerator;
     private List<int> _availableLanesIndexes = new List<int>();
     float[] _lanesCoordinates;

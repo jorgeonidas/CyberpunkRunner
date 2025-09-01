@@ -1,6 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 //credits to: https://github.com/mirrorfishmedia/ImaginaryCities
 public class BuildingGenerator : MonoBehaviour
@@ -12,6 +12,40 @@ public class BuildingGenerator : MonoBehaviour
     public GameObject[] middleParts;
     public GameObject[] topParts;
     private Material _pickedMaterial;
+
+    private readonly Dictionary<string, ObjectPool<GameObject>> _pools = new();
+    private readonly List<(GameObject instance, string poolKey)> _activePieces = new();
+
+    private void Awake()
+    {
+        InitializePoolsFor(baseParts);
+        InitializePoolsFor(middleParts);
+        InitializePoolsFor(topParts);
+    }
+
+    private void InitializePoolsFor(GameObject[] prefabs)
+    {
+        foreach (var prefab in prefabs)
+        {
+            if (prefab == null) continue;
+
+            var key = prefab.name;
+            if (_pools.ContainsKey(key)) continue;
+
+            _pools.Add(key, new ObjectPool<GameObject>(
+                createFunc: () => Instantiate(prefab),
+                actionOnGet: (obj) =>
+                {
+                    obj.SetActive(true);
+                    obj.transform.SetParent(transform);
+                },
+                actionOnRelease: (obj) => obj.SetActive(false),
+                actionOnDestroy: (obj) => Destroy(obj),
+                collectionCheck: false,
+                defaultCapacity: 10,
+                maxSize: 50));
+        }
+    }
 
     [ContextMenu("Generate")]
     public void Build()
@@ -39,10 +73,29 @@ public class BuildingGenerator : MonoBehaviour
 
     float SpawnPieceLayer(GameObject[] pieceArray, float inputHeight)
     {
-        Transform randomTransform = pieceArray[Random.Range(0, pieceArray.Length)].transform;
-        GameObject clone = Instantiate(randomTransform.gameObject, this.transform.position
-            + new Vector3(0, inputHeight, 0), transform.rotation) as GameObject;
-        //the roof will have a special case where is an empty object
+        if (pieceArray == null || pieceArray.Length == 0)
+        {
+            return 0;
+        }
+
+        GameObject prefab = pieceArray[Random.Range(0, pieceArray.Length)];
+        if (prefab == null)
+        {
+            return 0;
+        }
+
+        string key = prefab.name;
+        if (!_pools.ContainsKey(key))
+        {
+            Debug.LogError($"Pool for '{key}' not found. Make sure it is in the prefab arrays.");
+            return 0;
+        }
+
+        GameObject clone = _pools[key].Get();
+        _activePieces.Add((clone, key));
+        clone.transform.position = this.transform.position + new Vector3(0, inputHeight, 0);
+        clone.transform.rotation = transform.rotation;
+        
         float heightOffset = 0;
         if (clone.TryGetComponent<MeshFilter>(out MeshFilter meshFilter))
         {
@@ -50,8 +103,9 @@ public class BuildingGenerator : MonoBehaviour
             Bounds bounds = cloneMesh.bounds;
             heightOffset = bounds.size.y;
         }
+        
         SetMaterialRecursively(clone, _pickedMaterial);
-        clone.transform.SetParent(this.transform);
+        
         return heightOffset;
     }
 
@@ -69,18 +123,27 @@ public class BuildingGenerator : MonoBehaviour
 
     private void ClearBuilding()
     {
-        while (transform.childCount > 0)
+        if (_pools.Count == 0 && Application.isEditor && !Application.isPlaying)
         {
-            Transform child = transform.GetChild(0);
-            //when is called from context menu
-            if (Application.isEditor && !Application.isPlaying)
+            while (transform.childCount > 0)
             {
-                DestroyImmediate(child.gameObject);
+                DestroyImmediate(transform.GetChild(0).gameObject);
+            }
+            return;
+        }
+
+        foreach (var piece in _activePieces)
+        {
+            if (_pools.TryGetValue(piece.poolKey, out var pool))
+            {
+                pool.Release(piece.instance);
             }
             else
             {
-                Destroy(child.gameObject);
+                Debug.LogWarning($"Pool with key '{piece.poolKey}' not found. The object will be destroyed.");
+                Destroy(piece.instance);
             }
         }
+        _activePieces.Clear();
     }
 }
