@@ -162,7 +162,7 @@ public class SfxManager : MonoBehaviour
         };
         source.volume = activeLoop.DefaultVolume; // Apply current SFX volume setting
         AddLoopSfx(instanceId, activeLoop);
-        Debug.Log($"<color=cyan>Playing loop SFX with instance ID '{instanceId}'</color>");
+        //Debug.Log($"<color=cyan>Playing loop SFX with instance ID '{instanceId}'</color>");
     }
 
     private void AddLoopSfx(int instanceId, ActiveLoopSfx loopSfx)

@@ -22,7 +22,7 @@ public abstract class SettingsUIItemBase<TKey, TValue> : MonoBehaviour
     {
         currentValue = newValue;
         OnValueChanged?.Invoke(settingId, currentValue);
-        Debug.Log($"Setting {settingId} updated to {currentValue}");
+        //Debug.Log($"Setting {settingId} updated to {currentValue}");
     }
 
     public abstract void SetSettingLabel();

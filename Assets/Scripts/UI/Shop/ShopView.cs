@@ -24,16 +24,18 @@ public class ShopView : MonoBehaviour
                 var newItem = Instantiate(_shopViewItemPrefab, _itemsContainer);
                 bool owned = UserDataServiceSO.Instance.Owns(_productCategory, item.Id);
                 bool equipped = UserDataServiceSO.Instance.IsEquipped(_productCategory, item.Id);
-                Debug.Log($"_productCategory {_productCategory} item.Id {item.Id} owned {owned} equipped {equipped}");
                 newItem.Initialize(item, ItemSelected, owned, equipped);
-                newItem.SetSelected(owned && equipped);
-                if (owned && equipped)
-                {
-                    onItemSelected?.Invoke(_productCategory, item.Id);
-                }
                 _shopItems.Add(newItem);
             }
         }
+
+        foreach (var shopItem in _shopItems)
+        {
+            bool owned = UserDataServiceSO.Instance.Owns(_productCategory, shopItem.ProductId);
+            bool equipped = UserDataServiceSO.Instance.IsEquipped(_productCategory, shopItem.ProductId);
+            shopItem.SetSelected(owned && equipped);
+        }
+
         OnItemSelected = onItemSelected;
     }
 

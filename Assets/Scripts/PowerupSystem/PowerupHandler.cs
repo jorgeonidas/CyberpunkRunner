@@ -72,7 +72,7 @@ public class PowerupHandler : MonoBehaviour, IGameStateChangedListener
 
     private void PowerupPickup_OnAnyPowerupPicked(PowerupBase pickedPowerUp)
     {
-        Debug.Log($"Player picked {pickedPowerUp}");
+       // Debug.Log($"Player picked {pickedPowerUp}");
         if (_player.IsPlayerDead)
         {
             return;
@@ -84,7 +84,7 @@ public class PowerupHandler : MonoBehaviour, IGameStateChangedListener
             return;
         }
 
-        Debug.Log($"powerUpIntId {pickedPowerUp.Id.GetHashCode()} for powerup {pickedPowerUp.Id}");
+        //Debug.Log($"powerUpIntId {pickedPowerUp.Id.GetHashCode()} for powerup {pickedPowerUp.Id}");
 
         float powerupDuration = pickedPowerUp.Duration;
         string powerUpId = pickedPowerUp.Id;
