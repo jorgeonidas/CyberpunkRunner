@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
         {
             SfxManager.Instance.PlayMusic(SfxIdEnum.SoundTrackId.GamePlay);
         }
+        CrazyGamesService.Instance.GameplayStart();
     }
 
     void OnDisable()
@@ -52,7 +53,7 @@ public class GameManager : MonoBehaviour
         _player.OnPlayerDied -= Player_OnPlayerDied;
         _gameStateChangedEvent.OnEventRaised -= OnGameStateChanged;
     }
-    
+
     public void SetCameraController(CameraController cameraController)
     {
         _cameraController = cameraController;
@@ -109,12 +110,15 @@ public class GameManager : MonoBehaviour
         {
             case GameState.Playing:
                 _speedManager.Resume();
+                CrazyGamesService.Instance.GameplayStart();
                 break;
             case GameState.Paused:
                 _speedManager.StopInmediatelly();
+                CrazyGamesService.Instance.GameplayStop();
                 break;
             case GameState.GameOver:
                 _speedManager.Stop(true);
+                CrazyGamesService.Instance.GameplayStop();
                 break;
         }
     }
