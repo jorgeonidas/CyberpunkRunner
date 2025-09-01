@@ -663,7 +663,7 @@ GameObject:
   - component: {fileID: 412421424}
   - component: {fileID: 412421423}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: MainTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -708,7 +708,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SCIFI RUNNER
+  m_text: Cyber rider
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7fd30bfeb37f5884dabd391567e6530d, type: 2}
   m_sharedMaterial: {fileID: -1032854704505651332, guid: 7fd30bfeb37f5884dabd391567e6530d, type: 2}
@@ -2018,6 +2018,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3861324727791680861, guid: 1bf7f605d14ab4341a07aa2b793ce08a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3861324727791680861, guid: 1bf7f605d14ab4341a07aa2b793ce08a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3861324727791680861, guid: 1bf7f605d14ab4341a07aa2b793ce08a, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4207490887151761428, guid: 1bf7f605d14ab4341a07aa2b793ce08a, type: 3}
       propertyPath: m_Name
       value: ShopPanel
@@ -2126,6 +2138,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 252323637}
+    - target: {fileID: 7074553349581282523, guid: 1bf7f605d14ab4341a07aa2b793ce08a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7074553349581282523, guid: 1bf7f605d14ab4341a07aa2b793ce08a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8353760042841052808, guid: 1bf7f605d14ab4341a07aa2b793ce08a, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
