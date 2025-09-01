@@ -5,14 +5,28 @@ using UnityEngine;
 public class ShopView : MonoBehaviour
 {
     public Action<ProductCategory, string> OnItemSelected;
+    public Action OnViewClosed;
     [SerializeField] ProductCategory _productCategory;
     [SerializeField] ShopViewItem _shopViewItemPrefab;
     [SerializeField] Transform _itemsContainer;
+    [SerializeField] SlidingPanelAnimation _slidingAnim;
     private IEnumerable<StoreItemSO> _products;
     private List<ShopViewItem> _shopItems;
     StoreCatalog _catalog;
 
-    public void InitializeShopItems(StoreCatalog catalog, Action<ProductCategory, string> onItemSelected)
+    private void OnEnable()
+    {
+        _slidingAnim.OnClosed += ViewClosed;
+    }
+    
+    private void OnDisable()
+    {
+
+        _slidingAnim.OnClosed -= ViewClosed;
+        UserDataServiceSO.Instance.OnRevertItem?.Invoke(_productCategory);
+    }
+
+    public void InitializeShopItems(StoreCatalog catalog, Action<ProductCategory, string> onItemSelected, Action onClosed)
     {
         _catalog = catalog;
         if (_products == null)
@@ -43,6 +57,8 @@ public class ShopView : MonoBehaviour
         }
 
         OnItemSelected = onItemSelected;
+        _slidingAnim.Open();
+        OnViewClosed = onClosed;
     }
 
     public void RefreshProductsList()
@@ -66,8 +82,14 @@ public class ShopView : MonoBehaviour
         OnItemSelected?.Invoke(category, productId);
     }
 
-    private void OnDisable()
+    
+    public void Close()
     {
-        UserDataServiceSO.Instance.OnRevertItem?.Invoke(_productCategory);
+        _slidingAnim.Close();
+    }
+
+    private void ViewClosed()
+    {
+        OnViewClosed?.Invoke();
     }
 }

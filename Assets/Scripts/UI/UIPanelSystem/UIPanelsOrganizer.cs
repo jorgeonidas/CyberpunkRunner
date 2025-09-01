@@ -4,7 +4,7 @@ public class UIPanelsOrganizer : MonoBehaviour, IUIPanelsOrganizer
 {
     [Header("Panels Catalog")]
     [SerializeField] protected UIPanelCatalog _panelCatalog;
-    void Awake()
+    protected virtual void Awake()
     {
         _panelCatalog.Initialize();
     }

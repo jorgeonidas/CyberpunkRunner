@@ -32,13 +32,16 @@ public class ShopPanel : AbstractUIPanel
     public override void Show()
     {
         //TODO: expand this to more shop tipes in next updates
-        _paintShop.InitializeShopItems(_catalog, ItemSelected);
+        _paintShop.InitializeShopItems(_catalog, ItemSelected, () =>
+        {
+            MainMenuUIManager.Instance.ShowMainMenu();
+        });
         base.Show();
     }
 
     private void ItemSelected(ProductCategory category,string itemId)
     {
-        Debug.Log($"itemId {itemId} category {category}");
+        //Debug.Log($"itemId {itemId} category {category}");
         HandleSelectedItemState(category, itemId);
         UserDataServiceSO.Instance.Preview(category, itemId);
     }

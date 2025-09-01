@@ -27,7 +27,9 @@ public class SfxDataContainer : ScriptableObject
         {
             return sfxData;
         }
+#if UNITY_EDITOR
         Debug.LogWarning($"SFX Data not found for ID: {uISfxId}");
+#endif
         return null;
     }
 
@@ -37,17 +39,21 @@ public class SfxDataContainer : ScriptableObject
         {
             return sfxData;
         }
+#if UNITY_EDITOR
         Debug.LogWarning($"Loop SFX Data not found for ID: {sfxId}");
+#endif
         return null;
     }
-    
+
     public SfxData GetSoundTrackData(SoundTrackId sfxId)
     {
         if (_soundTrackDictionary.TryGetValue(sfxId, out var sfxData))
         {
             return sfxData;
         }
+#if UNITY_EDITOR
         Debug.LogWarning($"Sound Track Data not found for ID: {sfxId}");
+#endif
         return null;
     }
 }
