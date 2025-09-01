@@ -12,7 +12,7 @@ public class PauseMenuPanel : AbstractUIPanel
     public void OnResumeButtonPressed()
     {
         _gameManager.TooglePauseState();
-        SfxManager.Instance.PlayUISfx(SfxIdEnum.UISfxId.back);
+        SfxManager.Instance.PlayUISfx(SfxIdEnum.UISfxId.Back);
     }
 
     public void OnQuitButtonPressed()

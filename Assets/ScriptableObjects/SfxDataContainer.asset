@@ -40,6 +40,10 @@ MonoBehaviour:
       Value: {fileID: 11400000, guid: 01a2f781d62914d4cb942e4955a13b7a, type: 2}
     - Key: 4
       Value: {fileID: 11400000, guid: e39d4e938088bed4c8bf03bf79cc00c6, type: 2}
+    - Key: 5
+      Value: {fileID: 11400000, guid: ca46d32082ff09340b3b6e3bf9b5360f, type: 2}
+    - Key: 6
+      Value: {fileID: 11400000, guid: e7dc39bdeb8ab8249bc44ea7700b7589, type: 2}
   _loopSfxDataDictionary:
     _serializedList:
     - Key: 3

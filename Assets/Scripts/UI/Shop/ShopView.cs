@@ -34,6 +34,12 @@ public class ShopView : MonoBehaviour
             bool owned = UserDataServiceSO.Instance.Owns(_productCategory, shopItem.ProductId);
             bool equipped = UserDataServiceSO.Instance.IsEquipped(_productCategory, shopItem.ProductId);
             shopItem.SetSelected(owned && equipped);
+
+            //to refresh shop panel state
+            if (equipped)
+            {
+                onItemSelected?.Invoke(_productCategory, shopItem.ProductId);
+            }
         }
 
         OnItemSelected = onItemSelected;

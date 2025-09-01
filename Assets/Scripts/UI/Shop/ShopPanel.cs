@@ -75,6 +75,8 @@ public class ShopPanel : AbstractUIPanel
     {
         Debug.Log($"Try equip {_selectedStoreItem.Id}");
         UserDataServiceSO.Instance.Equip(_selectedStoreItem.Category, _selectedStoreItem.Id);
+        //TODO: if we get more categorys select sfx by category
+        SfxManager.Instance.PlayUISfx(SfxIdEnum.UISfxId.EquipPaint);
     }
 
     public void OnPurchaseButtonPressed()
@@ -90,6 +92,7 @@ public class ShopPanel : AbstractUIPanel
             UserDataServiceSO.Instance.AddOwned(_selectedStoreItem.Category, _selectedStoreItem.Id);
             UserDataServiceSO.Instance.AddCoins(-_selectedStoreItem.Price);
             _paintShop.RefreshProductsList();
+            SfxManager.Instance.PlayUISfx(SfxIdEnum.UISfxId.Purchased);
         }
     }
 

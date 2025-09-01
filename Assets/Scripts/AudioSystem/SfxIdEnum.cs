@@ -15,11 +15,13 @@ public class SfxIdEnum
 
     public enum UISfxId
     {
-        click = 0,
-        back = 1,
-        slide = 2,
-        confirm = 3,
-        cancel = 4,
+        Click = 0,
+        Back = 1,
+        Slide = 2,
+        Confirm = 3,
+        Cancel = 4,
+        Purchased = 5,
+        EquipPaint = 6,
     }
 
     public enum LoopSfxId
