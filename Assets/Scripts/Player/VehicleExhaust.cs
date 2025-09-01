@@ -7,6 +7,7 @@ public class VehicleExhaust : MonoBehaviour
     [SerializeField] float _maxParticleSize = 1f;
     [Range(0.01f, 1f)]
     [SerializeField] float _floatMinParticleSize = 0.1f;
+    [SerializeField] AnimationCurve _burstSizeCurve;
 
     private void Start()
     {
@@ -28,6 +29,6 @@ public class VehicleExhaust : MonoBehaviour
     public void SetFlameSize(float speedNormalized)
     {
         var main = _particleSystem.main;
-        main.startSize = Mathf.Lerp(_floatMinParticleSize, _maxParticleSize, speedNormalized);
+        main.startSize = Mathf.Lerp(_floatMinParticleSize, _maxParticleSize, _burstSizeCurve.Evaluate(speedNormalized));
     }
 }
