@@ -46,7 +46,7 @@ public class TachometerUI : MonoBehaviour
 
         _fillImage.fillAmount = targerFill;
         needleTransform.localRotation = Quaternion.Euler(0f, 0f, targetAngle);
-        _currentSpeedText.text = $"{(currentSpeed * 10).ToString("f0")}";
+        _currentSpeedText.text = $"{(currentSpeed * 10).ToString("f0")}\n<size=26>KM/H</size>";
         _currentSpeedText.color = _colorGradient.Evaluate(normalizedSpeed);
         _fillImage.color = _colorGradient.Evaluate(normalizedSpeed);
     }
