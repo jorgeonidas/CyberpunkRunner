@@ -149,6 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerCharacterVisuals: {fileID: 3038982819313421986}
+  _gameStateChangedEventListener: {fileID: 11400000, guid: 0b762577dfa80cd44b6b9f389dfc830c, type: 2}
 --- !u!114 &4917855377038807386
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     public Action OnPausePressed;
     public Action<string, float> OnPowerUpActivated;
     [SerializeField] GameObject _playerCharacterVisuals;
+    [SerializeField] GameStateChangedEvent _gameStateChangedEventListener;
     private GameManager _gameManager;
     PlayerController _playerController;
     PlayerCollisionHandler _playerCollisionHandler;
@@ -27,12 +28,31 @@ public class Player : MonoBehaviour
     {
         _playerCollisionHandler.OnPlayerCollided += PlayerCollisionHandle_OnPlayerCollided;
         _playerController.OnPausedPressed += PlayerController_OnPausedPressed;
+        _gameStateChangedEventListener.OnEventRaised += OnGameStateChanged;
+
     }
 
     private void OnDisable()
     {
         _playerCollisionHandler.OnPlayerCollided += PlayerCollisionHandle_OnPlayerCollided;
         _playerController.OnPausedPressed += PlayerController_OnPausedPressed;
+        _gameStateChangedEventListener.OnEventRaised -= OnGameStateChanged;
+    }
+
+    private void OnGameStateChanged(GameState state)
+    {
+        switch (state)
+        {
+            case GameState.GameOver:
+            case GameState.Paused:
+                _playerController.enabled = false;
+                break;
+            case GameState.Playing:
+                _playerController.enabled = true;
+                break;
+            default:
+                break;
+        }
     }
 
     private void PlayerCollisionHandle_OnPlayerCollided()
