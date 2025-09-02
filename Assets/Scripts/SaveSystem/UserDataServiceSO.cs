@@ -30,7 +30,7 @@ public class UserDataServiceSO : SingletonScriptableObject<UserDataServiceSO>
         _jsonSettings.Converters.Add(new StringEnumConverter());
 
         _data = SaveToJson.Load<UserData>(fileName, _jsonSettings) ?? new UserData();
-        Debug.Log("[UserDataService] Initialized");
+        Debug.Log($"[UserDataService] Initialized {fileName}");
     }
 
     public void Save()
