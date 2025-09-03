@@ -148,11 +148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbdc29eeb8fbc47438609970d5875afb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PowerupTest
-  _obstacles:
-  - {fileID: 961293281}
-  - {fileID: 174563879}
-  - {fileID: 1760270552}
-  - {fileID: 1035230221}
   _rocketPrefab: {fileID: 124899331497755070, guid: f407406fe7bd9fe4f9e24f0b2c5dd2f8, type: 3}
 --- !u!4 &65078133
 Transform:
@@ -223,24 +218,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7264125426370874599, guid: 0c80ec0af0712aa46866501e319e145a, type: 3}
       propertyPath: m_Name
-      value: Vehicle_SwipeCar (1)
+      value: VehicleObstacle_1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c80ec0af0712aa46866501e319e145a, type: 3}
---- !u!114 &174563879 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6207267802131567749, guid: 0c80ec0af0712aa46866501e319e145a, type: 3}
-  m_PrefabInstance: {fileID: 174563878}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dddda06ee10f1b44d91af36448c8f2f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &440314798
 GameObject:
   m_ObjectHideFlags: 0
@@ -535,6 +519,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 412629640423822869, guid: 0c80ec0af0712aa46866501e319e145a, type: 3}
+      propertyPath: m_Name
+      value: VehicleObstacle_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1510816783428888471, guid: 0c80ec0af0712aa46866501e319e145a, type: 3}
+      propertyPath: m_Name
+      value: VehicleObstacle_1
+      objectReference: {fileID: 0}
     - target: {fileID: 1679322725428831109, guid: 0c80ec0af0712aa46866501e319e145a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -11.073672
@@ -575,30 +567,27 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3244675657247531538, guid: 0c80ec0af0712aa46866501e319e145a, type: 3}
+      propertyPath: m_Name
+      value: VehicleObstacle_1
+      objectReference: {fileID: 0}
     - target: {fileID: 3370881533412048526, guid: 0c80ec0af0712aa46866501e319e145a, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5125502133732756138, guid: 0c80ec0af0712aa46866501e319e145a, type: 3}
+      propertyPath: m_Name
+      value: VehicleObstacle_1
+      objectReference: {fileID: 0}
     - target: {fileID: 7264125426370874599, guid: 0c80ec0af0712aa46866501e319e145a, type: 3}
       propertyPath: m_Name
-      value: Vehicle_SwipeCar
+      value: VehicleObstacle_1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c80ec0af0712aa46866501e319e145a, type: 3}
---- !u!114 &961293281 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6207267802131567749, guid: 0c80ec0af0712aa46866501e319e145a, type: 3}
-  m_PrefabInstance: {fileID: 961293280}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dddda06ee10f1b44d91af36448c8f2f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!43 &1020819152
 Mesh:
   m_ObjectHideFlags: 0
@@ -831,24 +820,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7264125426370874599, guid: 0c80ec0af0712aa46866501e319e145a, type: 3}
       propertyPath: m_Name
-      value: Vehicle_SwipeCar (3)
+      value: VehicleObstacle_1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c80ec0af0712aa46866501e319e145a, type: 3}
---- !u!114 &1035230221 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6207267802131567749, guid: 0c80ec0af0712aa46866501e319e145a, type: 3}
-  m_PrefabInstance: {fileID: 1035230220}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dddda06ee10f1b44d91af36448c8f2f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1360810122
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1312,24 +1290,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7264125426370874599, guid: 0c80ec0af0712aa46866501e319e145a, type: 3}
       propertyPath: m_Name
-      value: Vehicle_SwipeCar (2)
+      value: VehicleObstacle_1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c80ec0af0712aa46866501e319e145a, type: 3}
---- !u!114 &1760270552 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6207267802131567749, guid: 0c80ec0af0712aa46866501e319e145a, type: 3}
-  m_PrefabInstance: {fileID: 1760270551}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dddda06ee10f1b44d91af36448c8f2f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2114859734
 GameObject:
   m_ObjectHideFlags: 0

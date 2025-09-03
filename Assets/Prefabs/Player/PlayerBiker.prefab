@@ -113,6 +113,7 @@ GameObject:
   - component: {fileID: 7331299940704789771}
   - component: {fileID: 6358090529405687154}
   - component: {fileID: 2581585842125369548}
+  - component: {fileID: 8375135365955068285}
   m_Layer: 0
   m_Name: PlayerBiker
   m_TagString: Player
@@ -176,8 +177,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52418a0a919bffb4a95fb4945010574e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hitCooldownTime: 1
-  _testInvincible: 0
+  _playerCollider: {fileID: 0}
+  _screenShakeSource: {fileID: 0}
+  _hitCooldownSeconds: 1
+  _forceInvincibleForTesting: 0
 --- !u!114 &6758020255909572474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -512,6 +515,19 @@ MonoBehaviour:
     DissipationDistance: 100
     PropagationSpeed: 343
   DefaultVelocity: {x: 0, y: -1, z: 0}
+--- !u!114 &8375135365955068285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8028125100094935181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbdc29eeb8fbc47438609970d5875afb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PowerupTest
+  _rocketPrefab: {fileID: 124899331497755070, guid: f407406fe7bd9fe4f9e24f0b2c5dd2f8, type: 3}
 --- !u!1001 &3009105983800780847
 PrefabInstance:
   m_ObjectHideFlags: 0

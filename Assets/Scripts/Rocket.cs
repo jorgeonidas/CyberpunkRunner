@@ -53,4 +53,18 @@ public class Rocket : MonoBehaviour
             Gizmos.DrawLine(transform.position, _target.position);
         }
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        Debug.Log($"OnTriggerEnter {other.name}");
+        if (other.TryGetComponent(out IDestroy destructible))
+        {
+            Debug.Log("here!");
+            destructible.DestroyMe();
+            Destroy(gameObject);
+        }
+        //instantiate explosion
+        //destroy this (add to pool manager)
+
+    }
 }
