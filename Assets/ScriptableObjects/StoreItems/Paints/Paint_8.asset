@@ -15,6 +15,6 @@ MonoBehaviour:
   _id: Paint_8
   _displayNameKey: Purple
   _category: 0
-  _price: 1000
+  _price: 5000
   _thumbnail: {fileID: 21300000, guid: 427c1f2f492df7e4d9c3ee1226018a74, type: 3}
   _paintMaterial: {fileID: 2100000, guid: e43e0848fad28db439d9411118a7fc32, type: 2}

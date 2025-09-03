@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8312937031345575377}
   - component: {fileID: 9027843247361589471}
+  - component: {fileID: 3676340547072825313}
   m_Layer: 0
   m_Name: MovingObjecsSpawner
   m_TagString: Untagged
@@ -57,3 +58,17 @@ MonoBehaviour:
   _spawnInterval: 1.2
   _minSpawnSpeed: 0.6
   _spawnIntervalDecreaseRate: 0.05
+--- !u!114 &3676340547072825313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 890333642553595747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 174427ec5b85e6940a7f085108f5338d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MovingObjectEventsListener
+  _placeCoinEvent: {fileID: 11400000, guid: 9a393d5bf7ae5dd4bbee06af0b19ae67, type: 2}
+  _movingObjectsSpawner: {fileID: 9027843247361589471}

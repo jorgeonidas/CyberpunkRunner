@@ -15,6 +15,6 @@ MonoBehaviour:
   _id: Paint_1
   _displayNameKey: Mustard
   _category: 0
-  _price: 1000
+  _price: 5000
   _thumbnail: {fileID: 21300000, guid: b72599480e699664fbcbbc522501316e, type: 3}
   _paintMaterial: {fileID: 2100000, guid: 5846f1c3c4e5f1e42b95451831844600, type: 2}

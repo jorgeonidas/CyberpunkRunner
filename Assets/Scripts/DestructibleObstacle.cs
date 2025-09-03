@@ -5,6 +5,7 @@ public class DestructibleObstacle : MonoBehaviour, IDestroy
     VFXSpawner _vfxSpawner;
     PooledObject _poolObject;
     SfxEmitter _sfxEmmiter;
+    [SerializeField] OnPositionEvent _placeCoinEvent;
 
     void Awake()
     {
@@ -15,6 +16,7 @@ public class DestructibleObstacle : MonoBehaviour, IDestroy
 
     public void DestroyMe()
     {
+        _placeCoinEvent?.Raise(transform.position);
         PoolManager.Instance?.Get(_poolObject.PoolObjectId + StringConstants.DestroyedSufix, transform.position, transform.rotation);
         _vfxSpawner?.PlayParticleEffect(transform.position);
         _sfxEmmiter?.PlaySfx();

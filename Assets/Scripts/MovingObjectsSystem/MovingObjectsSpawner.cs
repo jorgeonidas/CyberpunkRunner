@@ -33,12 +33,12 @@ public class MovingObjectsSpawner : MonoBehaviour
 
     void OnDisable()
     {
-        _gameStateChangedEvent.OnEventRaised -= OnGameStateChanged; 
+        _gameStateChangedEvent.OnEventRaised -= OnGameStateChanged;
     }
 
     private void Update()
     {
-        if(_stopped)
+        if (_stopped)
         {
             return;
         }
@@ -118,7 +118,7 @@ public class MovingObjectsSpawner : MonoBehaviour
         {
             float zPos = startZ - spacing * i;
             Vector3 spawnPos = new Vector3(xPosition, 0f, zPos);
-            PoolManager.Instance.Get(StringConstants.Coin, spawnPos, transform.rotation);
+            SpawnCoin(spawnPos);
         }
     }
 
@@ -161,14 +161,6 @@ public class MovingObjectsSpawner : MonoBehaviour
         }
     }
 
-    public void TryDecreaseSpawnrate()
-    {
-        if (_spawnInterval > _minSpawnSpeed)
-        {
-            _spawnInterval = Mathf.Max(_minSpawnSpeed, _spawnInterval - _spawnIntervalDecreaseRate);
-        }
-    }
-
     private void OnGameStateChanged(GameState state)
     {
         switch (state)
@@ -189,10 +181,23 @@ public class MovingObjectsSpawner : MonoBehaviour
     {
         _stopped = true;
     }
-    
+
     private void Resume()
     {
         _stopped = false;
         _nextSpawnTime = Time.time + _spawnInterval;
+    }
+
+    public void TryDecreaseSpawnrate()
+    {
+        if (_spawnInterval > _minSpawnSpeed)
+        {
+            _spawnInterval = Mathf.Max(_minSpawnSpeed, _spawnInterval - _spawnIntervalDecreaseRate);
+        }
+    }
+
+    public void SpawnCoin(Vector3 spawnPos)
+    {
+        PoolManager.Instance.Get(StringConstants.Coin, spawnPos, transform.rotation);
     }
 }

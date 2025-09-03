@@ -30,7 +30,16 @@ public class UserDataServiceSO : SingletonScriptableObject<UserDataServiceSO>
         _jsonSettings.Converters.Add(new StringEnumConverter());
 
         _data = SaveToJson.Load<UserData>(fileName, _jsonSettings) ?? new UserData();
-        Debug.Log($"[UserDataService] Initialized {fileName}");
+        FailSafeData();
+        Debug.Log($"[UserDataService] Initialized {fileName} _data? {_data != null} gs {_data.userGameSettings != null}");
+    }
+
+    private void FailSafeData()
+    {
+        if (_data.userGameSettings == null)
+        {
+            _data.userGameSettings = new UserGameSettings();
+        }
     }
 
     public void Save()

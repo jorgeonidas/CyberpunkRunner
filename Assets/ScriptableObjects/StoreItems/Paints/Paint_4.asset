@@ -15,6 +15,6 @@ MonoBehaviour:
   _id: Paint_4
   _displayNameKey: White
   _category: 0
-  _price: 1000
+  _price: 5000
   _thumbnail: {fileID: 21300000, guid: f5c8dce9e7f71ec4d88e15fcc7c1ca8e, type: 3}
   _paintMaterial: {fileID: 2100000, guid: 5b103efddde787a45ac844ebc57b0aca, type: 2}

@@ -15,6 +15,6 @@ MonoBehaviour:
   _id: Paint_7
   _displayNameKey: Brown
   _category: 0
-  _price: 1000
+  _price: 5000
   _thumbnail: {fileID: 21300000, guid: b949877814dee004483629e172ef803f, type: 3}
   _paintMaterial: {fileID: 2100000, guid: f48d74d319b42e046888964c0831d020, type: 2}

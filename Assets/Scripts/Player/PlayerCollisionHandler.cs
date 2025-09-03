@@ -1,95 +1,112 @@
 using System;
 using UnityEngine;
 
-public class PlayerCollisionHandler : MonoBehaviour
+[DisallowMultipleComponent]
+public sealed class PlayerCollisionHandler : MonoBehaviour
 {
-    public Action OnPlayerCollided;
-    [SerializeField] float _hitCooldownTime = 1f;
-    
-    [Header("Test Invincible")]
-    [SerializeField] bool _testInvincible = false;
-    ScreenShakeSource _screenShakeSource;
-    Collider _playerCollider;
-    bool _hitCooldownActive;
-    bool _isInvincible;
-    float _hitCooldownTimer;
+    // === Events ===
+    /// <summary>Raised when the player takes a hit (and is not invincible nor under cooldown).</summary>
+    public event Action OnPlayerCollided;
+
+    // === Inspector ===
+    [Header("Collision")]
+    [Tooltip("Optional: Player collider. If null, it will be resolved from children on Awake.")]
+    [SerializeField] private Collider _playerCollider;
+
+    [Header("Feedback")]
+    [Tooltip("Optional screen shake source.")]
+    [SerializeField] private ScreenShakeSource _screenShakeSource;
+
+    [Header("Rules")]
+    [Tooltip("Cooldown (seconds) to ignore further hits after a valid collision.")]
+    [SerializeField] private float _hitCooldownSeconds = 1f;
+
+    [Header("Testing")]
+    [Tooltip("When enabled, the player is always invincible regardless of runtime state.")]
+    [SerializeField] private bool _forceInvincibleForTesting = false;
+
+    // === State ===
+    private float _lastHitTime = float.NegativeInfinity;  
+    private bool _runtimeInvincible;                       
+
+    // === Properties ===
+    private bool IsOnCooldown => Time.time < _lastHitTime + _hitCooldownSeconds;
+    private bool IsInvincible => _forceInvincibleForTesting || _runtimeInvincible;
 
     private void Awake()
     {
-        TryGetComponent(out _screenShakeSource);
-        _playerCollider = GetComponentInChildren<Collider>(); 
+        if (_screenShakeSource == null)
+        {
+            TryGetComponent(out _screenShakeSource);
+        }
+
+        if (_playerCollider == null)
+        {
+            _playerCollider = GetComponentInChildren<Collider>();
+        }
+
+        if (_playerCollider == null)
+        {
+            Debug.LogWarning("[PlayerCollisionHandler] No collider found. Call EnableCollider(false) if intentional.", this);
+        }
     }
 
     private void Start()
     {
-        _isInvincible = false;
-        if (_testInvincible)
-        {
-            _isInvincible = _testInvincible;//carefull here
-        }
-        ActivateHitCooldown();
+        // Start with cooldown active so immediate spawn contacts don't trigger a hit
+        ArmCooldown();
     }
 
-    private void Update()
-    {
-        if (_hitCooldownActive)
-        {
-            _hitCooldownTimer -= Time.deltaTime;
-            if (_hitCooldownTimer < 0)
-            {
-                _hitCooldownActive = false;
-            }
-        }
-    }
-
-    void OnCollisionEnter(Collision other)
+    private void OnCollisionEnter(Collision other)
     {
         if (!other.transform.CompareTag(StringConstants.OBSTACLE_TAG))
         {
             return;
         }
-        HandleObstacleCollision(other);
-        if (!_isInvincible)
-        {
-            HandleVulnerableCollision(other);
-        }
-    }
 
-    private void HandleObstacleCollision(Collision other)
-    {
-        if (other.transform.TryGetComponent<IDestroy>(out IDestroy obstacle))
-        {
-            _screenShakeSource?.ShakeCamera();
-            obstacle.DestroyMe();
-        }
-    }
+        // Handle obstacle-specific logic
+        TryHandleObstacleSide(other);
 
-    private void HandleVulnerableCollision(Collision other)
-    {
-        if (_hitCooldownActive)
+        if (IsInvincible || IsOnCooldown)
         {
             return;
         }
 
-        ActivateHitCooldown();
+        ArmCooldown();
         OnPlayerCollided?.Invoke();
-        _screenShakeSource?.ShakeCamera();
     }
 
-    private void ActivateHitCooldown()
+    private void TryHandleObstacleSide(Collision other)
     {
-        _hitCooldownTimer = _hitCooldownTime;
-        _hitCooldownActive = true;
+        if (other.transform.TryGetComponent<IDestroy>(out var destroyable))
+        {
+            _screenShakeSource?.ShakeCamera();
+            destroyable.DestroyMe();
+        }
     }
 
-    public void SetInvincible(bool invincible)
+    private void ArmCooldown()
     {
-        _isInvincible = invincible;
-        Debug.Log($"_isInvincible {_isInvincible}");
+        _lastHitTime = Time.time;
+    }
+
+    public void SetInvincible(bool value)
+    {
+        _runtimeInvincible = value;
+
+#if UNITY_EDITOR
+        Debug.Log($"[PlayerCollisionHandler] Runtime invincible: {_runtimeInvincible}");
+#endif
     }
 
     public void EnableCollider(bool enable)
     {
+        if (_playerCollider == null)
+        {
+            Debug.LogWarning("[PlayerCollisionHandler] No collider to enable/disable.", this);
+            return;
+        }
+
         _playerCollider.enabled = enable;
     }
 }

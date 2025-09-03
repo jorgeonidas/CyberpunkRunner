@@ -15,6 +15,6 @@ MonoBehaviour:
   _id: Paint_3
   _displayNameKey: Navi Blue
   _category: 0
-  _price: 1000
+  _price: 5000
   _thumbnail: {fileID: 21300000, guid: 9b114a7137a79a44b8112d72fa40afdd, type: 3}
   _paintMaterial: {fileID: 2100000, guid: 1b3f510c14fcc24419370fa386429eac, type: 2}
