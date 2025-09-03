@@ -17,6 +17,11 @@ public class WhooshSfxEmitter : SfxEmitter
 
     void Update()
     {
+        if(_playerTransform == null)
+        {
+            return;
+        }
+
         if (_hasPlayedWhoosh)
         {
             return;

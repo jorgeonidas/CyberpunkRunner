@@ -1,0 +1,35 @@
+{
+    "version": 1,
+    "name": "TestInputs",
+    "maps": [
+        {
+            "name": "DebugInputs",
+            "id": "1515a2fc-2f69-46f0-97bf-c502c6a07d9c",
+            "actions": [
+                {
+                    "name": "SpaceBarInput",
+                    "type": "Button",
+                    "id": "df880e1f-8482-420a-95be-598d0d147e4e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "003f6498-b94c-4358-8b2c-d2167547f187",
+                    "path": "<Keyboard>/space",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SpaceBarInput",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
