@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8cc02bc8512e0343ad160b10337482c, type: 3}
+  m_Name: RocketLauncherPowerup
+  m_EditorClassIdentifier: Assembly-CSharp::RocketLauncherPowerup
+  _id: RocketLauncher
+  _icon: {fileID: 21300000, guid: 37c7faa38711a6044bf12b84912e0dd5, type: 3}
+  _loopSfxId: 0
+  _duration: 0
+  _rocketPrefab: {fileID: 124899331497755070, guid: f407406fe7bd9fe4f9e24f0b2c5dd2f8, type: 3}
+  _numberOfRockets: 3
+  _timeBetweenMissiles: 0.15

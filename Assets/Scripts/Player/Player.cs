@@ -12,16 +12,19 @@ public class Player : MonoBehaviour
     PlayerController _playerController;
     PlayerCollisionHandler _playerCollisionHandler;
     PlayerSoundsController _playerSoundsController;
+    private RocketLauncher _rocketLauncher;
     private RagdollSpawner _ragdollSpawner;
     private bool _playerDead;
     public bool IsPlayerDead => _playerDead;
     public float CurrentNormalizedSpeed => _gameManager.NormalizedChunkSpeed;
+    public RocketLauncher RocketLauncher => _rocketLauncher;
     private void Awake()
     {
         _playerController = GetComponent<PlayerController>();
         _playerCollisionHandler = GetComponent<PlayerCollisionHandler>();
         TryGetComponent(out _ragdollSpawner);
         TryGetComponent(out _playerSoundsController);
+        TryGetComponent(out _rocketLauncher);
     }
 
     private void OnEnable()

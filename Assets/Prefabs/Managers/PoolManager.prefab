@@ -60,6 +60,11 @@ MonoBehaviour:
     defaultCapacity: 4
     maxSize: 8
     prewarm: 2
+  - key: RocketLauncher
+    objectPrefab: {fileID: 3527117324728761569, guid: d25f2c709fa2a7b42890e231c8182ffe, type: 3}
+    defaultCapacity: 4
+    maxSize: 8
+    prewarm: 2
   - key: VehicleObstacle_1
     objectPrefab: {fileID: 7246594060548260529, guid: 0c80ec0af0712aa46866501e319e145a, type: 3}
     defaultCapacity: 20

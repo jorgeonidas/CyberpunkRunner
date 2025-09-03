@@ -83,7 +83,12 @@ public class PowerupHandler : MonoBehaviour, IGameStateChangedListener
             Debug.LogError($"Invalid powerup id for {pickedPowerUp} is null or empty");
             return;
         }
-
+        
+        if (pickedPowerUp.Duration <= 0)
+        {
+            ActivateInstantPoserup(pickedPowerUp);
+            return;
+        }
         //Debug.Log($"powerUpIntId {pickedPowerUp.Id.GetHashCode()} for powerup {pickedPowerUp.Id}");
 
         float powerupDuration = pickedPowerUp.Duration;
@@ -102,6 +107,12 @@ public class PowerupHandler : MonoBehaviour, IGameStateChangedListener
             _powerupTimers.Add(powerUpId, powerupDuration);
             _activePowerups.Add(powerUpId, pickedPowerUp);
         }
+    }
+
+    private void ActivateInstantPoserup(PowerupBase powerup)
+    {
+        powerup.StartEffect(GameManager.Instance);
+        //no need to track instant powerups
     }
 
     private void Player_OnPlayerDied()
