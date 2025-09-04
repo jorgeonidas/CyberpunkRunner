@@ -27,7 +27,7 @@ public class IngameUIManager : UIPanelsOrganizer
         {
             return;
         }
-        if(_gameManager.CurrentGameState != GameState.Playing)
+        if (_gameManager.CurrentGameState != GameState.Playing)
         {
             return;
         }
@@ -45,7 +45,7 @@ public class IngameUIManager : UIPanelsOrganizer
     {
         _coinCollectedEvent.OnEventRaised -= OnScoreChanged;
         _gamestateChangedEvent.OnEventRaised -= OnGameStateChanged;
-        _powerupActivationEvent.OnEventRaised -= OnPowerupActivated; 
+        _powerupActivationEvent.OnEventRaised -= OnPowerupActivated;
     }
 
     private void OnScoreChanged(int score)
@@ -72,5 +72,10 @@ public class IngameUIManager : UIPanelsOrganizer
                 Hide(StringConstants.IngamePanels.Pause);
                 break;
         }
+    }
+
+    public void OnPauseButtonClicked()
+    {
+        _gameManager.TooglePauseState();
     }
 }
