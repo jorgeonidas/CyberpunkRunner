@@ -23,6 +23,7 @@ public class GamerOverPanel : AbstractUIPanel
         if (isNewRecord)
         {
             UserDataServiceSO.Instance.SetRecord(traveledDistance);
+            CrazyGamesService.Instance?.HappyTime();
         }
         _traveledDistanceText.text = $"DISTANCE: {traveledDistance}m";
         _earnedCoinsText.text = $"COINS: {_gameManager.CoinsCollected}";

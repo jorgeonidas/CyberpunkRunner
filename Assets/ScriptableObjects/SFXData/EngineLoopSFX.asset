@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SfxData
   _clips:
   - {fileID: 8300000, guid: 5abc2494f98a5934c88f839c7f7aee95, type: 3}
-  _volume: 0.3
+  _volume: 0.2
   _minPitch: 1
   _maxPitch: 1

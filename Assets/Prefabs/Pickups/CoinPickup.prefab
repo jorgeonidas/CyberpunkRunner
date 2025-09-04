@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: -2732467150225652828}
   - component: {fileID: 8907547727281242133}
   - component: {fileID: 6489734875922865400}
-  - component: {fileID: 6269598293059102616}
   - component: {fileID: 1828369857025452804}
+  - component: {fileID: 6269598293059102616}
   m_Layer: 0
   m_Name: CoinPickup
   m_TagString: Untagged
@@ -76,6 +76,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _coinSetting: {fileID: 11400000, guid: 26bd166d7d970914087c09a36183df50, type: 2}
+  _movingObjectScript: {fileID: -8719212087644237097}
 --- !u!114 &-8719212087644237097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,6 +130,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _screenShakeProfile: {fileID: 11400000, guid: d8123277147e0ca468a7ebe79870babe, type: 2}
   _cinemachineImpulseSource: {fileID: 6269598293059102616}
+--- !u!114 &1828369857025452804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 211386016494728453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b93b1239f49ddf46944f21f75557d98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SfxEmmiter
+  sfxId: 1
 --- !u!114 &6269598293059102616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,19 +196,6 @@ MonoBehaviour:
     DissipationDistance: 100
     PropagationSpeed: 343
   DefaultVelocity: {x: 0, y: -1, z: 0}
---- !u!114 &1828369857025452804
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 211386016494728453}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b93b1239f49ddf46944f21f75557d98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SfxEmmiter
-  sfxId: 1
 --- !u!1 &7420548770909788941
 GameObject:
   m_ObjectHideFlags: 0

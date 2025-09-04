@@ -7,6 +7,7 @@ public class CoinMagnet : MonoBehaviour
     [SerializeField] private float magnetRadius = 5f;
     [SerializeField] private float magnetForce = 20f;
     private bool magnetActive = false;
+    private float _coinReachDistance = 0.25f;
 
     // Lista de monedas magnetizadas
     private readonly List<CoinPickUp> magnetizedCoins = new List<CoinPickUp>();
@@ -42,7 +43,7 @@ public class CoinMagnet : MonoBehaviour
             float dist = Vector3.Distance(coin.transform.position, magnetPosition);
             if (dist <= magnetRadius)
             {
-                //coin.SetMagnetized(true);
+                coin.Magnetize(true);
                 magnetizedCoins.Add(coin);
             }
         }
@@ -63,7 +64,7 @@ public class CoinMagnet : MonoBehaviour
             }
             // Si la moneda ya llegó al magneto (puedes ajustar el umbral si es necesario)
             float dist = Vector3.Distance(coin.transform.position, magnetPosition);
-            if (dist < 0.1f)
+            if (dist < _coinReachDistance)
             {
                 coinsToRemove.Add(coin);
                 continue;
