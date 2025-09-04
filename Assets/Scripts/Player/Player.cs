@@ -13,11 +13,13 @@ public class Player : MonoBehaviour
     PlayerCollisionHandler _playerCollisionHandler;
     PlayerSoundsController _playerSoundsController;
     private RocketLauncher _rocketLauncher;
+    private CoinMagnet _coinMagnet;
     private RagdollSpawner _ragdollSpawner;
     private bool _playerDead;
     public bool IsPlayerDead => _playerDead;
     public float CurrentNormalizedSpeed => _gameManager.NormalizedChunkSpeed;
     public RocketLauncher RocketLauncher => _rocketLauncher;
+    public CoinMagnet CoinMagnet => _coinMagnet;
     private void Awake()
     {
         _playerController = GetComponent<PlayerController>();

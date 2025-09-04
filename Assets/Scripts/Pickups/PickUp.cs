@@ -1,14 +1,12 @@
 using UnityEngine;
 
-public abstract class PickUp : MonoBehaviour
+public abstract class PickUp : PooledObject
 {
-    private PooledObject _pooled;
     private VFXSpawner _vfxSpawner;
     private ScreenShakeSource _screenShakeSource;
     private SfxEmitter _sfxEmmiter;
     private void Awake()
     {
-        TryGetComponent(out _pooled);
         TryGetComponent(out _vfxSpawner);
         TryGetComponent(out _screenShakeSource);
         TryGetComponent(out _sfxEmmiter);
@@ -21,7 +19,7 @@ public abstract class PickUp : MonoBehaviour
             _vfxSpawner?.PlayParticleEffect(other.transform.position);
             _screenShakeSource?.ShakeCamera();
             _sfxEmmiter?.PlaySfx();
-            _pooled?.Release();
+            Release();
         }
     }
     protected abstract void OnPickUp();

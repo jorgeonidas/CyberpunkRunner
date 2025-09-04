@@ -46,22 +46,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _configs:
   - key: Coin
-    objectPrefab: {fileID: 1533778231171789797, guid: 7b57a1b15a651fc41a8cc47372309616, type: 3}
+    objectPrefab: {fileID: 8564360296969163897, guid: 7b57a1b15a651fc41a8cc47372309616, type: 3}
     defaultCapacity: 100
     maxSize: 200
     prewarm: 60
   - key: SpeedBoost
-    objectPrefab: {fileID: 3527117324728761569, guid: 6b337659086f2c143800c3b2b377f49c, type: 3}
+    objectPrefab: {fileID: 8885810628254650407, guid: 6b337659086f2c143800c3b2b377f49c, type: 3}
     defaultCapacity: 4
     maxSize: 8
     prewarm: 2
   - key: Invincible
-    objectPrefab: {fileID: 3527117324728761569, guid: d6bedf4e2733d58468bb028453786677, type: 3}
+    objectPrefab: {fileID: 8885810628254650407, guid: d6bedf4e2733d58468bb028453786677, type: 3}
     defaultCapacity: 4
     maxSize: 8
     prewarm: 2
   - key: RocketLauncher
-    objectPrefab: {fileID: 3527117324728761569, guid: d25f2c709fa2a7b42890e231c8182ffe, type: 3}
+    objectPrefab: {fileID: 8885810628254650407, guid: d25f2c709fa2a7b42890e231c8182ffe, type: 3}
     defaultCapacity: 4
     maxSize: 8
     prewarm: 2
