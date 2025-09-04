@@ -5,12 +5,14 @@ public class Rocket : PooledObject
     [SerializeField] AnimationCurve _trayectoryCurve;
     [SerializeField] float _speed = 10f;
     [SerializeField] float _yAmplitude = 2.5f;
+    [SerializeField] VFXSpawner _trailVFXSpawner;
     Transform _target;
     float _totalDistance;
     Vector3 _startPosition;
     Vector3 _startTargetPosition;
     float _launchTime;
     float _duration;
+    PooledObject _trailVFX;
     public void Launch(Transform target)
     {
         _target = target;
@@ -23,6 +25,7 @@ public class Rocket : PooledObject
         {
             SfxManager.Instance.PlaySfx(SfxIdEnum.SfxId.RocketLaunch, transform.position);
         }
+        _trailVFX = _trailVFXSpawner.PlayParticleEffect(transform.position);//Figure out how to release it
     }
 
     private void Update()
@@ -46,7 +49,7 @@ public class Rocket : PooledObject
         {
             transform.rotation = Quaternion.LookRotation(moveDirection);
         }
-        transform.position = nextPosition;
+        transform.position = _trailVFX.transform.position = nextPosition;
     }
 
     void OnDrawGizmos()
@@ -67,8 +70,6 @@ public class Rocket : PooledObject
             destructible.DestroyMe();
             RocketImpact();
         }
-        //instantiate explosion
-        //destroy this (add to pool manager)
     }
 
     private void RocketImpact()
