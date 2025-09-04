@@ -33,6 +33,7 @@ public class SfxIdEnum
         PlayerBikeEngineLoop = 3,
         ForceFieldLoop = 4,
         CarEngineLoop = 5,
+        MagneticFieldLoop = 6,
     }
 
     public enum SoundTrackId
