@@ -19,6 +19,10 @@ public class Rocket : MonoBehaviour
         _totalDistance = Vector3.Distance(_startPosition, _startTargetPosition);
         _duration = _totalDistance / _speed;
         _launchTime = Time.time;
+        if (SfxManager.Instance)
+        {
+            SfxManager.Instance.PlaySfx(SfxIdEnum.SfxId.RocketLaunch, transform.position);
+        }
     }
 
     private void Update()
@@ -61,10 +65,14 @@ public class Rocket : MonoBehaviour
         {
             Debug.Log("here!");
             destructible.DestroyMe();
-            Destroy(gameObject);
+            RocketImpact();
         }
         //instantiate explosion
         //destroy this (add to pool manager)
+    }
 
+    private void RocketImpact()
+    {
+        Destroy(gameObject);
     }
 }

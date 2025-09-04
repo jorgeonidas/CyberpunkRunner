@@ -10,6 +10,7 @@ public class SfxIdEnum
         SpeedPowerup = 3,
         InvincibilityPowerup = 4,
         Whoosh = 5,
+        RocketLaunch = 6,
         //UI
     }
 
