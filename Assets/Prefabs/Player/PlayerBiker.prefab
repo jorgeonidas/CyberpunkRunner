@@ -102,6 +102,7 @@ GameObject:
   - component: {fileID: 7801529265794400478}
   - component: {fileID: 6758020255909572474}
   - component: {fileID: 2492954280592009525}
+  - component: {fileID: 284743177741106419}
   - component: {fileID: 806347939411337014}
   - component: {fileID: 1041849058272339798}
   - component: {fileID: 197229381577994216}
@@ -280,6 +281,23 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &284743177741106419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8028125100094935181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e9b0f08e25948941a6703ce255222dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SwipeToLaneInput
+  _player: {fileID: 4917855377038807386}
+  _minSwipeDistancePx: 80
+  _maxSwipeTime: 0.5
+  _horizontalDominance: 1.2
+  _deadZonePx: 10
 --- !u!114 &806347939411337014
 MonoBehaviour:
   m_ObjectHideFlags: 0

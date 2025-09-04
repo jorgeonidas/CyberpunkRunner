@@ -1,22 +1,25 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+    
 public class PlayerController : MonoBehaviour
 {
     public Action OnPausedPressed;
-    [SerializeField] LevelSettings _levelSettings;
-    [SerializeField] SpeedSettings _speedSettings;
+
+    [SerializeField] private LevelSettings _levelSettings;
+    [SerializeField] private SpeedSettings _speedSettings;
+
     private float[] _lanes;
     private Rigidbody _playerRigidbody;
     private Vector3 _targetPosition;
+
     private int _currentLane = 0;
     private float _defaultSideMoveSpeed = 5f;
     private float _currentSideMoveSpeed = 5f;
+
     private void Awake()
     {
         _playerRigidbody = GetComponent<Rigidbody>();
-
     }
 
     private void Start()
@@ -43,30 +46,43 @@ public class PlayerController : MonoBehaviour
         _currentLane = _lanes.Length / 2;
     }
 
-    public void MoveLeft(InputAction.CallbackContext conext)
+    // === Common lane-change helper used by both actions and swipe ===
+    private void ChangeLane(int delta)
     {
-        if (conext.performed)
-        {
-            _currentLane = Mathf.Max(_currentLane - 1, 0);
-            SetTargetLanePosition();
-        }
+        int newLane = Mathf.Clamp(_currentLane + delta, 0, _lanes.Length - 1);
+        if (newLane == _currentLane) return; // already at edge
+        _currentLane = newLane;
+        SetTargetLanePosition();
     }
 
-    public void MoveRigth(InputAction.CallbackContext conext)
+    // === Input Actions (keyboard/gamepad) ===
+    public void MoveLeft(InputAction.CallbackContext context)
     {
-        if (conext.performed)
-        {
-            _currentLane = Mathf.Min(_currentLane + 1, _lanes.Length - 1);
-            SetTargetLanePosition();
-        }
+        if (context.performed) ChangeLane(-1);
     }
 
-    public void TogglePause(InputAction.CallbackContext conext)
+    public void MoveRigth(InputAction.CallbackContext context) // keeping your original name
     {
-        if (conext.performed)
+        if (context.performed) ChangeLane(+1);
+    }
+
+    public void TogglePause(InputAction.CallbackContext context)
+    {
+        if (context.performed)
         {
             OnPausedPressed?.Invoke();
         }
+    }
+
+    // === Public methods for swipe calls ===
+    public void MoveLeft()
+    {
+        ChangeLane(-1);
+    }
+
+    public void MoveRight()
+    {
+        ChangeLane(+1);
     }
 
     public void AddMoveSpeed(float speed)
@@ -76,7 +92,11 @@ public class PlayerController : MonoBehaviour
 
     private void HandleMovement()
     {
-        Vector3 newPosition = Vector3.MoveTowards(_playerRigidbody.position, _targetPosition, _currentSideMoveSpeed * Time.fixedDeltaTime);
+        Vector3 newPosition = Vector3.MoveTowards(
+            _playerRigidbody.position,
+            _targetPosition,
+            _currentSideMoveSpeed * Time.fixedDeltaTime);
+
         _playerRigidbody.MovePosition(newPosition);
     }
 
