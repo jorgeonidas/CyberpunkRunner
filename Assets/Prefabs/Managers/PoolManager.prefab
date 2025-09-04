@@ -51,7 +51,7 @@ MonoBehaviour:
     maxSize: 200
     prewarm: 60
   - key: SpeedBoost
-    objectPrefab: {fileID: 8885810628254650407, guid: 6b337659086f2c143800c3b2b377f49c, type: 3}
+    objectPrefab: {fileID: 8885810628254650407, guid: b6096231cd0943848bbe674d6f897b17, type: 3}
     defaultCapacity: 4
     maxSize: 8
     prewarm: 2
@@ -62,6 +62,11 @@ MonoBehaviour:
     prewarm: 2
   - key: RocketLauncher
     objectPrefab: {fileID: 8885810628254650407, guid: d25f2c709fa2a7b42890e231c8182ffe, type: 3}
+    defaultCapacity: 4
+    maxSize: 8
+    prewarm: 2
+  - key: CoinMagnet
+    objectPrefab: {fileID: 8885810628254650407, guid: 6b337659086f2c143800c3b2b377f49c, type: 3}
     defaultCapacity: 4
     maxSize: 8
     prewarm: 2

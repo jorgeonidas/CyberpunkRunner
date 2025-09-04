@@ -6,7 +6,7 @@ public class CoinMagnet : MonoBehaviour
     [Header("Magnet Settings")]
     [SerializeField] private float magnetRadius = 5f;
     [SerializeField] private float magnetForce = 20f;
-    [SerializeField] private bool magnetActive = false;
+    private bool magnetActive = false;
 
     public bool MagnetActive
     {

@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
         TryGetComponent(out _ragdollSpawner);
         TryGetComponent(out _playerSoundsController);
         TryGetComponent(out _rocketLauncher);
+        TryGetComponent(out _coinMagnet);
     }
 
     private void OnEnable()
