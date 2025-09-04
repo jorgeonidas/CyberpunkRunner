@@ -88,7 +88,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _speed: 60
+  _speed: 45
   _yAmplitude: 5
 --- !u!136 &675609087981088513
 CapsuleCollider:
@@ -231,6 +231,10 @@ PrefabInstance:
     - target: {fileID: 1722081097931586, guid: 4b21d5ab091be5a46ad6e87699fab62c, type: 3}
       propertyPath: m_Name
       value: FX_Fireball_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1722081097931586, guid: 4b21d5ab091be5a46ad6e87699fab62c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4457159321914820, guid: 4b21d5ab091be5a46ad6e87699fab62c, type: 3}
       propertyPath: m_LocalPosition.x

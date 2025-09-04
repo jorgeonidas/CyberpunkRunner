@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Rocket : MonoBehaviour
+public class Rocket : PooledObject
 {
     [SerializeField] AnimationCurve _trayectoryCurve;
     [SerializeField] float _speed = 10f;
@@ -73,6 +73,6 @@ public class Rocket : MonoBehaviour
 
     private void RocketImpact()
     {
-        Destroy(gameObject);
+        Release();
     }
 }

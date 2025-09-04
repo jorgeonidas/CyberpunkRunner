@@ -120,3 +120,8 @@ MonoBehaviour:
     defaultCapacity: 20
     maxSize: 50
     prewarm: 10
+  - key: Rocket
+    objectPrefab: {fileID: 124899331497755070, guid: f407406fe7bd9fe4f9e24f0b2c5dd2f8, type: 3}
+    defaultCapacity: 20
+    maxSize: 50
+    prewarm: 10
