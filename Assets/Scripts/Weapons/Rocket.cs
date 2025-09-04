@@ -16,6 +16,11 @@ public class Rocket : PooledObject
     public void Launch(Transform target)
     {
         _target = target;
+        if (_target == null || float.IsNaN(_target.position.x) || float.IsNaN(_target.position.y) || float.IsNaN(_target.position.z))
+        {
+            Debug.LogError("Invalid target transform for rocket.");
+            return;
+        }
         _startPosition = transform.position;
         _startTargetPosition = target.position;
         _totalDistance = Vector3.Distance(_startPosition, _startTargetPosition);
@@ -49,7 +54,11 @@ public class Rocket : PooledObject
         {
             transform.rotation = Quaternion.LookRotation(moveDirection);
         }
-        transform.position = _trailVFX.transform.position = nextPosition;
+        transform.position = nextPosition;
+        if (_trailVFX)
+        {
+            _trailVFX.transform.position = nextPosition;
+        }
     }
 
     void OnDrawGizmos()

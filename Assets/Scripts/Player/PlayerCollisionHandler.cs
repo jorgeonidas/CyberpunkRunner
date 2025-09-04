@@ -33,24 +33,6 @@ public sealed class PlayerCollisionHandler : MonoBehaviour
     private bool IsOnCooldown => Time.time < _lastHitTime + _hitCooldownSeconds;
     private bool IsInvincible => _forceInvincibleForTesting || _runtimeInvincible;
 
-    private void Awake()
-    {
-        if (_screenShakeSource == null)
-        {
-            TryGetComponent(out _screenShakeSource);
-        }
-
-        if (_playerCollider == null)
-        {
-            _playerCollider = GetComponentInChildren<Collider>();
-        }
-
-        if (_playerCollider == null)
-        {
-            Debug.LogWarning("[PlayerCollisionHandler] No collider found. Call EnableCollider(false) if intentional.", this);
-        }
-    }
-
     private void Start()
     {
         // Start with cooldown active so immediate spawn contacts don't trigger a hit

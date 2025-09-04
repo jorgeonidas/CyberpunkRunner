@@ -124,7 +124,7 @@ public class MovingObjectsSpawner : MonoBehaviour
 
     private void SpawnPowerup()
     {
-        Debug.Log($"_currentAvailableLanes.Count = {_currentAvailableLanes.Count}");
+        //Debug.Log($"_currentAvailableLanes.Count = {_currentAvailableLanes.Count}");
         if (_currentAvailableLanes.Count == 0)
         {
             return;
@@ -134,7 +134,7 @@ public class MovingObjectsSpawner : MonoBehaviour
         float zCoordinate = _horizontalLanes[horizontalLaneIndex];
         Vector3 spawnPos = new Vector3(GetXPosition(verticalLaneIndex), 0f, transform.position.z + zCoordinate);
         var chosenPowerup = _powerUpSetting.ChoosePowerup();
-        Debug.Log($"Chosen powerup: {chosenPowerup}");
+        //Debug.Log($"Chosen powerup: {chosenPowerup}");
         if (chosenPowerup != null && chosenPowerup.Id != StringConstants.PowerupIds.None)
         {
             PoolManager.Instance.Get(chosenPowerup.Id, spawnPos, transform.rotation);
