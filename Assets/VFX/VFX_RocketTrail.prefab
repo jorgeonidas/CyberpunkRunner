@@ -11,14 +11,14 @@ GameObject:
   - component: {fileID: 7274481373563745300}
   - component: {fileID: 7366687337266851192}
   - component: {fileID: 7367730117225644166}
-  - component: {fileID: 5183710915791350647}
+  - component: {fileID: 5421795807415632709}
   m_Layer: 0
-  m_Name: RocketTrailPoolFX
+  m_Name: VFX_RocketTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7274481373563745300
 Transform:
   m_ObjectHideFlags: 0
@@ -52,7 +52,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 0
   looping: 1
-  prewarm: 0
+  prewarm: 1
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
@@ -4927,7 +4927,7 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &5183710915791350647
+--- !u!114 &5421795807415632709
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4936,9 +4936,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7277233975120929426}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b6271a1b64d4064a8a5d0888a9a0bc0, type: 3}
+  m_Script: {fileID: 11500000, guid: fad62a4d0c0d7af468c2289e0574a81e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PooledObject
+  m_EditorClassIdentifier: Assembly-CSharp::VfxPoolable
 --- !u!1 &7277272857076794104
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ public class Rocket : PooledObject
     Vector3 _startTargetPosition;
     float _launchTime;
     float _duration;
-    PooledObject _trailVFX;
+    VfxPoolable _trailVFX;
     public void Launch(Transform target)
     {
         _target = target;
@@ -25,7 +25,7 @@ public class Rocket : PooledObject
         {
             SfxManager.Instance.PlaySfx(SfxIdEnum.SfxId.RocketLaunch, transform.position);
         }
-        _trailVFX = _trailVFXSpawner.PlayParticleEffect(transform.position);//Figure out how to release it
+        _trailVFX = _trailVFXSpawner.PlayParticleEffect(transform.position) as VfxPoolable;
     }
 
     private void Update()
@@ -74,6 +74,16 @@ public class Rocket : PooledObject
 
     private void RocketImpact()
     {
+        ResetTrailVfx();
         Release();
+    }
+
+    private void ResetTrailVfx()
+    {
+        if (_trailVFX != null)
+        {
+            _trailVFX.Stop();
+            _trailVFX = null;
+        }
     }
 }

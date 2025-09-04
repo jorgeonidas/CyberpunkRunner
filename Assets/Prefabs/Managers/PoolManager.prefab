@@ -121,7 +121,7 @@ MonoBehaviour:
     maxSize: 50
     prewarm: 10
   - key: VFX_RocketTrail
-    objectPrefab: {fileID: 5183710915791350647, guid: 8aa8881f4cc58e247b43c0ed53ffc2ac, type: 3}
+    objectPrefab: {fileID: 5421795807415632709, guid: 8aa8881f4cc58e247b43c0ed53ffc2ac, type: 3}
     defaultCapacity: 20
     maxSize: 50
     prewarm: 10

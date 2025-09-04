@@ -21,4 +21,9 @@ public class VfxPoolable : PooledObject
     {
         _particleSystem.Play();
     }
+
+    public void Stop()
+    {
+        _particleSystem.Stop();
+    }
 }
