@@ -38,10 +38,20 @@ public class CoinMagnet : MonoBehaviour
         Vector3 magnetPosition = transform.position;
         foreach (var coin in coins)
         {
-            if (coin == null) continue;
-            if (magnetizedCoins.Contains(coin)) continue;
+            if (coin == null)
+            {
+                continue;
+            }
+            if (coin.Released)
+            {
+                continue;
+            }
+            if (magnetizedCoins.Contains(coin))
+            {
+                continue;
+            }
             float dist = Vector3.Distance(coin.transform.position, magnetPosition);
-            if (dist <= magnetRadius)
+            if (dist <= magnetRadius && magnetPosition.z < coin.transform.position.z)
             {
                 coin.Magnetize(true);
                 magnetizedCoins.Add(coin);

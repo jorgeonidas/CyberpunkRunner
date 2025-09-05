@@ -8,6 +8,7 @@ public class PooledObject : MonoBehaviour
     private bool _released;
     private string _poolObjectId;
     public string PoolObjectId => _poolObjectId;
+    public bool Released => _released;
 
     public void SetPoolObjectId(string id) => _poolObjectId = id;
     public virtual void OnGetFromPool() => _released = false;
