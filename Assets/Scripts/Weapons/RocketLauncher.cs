@@ -6,6 +6,7 @@ using System.Linq;
 public class RocketLauncher : MonoBehaviour
 {
 
+    [SerializeField] ScreenShakeSource _screenShakeSource;
     // Usar variables locales en vez de campos para evitar problemas con corrutinas simultáneas
     float _zOffset = 5f;
     // Estado para lanzamiento por Update
@@ -79,5 +80,6 @@ public class RocketLauncher : MonoBehaviour
         }
         rocketInstance.transform.position = transform.position;
         rocketInstance.Launch(target);
+        _screenShakeSource?.ShakeCamera();
     }
 }
