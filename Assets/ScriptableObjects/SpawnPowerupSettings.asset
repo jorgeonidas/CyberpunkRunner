@@ -14,10 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _powerupList:
   - _powerupData: {fileID: 11400000, guid: c4f473ef29bcbb94bb9f61d2eee0b162, type: 2}
-    _dropChance: 0.8
+    _dropChance: 0.75
   - _powerupData: {fileID: 11400000, guid: 6260b3364d962fd4796c53c91367cede, type: 2}
     _dropChance: 0.1
   - _powerupData: {fileID: 11400000, guid: f251fedf3b5ad974e94856ede8336fc7, type: 2}
     _dropChance: 0.05
   - _powerupData: {fileID: 11400000, guid: 2816c4147e26e804e88aefe48519312c, type: 2}
+    _dropChance: 0.05
+  - _powerupData: {fileID: 11400000, guid: b4e575a5e2fc0324995f1138bb7b4f2e, type: 2}
     _dropChance: 0.05
