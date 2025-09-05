@@ -6,38 +6,77 @@ using System.Linq;
 public class RocketLauncher : MonoBehaviour
 {
 
-    float _timeBetweenRockets = 0;
-    List<Transform> _targets = new List<Transform>();
-    float _zOffset = 3f;
-    public void LaunchRockets( string rocketId, float timeBetweenRockets, int numberOfRockets)
-    {
-        // _rocketToLaunch = rocketPrefab;
-        _timeBetweenRockets = timeBetweenRockets;
+    // Usar variables locales en vez de campos para evitar problemas con corrutinas simultáneas
+    float _zOffset = 5f;
+    // Estado para lanzamiento por Update
+    private List<Transform> _pendingTargets = null;
+    private float _pendingTimeBetweenRockets = 0f;
+    private string _pendingRocketId = null;
+    private int _pendingRocketIndex = 0;
+    private float _pendingNextLaunchTime = 0f;
 
-        // Buscar obstáculos destruibles activos en la escena
+    public void LaunchRockets(string rocketId, float timeBetweenRockets, int numberOfRockets)
+    {
         var obstacles = FindObjectsByType<DestructibleObstacle>(FindObjectsSortMode.None);
-        // Filtrar solo los que estén adelante y cerca
         float currentZ = transform.position.z + _zOffset;
-        var filteredObstacles = obstacles.Where(x => x.transform.position.z > currentZ).ToList();
-        // Seleccionar aleatoriamente la cantidad igual a numberOfRockets
+        var filteredObstacles = obstacles.Where(x => !x.IsDestroyed && x.transform.position.z > currentZ).ToList();
         var selectedObstacles = filteredObstacles.OrderBy(x => Vector3.Distance(transform.position, x.transform.position)).Take(numberOfRockets).ToList();
-        _targets = selectedObstacles.Select(x => x.transform).ToList();
-        StartCoroutine(LaunchRocketsCoroutine(rocketId));
+        var targets = selectedObstacles.Select(x => x.transform).ToList();
+
+        // Evitar duplicados en _pendingTargets
+        if (_pendingTargets != null && _pendingTargets.Count > 0)
+        {
+            targets = targets.Where(t => !_pendingTargets.Contains(t)).ToList();
+        }
+
+        if (targets.Count == 0)
+        {
+            Debug.LogWarning("RocketLauncher: No new obstacles to launch rockets.");
+            return;
+        }
+        _pendingTargets = targets;
+        _pendingTimeBetweenRockets = timeBetweenRockets;
+        _pendingRocketId = rocketId;
+        _pendingRocketIndex = 0;
+        _pendingNextLaunchTime = Time.time;
     }
 
-    private IEnumerator LaunchRocketsCoroutine(string rocketId)
+    // Elimina la corrutina, ahora el lanzamiento es por Update
+    private void Update()
     {
-        foreach (var target in _targets)
+        if (_pendingTargets != null && _pendingRocketIndex < _pendingTargets.Count)
         {
-            LaunchRocket(target, rocketId);
-            yield return new WaitForSeconds(_timeBetweenRockets);
+            if (Time.time >= _pendingNextLaunchTime)
+            {
+                var target = _pendingTargets[_pendingRocketIndex];
+                LaunchRocket(target, _pendingRocketId);
+                _pendingRocketIndex++;
+                _pendingNextLaunchTime = Time.time + _pendingTimeBetweenRockets;
+                if (_pendingRocketIndex >= _pendingTargets.Count)
+                {
+                    // Lanzamiento terminado
+                    _pendingTargets = null;
+                    _pendingRocketId = null;
+                }
+            }
         }
     }
 
     private void LaunchRocket(Transform target, string rocketId)
     {
         // Instantiate and launch the rocket towards the target position
-        Rocket rocketInstance = PoolManager.Instance.Get(rocketId) as Rocket;
+        var poolObject = PoolManager.Instance.Get(rocketId);
+        if (poolObject == null)
+        {
+            Debug.LogWarning($"RocketLauncher: No rockets available in the pool for '{rocketId}'");
+            return;
+        }
+        Rocket rocketInstance = poolObject as Rocket;
+        if (rocketInstance == null)
+        {
+            Debug.LogError($"RocketLauncher: The object obtained from the pool is not of type Rocket (id: {rocketId})");
+            return;
+        }
         rocketInstance.transform.position = transform.position;
         rocketInstance.Launch(target);
     }

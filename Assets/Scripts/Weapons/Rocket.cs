@@ -10,9 +10,8 @@ public class Rocket : PooledObject
     float _totalDistance;
     Vector3 _startPosition;
     Vector3 _startTargetPosition;
-    float _launchTime;
-    float _duration;
     VfxPoolable _trailVFX;
+    private Transform _targetGameObject;
     public void Launch(Transform target)
     {
         _target = target;
@@ -24,31 +23,44 @@ public class Rocket : PooledObject
         _startPosition = transform.position;
         _startTargetPosition = target.position;
         _totalDistance = Vector3.Distance(_startPosition, _startTargetPosition);
-        _duration = _totalDistance / _speed;
-        _launchTime = Time.time;
         if (SfxManager.Instance)
         {
             SfxManager.Instance.PlaySfx(SfxIdEnum.SfxId.RocketLaunch, transform.position);
         }
         _trailVFX = _trailVFXSpawner.PlayParticleEffect(transform.position) as VfxPoolable;
+
+        // Guardar referencia al GameObject del target para chequeo de pooling
+        _targetGameObject = target;
     }
 
+    /*
+ - The rocket moves from its start position to the target along a straight line in 3D space.
+ - Each frame, we calculate the normalized direction vector from the start to the target.
+ - The rocket advances incrementally by 'speed * deltaTime', ensuring smooth movement regardless of frame rate.
+ - The total distance traveled is clamped so the rocket never overshoots the target.
+ - The normalized progress 't' (from 0 to 1) represents how far the rocket is along its path.
+ - The Y axis is modified by an animation curve, allowing for custom arc shapes (e.g., parabolic, sine wave).
+ - At t=0, the rocket is at the start; at t=1, it reaches the target. The curve controls the vertical offset at each point.
+*/
     private void Update()
     {
-        if (_target == null)
+
+        if (_target == null || _targetGameObject == null || !_targetGameObject.gameObject.activeInHierarchy)
         {
+            RocketImpact();
             return;
         }
 
-        float elapsed = Time.time - _launchTime;
-        float t = Mathf.Clamp01(elapsed / _duration);
+        // Incremental movement to avoid overshooting the target
         Vector3 currentTargetPosition = _target.position;
         Vector3 direction = (currentTargetPosition - _startPosition).normalized;
-        float distanceToTravel = _totalDistance * t;
-        Vector3 nextPosition = _startPosition + direction * distanceToTravel;
+        float moveStep = _speed * Time.deltaTime;
+        float distanceFromStart = Vector3.Distance(_startPosition, transform.position);
+        float nextDistance = Mathf.Min(distanceFromStart + moveStep, _totalDistance);
+        float t = Mathf.Clamp01(nextDistance / _totalDistance);
+        Vector3 nextPosition = _startPosition + direction * nextDistance;
         nextPosition.y = _yAmplitude * _trayectoryCurve.Evaluate(t);
-
-        // Calcular dirección de movimiento antes de actualizar la posición
+        
         Vector3 moveDirection = nextPosition - transform.position;
         if (moveDirection.sqrMagnitude > 0.0001f)
         {

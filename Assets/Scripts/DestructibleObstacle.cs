@@ -7,6 +7,8 @@ public class DestructibleObstacle : MonoBehaviour, IDestroy
     SfxEmitter _sfxEmmiter;
     [SerializeField] OnPositionEvent _placeCoinEvent;
 
+    public bool IsDestroyed => _poolObject.Released;
+
     void Awake()
     {
         TryGetComponent(out _poolObject);
