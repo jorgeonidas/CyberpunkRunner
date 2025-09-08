@@ -1411,6 +1411,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PropSpawner (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 2828484801471885380, guid: b8ddae433fa4fc741b85f556ae633de9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8183996337960793896, guid: b8ddae433fa4fc741b85f556ae633de9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10
@@ -1539,6 +1543,10 @@ PrefabInstance:
     - target: {fileID: 2828484801471885380, guid: b8ddae433fa4fc741b85f556ae633de9, type: 3}
       propertyPath: m_Name
       value: PropSpawner (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2828484801471885380, guid: b8ddae433fa4fc741b85f556ae633de9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8183996337960793896, guid: b8ddae433fa4fc741b85f556ae633de9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2342,6 +2350,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PropSpawner (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2828484801471885380, guid: b8ddae433fa4fc741b85f556ae633de9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8183996337960793896, guid: b8ddae433fa4fc741b85f556ae633de9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10
@@ -2466,6 +2478,10 @@ PrefabInstance:
     - target: {fileID: 2828484801471885380, guid: b8ddae433fa4fc741b85f556ae633de9, type: 3}
       propertyPath: m_Name
       value: PropSpawner (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2828484801471885380, guid: b8ddae433fa4fc741b85f556ae633de9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8183996337960793896, guid: b8ddae433fa4fc741b85f556ae633de9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2739,6 +2755,10 @@ PrefabInstance:
     - target: {fileID: 2828484801471885380, guid: b8ddae433fa4fc741b85f556ae633de9, type: 3}
       propertyPath: m_Name
       value: PropSpawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 2828484801471885380, guid: b8ddae433fa4fc741b85f556ae633de9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8183996337960793896, guid: b8ddae433fa4fc741b85f556ae633de9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3464,6 +3484,10 @@ PrefabInstance:
     - target: {fileID: 2828484801471885380, guid: b8ddae433fa4fc741b85f556ae633de9, type: 3}
       propertyPath: m_Name
       value: PropSpawner (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2828484801471885380, guid: b8ddae433fa4fc741b85f556ae633de9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8183996337960793896, guid: b8ddae433fa4fc741b85f556ae633de9, type: 3}
       propertyPath: m_LocalPosition.x

@@ -67,23 +67,9 @@ MonoBehaviour:
   - {fileID: 2100000, guid: e43e0848fad28db439d9411118a7fc32, type: 2}
   - {fileID: 2100000, guid: f48d74d319b42e046888964c0831d020, type: 2}
   - {fileID: 2100000, guid: 7910c4de4f114e343a611b5cdfb7b8d8, type: 2}
-  baseParts:
-  - {fileID: 3588444777822696719, guid: 5ddd386a5e85cb945bde89905e1f9931, type: 3}
-  - {fileID: 7446166425198531211, guid: 1208b804578a56d41b6284df1e72a535, type: 3}
-  - {fileID: 7234322236937779054, guid: 6ff92c68bdb963e4cb20b433929ff6fe, type: 3}
-  - {fileID: 7077358502518921386, guid: 05946c129cd32fd41b7e70378df808f8, type: 3}
-  middleParts:
-  - {fileID: 4683719736975886910, guid: 80ce6c131b584104088e45824b77c653, type: 3}
-  - {fileID: 6434700479729483485, guid: b4060c90ce822574f80d67735d894b59, type: 3}
-  - {fileID: 6885751029055845866, guid: 30746299dfca2e340aae973fe1b4f33c, type: 3}
-  - {fileID: 3495549645584753499, guid: d2c81bea404e76b40945e214aa68aa5c, type: 3}
-  - {fileID: 1709154178417435078, guid: 633690241567420469d65aaf39f45f6a, type: 3}
-  topParts:
-  - {fileID: 8261090503610277283, guid: 4d13ef2a87599eb40b216ecd1976fee6, type: 3}
-  - {fileID: 499087125029077577, guid: 17d17c5864a83294e901cd96f0a13ea5, type: 3}
-  - {fileID: 174360609907199384, guid: 8eb9aa3bbc1397e438bc06493808a049, type: 3}
-  - {fileID: 2286294091712599714, guid: 21c40f96519420e41a1d3b88cdab4008, type: 3}
-  - {fileID: 7029806738123185508, guid: 660f8f2cb982d6e4aab52ea368258e5c, type: 3}
-  - {fileID: 7263855142833823311, guid: bbd68853dc21cf04f83dd12e4910e648, type: 3}
-  - {fileID: 7995451243018199682, guid: c5a2312f8443eff41afe0b3c31e316d3, type: 3}
-  _testAutoBuild: 0
+  baseKeys:
+  - Base_1
+  middleKeys:
+  - Middle_1
+  topKeys:
+  - Top_1

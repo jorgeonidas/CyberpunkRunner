@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Pool;
 
 //credits to: https://github.com/mirrorfishmedia/ImaginaryCities
 public class BuildingGenerator : MonoBehaviour
@@ -8,44 +7,13 @@ public class BuildingGenerator : MonoBehaviour
     public int minPieces = 5;
     public int maxPieces = 20;
     public Material[] materialVariants;
-    public GameObject[] baseParts;
-    public GameObject[] middleParts;
-    public GameObject[] topParts;
+    public string[] baseKeys;
+    public string[] middleKeys;
+    public string[] topKeys;
     private Material _pickedMaterial;
 
-    private readonly Dictionary<string, ObjectPool<GameObject>> _pools = new();
-    private readonly List<(GameObject instance, string poolKey)> _activePieces = new();
+    private readonly List<(PooledObject instance, string poolKey)> _activePieces = new();
 
-    private void Awake()
-    {
-        InitializePoolsFor(baseParts);
-        InitializePoolsFor(middleParts);
-        InitializePoolsFor(topParts);
-    }
-
-    private void InitializePoolsFor(GameObject[] prefabs)
-    {
-        foreach (var prefab in prefabs)
-        {
-            if (prefab == null) continue;
-
-            var key = prefab.name;
-            if (_pools.ContainsKey(key)) continue;
-
-            _pools.Add(key, new ObjectPool<GameObject>(
-                createFunc: () => Instantiate(prefab),
-                actionOnGet: (obj) =>
-                {
-                    obj.SetActive(true);
-                    obj.transform.SetParent(transform);
-                },
-                actionOnRelease: (obj) => obj.SetActive(false),
-                actionOnDestroy: (obj) => Destroy(obj),
-                collectionCheck: false,
-                defaultCapacity: 10,
-                maxSize: 50));
-        }
-    }
 
     [ContextMenu("Generate")]
     public void Build()
@@ -55,14 +23,18 @@ public class BuildingGenerator : MonoBehaviour
         int targetPieces = Random.Range(minPieces, maxPieces);
         _pickedMaterial = materialVariants[Random.Range(0, materialVariants.Length)];
         float heightOffset = 0;
-        heightOffset += SpawnPieceLayer(baseParts, heightOffset);
 
+        // Base
+        heightOffset += SpawnPieceLayer(baseKeys, heightOffset);
+
+        // Middles
         for (int i = 2; i < targetPieces; i++)
         {
-            heightOffset += SpawnPieceLayer(middleParts, heightOffset);
+            heightOffset += SpawnPieceLayer(middleKeys, heightOffset);
         }
 
-        SpawnPieceLayer(topParts, heightOffset);
+        // Top
+        SpawnPieceLayer(topKeys, heightOffset);
     }
 
     [ContextMenu("Clear Generated")]
@@ -71,41 +43,30 @@ public class BuildingGenerator : MonoBehaviour
         ClearBuilding();
     }
 
-    float SpawnPieceLayer(GameObject[] pieceArray, float inputHeight)
+
+    float SpawnPieceLayer(string[] keysArray, float inputHeight)
     {
-        if (pieceArray == null || pieceArray.Length == 0)
+        if (keysArray == null || keysArray.Length == 0)
         {
             return 0;
         }
 
-        GameObject prefab = pieceArray[Random.Range(0, pieceArray.Length)];
-        if (prefab == null)
-        {
-            return 0;
-        }
+        int idx = Random.Range(0, keysArray.Length);
+        string key = keysArray[idx];
+        var pooledObj = PoolManager.Instance.Get(key, this.transform.position + new Vector3(0, inputHeight, 0), transform.rotation);
+        pooledObj.transform.SetParent(this.transform); // Asignar como hijo para que siga el movimiento
+        _activePieces.Add((pooledObj, key));
 
-        string key = prefab.name;
-        if (!_pools.ContainsKey(key))
-        {
-            Debug.LogError($"Pool for '{key}' not found. Make sure it is in the prefab arrays.");
-            return 0;
-        }
-
-        GameObject clone = _pools[key].Get();
-        _activePieces.Add((clone, key));
-        clone.transform.position = this.transform.position + new Vector3(0, inputHeight, 0);
-        clone.transform.rotation = transform.rotation;
-        
         float heightOffset = 0;
-        if (clone.TryGetComponent<MeshFilter>(out MeshFilter meshFilter))
+        if (pooledObj.TryGetComponent<MeshFilter>(out MeshFilter meshFilter))
         {
             Mesh cloneMesh = meshFilter.mesh;
             Bounds bounds = cloneMesh.bounds;
             heightOffset = bounds.size.y;
         }
-        
-        SetMaterialRecursively(clone, _pickedMaterial);
-        
+
+        SetMaterialRecursively(pooledObj.gameObject, _pickedMaterial);
+
         return heightOffset;
     }
 
@@ -121,26 +82,19 @@ public class BuildingGenerator : MonoBehaviour
         }
     }
 
+
     private void ClearBuilding()
     {
-        if (_pools.Count == 0 && Application.isEditor && !Application.isPlaying)
-        {
-            while (transform.childCount > 0)
-            {
-                DestroyImmediate(transform.GetChild(0).gameObject);
-            }
-            return;
-        }
-
         foreach (var piece in _activePieces)
         {
-            if (_pools.TryGetValue(piece.poolKey, out var pool))
+            // Devuelve al pool central
+            var pooledObj = piece.instance.GetComponent<PooledObject>();
+            if (pooledObj != null)
             {
-                pool.Release(piece.instance);
+                pooledObj.Release();
             }
             else
             {
-                Debug.LogWarning($"Pool with key '{piece.poolKey}' not found. The object will be destroyed.");
                 Destroy(piece.instance);
             }
         }
