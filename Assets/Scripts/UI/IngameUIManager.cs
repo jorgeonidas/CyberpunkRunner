@@ -9,6 +9,7 @@ public class IngameUIManager : UIPanelsOrganizer
     [SerializeField] PowerupActivationEvent _powerupActivationEvent;
     IngameHUD _ingameHud;
     GameManager _gameManager;
+    int _travelledDistance = 0;
 
     private void Start()
     {
@@ -31,7 +32,16 @@ public class IngameUIManager : UIPanelsOrganizer
         {
             return;
         }
-        _ingameHud.SetTraveledDistance(_gameManager.GetDistanceTravelled());
+
+    }
+
+    private void LateUpdate()
+    {
+        if (_travelledDistance != _gameManager.GetDistanceTravelled())
+        {
+            _travelledDistance = _gameManager.GetDistanceTravelled();
+            _ingameHud.SetTraveledDistance(_travelledDistance);
+        }
     }
 
     void OnEnable()
