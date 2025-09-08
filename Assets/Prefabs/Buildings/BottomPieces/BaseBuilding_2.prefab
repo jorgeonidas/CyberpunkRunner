@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1942081263519824425}
   - component: {fileID: 7621767340539564788}
   - component: {fileID: 662440026409471874}
+  - component: {fileID: 5210595462717679635}
   m_Layer: 0
   m_Name: BaseBuilding_2
   m_TagString: Untagged
@@ -89,3 +90,15 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &5210595462717679635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7446166425198531211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b6271a1b64d4064a8a5d0888a9a0bc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PooledObject

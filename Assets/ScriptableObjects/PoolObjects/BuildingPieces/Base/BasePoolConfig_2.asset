@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b638ced151fce6478301640e43a0dd8, type: 3}
-  m_Name: MiddlePoolConfig_1
+  m_Name: BasePoolConfig_2
   m_EditorClassIdentifier: Assembly-CSharp::PoolObjectConfig
   _poolObjectConfig:
-    key: Middle_1
-    objectPrefab: {fileID: 8683943282549099295, guid: b4060c90ce822574f80d67735d894b59, type: 3}
+    key: Base_2
+    objectPrefab: {fileID: 5210595462717679635, guid: 1208b804578a56d41b6284df1e72a535, type: 3}
     defaultCapacity: 10
     maxSize: 45
     prewarm: 5
