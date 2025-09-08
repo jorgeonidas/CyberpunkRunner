@@ -28,54 +28,11 @@ public class PoolManager : MonoBehaviour
             RegisterPool(configuration.Config.key,
                         configuration.Config.objectPrefab,
                         configuration.Config.defaultCapacity,
-                        configuration.Config.maxSize,
-                        configuration.Config.prewarm);
-            // ObjectPool<PooledObject> pool = null;
-
-            // pool = new ObjectPool<PooledObject>(
-            //     createFunc: () =>
-            //     {
-            //         PooledObject poolObject = Instantiate(configuration.Config.objectPrefab);
-            //         poolObject.Pool ??= pool;     // ?? assing if not assigned
-            //         poolObject.SetPoolObjectId(configuration.Config.key);
-            //         poolObject.transform.parent = this.transform;
-            //         poolObject.gameObject.SetActive(false);
-            //         return poolObject;
-            //     },
-            //     actionOnGet: (poolObject) =>
-            //     {
-            //         poolObject.gameObject.SetActive(true);
-            //         poolObject.OnGetFromPool();
-            //     },
-            //     actionOnRelease: (poolObject) =>
-            //     {
-            //         poolObject.OnReleaseToPool();
-            //         poolObject.gameObject.SetActive(false);
-            //     },
-            //     actionOnDestroy: (poolObject) =>
-            //     {
-            //         if (poolObject)
-            //         {
-            //             Destroy(poolObject.gameObject);
-            //         }
-            //     },
-            //     collectionCheck: true,
-            //     defaultCapacity: Mathf.Max(1, configuration.Config.defaultCapacity),
-            //     maxSize: Mathf.Max(1, configuration.Config.maxSize)
-            // );
-
-            // _pools[configuration.Config.key] = pool;
-
-            // // Precalienta si quieres
-            // for (int i = 0; i < configuration.Config.prewarm; i++)
-            // {
-            //     var o = pool.Get();
-            //     pool.Release(o);
-            // }
+                        configuration.Config.maxSize);
         }
     }
 
-    public void RegisterPool(string key, PooledObject prefab, int defaultCapacity, int maxSize, int prewarm, Transform parent = null)
+    public void RegisterPool(string key, PooledObject prefab, int defaultCapacity, int maxSize, Transform parent = null)
     {
         if (_pools.ContainsKey(key))
         {
@@ -102,13 +59,6 @@ public class PoolManager : MonoBehaviour
         );
 
         _pools[key] = pool;
-
-        // Prewarm
-        for (int i = 0; i < prewarm; i++)
-        {
-            var o = pool.Get();
-            pool.Release(o);
-        }
     }
 
     public PooledObject Get(string key)
