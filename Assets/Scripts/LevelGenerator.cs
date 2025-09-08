@@ -16,10 +16,11 @@ public class LevelGenerator : MonoBehaviour
     private SpeedManager _speedManager;
     private int _chunksSurpassed = 0;
     private float _distanceTravelled = 0f;
+    Transform _cameraTransform;
     #region UnityLifeCycle    
     private void Start()
     {
-
+        _cameraTransform = Camera.main.transform;
     }
 
     private void OnEnable()
@@ -101,7 +102,7 @@ public class LevelGenerator : MonoBehaviour
             Chunk chunk = _chunksList[i];
             chunk.transform.Translate(Vector3.back * _speedManager.CurrentChunksMoveSpeed * Time.deltaTime);
 
-            if (chunk.transform.position.z <= Camera.main.transform.position.z - _levelSettings.ChunkLength)
+            if (chunk.transform.position.z <= _cameraTransform.position.z - _levelSettings.ChunkLength)
             {
                 _chunksSurpassed++;
                 _chunksList.Remove(chunk);
