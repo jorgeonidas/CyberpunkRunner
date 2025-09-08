@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b638ced151fce6478301640e43a0dd8, type: 3}
+  m_Name: TopPoolConfig_2
+  m_EditorClassIdentifier: Assembly-CSharp::PoolObjectConfig
+  _poolObjectConfig:
+    key: Top_2
+    objectPrefab: {fileID: -9115838865434775636, guid: 8eb9aa3bbc1397e438bc06493808a049, type: 3}
+    defaultCapacity: 10
+    maxSize: 45
+    prewarm: 5
