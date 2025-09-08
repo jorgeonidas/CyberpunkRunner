@@ -793,6 +793,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VehicleSpsotLigth
       objectReference: {fileID: 0}
+    - target: {fileID: 2983918155548740932, guid: efeeaecd70f934749901e7688ab26a02, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4252671423154890191, guid: efeeaecd70f934749901e7688ab26a02, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
