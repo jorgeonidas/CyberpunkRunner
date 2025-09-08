@@ -19,7 +19,7 @@ public class VehicleLeaning : MonoBehaviour
         initialLocalRot = _visual ? _visual.localRotation : Quaternion.identity;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         float lateralSpeed = _playerRigidBody.linearVelocity.x;
         float normalizedMinusPlusLeaning = Mathf.Clamp(lateralSpeed / _speedToMaxLean, -1f, 1f);
