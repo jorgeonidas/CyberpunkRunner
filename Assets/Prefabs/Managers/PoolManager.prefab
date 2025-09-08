@@ -13,7 +13,7 @@ GameObject:
   m_Layer: 0
   m_Name: PoolManager
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -44,94 +44,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c280dae8b4b27fe4090b822314fd02af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _configs:
-  - key: Coin
-    objectPrefab: {fileID: 8564360296969163897, guid: 7b57a1b15a651fc41a8cc47372309616, type: 3}
-    defaultCapacity: 100
-    maxSize: 200
-    prewarm: 60
-  - key: SpeedBoost
-    objectPrefab: {fileID: 8885810628254650407, guid: b6096231cd0943848bbe674d6f897b17, type: 3}
-    defaultCapacity: 4
-    maxSize: 8
-    prewarm: 2
-  - key: Invincible
-    objectPrefab: {fileID: 8885810628254650407, guid: d6bedf4e2733d58468bb028453786677, type: 3}
-    defaultCapacity: 4
-    maxSize: 8
-    prewarm: 2
-  - key: RocketLauncher
-    objectPrefab: {fileID: 8885810628254650407, guid: d25f2c709fa2a7b42890e231c8182ffe, type: 3}
-    defaultCapacity: 4
-    maxSize: 8
-    prewarm: 2
-  - key: CoinMagnet
-    objectPrefab: {fileID: 8885810628254650407, guid: 6b337659086f2c143800c3b2b377f49c, type: 3}
-    defaultCapacity: 4
-    maxSize: 8
-    prewarm: 2
-  - key: VehicleObstacle_1
-    objectPrefab: {fileID: 7246594060548260529, guid: 0c80ec0af0712aa46866501e319e145a, type: 3}
-    defaultCapacity: 20
-    maxSize: 50
-    prewarm: 10
-  - key: VehicleObstacle_2
-    objectPrefab: {fileID: 8446282707843283889, guid: 7a832253072d35f48b8cd91df8e2c2ac, type: 3}
-    defaultCapacity: 20
-    maxSize: 50
-    prewarm: 10
-  - key: VehicleObstacle_3
-    objectPrefab: {fileID: 8446282707843283889, guid: a8a59271eaffb224390b3ee97f4735f3, type: 3}
-    defaultCapacity: 20
-    maxSize: 50
-    prewarm: 10
-  - key: VehicleObstacle_4
-    objectPrefab: {fileID: 4032396584561504956, guid: 864730ad01d145c49b336a24a479c547, type: 3}
-    defaultCapacity: 20
-    maxSize: 50
-    prewarm: 10
-  - key: PlayerBike_Destroyed
-    objectPrefab: {fileID: 4981948302037896105, guid: 5c411577f678bca4596a25736245d6e9, type: 3}
-    defaultCapacity: 1
-    maxSize: 4
-    prewarm: 1
-  - key: VehicleObstacle_1_Destroyed
-    objectPrefab: {fileID: 4981948302037896105, guid: a021bdabce7220c4fa4b8d91c9f5b7e2, type: 3}
-    defaultCapacity: 20
-    maxSize: 50
-    prewarm: 10
-  - key: VehicleObstacle_2_Destroyed
-    objectPrefab: {fileID: 4016864125754604111, guid: 2dc6a7874acf32f40a16db3c3357a46c, type: 3}
-    defaultCapacity: 20
-    maxSize: 50
-    prewarm: 10
-  - key: VehicleObstacle_3_Destroyed
-    objectPrefab: {fileID: 4016864125754604111, guid: 078e04b3b26d3df49975f93302f0819c, type: 3}
-    defaultCapacity: 20
-    maxSize: 50
-    prewarm: 10
-  - key: VehicleObstacle_4_Destroyed
-    objectPrefab: {fileID: 4016864125754604111, guid: cdb620c6461b7ff4f8edcbe5e8d9becd, type: 3}
-    defaultCapacity: 20
-    maxSize: 50
-    prewarm: 10
-  - key: VFX_Coin
-    objectPrefab: {fileID: 9199874876770903639, guid: be44aaeae982fcb48a21adb8dc5ec191, type: 3}
-    defaultCapacity: 20
-    maxSize: 50
-    prewarm: 10
-  - key: VFX_Explosion
-    objectPrefab: {fileID: -6331053207474754198, guid: 78cca44bf058e5949bc927ce669a1271, type: 3}
-    defaultCapacity: 20
-    maxSize: 50
-    prewarm: 10
-  - key: VFX_RocketTrail
-    objectPrefab: {fileID: 5421795807415632709, guid: 8aa8881f4cc58e247b43c0ed53ffc2ac, type: 3}
-    defaultCapacity: 20
-    maxSize: 50
-    prewarm: 10
-  - key: Rocket
-    objectPrefab: {fileID: 124899331497755070, guid: f407406fe7bd9fe4f9e24f0b2c5dd2f8, type: 3}
-    defaultCapacity: 20
-    maxSize: 50
-    prewarm: 10
+  _poolObjectConfigs:
+  - {fileID: 11400000, guid: a275e707eaef7b04d860862e85add981, type: 2}
+  - {fileID: 11400000, guid: efc33e0a51f87224b982aa2aaa1f6cad, type: 2}
+  - {fileID: 11400000, guid: d5c49b98a48738b4e997c1275ba92bca, type: 2}
+  - {fileID: 11400000, guid: cc45aa31184a5f54dae5656643d4dd29, type: 2}
+  - {fileID: 11400000, guid: 0bb256be28f7d8d48b4f1bf895e1d89a, type: 2}
+  - {fileID: 11400000, guid: 5703602c7340fd74ba868a87577fd693, type: 2}
+  - {fileID: 11400000, guid: d66ed9b66c048ea4497e892f7106e4db, type: 2}
+  - {fileID: 11400000, guid: 6a66732bb7cebb840b2f1f0c10391810, type: 2}
+  - {fileID: 11400000, guid: 56f9d9540da6d8348ad1cad95820dfc2, type: 2}
+  - {fileID: 11400000, guid: 5353c8c2a8097f44ca85aa6e0f216ae5, type: 2}
+  - {fileID: 11400000, guid: e1c77cf167f52bc4c9fe390dcfe3955d, type: 2}
+  - {fileID: 11400000, guid: 563a4270cfbcca248b867d643262aae3, type: 2}
+  - {fileID: 11400000, guid: 49ba43cb2896ba94686488d74e93486b, type: 2}
+  - {fileID: 11400000, guid: 2ad66011502c4dd41ade13e6f02f6c55, type: 2}
+  - {fileID: 11400000, guid: e8f03687d1cb2794fb11fb135b62f2ab, type: 2}
+  - {fileID: 11400000, guid: 61f5adb5fee7a0049a582df75842ca45, type: 2}
+  - {fileID: 11400000, guid: c8cc4e448b7062643b138a03c6afd75a, type: 2}
+  - {fileID: 11400000, guid: 5b92bd409360c1e4d9b583c5d1e35109, type: 2}

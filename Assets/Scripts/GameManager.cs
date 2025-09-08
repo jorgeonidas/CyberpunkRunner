@@ -114,7 +114,6 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.Paused:
                 _speedManager.StopInmediatelly();
-                CrazyGamesService.Instance.GameplayStop();
                 break;
             case GameState.GameOver:
                 _speedManager.Stop(true);

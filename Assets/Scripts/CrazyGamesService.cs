@@ -37,16 +37,12 @@ public class CrazyGamesService : MonoBehaviour, ICrazyGamesService
     {
         // Inform CrazyGames that gameplay is active (affects site behavior and analytics)
         CrazySDK.Game.GameplayStart(); // Official Unity call
-        // Optional: unmute audio or resume game time if you centralized it here.
-        // AudioListener.pause = false; Time.timeScale = 1f;
     }
 
     public void GameplayStop()
     {
         // Inform CrazyGames that gameplay is paused/broken
         CrazySDK.Game.GameplayStop();
-        // Optional: centralize pause here.
-        // AudioListener.pause = true; Time.timeScale = 0f;
     }
 
     public void HappyTime()

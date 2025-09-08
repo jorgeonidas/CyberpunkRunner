@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -6,17 +5,9 @@ using UnityEngine.Pool;
 public class PoolManager : MonoBehaviour
 {
     public static PoolManager Instance { get; private set; }
-    [Serializable]
-    public struct PoolConfig
-    {
-        public string key;
-        public PooledObject objectPrefab;
-        public int defaultCapacity;
-        public int maxSize;
-        public int prewarm;
-    }
 
-    [SerializeField] private List<PoolConfig> _configs;
+    [SerializeField] private List<PoolObjectConfig> _poolObjectConfigs;
+    // [SerializeField] private List<PoolConfig> _configs;
     private readonly Dictionary<string, ObjectPool<PooledObject>> _pools = new();
 
     private void Awake()
@@ -32,16 +23,16 @@ public class PoolManager : MonoBehaviour
 
     private void SetupPools()
     {
-        foreach (var configuration in _configs)
+        foreach (var configuration in _poolObjectConfigs)
         {
             ObjectPool<PooledObject> pool = null;
 
             pool = new ObjectPool<PooledObject>(
                 createFunc: () =>
                 {
-                    PooledObject poolObject = Instantiate(configuration.objectPrefab);
+                    PooledObject poolObject = Instantiate(configuration.Config.objectPrefab);
                     poolObject.Pool ??= pool;     // ?? assing if not assigned
-                    poolObject.SetPoolObjectId(configuration.key);
+                    poolObject.SetPoolObjectId(configuration.Config.key);
                     poolObject.transform.parent = this.transform;
                     poolObject.gameObject.SetActive(false);
                     return poolObject;
@@ -64,14 +55,14 @@ public class PoolManager : MonoBehaviour
                     }
                 },
                 collectionCheck: true,
-                defaultCapacity: Mathf.Max(1, configuration.defaultCapacity),
-                maxSize: Mathf.Max(1, configuration.maxSize)
+                defaultCapacity: Mathf.Max(1, configuration.Config.defaultCapacity),
+                maxSize: Mathf.Max(1, configuration.Config.maxSize)
             );
 
-            _pools[configuration.key] = pool;
+            _pools[configuration.Config.key] = pool;
 
             // Precalienta si quieres
-            for (int i = 0; i < configuration.prewarm; i++)
+            for (int i = 0; i < configuration.Config.prewarm; i++)
             {
                 var o = pool.Get();
                 pool.Release(o);
