@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
+  m_GroupName: Default Local Group
+  m_GUID: fcf2ef79b54c05e408253219bf4ab301
+  m_SerializeEntries:
+  - m_GUID: 004716e710d11884d803be4ce6e7a3ad
+    m_Address: Assets/Prefabs/Buildings/BottomPieces
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Bottom
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b0b4c8171a8421247aa9eca4731b9223
+    m_Address: Assets/Prefabs/Buildings/MidPieces
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Mid
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dc8ffb822dd9c8648a404d86b13287e7
+    m_Address: Assets/Prefabs/Buildings/TopPieces
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Top
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: f41ef72e80be1f84395877744f3dc6bc, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: ed2c72999eecd1b4195db438043d5396, type: 2}
+    - {fileID: 11400000, guid: ba2837b7036de884c96f228dc91169d5, type: 2}

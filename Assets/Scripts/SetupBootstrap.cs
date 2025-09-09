@@ -3,8 +3,9 @@
 public class SetupBootstrap : MonoBehaviour
 {
     [Header("Prefabs to spawn (persist across scenes)")]
-    [SerializeField] private ScenesManager scenesManagerPrefab; // contiene ScenesManager + CanvasFader
-    [SerializeField] private SfxManager audioManagerPrefab;  // opcional
+    [SerializeField] private ScenesManager _scenesManagerPrefab; 
+    [SerializeField] private SfxManager _audioManagerPrefab;
+    [SerializeField] private AddressablessSetup _addressablessSetup;
     // ... agrega aquí otros managers/SDKs si usás prefabs (Analytics, etc.)
 
     private bool _initialized;
@@ -17,17 +18,18 @@ public class SetupBootstrap : MonoBehaviour
             Finish(); return;
         }
         
-        UserDataServiceSO.Instance.Initialize();
+        await _addressablessSetup.Initialize();
 
+        UserDataServiceSO.Instance.Initialize();
         // 1) Instanciar managers persistentes
-        if (ScenesManager.Instance == null && scenesManagerPrefab != null)
+        if (ScenesManager.Instance == null && _scenesManagerPrefab != null)
         {
-            var go = Instantiate(scenesManagerPrefab);
+            var go = Instantiate(_scenesManagerPrefab);
         }
 
-        if (SfxManager.Instance == null && audioManagerPrefab != null)
+        if (SfxManager.Instance == null && _audioManagerPrefab != null)
         {
-            var go = Instantiate(audioManagerPrefab);
+            var go = Instantiate(_audioManagerPrefab);
         }
 
         // 2) Inicializar servicios/sistemas (orden recomendado)

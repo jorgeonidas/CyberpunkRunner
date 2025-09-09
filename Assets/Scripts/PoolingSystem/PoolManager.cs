@@ -5,9 +5,8 @@ using UnityEngine.Pool;
 public class PoolManager : MonoBehaviour
 {
     public static PoolManager Instance { get; private set; }
-
+    [SerializeField] private PoolCatalogSO _poolCatalog;
     [SerializeField] private List<PoolObjectConfig> _poolObjectConfigs;
-    // [SerializeField] private List<PoolConfig> _configs;
     private readonly Dictionary<string, ObjectPool<PooledObject>> _pools = new();
 
     private void Awake()
@@ -30,6 +29,17 @@ public class PoolManager : MonoBehaviour
                         configuration.Config.defaultCapacity,
                         configuration.Config.maxSize);
         }
+        
+        if (_poolCatalog != null)
+        {
+            foreach (var config in _poolCatalog.PoolConfigs)
+            {
+                RegisterPool(config.key,
+                            config.objectPrefab,
+                            config.defaultCapacity,
+                            config.maxSize);
+            }
+        }   
     }
 
     public void RegisterPool(string key, PooledObject prefab, int defaultCapacity, int maxSize, Transform parent = null)
