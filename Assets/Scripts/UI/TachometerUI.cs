@@ -18,6 +18,8 @@ public class TachometerUI : MonoBehaviour
     [SerializeField] private float _maxAngle = 90f;  // Ángulo máximo de la aguja
     [SerializeField] private float _maxFillImageAmount = 0.7f; // Máximo valor de la imagen de relleno
     private float currentSpeed;
+    private float _lastDisplayedSpeed = -1f;
+    private const float _speedUpdateThreshold = 0.1f; // Cambia este valor según la sensibilidad deseada
     private float _maxSpeed = 100f;
 
     private void Start()
@@ -30,17 +32,18 @@ public class TachometerUI : MonoBehaviour
 
     private void Update()
     {
-        UpdateSpeed();
+        float targetSpeed = _speedManager?.CurrentChunksMoveSpeed ?? 0;
+        currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, _smoothSpeed * Time.deltaTime);
+        if (Mathf.Abs(currentSpeed - _lastDisplayedSpeed) > _speedUpdateThreshold)
+        {
+            UpdateSpeedUI();
+            _lastDisplayedSpeed = currentSpeed;
+        }
     }
 
-    private void UpdateSpeed()
+    private void UpdateSpeedUI()
     {
-        float targetSpeed = _speedManager?.CurrentChunksMoveSpeed ?? 0;
-
-        currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, _smoothSpeed * Time.deltaTime);
-
         float normalizedSpeed = Mathf.Clamp01(currentSpeed / _maxSpeed);
-
         float targetAngle = Mathf.Lerp(_minAngle, _maxAngle, normalizedSpeed);
         float targerFill = Mathf.Lerp(0, _maxFillImageAmount, normalizedSpeed);
 
