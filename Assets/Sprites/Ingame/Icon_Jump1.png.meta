@@ -1,5 +1,12 @@
 fileFormatVersion: 2
-guid: 162be6f621b0d8245b26dc63aee7cd62
+guid: 56aa9c7f839a91d4d8db30046bf13997
+AssetOrigin:
+  serializedVersion: 1
+  productId: 149421
+  packageName: SCI-FI UI Pack Pro
+  packageVersion: 2.3
+  assetPath: Assets/SCI-FI UI Pack Pro/Common/White Icons/Textures/Icons2/Icon_Jump1.png
+  uploadId: 729885
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -39,13 +46,13 @@ TextureImporter:
     mipBias: 0
     wrapU: 1
     wrapV: 1
-    wrapW: 0
+    wrapW: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
   spriteMode: 1
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -63,9 +70,9 @@ TextureImporter:
   compressionQualitySet: 0
   textureFormatSet: 0
   ignorePngGamma: 0
-  applyGammaDecoding: 0
+  applyGammaDecoding: 1
   swizzle: 50462976
-  cookieLightType: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
@@ -152,7 +159,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 5e2609818643e854195de4a11ead5dac
     internalID: 0
     vertices: []
     indices: 

@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 85e374ab6bd0cbc4491ca724ffe8da1e
+guid: b5f32864e4a610b47a0aa6e22cbf6db5
 AssetOrigin:
   serializedVersion: 1
   productId: 149421
   packageName: SCI-FI UI Pack Pro
   packageVersion: 2.3
-  assetPath: Assets/SCI-FI UI Pack Pro/Common/SceneIcons/Icon_Shop0.png
+  assetPath: Assets/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn08White_2.png
   uploadId: 729885
 TextureImporter:
   internalIDToNameTable: []
@@ -56,7 +56,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteBorder: {x: 35, y: 30, z: 35, w: 30}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -76,12 +76,12 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 1024
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
-    crunchedCompression: 1
+    crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
     ignorePlatformSupport: 0

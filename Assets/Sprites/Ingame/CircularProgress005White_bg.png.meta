@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 85e374ab6bd0cbc4491ca724ffe8da1e
+guid: ef6c2e8bc37fbe24d9b65d58563d01ce
 AssetOrigin:
   serializedVersion: 1
   productId: 149421
   packageName: SCI-FI UI Pack Pro
   packageVersion: 2.3
-  assetPath: Assets/SCI-FI UI Pack Pro/Common/SceneIcons/Icon_Shop0.png
+  assetPath: Assets/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Component02/CircularProgress005White_bg.png
   uploadId: 729885
 TextureImporter:
   internalIDToNameTable: []

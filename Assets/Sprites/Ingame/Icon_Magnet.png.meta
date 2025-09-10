@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 85e374ab6bd0cbc4491ca724ffe8da1e
+guid: 9a6189c894559c546a8fc639ae5d57b6
 AssetOrigin:
   serializedVersion: 1
   productId: 149421
   packageName: SCI-FI UI Pack Pro
   packageVersion: 2.3
-  assetPath: Assets/SCI-FI UI Pack Pro/Common/SceneIcons/Icon_Shop0.png
+  assetPath: Assets/SCI-FI UI Pack Pro/Common/White Icons/Textures/Icons2/Icon_Magnet.png
   uploadId: 729885
 TextureImporter:
   internalIDToNameTable: []
@@ -70,18 +70,18 @@ TextureImporter:
   compressionQualitySet: 0
   textureFormatSet: 0
   ignorePngGamma: 0
-  applyGammaDecoding: 0
+  applyGammaDecoding: 1
   swizzle: 50462976
   cookieLightType: 1
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 1024
+    maxTextureSize: 512
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
-    crunchedCompression: 1
+    crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
     ignorePlatformSupport: 0
@@ -159,7 +159,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: dd6e63dd0fc5b8347b22d6eccd300454
     internalID: 0
     vertices: []
     indices: 
