@@ -14,25 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
   m_GroupName: Default Local Group
   m_GUID: fcf2ef79b54c05e408253219bf4ab301
-  m_SerializeEntries:
-  - m_GUID: 004716e710d11884d803be4ce6e7a3ad
-    m_Address: Assets/Prefabs/Buildings/BottomPieces
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Bottom
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b0b4c8171a8421247aa9eca4731b9223
-    m_Address: Assets/Prefabs/Buildings/MidPieces
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Mid
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: dc8ffb822dd9c8648a404d86b13287e7
-    m_Address: Assets/Prefabs/Buildings/TopPieces
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Top
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: f41ef72e80be1f84395877744f3dc6bc, type: 2}
   m_SchemaSet:

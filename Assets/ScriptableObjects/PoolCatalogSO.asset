@@ -14,4 +14,72 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PoolCatalogSO
   defaultCapacity: 10
   maxSize: 100
-  poolConfigs: []
+  poolConfigs:
+  - key: Base_1
+    objectPrefab: {fileID: -8697225853056018717, guid: 5ddd386a5e85cb945bde89905e1f9931, type: 3}
+    defaultCapacity: 10
+    maxSize: 100
+  - key: Base_2
+    objectPrefab: {fileID: 5210595462717679635, guid: 1208b804578a56d41b6284df1e72a535, type: 3}
+    defaultCapacity: 0
+    maxSize: 0
+  - key: Base_3
+    objectPrefab: {fileID: 6361959439743479681, guid: 05946c129cd32fd41b7e70378df808f8, type: 3}
+    defaultCapacity: 10
+    maxSize: 100
+  - key: Base_4
+    objectPrefab: {fileID: -2493943509788675408, guid: 6ff92c68bdb963e4cb20b433929ff6fe, type: 3}
+    defaultCapacity: 0
+    maxSize: 0
+  - key: Middle_1
+    objectPrefab: {fileID: 8683943282549099295, guid: b4060c90ce822574f80d67735d894b59, type: 3}
+    defaultCapacity: 0
+    maxSize: 0
+  - key: Middle_2
+    objectPrefab: {fileID: 4847983238225183384, guid: 80ce6c131b584104088e45824b77c653, type: 3}
+    defaultCapacity: 0
+    maxSize: 0
+  - key: Middle_3
+    objectPrefab: {fileID: 5598116377466108349, guid: 30746299dfca2e340aae973fe1b4f33c, type: 3}
+    defaultCapacity: 10
+    maxSize: 100
+  - key: Middle_4
+    objectPrefab: {fileID: 2354086650391990881, guid: d2c81bea404e76b40945e214aa68aa5c, type: 3}
+    defaultCapacity: 10
+    maxSize: 100
+  - key: Middle_5
+    objectPrefab: {fileID: 4278164967703039398, guid: a6c932ce9441e6442a65d03628d9c687, type: 3}
+    defaultCapacity: 10
+    maxSize: 100
+  - key: Middle_6
+    objectPrefab: {fileID: -466212611992973908, guid: 633690241567420469d65aaf39f45f6a, type: 3}
+    defaultCapacity: 10
+    maxSize: 100
+  - key: Top_1
+    objectPrefab: {fileID: 794752716291292064, guid: 17d17c5864a83294e901cd96f0a13ea5, type: 3}
+    defaultCapacity: 10
+    maxSize: 100
+  - key: Top_2
+    objectPrefab: {fileID: -9115838865434775636, guid: 8eb9aa3bbc1397e438bc06493808a049, type: 3}
+    defaultCapacity: 10
+    maxSize: 100
+  - key: Top_3
+    objectPrefab: {fileID: -4567936482706486732, guid: bbd68853dc21cf04f83dd12e4910e648, type: 3}
+    defaultCapacity: 10
+    maxSize: 100
+  - key: Top_4
+    objectPrefab: {fileID: -4864673345810175350, guid: 21c40f96519420e41a1d3b88cdab4008, type: 3}
+    defaultCapacity: 10
+    maxSize: 100
+  - key: Top_5
+    objectPrefab: {fileID: 2331436435688720701, guid: c5a2312f8443eff41afe0b3c31e316d3, type: 3}
+    defaultCapacity: 10
+    maxSize: 100
+  - key: Top_6
+    objectPrefab: {fileID: 8045028407354954057, guid: 660f8f2cb982d6e4aab52ea368258e5c, type: 3}
+    defaultCapacity: 10
+    maxSize: 100
+  - key: Top_7
+    objectPrefab: {fileID: 8560142625237334153, guid: 4d13ef2a87599eb40b216ecd1976fee6, type: 3}
+    defaultCapacity: 10
+    maxSize: 100

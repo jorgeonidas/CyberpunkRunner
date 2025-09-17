@@ -5,7 +5,7 @@ public class SetupBootstrap : MonoBehaviour
     [Header("Prefabs to spawn (persist across scenes)")]
     [SerializeField] private ScenesManager _scenesManagerPrefab; 
     [SerializeField] private SfxManager _audioManagerPrefab;
-    [SerializeField] private AddressablessSetup _addressablessSetup;
+    //[SerializeField] private AddressablessSetup _addressablessSetup;
     // ... agrega aquí otros managers/SDKs si usás prefabs (Analytics, etc.)
 
     private bool _initialized;
@@ -18,7 +18,7 @@ public class SetupBootstrap : MonoBehaviour
             Finish(); return;
         }
         
-        await _addressablessSetup.Initialize();
+        //await _addressablessSetup.Initialize();
 
         UserDataServiceSO.Instance.Initialize();
         // 1) Instanciar managers persistentes
